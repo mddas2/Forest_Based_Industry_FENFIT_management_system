@@ -61,14 +61,14 @@ $(function () {
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
-            label: "Orders",
+            label: "REJECTED",
             value: 8500,
 
         }, {
-            label: "Panding",
+            label: "PENDING",
             value: 3630,
         }, {
-            label: "Delivered",
+            label: "APPROVED",
             value: 4870
         }],
         resize: true,

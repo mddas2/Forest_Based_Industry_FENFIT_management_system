@@ -20,10 +20,8 @@ def is_admin_group(user,request):
         return user.groups.filter(name='admin').exists()
 
 def is_admin_role(user,request):
-    if user.role == user.Admin:
+    if user.role == user.CENTRAL:
         return True
-        return user.groups.filter(name='admin').exists()
-
         # if user.is_superuser and user.is_staff:
         #     return user.groups.filter(name='admin').exists()
         # else:
