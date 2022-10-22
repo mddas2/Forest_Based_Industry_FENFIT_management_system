@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'Mainproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecommerce_admin',
+        'NAME': 'fenfit',
         'USER': 'root',
         'PASSWORD':'',
         'HOST':'localhost',
