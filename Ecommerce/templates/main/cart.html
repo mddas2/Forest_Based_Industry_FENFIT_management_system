@@ -1,0 +1,136 @@
+{% extends 'layout/master.html' %}
+{% block contents %}
+{% load mathfilters %} 
+ <div class="container-fuid cart mt-5">
+     <div class="text-center cartTitle">Your Collection</div>
+     <div class="row">
+        
+         <div class="col-xl-9 col-md-12">
+             <div class="row topCartContainer">
+                 <div class="col-4 topCartProduct">Products</div>
+
+                 <div class="col-md-2 topCartPrice">Total Price</div>
+                 <div class="col-md-3 topCartQuantity">Quantity</div>
+                 <div class="col-md-2 topCartTotal">Action</div>
+             </div>
+         </div>
+         <hr />
+     </div>
+
+   
+     <div class="row">
+         <div class="col-xl-8 col-md-12">
+            <input type='hidden' id="count"  name="count" value="{{wishlist|length}}">    
+            {% for w in wishlist %}
+           
+                <div class="row leftSideCart">
+                    <div class="col-4 productImgAndName">
+                        <a href="{% url "ProductDetail"  id=w.product.id %}" style="color:black" >
+
+                        <img class="img-fluid"
+                        src="{{w.product.image1.url}}"
+                        alt="ak" />
+                        </a>
+                        <a href="{% url "ProductDetail"  id=w.product.id %}" style="color:black" >
+                        <p>{{w.product.name}}</p>
+                         </a>
+                    </div>
+
+                    
+                    <div class="col-md-3 cartProductPrice" style="color: black ; display:none ;" id="price{{forloop.counter}}">{{w.product.price|sub:w.product.discount}}</div>
+                    <div class="col-md-3  totalAmt" style="" id="total{{forloop.counter}}"></div>
+                    
+                    <div class="col-md-4 productQuantity" >
+                        {{w.quantity}}
+                    </div>
+                    <div style="display:none">
+                       <button type="button" id="minus{{forloop.counter}}">-</button>
+                            <span class="number" id="num{{forloop.counter}}">{{w.quantity}}</span>
+                            <button type="button" id="plus{{forloop.counter}}">+</button>
+                    </div>
+                    
+                    <div class=" totalAmt" style="display:none ;" id="total{{forloop.counter}}"></div>
+                    <div class="col-md-1 remove">
+                         <a href="{% url 'WishListDelete' p_id=w.product.id pk=c_id next="cart" %}" style="text-decoration: none;color: black;">
+                            remove
+                            </a>
+                    </div>
+                </div>
+               
+                 <script>
+                        $(document).ready(function(){
+                            $('#total{{forloop.counter}}').text(parseInt($('#price{{forloop.counter}}').text()) * parseInt($('#num{{forloop.counter}}').text()) )
+                            var alltotal = 0
+                            var items = 0
+                            $('#plus{{forloop.counter}}').click(function(){        
+                                var i = $('#num{{forloop.counter}}').text();
+                                var i = parseInt(i) + 1 ;
+                                $('#num{{forloop.counter}}').text(i);
+                                $('#number{{forloop.counter}}').val(i);
+                                var price = $('#price{{forloop.counter}}').text();
+                                var price = parseInt(price);
+                                var total = price * i;
+                                $('#total{{forloop.counter}}').text(total);
+                                alltotal = parseInt($('#alltotal').text())
+                                alltotal += parseInt(price)
+                                $('#alltotal').text(alltotal)
+                                $('#items').text(parseInt($('#items').text()) + 1)
+
+                            });
+                            $('#minus{{forloop.counter}}').click(function(){  
+                                var i = $('#num{{forloop.counter}}').text()
+                                if (i != 1){
+                                    var price = $('#price{{forloop.counter}}').text();
+                                    var tprice = $('#total{{forloop.counter}}').text();
+                                    var total = parseInt(tprice) - parseInt(price) ;
+                                    $('#total{{forloop.counter}}').text(total);
+                                    var i = parseInt(i) - 1 ;
+                                    $('#num{{forloop.counter}}').text(i)
+                                    $('#number{{forloop.counter}}').val(i)
+                                    alltotal = parseInt($('#alltotal').text())
+                                    alltotal -= parseInt(price)
+                                    $('#alltotal').text(alltotal)
+                                    $('#items').text(parseInt($('#items').text()) - 1)
+                                }                           
+
+                            });                            
+                        });
+                    </script>
+            {% endfor %}
+         </div>
+
+        
+         <div class="col-xl-4 col-md-12  checkBoxWithoutLogin">
+             <div class="containerInfo">
+                 <p>
+                    
+                     Subtotal (<span id="items"></span> item) :Rs. {<span id="alltotal"></span>}.00
+                     <br />
+                    <script>
+                        var count = $('#count').val()
+                        var items = 0
+                        var temp_items = 0
+                        var total = 0
+                        for (var i=1;i<=count;i++){
+                            var name = '#num'+i
+                            var price = '#price'+i
+                            items += parseInt($(name).text())
+                            temp_items = parseInt($(name).text())
+                            price = parseInt($(price).text())
+                            total += temp_items * price                           
+                        }            
+                        $('#items').text(items)          
+                        $('#alltotal').text(total)          
+                       
+                    </script>
+                     <a href="{% url "CheckOut" %}">
+                     <button>Procced to ckeckout</button>
+                     </a>
+                 </p>
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+{% endblock %}

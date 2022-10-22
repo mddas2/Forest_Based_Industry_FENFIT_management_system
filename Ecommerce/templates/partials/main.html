@@ -1,0 +1,498 @@
+{% load staticfiles %}
+{% load mathfilters %}
+<!-- slider -->
+
+
+<section class="image-slider owl-carousel owl-theme">
+    {% for slider in sliders %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6  col-12 sliderImg">
+                <img src="{%if slider.getBannerImage1 %}{{slider.getBannerImage1}}{%else%}{% static 'img/slider/product'%}{{forloop.counter}}.png{%endif%}"
+                    alt="sliderBarImg" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 sideBarData ">
+                <div class="bottomLeftContain">
+                    {% if slider.long_contents %}
+                    {% autoescape off %}
+                    {{slider.long_contents}}
+                    {% endautoescape %}
+                    {% else %}
+                    </q> <span>New Collection</span>
+                    <h1>
+                        The Great Fashion <br /> Collection 2022
+                    </h1>
+                    <p>
+                        Up To 40% Off On Final Sell Item.
+                        <br />
+                        Caught in The Moment!
+                    </p>
+                    {% endif %}
+
+                </div>
+                <a href="/{{slider.parent.name}}/{{slider.name}}">
+                    <div class="bottomLeftButton">
+                        <button>Show Collection</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+
+<!-- end slider -->
+
+<section class="container-fluid product">
+    <div class="productWrapper">
+        <div class="row">
+
+            <div class="col-md-5 leftSideProduct">
+                <div class="leftSideProductImg">
+
+                    <img src="{%if top3.0.getBannerImage1 %}{{top3.0.getBannerImage1}}{%else%}{% static 'img/slider/product1.png'%}{%endif%}"
+                        alt="category0" />
+                </div>
+
+                <div class="top-left">
+                    {% if top3.0.short_description %}
+                    {% autoescape off %}
+                    <h4>
+                        {{top3.0.short_description}} <br /> Style To
+                    </h4>
+                    {% endautoescape %}
+                    {% else %}
+                    <h4>
+                        Spring Collection <br /> Style To
+                    </h4>
+                    {% endif %}
+                    <a href="/{{top3.0.parent.name}}/{{top3.0.name}}">
+                        <span>
+                                View Items
+                                <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class=" col-md-7  rightSideData">
+                <div class=" rightSideDataWrapper">
+                    <div class="col-6 rightSideDataFirst">
+                        <div class="rightSideProductImgFirst">
+
+                            <img src="{%if top3.1.getBannerImage1 %}{{top3.1.getBannerImage1}}{%else%}{% static 'img/product/product4.png'%}{%endif%}"
+                                alt="category1" />
+                        </div>
+
+                        <div class="top-left">
+                            {% if top3.1.short_description %}
+                            {% autoescape off %}
+                            <h4>
+                                {{top3.1.short_description}} <br /> Style To
+                            </h4>
+                            {% endautoescape %}
+                            {% else %}
+                            <h4>
+                                Spring Collection <br /> Style To
+                            </h4>
+                            {% endif %}
+                            <a href="/{{top3.1.parent.name}}/{{top3.1.name}}">
+                                <span>
+                                        View Items
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class=" rightSideDataSecond">
+                        <div class=" rightSideProductImgSecond">
+
+                            <img src="{%if top3.2.getBannerImage1 %}{{top3.2.getBannerImage1}}{%else%}{% static 'img/product/product4.png'%}{%endif%}"
+                                alt="category2" />
+                        </div>
+
+                        <div class="top-left">
+                            {% if top3.2.short_description %}
+                            {% autoescape off %}
+                            <h4>
+                                {{top3.2.short_description}} <br /> Style To
+                            </h4>
+                            {% endautoescape %}
+                            {% else %}
+                            <h4>
+                                Spring Collection <br /> Style To
+                            </h4>
+                            {% endif %}
+                            <a href="/Sale">
+                                <span>
+                                        View Items
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="buttomProductSideData">
+                    <div class=" buttomProductImg">
+
+                        <img src="{%if top3.3.getBannerImage1 %}{{top3.3.getBannerImage1}}{%else%}{% static 'img/product/product20.png'%}{%endif%}"
+                            alt="category3" />
+                    </div>
+
+                    <div class="top-left">
+                        {% if top3.3.short_description %}
+                        {% autoescape off %}
+                        <h4>
+                            {{top3.3.short_description}} <br /> Style To
+                        </h4>
+                        {% endautoescape %}
+                        {% else %}
+                        <h4>
+                            Spring Collection <br /> Style To
+                        </h4>
+                        {% endif %}
+                        <a href="/{{top3.3.parent.name}}/{{top3.3.name}}">
+                            <span>
+                                    View Items
+                                    <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- products --->
+
+<div class="container newProduct">
+    <div class="testimonialsTopBar ">New Products</div>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="new_arrival-tab" data-bs-toggle="tab" data-bs-target="#new_arrival" type="button" role="tab" aria-controls="new_arrival" aria-selected="false">New Arrival</button>
+            <button class="nav-link" id="featured-tab" data-bs-toggle="tab" data-bs-target="#featured" type="button" role="tab" aria-controls="featured" aria-selected="true">Featured</button>
+            <button class="nav-link" id="trending-tab" data-bs-toggle="tab" data-bs-target="#trending" type="button" role="tab" aria-controls="trending" aria-selected="false">Trending</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        {% for key,value in ftn_dict.items %}
+            <div class="tab-pane fade show active" id="{{key}}" role="tabpanel" aria-labelledby="{{key}}-tab">
+                <div class="row">
+                    {% if product %}
+                    {% for k in value %}
+                        <div class=" col-lg-3 col-md-4 col-sm-6  col-6 tab-content">
+                            <div class="productItem">
+                                <div class="card" style="border: none;">
+                                    <a class="link" href="/product-details/{{k.id}}">
+                                        <img src='{% if k.image1 %}{{k.image1.url}}{% endif %}' class="card-img-top"
+                                            alt="cart_img" />
+                                    </a>
+
+
+                                    <div class="salePercentage">-{{k.discount_type}}</div>
+                                    <div class="card-body">
+
+                                        <a class="link" href="/product-details/{{k.id}}">
+                                            <div class="card-Title">{{k.name}}</div>
+                                        </a>
+
+                                        <div class="price">
+                                            Rs {{k.price|sub:k.discount}}- <del>{{k.price}}</del>
+                                        </div>
+
+
+                                        <div class="rating">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+
+                                        <div class="addToCard">
+                                            <div class="cartIcon">
+                                                <a href="{% url 'Cart' p_id=k.id c_id=c_id %}"
+                                                    style="text-decoration: none;color: black;">
+                                                    <i class="fa-solid fa-cart-arrow-down"></i>
+                                                </a>
+                                            </div>
+
+                                            <div class="favouriteIcon">
+                                                <a href="{% url 'WishList' p_id=k.id c_id=c_id %}"
+                                                    style="text-decoration: none;color: black;">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </a>
+                                            </div>
+
+                                            <a class="link" href="/product-details/{{k.id}}">
+                                                <div class="viewIcon">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- end of products -->
+
+
+
+
+
+
+<!-- offer -->
+
+
+<div class="container offer">
+    <div class="offerWrapper">
+        <div class="row">
+
+            <div class="col-md-6 leftSideOffer">
+                <div class="leftSideOfferData">
+                    {% if pemplatechild.0.long_contents %}
+                    {% autoescape off %}
+                    {{pemplatechild.0.long_contents}}
+                    {% endautoescape %}
+                    {% else %}
+
+
+                    <h6>Hurry up and Get 25% Discount</h6>
+                    <h3>Deals Of The Day</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        <br /> sed do eiusmod tempor incididunt ut labore
+                    </p>
+                    </p>
+                    </p>
+
+                    {%endif%}
+
+                    <div class="shoeCollBtn">
+                        <button>
+                            Show Collection
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 rightSideOffer">
+                <img src="{% if pemplatechild.0.long_contents %}{{pemplatechild.0.banner_image1.url}}{% else %}{% static 'img/product/product4.png'%}{% endif %}"
+                    alt="img" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- best sheller -->
+
+
+<div class="container blogSection">
+    <div class="testimonialsTopBar ">Our Best Sellers</div>
+
+    <div class="row">
+
+
+        <div class="col-md-12 blogItem owl-carousel owl-theme blog-slider mt-4">
+            {% if product %}
+            {% for k in product %}
+
+            <div class="productItem">
+                <div class="card" style="border: none;">
+                    <a class="link" href="/product-details/{{k.id}}">
+                        <img src='{% if k.image1 %}{{k.image1.url}}{% endif %}' class="card-img-top" alt="cart_img" />
+                    </a>
+
+
+                    <div class="salePercentage">-{{k.discount_type}}</div>
+                    <div class="card-body">
+
+                        <a class="link" href="/product-details/{{k.id}}">
+                            <div class="card-Title">{{k.name}}</div>
+                        </a>
+
+                        <div class="price">
+                            Rs {{k.price|sub:k.discount}}- <del>{{k.price}}</del>
+                        </div>
+
+
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+
+                        <div class="addToCard">
+                            <div class="cartIcon">
+                                <a href="{% url 'Cart' p_id=k.id c_id=c_id %}"
+                                    style="text-decoration: none;color: black;">
+                                    <i class="fa-solid fa-cart-arrow-down"></i>
+                                </a>
+                            </div>
+
+                            <div class="favouriteIcon">
+                                <a href="{% url 'WishList' p_id=k.id c_id=c_id %}"
+                                    style="text-decoration: none;color: black;">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                            </div>
+
+                            <a class="link" href="/product-details/{{k.id}}">
+                                <div class="viewIcon">
+                                    <i class="fa-regular fa-eye"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+            {% endif %}
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- testomonoals -->
+
+<section class="container testimonials">
+    <div class="testimonialsTopBar ">Our Clients Say</div>
+
+    <div class="row">
+
+        <div class="col-md-12 owl-carousel owl-theme testomonials-slider">
+
+            {% for client in clientschild %}
+            <div class="testimonialsCard active p-3 text-center px-4">
+                <div class="user-image">
+                    <img src='{{client.getBannerImage1}}' class="rounded-circle" width="80" alt="img" />
+                </div>
+
+                <div class="user-content">
+                    <h5 class="mb-0">{{client.name}}</h5>
+                    <h6>{{client.caption}}</h6>
+                    <p>{{client.short_description}}</p>
+                </div>
+
+                <div class="ratings">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+
+</section>
+<!-- end testomonials -->
+
+<section class="container offerTwo mt-5" {% if pemplatechild.1.banner_image1 %}style="background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.3),
+      rgba(61, 61, 61, 0.8)
+    ),
+    url('{{pemplatechild.1.banner_image1.url}}');
+ " {% endif %}>
+    <div class="offerTwoWrapper">
+        <div class="offertwodata">
+            {% if pemplatechild.1.long_contents %}
+            {% autoescape off %}
+            {{pemplatechild.1.long_contents}}
+            {% endautoescape %}
+            {% else %}
+            <h3>Need Winter Boots?</h3>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Assumenda iste facilis optio fugiat doloribus minus vitae ipsa
+                dignissimos tenetur debitis, incidunt ratione, modi fugit.
+                Architecto.
+            </p>
+
+            {%endif%}
+            <button>
+                Shop Now
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- from blog -->
+
+<div class="container blogSection">
+    <div class="testimonialsTopBar ">From The Blog</div>
+
+    <div class="row">
+
+
+        <div class="col-md-12 blogItem owl-carousel owl-theme blog-slider mt-4">
+            {% for b in blog %}
+            <div class="blogSectionImg">
+                {% if b.icon_image %}
+                <img src="{{b.icon_image.url}}" class="card-img-top" alt="cart_img" />
+                {%else%}
+                <img src="{{b.banner_image.url}}" class="card-img-top" alt="cart_img" />
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h6>{{b.updated_at}}</h6>
+
+                    <div class="blog-Title">
+                        <a class="link" href="{% url 'BlogDetail' id=b.id %}">
+                            {{b.title}}
+                        </a>
+
+                    </div>
+
+                    <div class="readMoreButton">
+                        <a class="link" href="{% url 'BlogDetail' id=b.id %}">
+                            <span> Read More</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+</div>

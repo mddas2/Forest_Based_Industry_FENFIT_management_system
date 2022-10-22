@@ -1,0 +1,92 @@
+{% extends 'layout/master.html' %}
+{% block contents %}
+    <div class="form">
+
+        <div class="topData">
+            <div class="topDataText">
+                <h3>Contact Us</h3>
+                <p>
+                    <a class="link" href="/">
+                        Home
+                    </a>
+                    <span>/</span>
+                    Contact Us
+                </p>
+            </div>
+        </div>
+        <div class="container form_wrapper">
+            <div class="row">
+
+                <div class="col-md-8 mb-5">
+
+                    <form class="contact-form row" method="post" action="{% url 'Contactus' %}">
+                        {% csrf_token %}
+                        <div class="form-field col-lg-6">
+                            <input name="name" type="text" placeholder="Enter your full name*" />
+                        </div>
+
+                        <div class="form-field col-lg-6 ">
+                            <input name="email" type="email" placeholder="Enter your email*" />
+                        </div>
+
+                        <div class="form-field col-lg-12 ">
+                            <input name="subject" type="text" placeholder="Subject*" />
+                        </div>
+
+                        <div class="form-field col-lg-12">
+                            <textarea name="message" type="text" placeholder="Enter your message*"></textarea>
+                        </div>
+
+                        <div class="submmitButton">
+                            <button type="submmit">Submit Now</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-4 rightSideFormData">
+
+                    <div class="contactUsIconItem">
+                        <p class="text-center">
+                            <i class="fa-solid fa-location-pin"></i>
+                        </p>
+                        <h5 class="text-center">Office Location</h5>
+                        <h6 class="text-center">{% if global_data.site_address != '' %}{{global_data.site_address}}{% else %}Katmandu ,Nepal ,street 35{% endif %}</h6>
+                    </div>
+
+                    <div class="contactUsIconItem">
+                        <p class="text-center">
+                            <i class="fa-solid fa-phone"></i>
+                        </p>
+                        <h5 class="text-center">Contact Us </h5>
+                        <h6 class="text-center">{% if global_data.site_contact != '' %}{{global_data.site_contact}}{% else %}+654675476{% endif %} {% if global_data.site_contact_nepali != '' and global_data.site_contact_nepali != 0 %},{{global_data.site_contact_nepali}}{% endif %}</h6>
+                    </div>
+
+                    <div class="contactUsIconItem">
+                        <p class="text-center">
+                            <i class="fa-solid fa-envelope"></i>
+                        </p>
+                        <h5 class="text-center">Our email </h5>
+                        <h6 class="text-center">{% if global_data.site_email != '' %}{{global_data.site_email}}{% else %}companyName@gmail.com{% endif %}</h6>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class=" container-fluid mapContainer">
+        <div class="row">
+            <div class="col-md-12">
+                <Iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56096.85759164457!2d81.07041065789676!3d28.50803506142142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a20c3137c6209b%3A0xef662ab7d48804c8!2sTikapur%2010901!5e0!3m2!1sen!2snp!4v1655166324678!5m2!1sen!2snp"
+                    width="100%" height="450"></Iframe>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'layout/master.html' %}
+{% block contents %}
+    {% for i in page_detail %}
+    <section class="aboutUs">
+        <div class="topData">
+            <div class="topDataText">
+                <h3>{{i.caption}}</h3>
+                <p>
+                    <a class="link" href="/">
+                        Home
+                    </a>
+                    <span>/</span>
+                    {{i.caption}}
+                </p>
+            </div>
+        </div>
+
+        <div class="container aboutUsWrapper">
+            <div class="row">
+                {% if i.banner_image1 or i.banner_image2 %}
+                    <div class=" col-xl-6 col-lg-12 aboutUsLeftSideImages">
+                        {%if i.banner_image1%}
+                            <div class="aboutUsImg aboutFirstImg">
+                                <img src="{{i.banner_image1.url}} "
+                                    alt="about_Img" />
+                            </div>
+                        {%endif%}
+                        {%if i.banner_image2%}
+                        <div class="aboutUsImg">
+                            <img src="{{i.banner_image2.url}}"
+                                alt="about_img" />
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-xl-6 col-md-12 aboutUsRightSide">
+                        {%else%}
+                    <div class=" col-md-12 aboutUsRightSide">
+
+                {% endif %}
+                
+                    <h4>{{i.title}}</h4>
+                    <h2>{{i.short_description}}</h2>
+                    <p>
+                       {{i.long_contents}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    {% endfor %}
+    <hr>
+
+    <!-- start members -->
+
+    <div class="container boardMembers">
+        <div class="boardMembersTopbar text-center mb-5 pb-1">
+            <h3>Our Team</h3>
+        </div>
+        <div class="row">
+
+            {%for t in team%}
+            <div class="col-6 col-sm-6 col-md-3 boardMembersContainer">
+                <div class="boardContainWrapper">
+
+                    <div class="bordCard" key={id}>
+                        <img src="{{t.profile_picture.url}}"
+                            class="img-fluid card-img-top" alt="member_img" />
+                        <div class="card-body">
+
+                            <h5 class="card-title">{{t.name}}</h5>
+
+                            <p class="card-text text-center">{{t.post}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+{% endblock %}
+

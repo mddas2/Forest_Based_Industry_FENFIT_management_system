@@ -1,0 +1,61 @@
+
+{% extends 'layout/master.html' %}
+{% block contents %}
+    <section class="aboutUs">
+        {% for i in page_detail %}
+            <div class="topData">
+                <div class="topDataText">
+                    <h3>{{i.caption}}</h3>
+                    <p>
+                        <a class="link" href="/">
+                        Home
+                        </a>
+                        <span>/</span>
+                        {{i.caption}}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="container blogPageWrapper">
+            <div class="row">
+
+                {% for b in blog %}
+                    <div class="container col-lg-3 col-md-4  col-6  blogPageItem">
+                        <div class="blogSectionImg">
+                            {% if b.icon_image %}
+                                <img src="{{b.icon_image.url}}" class="card-img-top" alt="cart_img" />
+                            {%else%}
+                                <img src="{{b.banner_image.url}}" class="card-img-top" alt="cart_img" />
+                            {% endif %}
+                            
+                            <div class="card-body">
+
+                                <h6>{{b.updated_at}}</h6>
+
+                                <div class="blog-Title">
+                                    <a class="link" href="{% url 'BlogDetail' id=b.id %}">
+                                        {{b.title}}
+                                    </a>
+
+                                </div>
+
+                                <div class="readMoreButton">
+                                    <a class="link" href="{% url 'BlogDetail' id=b.id %}">
+                                        <span> Read More</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+
+
+
+

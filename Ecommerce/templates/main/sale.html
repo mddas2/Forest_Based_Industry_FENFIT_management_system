@@ -1,0 +1,288 @@
+{% extends 'layout/master.html' %}
+{% block contents %}
+{% load mathfilters %}    
+{%load custom_tags %}
+
+<div class="productPage">
+        <div class="topData">
+            <div class="topDataText">
+                <h3>
+                    {% for i in page_detail %}
+                        {{i.caption}}
+                    {% endfor %}
+                    {% if search %}
+                        {{search}}
+                    {% endif %}
+                </h3>
+                <p class="text-center">
+                    <a class="link" href="{%url 'index_ecom' %}">
+                        Home
+                    </a>
+                    <span>/</span>
+                    {% if search %}
+                    Search
+                    {% endif %}
+                    {% if breadcom %}
+                    <a class="link" href="#">
+                        {{breadcom}}
+                    </a>
+                    <span>/</span>
+                    {% endif %}                    
+                    {% for i in page_detail %}
+                        {{i.name}}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Filter  -->
+    <div class="header"></div>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+
+    </label>
+    <div id="sidebarMenu">
+        <div class="sideBarWrappper">
+
+            <div class='sidebar'>
+                <div class="closeFilterNavIcon">
+
+
+                    <div class="categoryFilter">
+                        <div class="text-end">
+                            <label for="openSidebarMenu" class="sidebarIconToggle">
+                                <i class="fa-solid fa-xmark"></i>
+                            </label>
+
+                        </div>
+                        <br>
+                        <br>
+                        <h4>Categories</h4>
+                        <hr />
+
+                        <div class="categoryItem">
+                            <select name="" id="">
+                                <option value="">Leather</option>
+                                <option value="">Pant</option>
+                                <option value="">Jeans</option>
+                                <option value="">Cloth</option>
+                                <option value="">Woolen</option>
+                                <option value="">Demin Dress</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="categoryItem">
+                            <select name="" id="">
+                                <option value="">Leather</option>
+                                <option value="">Pant</option>
+                                <option value="">Jeans</option>
+                                <option value="">Cloth</option>
+                                <option value="">Woolen</option>
+                                <option value="">Demin Dress</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="categoryItem">
+                            <select name="" id="">
+                                <option value="">Leather</option>
+                                <option value="">Pant</option>
+                                <option value="">Jeans</option>
+                                <option value="">Cloth</option>
+                                <option value="">Woolen</option>
+                                <option value="">Demin Dress</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="categoryItem">
+                            <select name="" id="">
+                                <option value="">Leather</option>
+                                <option value="">Pant</option>
+                                <option value="">Jeans</option>
+                                <option value="">Cloth</option>
+                                <option value="">Woolen</option>
+                                <option value="">Demin Dress</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="filterByPrice mt-5">
+                        <h4>Filter By Price</h4>
+                        <hr />
+                        <div class="filterPriceWrapper">
+
+                            <div class="from">
+                                <label htmlFor="">From</label>
+                                <br />
+                                <input type="number" placeholder="$" />
+                            </div>
+
+                            <div class="to">
+                                <label htmlFor="">To</label>
+                                <br />
+                                <input type="number" placeholder="$" />
+                            </div>
+                        </div>
+
+                        <div class="filterButton  mb-5">Filter</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="container filter">
+        <div class="filterWrapper">
+            <div class="filterSlider" class="openSidebarMenu" id="openSidebarMenu">
+                <label for="openSidebarMenu" class="sidebarIconToggle">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Filter</span>
+                </label>
+
+            </div>
+
+
+            <div class=" searchData">
+
+                <div class="searhInputBox">
+                    <input id="search" type="text" placeholder="Keyword here..." />
+                </div>
+
+                <div class="searchDataIcon">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="resulttext">
+                <p>Showing {{product.number}}-{{product.paginator.num_pages}} of {{all_product|length}} results</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#data .col-lg-3").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
+
+    <div class="container  common_product"  id="data">
+        <div class="row">
+            {% if product %}
+                {% for k  in product %}
+                    <div class=" col-lg-3 col-md-4  col-6  ">
+                        <div class="productItem">
+                            <div class="card" style="border: none;">
+                                <a class="link" href="/product-details/{{k.id}}">
+                                    <img src='{% if k.image1 %}{{k.image1.url}}{% endif %}'
+                                        class="card-img-top" alt="cart_img" />
+                                </a>
+
+
+                                <div class="salePercentage">-{{k.discount_type}}</div>
+                                <div class="card-body">
+
+                                    <a class="link" href="/product-details/{{k.id}}">
+                                        <div class="card-Title">{{k.name}}</div>
+                                    </a>
+
+                                    <div class="price">
+                                        Rs {{k.price|sub:k.discount}}- <del>{{k.price}}</del>
+                                    </div>
+
+
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+
+                                    <div class="addToCard">
+                                        
+                                            <div class="cartIcon">
+                                                <a href="{% url 'Cart' p_id=k.id c_id=c_id %}" style="text-decoration: none;color: black;">
+                                                <i class="fa-solid fa-cart-arrow-down"></i>
+                                                  </a>
+                                            </div>
+                                      
+                                        <div class="favouriteIcon">
+                                            <a href="{% url 'WishList' p_id=k.id c_id=c_id %}" style="text-decoration: none;color: black;">
+                                            <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        </div>
+
+                                        <a class="link" href="/product-details/{{k.id}}">
+                                            <div class="viewIcon">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <!-- pagination -->
+    <div class="pagination_rounded pagination_wrapper">
+        <ul>            
+            <li>
+                <a href="{% if product.has_previous %}?page={{product.previous_page_number}}{% else %}#{% endif %}" class="prev"> <i class="fa fa-angle-left" aria-hidden="true"></i> Prev </a>
+            </li>  
+            {% if product.number > 4 %}
+                <li>
+                    <a href="?page=1">1</a>
+                </li> 
+                <li><a href="#"> . . . </a></li>
+            {% endif %}
+            {% for i in product.paginator.num_pages|times:product.number %} 
+                {% if forloop.counter < 6 %}
+                    <li>
+                        <a href="?page={{i}}">{{i}}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}            
+            {% if product.number < product.paginator.num_pages|sub:4  %}
+                <li><a href="#"> . . . </a></li>
+            {% endif %} 
+
+            <li><a href="?page={{product.paginator.num_pages}}">{{product.paginator.num_pages}}</a>
+            </li>
+            <li><a href="{% if product.has_next %}?page={{product.next_page_number}}{% else %}#{% endif %}" class="next"> Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    </div>
+    {% endblock %}
+
+
+
+
+
+
+
+

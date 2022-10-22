@@ -1,0 +1,162 @@
+{% extends 'layout/master.html' %}
+{% block contents %}
+{% load mathfilters %} 
+
+
+    <div class="productPage">
+        <div class="topData">
+            <div class="topDataText">
+                <h3>
+                    Women Clothing
+                </h3>
+                <p class="text-center">
+                    <Link class="link" to="/">
+                    Home
+                    </Link>
+                    <span>/</span>
+                    sale
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- PRODUCT DETAILS -->
+
+    <div class="container singlePage">
+        <form id="updateForm" method="post">
+            <div class="row">
+                {% csrf_token %}
+                <div class="col-md-6 leftSideImg">
+                    <img src="{{product.image1.url}}" alt="product_img" />
+                </div>
+                <div class="col-md-6 rightSide">
+                    <div class="productTitle">
+                        {{product.name}}
+                    </div>
+
+                    <div class="productdesc">
+                        <span class="productPrice">
+                            <span style="color: red;">
+                                Rs {{product.price|sub:product.discount}}- <del>{{product.price}}</del>
+                                </span>
+                        </span>
+
+
+                        <div class="productRating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>(12)</span>
+                        </div>
+
+                        <div class="productSize mt-2">
+                            <span>Color :</span>
+                            <select class="selectBox" name="color">
+                                <option>select</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="white">White</option>
+                                <option value="black">Black</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <br>
+
+                        <div class="productSize mt-2">
+                            <span>Size :</span>
+                            <select class="selectBox" name="size">
+                                <option>select</option>
+                                <option value="xl">XL</option>
+                                <option value="xxl">XXL</option>
+                                <option value="xxxl">XXXL</option>
+                            </select>
+                        </div>
+
+                        <div class="increaseAnddecrease">
+                            <button type="button" id="minus">-</button>
+                            <span class="number" id="num">1</span>
+                            <button type="button" id="plus">+</button>
+                        </div>
+                        <input type='hidden'  name="number" id="number" value="1">
+                        
+
+                        <div class="brandName">
+                            Brand: <span>Nike</span>
+                        </div>
+
+                       
+                        <div class="wisehList" id="wishlist">                        
+                            <i class="fa-regular fa-heart"></i>
+                            <span>Add To Wishlist</span>                            
+                        </div>
+                        
+
+                        <div class="addtoCard" id="cart">                            
+                                <button>ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="productDescData">
+                    <h3>Description</h3>
+                    <p>
+                    {{product.discription}}
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script>
+$(document).ready(function(){
+    $('#plus').click(function(){        
+        var i = $('#num').text()
+        var i = parseInt(i) + 1 ;
+        $('#num').text(i)
+        $('#number').val(i)
+
+    });
+    $('#minus').click(function(){  
+        var i = $('#num').text()
+        if (i != 1){
+        var i = parseInt(i) - 1 ;
+        $('#num').text(i)
+        $('#number').val(i)
+        }
+
+    });
+});
+
+var submitForm = function(method){
+var formAction = '/' + method + '/' + {{product.id}} + '/' +{{c_id}} ;
+$('#updateForm').attr('action', formAction);
+$('#updateForm').submit();
+};
+
+$(document)
+.on('click', '#wishlist', function(){
+    submitForm('wish-list');
+})
+.on('click', '#cart', function(){
+    submitForm('cart');
+});
+
+
+</script>
+
+
+
+{% endblock %}
