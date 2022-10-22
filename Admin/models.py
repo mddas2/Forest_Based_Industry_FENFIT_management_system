@@ -94,8 +94,9 @@ class ExcelFileUpload(models.Model):
     excel_file_upload = models.FileField(upload_to='excel')
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
-class Shipping(models.Model):
+class ApplicationDetail(models.Model):
     user_id = models.CharField(max_length=200)
+    application_id = models.CharField(max_length=200)
     name = models.CharField(max_length=205)
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
@@ -103,15 +104,15 @@ class Shipping(models.Model):
 
 class Order(models.Model):
     # product_id = models.IntegerField(default=0)
-    get_shipping_address = models.ForeignKey(Shipping,related_name="order",on_delete=models.DO_NOTHING,null=True)
-    product = models.ForeignKey(Products,related_name="order",on_delete=models.DO_NOTHING,null=True)
-    product_details = models.TextField(max_length=5000)
+    get_application_detail = models.ForeignKey(ApplicationDetail,related_name="order",on_delete=models.CASCADE,null=True)
     user_id = models.IntegerField(null=False)
+    phone = models.CharField(max_length=25,null=True)
     user_detail = models.CharField(max_length=300)
+    user_email = models.CharField(max_length=300)
+    district = models.CharField(max_length=300)
     shipping_address = models.CharField(max_length=2055)
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
-    phone = models.CharField(max_length=25,null=True)
     pdc = models.CharField(max_length=10,null=True) # p>pending , d=delivered , c=cancled
     def get_date(self):
         return humanize.naturaltime(self.updated_at)    
