@@ -38,7 +38,7 @@ def index(request, pk=None, pdc=None):
 
     today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
     # return  HttpResp  onse(today_max)
-    slug1 = "Order"
+    slug1 = request.user.getRoleName
     all_data = Order.objects.filter(pdc=None).order_by('-updated_at')
     pending = Order.objects.filter(pdc='p').order_by('-updated_at')
     delivered = Order.objects.filter(pdc='d').order_by('-updated_at')

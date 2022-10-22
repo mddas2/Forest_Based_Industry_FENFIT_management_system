@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views,user_authentication_authorization,global_views,blogs,teams,home,order,chatapp,mailapp
+from . import application_form, views,user_authentication_authorization,global_views,blogs,teams,home,chatapp,mailapp
 
 urlpatterns = [
     #**********User Authentication******************************************
@@ -103,25 +103,29 @@ urlpatterns = [
     path('teams-delete/<int:pk>', teams.TeamsDelete, name='TeamsDelete'),
 
     #****************Orders**************************************
-    path('customer-order', order.CustomerOrder, name='CustomerOrder'),
+    path('customer-order', application_form.CustomerOrder, name='CustomerOrder'),
     #****************Orders**************************************
-    path('order', order.Orders, name='Order'),
-    path('order/<int:pk>/<str:pdc>', order.Orders, name='Order'),
+    path('all-application', application_form.Orders, name='Order'),
+    path('all-application/<int:pk>/<str:pdc>', application_form.Orders, name='Order'),
 
     #**** Client messages*****#
     path('client-messages/<int:id>', views.ClientMessage, name='ClientMessage'),
 
     #****************Pending**************************************
-    path('pending', order.Pending, name='Pending'),
-    path('pending/<int:pk>/<str:pdc>', order.Pending, name='Pending'),
+    path('pending', application_form.Pending, name='Pending'),
+    path('pending/<int:pk>/<str:pdc>', application_form.Pending, name='Pending'),
 
     #****************Delivered**************************************
-    path('delivered', order.Delivered, name='Delivered'),
-    path('delivered/<int:pk>/<str:pdc>', order.Delivered, name='Delivered'),
+    path('approved', application_form.Delivered, name='Delivered'),
+    path('approved/<int:pk>/<str:pdc>', application_form.Delivered, name='Delivered'),
+
+     #****************Delivered**************************************
+    path('referred', application_form.Delivered, name='Delivered'),
+    path('referred/<int:pk>/<str:pdc>', application_form.Delivered, name='Delivered'),
     
     #****************CanclelledOrders**************************************
-    path('canclelled-orders', order.CanclelledOrders, name='CanclelledOrders'),
-    path('canclelled-orders/<int:pk>/<str:pdc>', order.CanclelledOrders, name='CanclelledOrders'),
+    path('rejected-application', application_form.CanclelledOrders, name='CanclelledOrders'),
+    path('rejected-application/<int:pk>/<str:pdc>', application_form.CanclelledOrders, name='CanclelledOrders'),
     
 
 ]   

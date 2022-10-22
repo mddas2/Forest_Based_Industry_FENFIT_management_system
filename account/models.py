@@ -27,13 +27,13 @@ class CustomUser(AbstractUser):
     # add additional fields in here
     def getRoleName(self):
         if self.role==1:
-            return 'CENTRAL'
+            return 'WELCOME TO CENTRAL LEVEL'
         elif self.role==2:
-            return 'STATE'
+            return 'WELCOME TO STATE LEVEL'
         elif self.role==3:
-            return 'DISTRICT'
+            return 'WELCOME TO DISTRICT LEVEL'
         elif self.role==4:
-            return 'USER'
+            return 'WELCOME TO USER LEVEL'
         else:
             return 'None'
 
