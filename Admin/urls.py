@@ -130,6 +130,15 @@ urlpatterns = [
 
     #****************Personal user information i.e clients**************************************
     path('personal-information', application_form.UserPersonalInformationCreate, name='UserPersonalInformationCreate'),
-    path('personal-information-store',user_authentication_authorization.UserPersonalInformationStore,name='UserPersonalInformationStore'),
-  
+    path('personal-information-store',application_form.UserPersonalInformationStore,name='UserPersonalInformationStore'),
+
+     #****************Application user application i.e clients send application to upper level**************************************
+    path('application-form', application_form.UserApplicationFormCreate, name='UserApplicationFormCreate'),
+    path('application-form-store',application_form.UserApplicationFormStore,name='UserApplicationFormStore'),
+
+   #****************Application reviewed application i.e clients check application status**************************************
+    path('application-reviewed', application_form.UserApplicationReview, name='UserApplicationReview'),
+
+   #****************Application reviewed application i.e clients check application status**************************************
+   path('application-result', application_form.UserApplicationResult, name='UserApplicationResult'),
 ]   

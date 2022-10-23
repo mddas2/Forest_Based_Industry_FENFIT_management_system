@@ -66,17 +66,6 @@
                                         </div>
                                         <!--/row-->
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">password</label>
-                                                    <input name="password1" type="text" name="meta_title" class="form-control"> </div>
-                                            </div>
-                                            <!--/span--> 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">confirm password</label>
-                                                    <input name="password2" type="text" name="keyword" class="form-control"> </div>
-                                            </div>
                                             <!--/span-->
                                         
                                             <div class="col-md-3">
@@ -92,6 +81,49 @@
                                                     </script>
                                                 {% endif %}
                                             </div>
+
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Document first</h4>
+                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.image %}
+                                                    <script>
+                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Citizenship</h4>
+                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.image %}
+                                                    <script>
+                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Other Document</h4>
+                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.image %}
+                                                    <script>
+                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
                                         <hr> </div>
                                     <input type="hidden" name="next" value="{{ request.path }}">
                                     <div class="form-actions m-t-40">

@@ -21,8 +21,8 @@ def UserPersonalInformationCreate(request,id=None):
         slug1 = "User-update" 
     action = "UserPersonalInformationStore"
     #Fetching the data of particular ID
-    get_data = None
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action}
+    id_data = CustomUser.objects.get(id=request.user.id)
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -57,17 +57,73 @@ def UserPersonalInformationStore(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def UserApplicationCreate(request,id=None):
+def UserApplicationFormCreate(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
-        slug1 = "User-create" 
+        slug1 = "Application-Form" 
     else:
         slug1 = "User-update" 
-    action = "UserStore"
+    action = "UserApplicationFormStore"
     #Fetching the data of particular ID
-    get_data = None
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action}
-    return render(request, "admin/applicant_users/user-form.html",data)
+    id_data = CustomUser.objects.get(id=request.user.id)
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    return render(request, "admin/applicant_users/user-application-form.html",data)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UserApplicationFormStore(request):
+    if request.POST['password1'] == request.POST['password2']:
+        password = make_password(request.POST['password1'])
+    else:
+        messages.info(request, "Password not match. please confirm the password")
+        return redirect(request.POST['next'])
+
+    if request.POST:
+        data = {
+            'first_name' : request.POST['first_name'],
+            'last_name' : request.POST['last_name'],
+            'username' : request.POST['username'],
+            'email' : request.POST['email'],
+            'phone' : request.POST['phone'],
+        }
+        # return HttpResponse(data)
+        if request.POST['password1']!='':
+            data['password'] = password
+        user,create = CustomUser.objects.update_or_create(id=request.user.id , defaults=data)
+        try:
+            user.image = request.FILES['profile_image']
+        except:
+            pass
+        messages.info(request, 'User inserted Successfully !!!')
+        return redirect(UserApplicationFormCreate)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UserApplicationReview(request,id=None):
+    create_link_name = reverse("UserPersonalInformationCreate")
+    if id==None:
+        slug1 = "Application-Form Review Status" 
+    else:
+        slug1 = "User-update" 
+    action = "UserApplicationFormStore"
+    #Fetching the data of particular ID
+    id_data = CustomUser.objects.get(id=request.user.id)
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    return render(request, "admin/applicant_users/user-application-form.html",data)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UserApplicationResult(request,id=None):
+    create_link_name = reverse("UserPersonalInformationCreate")
+    if id==None:
+        slug1 = "Application-Result" 
+    else:
+        slug1 = "User-update" 
+    action = "UserApplicationFormStore"
+    #Fetching the data of particular ID
+    id_data = CustomUser.objects.get(id=request.user.id)
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
 def CustomerOrder(request, pk=None, pdc=None):
