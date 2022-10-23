@@ -6,13 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.urls import reverse
 from django.shortcuts import redirect
-from Admin.decorators import customized_user_passes_test,is_admin_role
+from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_role
 from account.models import *
 from django.contrib.auth.hashers import make_password
 
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_USER_role)
 def UserPersonalInformationCreate(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
@@ -26,7 +26,7 @@ def UserPersonalInformationCreate(request,id=None):
     return render(request, "admin/applicant_users/user-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_USER_role)
 def UserPersonalInformationStore(request):
     if request.POST['password1'] == request.POST['password2']:
         password = make_password(request.POST['password1'])
@@ -56,7 +56,7 @@ def UserPersonalInformationStore(request):
         return redirect(UserPersonalInformationCreate)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_USER_role)
 def UserApplicationFormCreate(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
@@ -70,7 +70,7 @@ def UserApplicationFormCreate(request,id=None):
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_USER_role)
 def UserApplicationFormStore(request):
     if request.POST['password1'] == request.POST['password2']:
         password = make_password(request.POST['password1'])
@@ -98,7 +98,7 @@ def UserApplicationFormStore(request):
         return redirect(UserApplicationFormCreate)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_USER_role)
 def UserApplicationReview(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
@@ -112,7 +112,7 @@ def UserApplicationReview(request,id=None):
     return render(request, "admin/applicant_users/user-application-review.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_USER_role)
 def UserApplicationResult(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
@@ -126,6 +126,7 @@ def UserApplicationResult(request,id=None):
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
 def CustomerOrder(request, pk=None, pdc=None):
 
     slug1 = "Order"
@@ -138,6 +139,7 @@ def CustomerOrder(request, pk=None, pdc=None):
     return render(request,'admin/customer_orders/order.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
 def Orders(request, pk=None, pdc=None):
  
     slug1 = "Order"
@@ -150,6 +152,7 @@ def Orders(request, pk=None, pdc=None):
     return render(request,'admin/order/order.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
 def Pending(request, pk=None, pdc=None):
 
     slug1 = "Pending Orders"
@@ -162,6 +165,7 @@ def Pending(request, pk=None, pdc=None):
     return render(request,'admin/order/order.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
 def Delivered(request):
     slug1 = "Delivered Orders"
     all_data = Order.objects.filter(pdc="d").order_by('-updated_at')   
@@ -171,6 +175,7 @@ def Delivered(request):
     return render(request,'admin/order/order.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
 def CanclelledOrders(request):
     try:
         c_id = request.COOKIES['c_id']

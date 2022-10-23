@@ -26,8 +26,6 @@ def is_admin_role(user,request):
         return True
     if user.role == user.PRIVATE:
         return True
-    if user.role == user.USER:
-        return False
         # if user.is_superuser and user.is_staff:
         #     return user.groups.filter(name='admin').exists()
         # else:
@@ -35,6 +33,31 @@ def is_admin_role(user,request):
         #     return False
     else:
         messages.info(request,"You have not Authorized To Access Admin Panel")
+        return False
+
+def is_all_role(user,request):
+    if user.role == user.CENTRAL:
+        return True
+    if user.role == user.STATE:
+        return True
+    if user.role == user.PRIVATE:
+        return True
+    if user.role == user.USER:
+        return True
+        # if user.is_superuser and user.is_staff:
+        #     return user.groups.filter(name='admin').exists()
+        # else:
+        #     messages.info(request,"You have not Authorized To Access Admin Panel because You are Not SuperAdmin and Staff")
+        #     return False
+    else:
+        messages.info(request,"You have not Authorized To Access Admin Panel")
+        return False
+
+def is_USER_role(user,request):
+    if user.role == user.USER:
+        return True    
+    else:
+        messages.info(request,"You have not Authorized To Access User Panel")
         return False
 
 def customized_user_passes_test(test_func, login_url=None, redirect_field_name=REDIRECT_FIELD_NAME):

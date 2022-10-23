@@ -25,14 +25,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
 from wsgiref.util import FileWrapper
-from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_group
+from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_group,is_USER_role,is_all_role
 from django.shortcuts import redirect
 
 
 
 @login_required(login_url=settings.LOGIN_URL)
 # @customized_user_passes_test(is_admin_role)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_all_role)
 def index(request, pk=None, pdc=None):
     today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
 
@@ -75,6 +75,8 @@ def index(request, pk=None, pdc=None):
     data = {'total_users':total_users,'total_income':total_income,'today_income':today_income,'today_order':today_order,'slug1':slug1,'create':False, 'all_data':all_data,'action':True,'pending':pending,'delivered':delivered,'cancelled':cancelled}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
+    if request.user.role==CustomUser.USER:
+        return redirect('UserApplicationReview')
     return render(request,'admin/home.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
