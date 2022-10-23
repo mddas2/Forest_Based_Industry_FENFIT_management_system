@@ -320,7 +320,7 @@ def SignUp(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         user = CustomUser.objects.create_user(first_name, email, password)
         if user:
-            user.role = user.Admin
+            user.role = user.USER
         try:
             user.image = request.FILES['profile_image']
         except:
