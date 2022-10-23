@@ -6,13 +6,72 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.urls import reverse
 from django.shortcuts import redirect
+from Admin.decorators import customized_user_passes_test,is_admin_role
+from account.models import *
+from django.contrib.auth.hashers import make_password
+
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UserPersonalInformationCreate(request,id=None):
+    create_link_name = reverse("UserPersonalInformationCreate")
+    if id==None:
+        slug1 = "Personal-Information" 
+    else:
+        slug1 = "User-update" 
+    action = "UserPersonalInformationStore"
+    #Fetching the data of particular ID
+    get_data = None
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action}
+    return render(request, "admin/applicant_users/user-form.html",data)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UserPersonalInformationStore(request):
+    if request.POST['password1'] == request.POST['password2']:
+        password = make_password(request.POST['password1'])
+    else:
+        messages.info(request, "Password not match. please confirm the password")
+        return redirect(request.POST['next'])
+
+    if request.POST:
+        data = {
+            'first_name' : request.POST['first_name'],
+            'last_name' : request.POST['last_name'],
+            'username' : request.POST['username'],
+            'email' : request.POST['email'],
+            'phone' : request.POST['phone'],
+        }
+        # return HttpResponse(data)
+        if request.POST['password1']!='':
+            data['password'] = password
+        user,create = CustomUser.objects.update_or_create(id=request.user.id , defaults=data)
+        try:
+            user.image = request.FILES['profile_image']
+        except:
+            pass
+       
+        request.session['user_id'] = user.id
+        messages.info(request, 'User inserted Successfully !!!')
+        return redirect(UserPersonalInformationCreate)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UserApplicationCreate(request,id=None):
+    create_link_name = reverse("UserPersonalInformationCreate")
+    if id==None:
+        slug1 = "User-create" 
+    else:
+        slug1 = "User-update" 
+    action = "UserStore"
+    #Fetching the data of particular ID
+    get_data = None
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action}
+    return render(request, "admin/applicant_users/user-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
 def CustomerOrder(request, pk=None, pdc=None):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('index_ecom')
+
     slug1 = "Order"
     all_data = Order.objects.filter(pdc=None).order_by('-updated_at')   
     if pk and pdc:
@@ -24,10 +83,7 @@ def CustomerOrder(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 def Orders(request, pk=None, pdc=None):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('index_ecom')
+ 
     slug1 = "Order"
     all_data = Order.objects.filter(pdc=None).order_by('-updated_at')   
     if pk and pdc:
@@ -39,10 +95,7 @@ def Orders(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 def Pending(request, pk=None, pdc=None):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('index_ecom')
+
     slug1 = "Pending Orders"
     all_data = Order.objects.filter(pdc="p").order_by('-updated_at')   
     if pk and pdc:
@@ -54,10 +107,6 @@ def Pending(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 def Delivered(request):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('index_ecom')
     slug1 = "Delivered Orders"
     all_data = Order.objects.filter(pdc="d").order_by('-updated_at')   
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}

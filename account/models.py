@@ -12,12 +12,14 @@ class CustomUser(AbstractUser):
     CENTRAL = 1
     STATE = 2
     DISTRICT = 3
-    USER = 4
+    PRIVATE = 4
+    USER = 5
     
     ROLE_CHOICES = (
         (CENTRAL, 'CENTRAL'),
         (STATE, 'STATE'),
         (DISTRICT, 'DISTRICT'),
+        (PRIVATE, 'PRIVATE'),
         (USER, 'USER'),
 
     )
@@ -27,13 +29,15 @@ class CustomUser(AbstractUser):
     # add additional fields in here
     def getRoleName(self):
         if self.role==1:
-            return 'WELCOME TO CENTRAL LEVEL'
+            return 'CENTRAL'
         elif self.role==2:
-            return 'WELCOME TO STATE LEVEL'
+            return 'STATE'
         elif self.role==3:
-            return 'WELCOME TO DISTRICT LEVEL'
+            return 'DISTRICT'
         elif self.role==4:
-            return 'WELCOME TO USER LEVEL'
+            return 'PRIVATE'
+        elif self.role==5:
+            return 'USER'
         else:
             return 'None'
 
@@ -44,6 +48,8 @@ class CustomUser(AbstractUser):
             return 'STATE'
         elif self.DISTRICT==id:
             return 'DISTRICT'
+        elif self.PRIVATE==id:
+            return 'PRIVATE'
         elif self.USER==id:
             return 'USER'
         else:

@@ -18,8 +18,20 @@
                 <li><a href="{% url 'Teams' %}">Teams</a></li>
             </ul>
         </li> -->
+        {% if request.user.role == request.user.CENTRAL %}
+        <li class="nav-small-cap">----USER INFORMATION</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">YOUR INFORMATION<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
+                <li><a href="{% url 'UserPersonalInformationCreate' %}">PERSONAL INFORMATION</a></li>
+                <li><a href="{% url 'UserPersonalInformationCreate' %}">APPLICATION</a></li>
+                <li><a href="{% url 'UserPersonalInformationCreate' %}">APPLICATION REVIEWED</a></li>
+                <li><a href="{% url 'UserPersonalInformationCreate' %}">PRINT RESULT</a></li>
+            </ul>
+        </li>
+      {% endif %}
         <li class="nav-small-cap">----CLIENT ACTIVITIES</li>
-        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">CLIENTS <span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">USERS APPLICATION<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
                 <li><a href="{% url 'Order' %}">ALL APPLICATION</a></li>

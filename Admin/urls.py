@@ -126,6 +126,10 @@ urlpatterns = [
     #****************CanclelledOrders**************************************
     path('rejected-application', application_form.CanclelledOrders, name='CanclelledOrders'),
     path('rejected-application/<int:pk>/<str:pdc>', application_form.CanclelledOrders, name='CanclelledOrders'),
-    
+        
 
+    #****************Personal user information i.e clients**************************************
+    path('personal-information', application_form.UserPersonalInformationCreate, name='UserPersonalInformationCreate'),
+    path('personal-information-store',user_authentication_authorization.UserPersonalInformationStore,name='UserPersonalInformationStore'),
+  
 ]   
