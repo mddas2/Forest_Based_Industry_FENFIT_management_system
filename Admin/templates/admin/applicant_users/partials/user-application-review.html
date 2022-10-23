@@ -1,173 +1,109 @@
-     <!-- Info box Content applicant user personal information-->
-                <!-- ============================================================== -->
+{% load staticfiles %}
+<div class="row">
+    <!-- column -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Default Progress bars <a class="get-code" data-bs-toggle="collapse" href="#pgr1" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                <div class="collapse m-t-15" id="pgr1"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-danger " role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%; height:6px;"&gt; &lt;span class="sr-only"&gt;50% Complete&lt;/span&gt;&lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
+                <div class="progress m-t-30">
+                    <div class="progress-bar bg-danger" style="width: 60%; height:6px;" role="progressbar"> <span class="sr-only">60% Complete</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Default Progress bars <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
+                <div class="progress m-t-20">
+                    <div class="progress-bar bg-success" style="width: 75%; height:15px;" role="progressbar">75%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Striped Progress bar <a class="get-code" data-bs-toggle="collapse" href="#pgr3" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                <div class="collapse m-t-15" id="pgr3"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-info progress-bar-striped" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:85%;height:10px;"&gt; &lt;span class="sr-only"&gt;85% Complete&lt;/span&gt;&lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
+                <div class="progress m-t-20">
+                    <div class="progress-bar bg-info progress-bar-striped" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%; height:10px;" role="progressbar"> <span class="sr-only">85% Complete (success)</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+</div>
+
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="">FENFIT APPLICATION</h3>
+                <h6 class="card-subtitle text-info">Pending on STATE LEVEL</h6>
                 <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
-                                {% csrf_token %}
-                                    <div class="form-body">
-                                        <h5 class="card-title">Add Users</h5>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">First Name</label>
-                                                    <input type="text" id="first" name="first_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert" required>
-                                                </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
-                                                    <input type="text" id="last" name="last_name" class="form-control" value="{{id_data.last_name}}" placeholder="Einstein ">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">User Name</label>
-                                                    <input type="text" id="username" name="username" class="form-control" value="{{id_data.username}}" placeholder="Einstein" required>
-                                                </div>
-                                            </div>
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-                                        
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" name="email" value="{{id_data.email}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">Mobile Number</label>
-                                                    <input type="number" name="phone" value="{{id_data.phone}}" class="form-control">
-                                                </div>
-                                            </div>
-                                                <!--/span-->
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Status</label>
-                                                    <br/>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline1" name="status" class="form-check-input" checked>
-                                                        <label class="form-check-label" for="customRadioInline1">Publish</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline2" name="status" class="form-check-input">
-                                                        <label class="form-check-label" for="customRadioInline2">Draft</label>
-                                                    </div>
-                                                 </div>
-                                            </div>
-                                                <!--/span-->
-                                        </div>
-                                        <!--/row-->
-                                        <div class="row">
-                                            <!--/span-->
-                                        
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Profile Image</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.image %}
-                                                    <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Document first</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.image %}
-                                                    <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Citizenship</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.image %}
-                                                    <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Other Document</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.image %}
-                                                    <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                        <hr> </div>
-                                    <input type="hidden" name="next" value="{{ request.path }}">
-                                    <div class="form-actions m-t-40">
-                                        <button type="submit" class="btn btn-success text-white"> <i class="fa fa-check"></i> Save</button>
-                                        <button type="button" class="btn btn-dark">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="white-box text-center"> <img src="{% static '/assets/images/gallery/company.jpg' %}" class="img-responsive"> </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-6">
+                        <h4 class="box-title m-t-40">Application description</h4>
+                        <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p>
+                        <h2 class="m-t-40"><small class="text-success">(36% completed)</small></h2>
+                        <button class="btn btn-dark btn-rounded m-r-5" data-bs-toggle="tooltip" title="" data-original-title="Add to cart"><i class="ti-shopping-cart"></i> </button>
+                        <button class="btn btn-primary btn-rounded">Not Approved</button>
+                        <h3 class="box-title m-t-40">Key Highlights</h3>
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
+                            <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
+                            <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h3 class="box-title m-t-40">General Info</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td width="390">Name</td>
+                                        <td> Bishal Thapa </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Citizenship number</td>
+                                        <td>2034802309840</td>
+                                    </tr>
+                                    <tr>
+                                        <td>state</td>
+                                        <td>Gandaki</td>
+                                    </tr>
+                                    <tr>
+                                        <td>district</td>
+                                        <td>Kathmandu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Munciplity</td>
+                                        <td> Kathmandu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ward Number</td>
+                                        <td> 8 </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upholstery Included</td>
+                                        <td> Yes </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <!-- Column -->
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <script>
-          
-                    // Function to check Whether both passwords
-                    // is same or not.
-                    function checkPassword(form) {
-                        password1 = form.password1.value;
-                        password2 = form.password2.value;
-          
-                        // If password not entered
-                        if (password1 == ''){
-                            return true
-                            // alert ("password remain same");
-                        }
-                        // If confirm password not entered
-                        else if (password2 == ''){
-                            return true
-                            // alert ("password remain same");
-                        }
-                        // If Not same return False.    
-                        else if (password1 != password2) {
-                            alert ("\nPassword did not match: Please try again...")
-                            return false;
-                        }
-          
-                        // If same return True.
-                        else{
-                            return true;
-                        }
-                    }
-                </script>
- 
-                
-                
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
