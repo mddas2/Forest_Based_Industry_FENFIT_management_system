@@ -65,18 +65,7 @@ urlpatterns = [
     path('home-category-update/<int:edit_id>', home.HomeNavigationStore, name='HomeNavigationStore'),
     path('home-category-delete/<int:id>',home.HomeNavigationDelete,name="HomeNavigationDelete"),
 
-    #****************product**************************************
-    path('product-list', views.ProductList, name='ProductList'),
-    path('product-list/<int:pk>/<str:ftn>', views.ProductList, name='ProductList'), #For FTN
-    path('product-create/<int:pk>', views.ProductCreate, name='ProductCreate'),
-    path('product-create/', views.ProductCreate, name='ProductCreate'),
-    path('product-store/', views.ProductStore, name='ProductStore'),
-    path('product-store/<int:pk>', views.ProductStore, name='ProductStore'),
-    path('product-delete/<int:pk>', views.ProductDelete, name='ProductDelete'),
-
-    #****************Add Product**************************************
-    path('add-excel',views.AddProduct , name='AddProduct' ),
-    path('export-excel',views.ExportProduct.as_view()  , name='ExportProduct' ),
+    
 
    #****************global-setting**************************************
     path('global-create/<int:pk>', global_views.GlobalCreate, name="GlobalCreate"),
