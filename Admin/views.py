@@ -39,40 +39,8 @@ def index(request, pk=None, pdc=None):
     today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
     # return  HttpResp  onse(today_max)
     slug1 = request.user.getRoleName
-    all_data = Order.objects.filter(pdc=None).order_by('-updated_at')
-    pending = Order.objects.filter(pdc='p').order_by('-updated_at')
-    delivered = Order.objects.filter(pdc='d').order_by('-updated_at')
-    cancelled = Order.objects.filter(pdc='c').order_by('-updated_at')
-    today_order = Order.objects.filter(created_at__range=(today_min, today_max)).count()
-    today_income=0
-    total_users = CustomUser.objects.all().count()
-    for eachorder in Order.objects.filter(pdc='d',created_at__range=(today_min, today_max)):
-        try:
-            eachorder_quantity = eachorder.product_details
-            eachorder_price = eachorder.product.price
-            eachorder_discount = eachorder.product.discount
-            price_after_discount = int(eachorder_price)-int(eachorder_discount)
-            full_price_with_quantity = price_after_discount*int(eachorder_quantity)
-            today_income = today_income + full_price_with_quantity
-        except:
-            pass
 
-    total_income = 0
-    for eachorder in Order.objects.filter(pdc='d'):
-        try:
-            eachorder_quantity = eachorder.product_details
-            eachorder_price = eachorder.product.price
-            eachorder_discount = eachorder.product.discount
-            price_after_discount = int(eachorder_price)-int(eachorder_discount)
-            full_price_with_quantity = price_after_discount*int(eachorder_quantity)
-            total_income = total_income + full_price_with_quantity
-        except:
-            pass
-
-    if pk and pdc:
-         Order.objects.filter(id=pk).update(pdc=pdc)  
-
-    data = {'total_users':total_users,'total_income':total_income,'today_income':today_income,'today_order':today_order,'slug1':slug1,'create':False, 'all_data':all_data,'action':True,'pending':pending,'delivered':delivered,'cancelled':cancelled}
+    data = {'slug1':slug1,'create':False,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     if request.user.role==CustomUser.USER:

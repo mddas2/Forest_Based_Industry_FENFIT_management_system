@@ -7,6 +7,7 @@ from unicodedata import name
 # from tkinter import CASCADE
 # from turtle import position, update
 from django.db import models
+from account.models import CustomUser
 from django.conf import settings
 from django.contrib.humanize.templatetags import humanize
 
@@ -61,59 +62,22 @@ class HomeNavigation(models.Model):
             return self.banner_image1.url
         return ''
 
-# Create your models here.
-class Products(models.Model):
-    name = models.CharField(max_length=255)
-    category = models.ForeignKey(Navigation,related_name="product",on_delete=models.CASCADE,null=True)
-    price = models.CharField(max_length=255)
-    discount_type = models.CharField(max_length=255)
-    discount = models.CharField(max_length=255)
-    quantity = models.IntegerField(default=1)
-    vendor = models.CharField(max_length=255,null=True)
-    payment_type = models.CharField(max_length=255,default="COD")
-    size =models.CharField(max_length=255,default="medium")
-    title = models.CharField(max_length=2000,null=True)
-    discription = models.TextField(max_length=5000,null=True)
-    meta_title = models.CharField(max_length=300,null=True)
-    keyword = models.CharField(max_length=2000,null=True)
-    brand = models.CharField(max_length=2000,null=True)
-    status = models.BooleanField(default=True)
-    image1 = models.ImageField(upload_to='uploads/', null=True)
-    image2 = models.ImageField(upload_to='uploads/', null=True)
-    image3 = models.ImageField(upload_to='uploads/', null=True)
-    image4 = models.ImageField(upload_to='uploads/', null=True)
-    created_at = models.DateTimeField(auto_now=True,null=True)
-    updated_at = models.DateTimeField(auto_now=True,null=True)
-    ftn_choice = [("f","featured"),("t","trending"),("n","new_arrival")]
-    ftn = models.CharField(max_length=50,choices=ftn_choice,default="n")
-
-    def __str__(self):
-        return "{name:"+self.name+","+"Prpduct_id"+str(self.id)+"}"
-
-class ExcelFileUpload(models.Model):
-    excel_file_upload = models.FileField(upload_to='excel')
-    updated_at = models.DateTimeField(auto_now=True,null=True)
-
-class ApplicationDetail(models.Model):
+class UserApplicationDetail(models.Model):
     user_id = models.CharField(max_length=200)
     application_id = models.CharField(max_length=200)
     name = models.CharField(max_length=205)
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
-    shpping_address = models.CharField(max_length=2055)
-
-class Order(models.Model):
-    # product_id = models.IntegerField(default=0)
-    get_application_detail = models.ForeignKey(ApplicationDetail,related_name="order",on_delete=models.CASCADE,null=True)
-    user_id = models.IntegerField(null=False)
-    phone = models.CharField(max_length=25,null=True)
-    user_detail = models.CharField(max_length=300)
-    user_email = models.CharField(max_length=300,null=True)
     district = models.CharField(max_length=300,null=True)
-    shipping_address = models.CharField(max_length=2055)
+    state = models.CharField(max_length=300,null=True)
+
+class ApplicationForm(models.Model):
+    # product_id = models.IntegerField(default=0)
+    get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="applicationform",on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
-    pdc = models.CharField(max_length=10,null=True) # p>pending , d=delivered , c=cancled
+    dsc = models.CharField(max_length=10,null=True) # d>district , s=state , c=central
     def get_date(self):
         return humanize.naturaltime(self.updated_at)    
 
@@ -166,15 +130,6 @@ class Blog(models.Model):
     banner_image = models.ImageField(upload_to='blogs/banner', null=True)
     icon_image = models.ImageField(upload_to='blogs/icon', null=True)
     status = models.BooleanField(default=True)
-
-class Wishlist(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.DO_NOTHING,null=True)
-    product = models.ForeignKey('Products',on_delete=models.DO_NOTHING)
-    ishere = models.SmallIntegerField(default=True)   # ishere field 1 =>wishlist |||| 0 => cart ||| 2=> order
-    color = models.CharField(max_length=50, null=True)
-    size = models.CharField(max_length=50, null=True)
-    quantity = models.IntegerField(null=True,default=1)
-    temp_id = models.BigIntegerField(null=True)
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=50, null=True)
