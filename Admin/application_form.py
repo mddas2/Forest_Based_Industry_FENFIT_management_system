@@ -1,3 +1,4 @@
+from email.policy import default
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -65,35 +66,36 @@ def UserApplicationFormCreate(request,id=None):
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
-    id_data = CustomUser.objects.get(id=request.user.id)
+    id_data = UserApplicationDetail.objects.get(user_id=request.user.id)
     data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def UserApplicationFormStore(request):
-    if request.POST['password1'] == request.POST['password2']:
-        password = make_password(request.POST['password1'])
-    else:
-        messages.info(request, "Password not match. please confirm the password")
-        return redirect(request.POST['next'])
 
     if request.POST:
-        data = {
-            'first_name' : request.POST['first_name'],
-            'last_name' : request.POST['last_name'],
-            'username' : request.POST['username'],
-            'email' : request.POST['email'],
+        form_detail = {
+            'user_id' : request.user.id,
+            'name' : request.POST['first_name'],
             'phone' : request.POST['phone'],
+            'email' : request.POST['email'],
+            'district' : request.POST['district'],
+            'state' : request.POST['state'],
         }
-        # return HttpResponse(data)
-        if request.POST['password1']!='':
-            data['password'] = password
-        user,create = CustomUser.objects.update_or_create(id=request.user.id , defaults=data)
-        try:
-            user.image = request.FILES['profile_image']
-        except:
-            pass
+
+        Userform_detail_create,detail_create = UserApplicationDetail.objects.update_or_create(user_id=request.user.id , defaults=form_detail)
+        
+        form_data = {
+            'user_id' : request.user.id,
+            'get_user_application_detail_id' : Userform_detail_create.id,
+        }
+        
+        form,form_create = ApplicationForm.objects.update_or_create(user_id=request.user.id , defaults=form_data)
+        # try:
+        #     user.image = request.FILES['profile_image']
+        # except:
+        #     pass
         messages.info(request, 'User inserted Successfully !!!')
         return redirect(UserApplicationFormCreate)
 

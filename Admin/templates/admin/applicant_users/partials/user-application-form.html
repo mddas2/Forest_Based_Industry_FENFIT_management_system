@@ -11,57 +11,56 @@
                                         <h5 class="card-title">Add Users</h5>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
                                                     <input type="text" id="first" name="first_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert" required>
                                                 </div>
                                             </div>
                                             <!--/span-->
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Last Name</label>
                                                     <input type="text" id="last" name="last_name" class="form-control" value="{{id_data.last_name}}" placeholder="Einstein ">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">User Name</label>
-                                                    <input type="text" id="username" name="username" class="form-control" value="{{id_data.username}}" placeholder="Einstein" required>
-                                                </div>
-                                            </div>
+                                           
                                             <!--/span-->
                                         </div>
                                         <!--/row-->
                                         
                                         <div class="row">
-                                            <div class="col-md-4 ">
+                                            <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
                                                     <input type="email" name="email" value="{{id_data.email}}" class="form-control" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 ">
+                                            <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">Mobile Number</label>
                                                     <input type="number" name="phone" value="{{id_data.phone}}" class="form-control">
                                                 </div>
                                             </div>
                                                 <!--/span-->
-                                            <div class="col-md-4">
+                                            
+                                                <!--/span-->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Status</label>
-                                                    <br/>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline1" name="status" class="form-check-input" checked>
-                                                        <label class="form-check-label" for="customRadioInline1">Publish</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline2" name="status" class="form-check-input">
-                                                        <label class="form-check-label" for="customRadioInline2">Draft</label>
-                                                    </div>
-                                                 </div>
+                                                    <label class="form-label">District</label>
+                                                    <input type="text" name="district" value="{{id_data.district}}" class="form-control" required>
+                                                </div>
                                             </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">State</label>
+                                                    <input type="text" name="state" value="{{id_data.state}}" class="form-control">
+                                                </div>
+                                            </div>
+                                                <!--/span-->
+                                            
                                                 <!--/span-->
                                         </div>
                                         <!--/row-->

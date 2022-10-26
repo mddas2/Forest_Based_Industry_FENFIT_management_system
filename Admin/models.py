@@ -63,8 +63,7 @@ class HomeNavigation(models.Model):
         return ''
 
 class UserApplicationDetail(models.Model):
-    user_id = models.CharField(max_length=200)
-    application_id = models.CharField(max_length=200)
+    user_id = models.CharField(max_length=100)
     name = models.CharField(max_length=205)
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
@@ -75,9 +74,9 @@ class ApplicationForm(models.Model):
     # product_id = models.IntegerField(default=0)
     get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="applicationform",on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
+    dsc = models.CharField(max_length=10,null=True) # d>district , s=state , c=central
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
-    dsc = models.CharField(max_length=10,null=True) # d>district , s=state , c=central
     def get_date(self):
         return humanize.naturaltime(self.updated_at)    
 
