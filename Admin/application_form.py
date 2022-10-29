@@ -90,7 +90,11 @@ def UserApplicationFormStore(request):
             'user_id' : request.user.id,
             'get_user_application_detail_id' : Userform_detail_create.id,
         }
-        
+        if request.POST['submits']=='1':
+            dsc = {
+                'dsc' : 'd',
+            }
+            #join dcs and form_data if user press send
         form,form_create = ApplicationForm.objects.update_or_create(user_id=request.user.id , defaults=form_data)
         # try:
         #     user.image = request.FILES['profile_image']

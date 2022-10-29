@@ -14,7 +14,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
-                                                    <input type="text" id="first" name="first_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert" required>
+                                                    <input type="text" id="first" name="first_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
                                             </div>
                                             <!--/span-->
@@ -126,7 +126,8 @@
                                         <hr> </div>
                                     <input type="hidden" name="next" value="{{ request.path }}">
                                     <div class="form-actions m-t-40">
-                                        <button type="submit" class="btn btn-success text-white"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
                                         <button type="button" class="btn btn-dark">Cancel</button>
                                     </div>
                                 </form>
@@ -135,7 +136,7 @@
                     </div>
                     <!-- Column -->
                 </div>
-                <!-- ============================================================== -->
+                <!--==============================================================-->
                 <!-- End PAge Content -->
                 <script>
           
