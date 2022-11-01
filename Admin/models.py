@@ -1,5 +1,6 @@
 from ast import keyword
 from email.mime import image
+from email.policy import default
 from enum import unique
 from multiprocessing import current_process
 from statistics import mode
@@ -68,18 +69,18 @@ class UserApplicationDetail(models.Model):
     business_name = models.CharField(max_length=205, null=True)
     municipality = models.CharField(max_length=205,null=True)
     ward_number = models.CharField(max_length=205 , null=True)
-    tole = models.CharField(max_length=205, null=True)
+    tole = models.CharField(max_length=205, default=True)
 
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
     district = models.CharField(max_length=300,null=True)
     state = models.CharField(max_length=300,null=True)
 
-    certificate_citizenship = models.ImageField(upload_to='home/banner1', null=True) #नागरिकता पर्तिलिपि
-    certificate_company_registration = models.ImageField(upload_to='home/banner1', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
-    provisional_account_number = models.ImageField(upload_to='home/banner1', null=True) #अस्थायी लेखा नम्बरको पर्तिलिपि
-    auditing = models.ImageField(upload_to='home/banner1', null=True) #लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि
-    tax_paid_certificate = models.ImageField(upload_to='home/banner1', null=True) # कर चुक्ता प्रमाण पत्रको पर्तिलिपि
+    certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
+    certificate_company_registration = models.ImageField(upload_to='user/documents', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
+    provisional_account_number = models.ImageField(upload_to='user/documents', null=True) #अस्थायी लेखा नम्बरको पर्तिलिपि
+    auditing = models.ImageField(upload_to='user/documents', null=True) #लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि
+    tax_paid_certificate = models.ImageField(upload_to='user/documents', null=True) # कर चुक्ता प्रमाण पत्रको पर्तिलिपि
 
 class ApplicationForm(models.Model):
     # product_id = models.IntegerField(default=0)

@@ -61,33 +61,39 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 ">
+                                            <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">नगरपालिका/गाउँपालिका</label>
                                                     <input type="text" name="municipality" value="{{id_data.municipality}}" class="form-control" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 ">
+                                            
+                                            <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">वडा नं.</label>
                                                     <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Tole</label>
+                                                    <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <!--/row-->
                                         <div class="row">
                                             <!--/span-->
-                                        
                                             <div class="col-md-3">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                        <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify" />
                                                     </div>
                                                 </div>
                                                 {% if id_data.image %}
                                                     <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                        $("#certificate_citizenship").attr("data-default-file", "{{id_data.certificate_citizenship.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -96,12 +102,12 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                        <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
                                                     </div>
                                                 </div>
                                                 {% if id_data.image %}
                                                     <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                        $("#certificate_company_registration").attr("data-default-file", "{{id_data.certificate_company_registration.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -110,12 +116,12 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                        <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
                                                     </div>
                                                 </div>
                                                 {% if id_data.image %}
                                                     <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                        $("#provisional_account_number").attr("data-default-file", "{{id_data.provisional_account_number.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -124,12 +130,12 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                        <input name="auditing" type="file" id="auditing" class="dropify" />
                                                     </div>
                                                 </div>
                                                 {% if id_data.image %}
                                                     <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                        $("#auditing").attr("data-default-file", "{{id_data.auditing.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -137,12 +143,12 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
-                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                        <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
                                                     </div>
                                                 </div>
                                                 {% if id_data.image %}
                                                     <script>
-                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                        $("#tax_paid_certificate").attr("tax_paid_certificate", "{{id_data.tax_paid_certificate}}");
                                                     </script>
                                                 {% endif %}
                                             </div>

@@ -1,4 +1,5 @@
 from email.policy import default
+from xml.dom.minidom import Document
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -67,6 +68,7 @@ def UserApplicationFormCreate(request,id=None):
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
     id_data = UserApplicationDetail.objects.get(user_id=request.user.id)
+
     data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
@@ -87,6 +89,21 @@ def UserApplicationFormStore(request):
             'tole' : request.POST['tole'],
             'state' : request.POST['state'],
         }
+
+        documents = {} #dictionary of image
+        for im in request.FILES:
+            if im == "certificate_citizenship":
+                documents['certificate_citizenship'] = request.FILES['certificate_citizenship']
+            if im == "certificate_company_registration":
+                documents['certificate_company_registration'] = request.FILES['certificate_company_registration']
+            if im == "provisional_account_number":
+                documents['provisional_account_number'] = request.FILES['provisional_account_number']
+            if im == "auditing":
+                documents['auditing'] = request.FILES['auditing']
+            if im == "tax_paid_certificate":
+                documents['tax_paid_certificate'] = request.FILES['tax_paid_certificate']
+
+        form_detail = {**form_detail , **documents}
 
         Userform_detail_create,detail_create = UserApplicationDetail.objects.update_or_create(user_id=request.user.id , defaults=form_detail)
         
