@@ -13,15 +13,15 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">First Name</label>
-                                                    <input type="text" id="first" name="first_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
+                                                    <label class="form-label">उधेागमिको नाम्</label>
+                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
                                             </div>
                                             <!--/span-->
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
-                                                    <input type="text" id="last" name="last_name" class="form-control" value="{{id_data.last_name}}" placeholder="Einstein ">
+                                                    <label class="form-label">व्यवसायको नाम्</label>
+                                                    <input type="text" id="last" name="business_name" class="form-control" value="{{id_data.business_name}}" placeholder="Einstein ">
                                                 </div>
                                             </div>
                                            
@@ -32,13 +32,13 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Email</label>
+                                                    <label class="form-label">इमेल</label>
                                                     <input type="email" name="email" value="{{id_data.email}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Mobile Number</label>
+                                                    <label class="form-label">सम्पर्क नम्बर</label>
                                                     <input type="number" name="phone" value="{{id_data.phone}}" class="form-control">
                                                 </div>
                                             </div>
@@ -49,19 +49,30 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">District</label>
+                                                    <label class="form-label">जिल्ला</label>
                                                     <input type="text" name="district" value="{{id_data.district}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">State</label>
+                                                    <label class="form-label">राज्य(State)</label>
                                                     <input type="text" name="state" value="{{id_data.state}}" class="form-control">
                                                 </div>
                                             </div>
-                                                <!--/span-->
-                                            
-                                                <!--/span-->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
+                                                    <input type="text" name="municipality" value="{{id_data.municipality}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">वडा नं.</label>
+                                                    <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
                                         <!--/row-->
                                         <div class="row">
@@ -70,7 +81,7 @@
                                             <div class="col-md-3">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">Profile Image</h4>
+                                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                                         <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
                                                     </div>
                                                 </div>
@@ -84,7 +95,7 @@
                                             <div class="col-md-3">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">Document first</h4>
+                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
                                                         <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
                                                     </div>
                                                 </div>
@@ -95,10 +106,10 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">Citizenship</h4>
+                                                        <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
                                                         <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
                                                     </div>
                                                 </div>
@@ -109,10 +120,23 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">Other Document</h4>
+                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
+                                                        <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.image %}
+                                                    <script>
+                                                        $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
                                                         <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
                                                     </div>
                                                 </div>

@@ -77,10 +77,14 @@ def UserApplicationFormStore(request):
     if request.POST:
         form_detail = {
             'user_id' : request.user.id,
-            'name' : request.POST['first_name'],
+            'owner_full_name' : request.POST['owner_full_name'],
+            'business_name' : request.POST['business_name'],
             'phone' : request.POST['phone'],
             'email' : request.POST['email'],
             'district' : request.POST['district'],
+            'municipality' : request.POST['municipality'],
+            'ward_number' : request.POST['ward_number'],
+            'tole' : request.POST['tole'],
             'state' : request.POST['state'],
         }
 
@@ -94,6 +98,7 @@ def UserApplicationFormStore(request):
             dsc = {
                 'dsc' : 'd',
             }
+            form_data = {**dsc,**form_data}
             #join dcs and form_data if user press send
         form,form_create = ApplicationForm.objects.update_or_create(user_id=request.user.id , defaults=form_data)
         # try:
