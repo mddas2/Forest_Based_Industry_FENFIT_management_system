@@ -4,6 +4,9 @@
     .dropdown-toggle::after {
         display: none;
     }
+    .modal-dialog {
+        max-width: 100% !important;
+    }
 </style>
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -15,6 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Full Name</th>
                                 <th>नागरिकता पर्तिलिपि</th>
                                 <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
                                 <th>अस्थायी लेखा नम्बरको पर्तिलिपि</th>      
@@ -34,18 +38,44 @@
                             <tr>
                 
                                 <td>{{i.id}}</td>
-                                <td>{{i.owner_full_name}}</td>
-                                <td>#00{{i.id}}</td>
+                                <td>{{i.get_user_application_detail.owner_full_name}}</td>
+                                <td>
+                                    {% if i.get_user_application_detail.certificate_citizenship %}                                               
+                                    <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i.get_user_application_detail.certificate_company_registration %}                                               
+                                    <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>
                                 <td>    
-                                    {% if i.product.image1 %}                                               
-                                        <img src="{{i.product.image1.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                    {% if i.get_user_application_detail.provisional_account_number %}                                               
+                                    <img src="{{i.get_user_application_detail.provisional_account_number.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>   
-                                <td>{{i.product.name}}</td> 
-                                <td>{{i.product_details}}</td>  <!-- this is quantity-->
-                                <td>/-</td>
+                                <td>
+                                    {% if i.get_user_application_detail.auditing %}                                               
+                                    <img src="{{i.get_user_application_detail.auditing.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td> 
+                                <td>
+                                    {% if i.get_user_application_detail.tax_paid_certificate %}                                               
+                                    <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>  <!-- this is quantity-->
+                                <td>{{i.dsc}}</td>
+                                <td>{{i.get_user_application_detail.district}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                  <td><span class="label label-info">{{i.get_date}}</span></td>
                                  <td><span class="label label-success">{% if i.pdc == 'p' %} Pending {% elif i.pdc == 'd' %} Delevired {% else %} Processing {% endif %}</span></td>
@@ -108,12 +138,11 @@
 <!-----modal-->
 
 <div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Vertically Center</h4>
+    <div class="card-body">      
         <!-- sample modal content -->
         <!----for loop-->
-       {% for i in all_data %}  
-        <div id="order_detail{{i.id}}" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+       {% for id_data in all_data %}  
+        <div id="order_detail{{id_data.id}}" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -123,51 +152,105 @@
                     <div class="modal-body">
                         <!-----order detail-->
 
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="">{{i.product.name}}</h3>
-                                    <h6 class="card-subtitle">{{i.product.title}}</h6>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-6">
-                                            <div class="white-box text-center"> {% if i.product.image1 %}  <img src="{{i.product.image1.url}}" class="img-responsive"> {% endif %} </div>
+                        <div class="row">
+
+                            <!-- column -->
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Application Review Progress bars <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
+                                        <div class="progress m-t-20">
+                                            <div class="progress-bar bg-success" style="width: 45%; height:15px;" role="progressbar">75%</div>
                                         </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-6">
-                                            <h4 class="box-title m-t-40">Product description</h4>
-                                            <p>{{i.product.discription}}</p>
-                                            <h2 class="m-t-40">${{i.product.price}} <small class="text-success">({{i.product.discount_type}} off)</small></h2>
-                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <center>
+                                    <h3 class="">FENFIT APPLICATION</h3>
+                                    <h6 class="card-subtitle text-info">Pending on STATE LEVEL</h6>
+                                        <!-- <h4 class="box-title m-t-40">Application description</h4>
+                                        <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
+                                        <h2 class="m-t-4"><small class="text-success">(36% completed)</small></h2>
+                                        <button class="btn btn-primary btn-rounded">Not Approved</button> 
+                                </center>      
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <center>
+                                   <h3 class="box-title m-t-4">Key Highlights</h3>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
+                                        <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
+                                        <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
+                                    </ul>
+                                </center>
+                            </div>
+                            <!-- column -->
+                        </div>
+                        
+                        <div class="row">
+                            <!-- Column -->
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                            </div>
+                        
+                                      
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <h3 class="box-title m-t-40">General Info</h3>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width="390">Customer Name</td>
-                                                            <td>{{i.user_detail}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Mobile Number</td>
-                                                            <td>{{i.phone}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shipping Address</td>
-                                                            <td> {{i.shipping_address}} </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Email</td>
-                                                            <td>{{i.get_shipping_address.email}}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <h3 class="box-title m-t-40">General Info</h3>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="390">Name</td>
+                                                                <td> {{id_data.get_user_application_detail.owner_full_name}} </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>state</td>
+                                                                <td>{{id_data.get_user_application_detail.state}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>district</td>
+                                                                <td>{{id_data.get_user_application_detail.district}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Munciplity</td>
+                                                                <td>{{id_data.get_user_application_detail.municipality}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Ward Number</td>
+                                                                <td> {{id_data.get_user_application_detail.ward_number}} </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tole</td>
+                                                                <td> {{id_data.get_user_application_detail.tole}} </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Column -->
                         </div>
-
                         <!-----close order detail-->
                     </div>
                     <div class="modal-footer">

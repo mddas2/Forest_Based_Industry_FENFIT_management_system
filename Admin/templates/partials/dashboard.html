@@ -5,7 +5,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">PENDING APPLICATION</h4>
+                <h4 class="card-title">अस्वीकृत आवेदन फारम</h4>
                 <div class="text-end"> <span class="text-muted">Today Received Application</span>
                     <h1 class="font-light"><sup><i class="ti-arrow-up text-success"></i></sup>5</h1>
                 </div>
@@ -21,7 +21,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">APPROVED APPLICATION</h4>
+                <h4 class="card-title">स्वीकृत आवेदन फारम</h4>
                 <div class="text-end"> <span class="text-muted">Today Approved Application</span>
                     <h1 class="font-light"><sup><i class="ti-arrow-up text-primary"></i></sup>598</h1>
                 </div>
@@ -37,7 +37,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">REJECT APPLICATION</h4>
+                <h4 class="card-title">अस्वीकृत आवेदन फारम</h4>
                 <div class="text-end"> <span class="text-muted">Today Rejected Aapplication</span>
                     <h1 class="font-light"><sup><i class="ti-arrow-down text-info"></i></sup>23</h1>
                 </div>
@@ -53,7 +53,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">TOTAL MEMBERS</h4>
+                <h4 class="card-title">कुल सदस्य</h4>
                 <div class="text-end"> <span class="text-muted">TOTAL MEMBERS</span><!---yearly income-->
                     <h1 class="font-light"><sup><i class="ti-arrow-up text-inverse"></i></sup>{{total_users}}</h1>
                 </div>
@@ -66,6 +66,7 @@
     </div>
     <!-- Column -->
 </div>
+{%  include "admin/application_review/partials/application-lists.html" %}
 <!-- ============================================================== -->
 <!-- charts -->
 <!-- ============================================================== -->
@@ -121,4 +122,3 @@
 <!-- ============================================================== -->
 <!-- charts -->
 <!-- ============================================================== -->
-{%  include "admin/application_review/partials/application-lists.html" %}

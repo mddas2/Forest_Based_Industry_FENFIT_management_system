@@ -167,9 +167,9 @@ def CustomerOrder(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def Orders(request, pk=None, pdc=None):
+def Orders(request, pk=None, pdc=None):#all application
     slug1 = "Order"
-    all_data = ApplicationForm.objects.filter(dsc=None).order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at')   
     if pk and pdc:
          ApplicationForm.objects.filter(id=pk).update(dsc=pdc)  
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
