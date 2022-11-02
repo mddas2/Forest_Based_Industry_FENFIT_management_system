@@ -39,8 +39,8 @@ def index(request, pk=None, pdc=None):
     today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
     # return  HttpResp  onse(today_max)
     slug1 = request.user.getRoleName
-
-    data = {'slug1':slug1,'create':False,'action':True}
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at')   
+    data = {'slug1':slug1,'create':False,'action':True,'all_data':all_data}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     if request.user.role==CustomUser.USER:

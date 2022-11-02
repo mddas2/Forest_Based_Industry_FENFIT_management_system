@@ -45,7 +45,7 @@
                                 </td>   
                                 <td>{{i.product.name}}</td> 
                                 <td>{{i.product_details}}</td>  <!-- this is quantity-->
-                                <td>{{i.product.price|sub:i.product.discount|mul:i.product_details}}/-</td>
+                                <td>/-</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                  <td><span class="label label-info">{{i.get_date}}</span></td>
                                  <td><span class="label label-success">{% if i.pdc == 'p' %} Pending {% elif i.pdc == 'd' %} Delevired {% else %} Processing {% endif %}</span></td>
