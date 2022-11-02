@@ -15,16 +15,16 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Client Name</th>
-                                <th>Client Photo</th>
-                                <th>Application ID</th>      
-                                <th>Client Phone</th>
-                                <th>District Level</th>   
-                                <th>State Level</th> 
-                                <th>Private Level Id</th>                                                   
-                                <th>View</th>
-                                <th>Registered Date</th>
-                                <th>Status</th>   
+                                <th>नागरिकता पर्तिलिपि</th>
+                                <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
+                                <th>अस्थायी लेखा नम्बरको पर्तिलिपि</th>      
+                                <th>लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</th>
+                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>   
+                                <th>द्वारा स्थानान्तरण</th> 
+                                <th>जिल्ला</th>                                                   
+                                <th>विवरण हेर्नुहोस्</th>
+                                <th>दर्ता गरिएको मिति</th>
+                                <th>स्थिति</th>   
                                 <th style="display:none">email</th>                            
                             </tr>
                         </thead>
@@ -34,7 +34,7 @@
                             <tr>
                 
                                 <td>{{i.id}}</td>
-                                <td>{{i.user_detail}}</td>
+                                <td>{{i.owner_full_name}}</td>
                                 <td>#00{{i.id}}</td>
                                 <td>    
                                     {% if i.product.image1 %}                                               

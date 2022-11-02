@@ -28,7 +28,7 @@
                 <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li>
             </ul>
         </li>
-       {% elif request.user.role == request.user.CENTRAL or request.user.role == request.user.STATE or request.user.role == request.user.PRIVATE %}
+       {% elif request.user.role == request.user.CENTRAL or request.user.role == request.user.STATE or request.user.role == request.user.PRIVATE or request.user.role == request.user.DISTRICT%}
         <li class="nav-small-cap">----CLIENT ACTIVITIES</li>
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">USERS APPLICATION<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">

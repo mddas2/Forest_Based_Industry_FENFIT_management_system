@@ -40,6 +40,8 @@ def is_all_role(user,request):
         return True
     if user.role == user.STATE:
         return True
+    if user.role == user.DISTRICT:
+        return True
     if user.role == user.PRIVATE:
         return True
     if user.role == user.USER:
