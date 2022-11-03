@@ -169,9 +169,26 @@ def CustomerOrder(request, pk=None, pdc=None):
 @customized_user_passes_test(is_admin_role)
 def Orders(request, pk=None, approved_pending_cancelled=None):#all application
     slug1 = "Order"
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
-         ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  
+         ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
+         if approved_pending_cancelled=='a':
+            try:
+                dsc = ApplicationForm.objects.get(id=pk).dsc
+                if dsc == 'd' and request.user.get_dsc_Role()=='d':
+                    referred_to_dsc = 's'
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+                elif dsc == 's' and request.user.get_dsc_Role()=='s':
+                    referred_to_dsc = 'c'
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+                elif referred_to_dsc == 'c' and request.user.get_dsc_Role()=='c':
+                    referred_to_dsc = 'c'
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+                    #there is no any upper level
+                
+
+            except:
+                pass
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
@@ -195,7 +212,11 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
 def Delivered(request):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Delivered Orders"
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=dsc_role,approved_pending_cancelled="a").order_by('-updated_at')   
+    # if dsc_role == 'c':
+    #     all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at') #district,state,central level can see approved posts
+    # elif dsc_role == 's':
+    #     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc='d').order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at')
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
