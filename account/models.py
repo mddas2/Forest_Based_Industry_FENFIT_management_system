@@ -40,6 +40,19 @@ class CustomUser(AbstractUser):
             return 'USER'
         else:
             return 'None'
+    def get_dsc_Role(self):
+        if self.role==1:
+            return 'c'
+        elif self.role==2:
+            return 's'
+        elif self.role==3:
+            return 'd'
+        elif self.role==4:
+            return 'p'
+        elif self.role==5:
+            return 'u'
+        else:
+            return 'None'
 
     def getRoleById(self,id):
         if self.CENTRAL==id:

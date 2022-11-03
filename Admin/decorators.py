@@ -22,9 +22,11 @@ def is_admin_group(user,request):
 def is_admin_role(user,request):
     if user.role == user.CENTRAL:
         return True
-    if user.role == user.STATE:
+    elif user.role == user.STATE:
         return True
-    if user.role == user.PRIVATE:
+    elif user.role==user.DISTRICT:
+        return True
+    elif user.role == user.PRIVATE:
         return True
         # if user.is_superuser and user.is_staff:
         #     return user.groups.filter(name='admin').exists()

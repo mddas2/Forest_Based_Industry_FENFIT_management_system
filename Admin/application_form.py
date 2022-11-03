@@ -180,9 +180,9 @@ def Orders(request, pk=None, approved_pending_cancelled=None):#all application
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def Pending(request, pk=None, approved_pending_cancelled=None):
-
+    dsc_role = request.user.get_dsc_Role()
     slug1 = "Pending Orders"
-    all_data = ApplicationForm.objects.filter(approved_pending_cancelled="p").order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc=dsc_role,approved_pending_cancelled="p").order_by('-updated_at')   
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
@@ -193,8 +193,9 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def Delivered(request):
+    dsc_role = request.user.get_dsc_Role()
     slug1 = "Delivered Orders"
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=dsc_role,approved_pending_cancelled="a").order_by('-updated_at')   
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
@@ -203,8 +204,9 @@ def Delivered(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def CanclelledOrders(request):
+    dsc_role = request.user.get_dsc_Role()
     slug1 = "Canclelled Orders"
-    all_data = ApplicationForm.objects.filter(dsc="c").order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc=dsc_role,approved_pending_cancelled="c").order_by('-updated_at')   
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
