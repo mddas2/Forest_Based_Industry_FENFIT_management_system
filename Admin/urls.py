@@ -95,26 +95,26 @@ urlpatterns = [
     path('customer-order', application_form.CustomerOrder, name='CustomerOrder'),
     #****************Orders**************************************
     path('all-application', application_form.Orders, name='Order'),
-    path('all-application/<int:pk>/<str:pdc>', application_form.Orders, name='Order'),
+    path('all-application/<int:pk>/<str:approved_pending_cancelled>', application_form.Orders, name='Order'),
 
     #**** Client messages*****#
     path('client-messages/<int:id>', views.ClientMessage, name='ClientMessage'),
 
     #****************Pending**************************************
     path('pending', application_form.Pending, name='Pending'),
-    path('pending/<int:pk>/<str:pdc>', application_form.Pending, name='Pending'),
+    path('pending/<int:pk>/<str:approved_pending_cancelled>', application_form.Pending, name='Pending'),
 
     #****************Delivered**************************************
     path('approved', application_form.Delivered, name='Delivered'),
-    path('approved/<int:pk>/<str:pdc>', application_form.Delivered, name='Delivered'),
+    path('approved/<int:pk>/<str:approved_pending_cancelled>', application_form.Delivered, name='Delivered'),
 
      #****************Delivered**************************************
     path('referred', application_form.Delivered, name='Delivered'),
-    path('referred/<int:pk>/<str:pdc>', application_form.Delivered, name='Delivered'),
+    path('referred/<int:pk>/<str:approved_pending_cancelled>', application_form.Delivered, name='Delivered'),
     
     #****************CanclelledOrders**************************************
     path('rejected-application', application_form.CanclelledOrders, name='CanclelledOrders'),
-    path('rejected-application/<int:pk>/<str:pdc>', application_form.CanclelledOrders, name='CanclelledOrders'),
+    path('rejected-application/<int:pk>/<str:approved_pending_cancelled>', application_form.CanclelledOrders, name='CanclelledOrders'),
         
 
     #****************Personal user information i.e clients**************************************

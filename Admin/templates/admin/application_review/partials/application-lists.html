@@ -78,7 +78,7 @@
                                 <td>{{i.get_user_application_detail.district}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                  <td><span class="label label-info">{{i.get_date}}</span></td>
-                                 <td><span class="label label-success">{% if i.pdc == 'p' %} Pending {% elif i.pdc == 'd' %} Delevired {% else %} Processing {% endif %}</span></td>
+                                 <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
                                  {% if action%}
                                  <td>
                                    <div class="dropdown">
@@ -88,28 +88,28 @@
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
-                                                <a class="dropdown-item" href="{% url "Order" pk=i.id pdc="p"  %}"> 
-                                                    {%if i.pdc == "p" %} 
+                                                <a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="p"  %}"> 
+                                                    {%if i.approved_pending_cancelled == "p" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
                                                 Pending
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id pdc="d"  %}">
-                                                {%if i.pdc == "a" %} 
+                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="a"  %}">
+                                                {%if i.approved_pending_cancelled == "a" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
                                                 Approved
                                             </a></li>
-                                            {% comment %} <li><a class="dropdown-item" href="{% url "Order" pk=i.id pdc="c"  %}">
-                                                {%if i.pdc == "c" %} 
+                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="c"  %}">
+                                                {%if i.approved_pending_cancelled == "c" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
                                                  Cancelled
-                                            </a></li> {% endcomment %}
+                                            </a></li>
                                         </ul>
                                         </div>
                                  </td>

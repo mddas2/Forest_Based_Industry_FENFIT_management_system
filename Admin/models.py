@@ -88,10 +88,12 @@ class ApplicationForm(models.Model):
     user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
     dsc = models.CharField(max_length=10,null=True) # d>district , s=state , c=central
 
-    district_status = models.CharField(max_length=10,null=True) # a>approved , p>pending , c>cancel
-    state_status = models.CharField(max_length=10,null=True)
-    central_status = models.CharField(max_length=10,null=True)
-    private_status = models.CharField(max_length=10,null=True)
+    district_status = models.BooleanField(default=False) # True and False
+    state_status = models.BooleanField(default=False)
+    central_status = models.BooleanField(default=False)
+    private_status = models.BooleanField(default=False)
+
+    approved_pending_cancelled = models.CharField(max_length=10,null=True) #a>approved , c>cancelled , p>pending
 
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
