@@ -87,6 +87,12 @@ class ApplicationForm(models.Model):
     get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="applicationform",on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
     dsc = models.CharField(max_length=10,null=True) # d>district , s=state , c=central
+
+    district_status = models.CharField(max_length=10,null=True) # a>approved , p>pending , c>cancel
+    state_status = models.CharField(max_length=10,null=True)
+    central_status = models.CharField(max_length=10,null=True)
+    private_status = models.CharField(max_length=10,null=True)
+
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     def get_date(self):

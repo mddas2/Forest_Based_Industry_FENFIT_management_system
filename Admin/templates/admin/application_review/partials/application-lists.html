@@ -83,7 +83,7 @@
                                  <td>
                                    <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                           <i class="bi bi-three-dots-vertical" style="color: ;"></i>
+                                           <i class="bi bi-three-dots-vertical" style="color: red;"></i>
                                         </a>
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -97,18 +97,18 @@
                                                 </a>
                                             </li>
                                             <li><a class="dropdown-item" href="{% url "Order" pk=i.id pdc="d"  %}">
-                                                {%if i.pdc == "d" %} 
+                                                {%if i.pdc == "a" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                Delivered
+                                                Approved
                                             </a></li>
                                             {% comment %} <li><a class="dropdown-item" href="{% url "Order" pk=i.id pdc="c"  %}">
                                                 {%if i.pdc == "c" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                Cancelled Order
+                                                 Cancelled
                                             </a></li> {% endcomment %}
                                         </ul>
                                         </div>
