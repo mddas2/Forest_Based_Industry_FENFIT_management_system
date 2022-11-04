@@ -184,8 +184,8 @@ def Orders(request, pk=None, approved_pending_cancelled=None):#all application
                     referred_to_dsc = 'c'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_state_approved_by=request.user.id)
                     should_insert = 1
-                elif referred_to_dsc == 'c' and request.user.get_dsc_Role()=='c':
-                    referred_to_dsc = 'c'
+                elif dsc == 'c' and request.user.get_dsc_Role()=='c':
+                    referred_to_dsc = 'approved'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
                     #there is no any upper level

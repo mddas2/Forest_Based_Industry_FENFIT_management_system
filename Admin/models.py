@@ -86,7 +86,7 @@ class ApplicationForm(models.Model):
     # product_id = models.IntegerField(default=0)
     get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="applicationform",on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
-    dsc = models.CharField(max_length=10,null=True) # d>district , s=state , c=central
+    dsc = models.CharField(max_length=20,null=True) # d>district , s=state , c=central
 
     district_status = models.BooleanField(default=False) # True and False
     state_status = models.BooleanField(default=False)
