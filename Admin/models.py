@@ -93,12 +93,21 @@ class ApplicationForm(models.Model):
     central_status = models.BooleanField(default=False)
     private_status = models.BooleanField(default=False)
 
+    in_district_approved_by = models.ForeignKey(CustomUser,related_name='approved_form_in_district_level',on_delete=models.DO_NOTHING,null=True)
+    in_state_approved_by = models.ForeignKey(CustomUser,related_name='approved_form_in_state_level',on_delete=models.DO_NOTHING,null=True)
+    in_central_approved_by = models.ForeignKey(CustomUser,related_name='approved_form_in_central_level',on_delete=models.DO_NOTHING,null=True)
+
     approved_pending_cancelled = models.CharField(max_length=10,null=True) #a>approved , c>cancelled , p>pending
 
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     def get_date(self):
-        return humanize.naturaltime(self.updated_at)    
+        return humanize.naturaltime(self.updated_at)   
+
+class ApplicationFormApprovedDetail(models.Model):
+    approved_form = models.ForeignKey(ApplicationForm,related_name="application_form_approved_detailed",on_delete=models.CASCADE,null=True)
+    approved_by =  models.ForeignKey(CustomUser,related_name="total_application_form_approved",on_delete=models.CASCADE,null=True)
+    whose_form = models.CharField(max_length=100,null=True)
 
 class PageType(models.Model):
     page_name =  models.CharField(max_length=255)  

@@ -173,22 +173,40 @@ def Orders(request, pk=None, approved_pending_cancelled=None):#all application
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
          if approved_pending_cancelled=='a':
+            should_insert = 0
             try:
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 if dsc == 'd' and request.user.get_dsc_Role()=='d':
                     referred_to_dsc = 's'
-                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_district_approved_by = request.user.id)
+                    should_insert = 1
                 elif dsc == 's' and request.user.get_dsc_Role()=='s':
                     referred_to_dsc = 'c'
-                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_state_approved_by=request.user.id)
+                    should_insert = 1
                 elif referred_to_dsc == 'c' and request.user.get_dsc_Role()=='c':
                     referred_to_dsc = 'c'
-                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    should_insert = 1
                     #there is no any upper level
-                
+                if should_insert==1:
+                    whoses_form = ApplicationForm.objects.get(id=pk).user_id
+                    # return HttpResponse(whose_form)
+                    application_form_approved_detail_data = {
+                        'approved_form_id' : pk,
+                        'approved_by_id' : request.user.id,
+                        'whose_form' : whoses_form
+                        }
+                    ApplicationFormApprovedDetail.objects.create(**application_form_approved_detail_data)
+                else:
+                    messages.error(request,'can not insert to application_form_approved_detail please report to programmer')
+                    
+                messages.success(request,'form approved successfully!!!')
 
             except:
-                pass
+                messages.error(request,'form not approved')
+            
+
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
