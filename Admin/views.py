@@ -35,13 +35,25 @@ from django.shortcuts import redirect
 @customized_user_passes_test(is_all_role)
 def index(request, pk=None, pdc=None):
     today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
-
     today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+    
+    dsc_role = request.user.get_dsc_Role()
+    total_pending_application_form = ApplicationForm.objects.filter(dsc=dsc_role).count()
+    total_approved_form = request.user.total_application_form_approved.all().count()
+    total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
+    total_member = 1
+    data_1={
+        'total_pending_application_form' : total_pending_application_form,
+        'total_approved_form' : total_approved_form,
+        'total_rejected_application_form' : total_rejected_application_form,
+        'total_member' : total_member
+    }
+
     # return  HttpResp  onse(today_max)
     slug1 = request.user.getRoleName
-    dsc_role = request.user.get_dsc_Role()
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=dsc_role).order_by('-updated_at')   
     data = {'slug1':slug1,'create':False,'action':True,'all_data':all_data}
+    data = {**data,**data_1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     if request.user.role==CustomUser.USER:

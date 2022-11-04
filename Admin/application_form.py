@@ -202,7 +202,6 @@ def Orders(request, pk=None, approved_pending_cancelled=None):#all application
                     messages.error(request,'can not insert to application_form_approved_detail please report to programmer')
                     
                 messages.success(request,'form approved successfully!!!')
-
             except:
                 messages.error(request,'form not approved')
          elif approved_pending_cancelled=='c':
@@ -227,7 +226,7 @@ def Orders(request, pk=None, approved_pending_cancelled=None):#all application
 def Pending(request, pk=None, approved_pending_cancelled=None):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Pending Orders"
-    all_data = ApplicationForm.objects.filter(dsc=dsc_role,approved_pending_cancelled="p").order_by('-updated_at')   
+    all_data = ApplicationForm.objects.filter(dsc=dsc_role).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
