@@ -230,12 +230,10 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
 def Delivered(request):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Delivered Orders"
-    # if dsc_role == 'c':
-    #     all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at') #district,state,central level can see approved posts
-    # elif dsc_role == 's':
-    #     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc='d').order_by('-updated_at')   
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-updated_at')
-    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}
+
+    all_data = request.user.total_application_form_approved.all()
+    
+    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False,'is_approved_cancelled':1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     return render(request,'admin/application_review/application-lists.html',data)
@@ -245,7 +243,7 @@ def Delivered(request):
 def CanclelledOrders(request):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Canclelled Orders"
-    all_data = ApplicationForm.objects.filter(dsc=dsc_role,approved_pending_cancelled="c").order_by('-updated_at')   
+    all_data = all_data = request.user.total_application_form_approved.all()   
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg

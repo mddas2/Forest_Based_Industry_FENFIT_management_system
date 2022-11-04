@@ -2,7 +2,12 @@
 {% block contents %}
 
     {% include "partials/page-title.html" %}
-    {%  include "admin/application_review/partials/application-lists.html" %}
+    {% if is_approved_cancelled %}
+        {%  include "admin/application_review/partials/application-lists_approved_cancelled.html" %}
+    {% else %}
+        {%  include "admin/application_review/partials/application-lists.html" %}
+    {% endif %}
+    
     {% comment %} {% include 'admin/order/partials/order-form.html' %} {% endcomment %}
 
 {% endblock %}
