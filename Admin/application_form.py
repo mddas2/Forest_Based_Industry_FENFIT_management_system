@@ -205,7 +205,17 @@ def Orders(request, pk=None, approved_pending_cancelled=None):#all application
 
             except:
                 messages.error(request,'form not approved')
-            
+         elif approved_pending_cancelled=='c':
+            referred_to_dsc = None #jumps to user(cancelled by all)
+            ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+            whoses_form = ApplicationForm.objects.get(id=pk).user_id
+            application_form_cancelled_detail_data = {
+                    'cancelled_form_id' : pk,
+                    'cancelled_by_id' : request.user.id,
+                    'whose_form' : whoses_form
+                }
+            ApplicationFormCancelledDetail.objects.create(**application_form_cancelled_detail_data)           
+            messages.success(request,'form cancelled successfully!!!')
 
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
@@ -233,7 +243,7 @@ def Delivered(request):
 
     all_data = request.user.total_application_form_approved.all()
     
-    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False,'is_approved_cancelled':1}
+    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False,'is_approved':1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     return render(request,'admin/application_review/application-lists.html',data)
@@ -243,8 +253,8 @@ def Delivered(request):
 def CanclelledOrders(request):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Canclelled Orders"
-    all_data = all_data = request.user.total_application_form_approved.all()   
-    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False}
+    all_data = request.user.total_application_form_cancelled.all()   
+    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False,'is_cancelled':1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     return render(request,'admin/application_review/application-lists.html',data)

@@ -109,6 +109,11 @@ class ApplicationFormApprovedDetail(models.Model):
     approved_by =  models.ForeignKey(CustomUser,related_name="total_application_form_approved",on_delete=models.CASCADE,null=True)
     whose_form = models.CharField(max_length=100,null=True)
 
+class ApplicationFormCancelledDetail(models.Model):
+    cancelled_form = models.ForeignKey(ApplicationForm,related_name="application_form_cancelled_detailed",on_delete=models.CASCADE,null=True)
+    cancelled_by =  models.ForeignKey(CustomUser,related_name="total_application_form_cancelled",on_delete=models.CASCADE,null=True)
+    whose_form = models.CharField(max_length=100,null=True)
+
 class PageType(models.Model):
     page_name =  models.CharField(max_length=255)  
     status = models.BooleanField(default=True)

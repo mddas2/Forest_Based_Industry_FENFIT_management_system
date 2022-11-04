@@ -35,11 +35,10 @@
                         {% if all_data %}
                         <tbody id="tableSearch">
                             {% for i in all_data %}   
-                              {% with i=i.approved_form %} 
-                               
-                            <tr>
-                
+                                                              
+                            <tr>                
                                 <td>{{i.id}}</td>
+                                {% with i=i.cancelled_form %}
                                 <td>{{i.get_user_application_detail.owner_full_name}}</td>
                                 <td>
                                     {% if i.get_user_application_detail.certificate_citizenship %}                                               
@@ -78,7 +77,9 @@
                                 </td>  <!-- this is quantity-->
                                 <td>{{i.dsc}}</td>
                                 <td>{{i.get_user_application_detail.district}}</td>
+                                {% endwith %}
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
+                                {% with i=i.approved_form %}
                                  <td><span class="label label-info">{{i.get_date}}</span></td>
                                  <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
                                  {% if action%}
@@ -145,12 +146,12 @@
         <!-- sample modal content -->
         <!----for loop-->
        {% for id_data in all_data %}  
-        {% with id_data=id_data.approved %}
         <div id="order_detail{{id_data.id}}" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+            {% with id_data=id_data.cancelled_form %}
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="vcenter">ORDER DETAIL</h4>
+                        <h4 class="modal-title" id="vcenter">APPLICATION DETAIL</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -222,7 +223,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td width="390">Name</td>
-                                                                <td> {{id_data.get_user_application_detail.owner_full_name}} </td>
+                                                                <td>{{id_data.get_user_application_detail.owner_full_name}} </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>state</td>
