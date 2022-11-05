@@ -25,6 +25,31 @@ class CustomUser(AbstractUser):
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True)
     REQUIRED_FIELDS = []
+    states = (
+        ('province_1','Province 1'),
+        ('province_2','Madhesh Pradesh'),
+        ('province_3','Bagmati Pradesh'),
+        ('province_4','Gandaki Pradesh'),
+        ('province_5','Lumbini Pradesh'),
+        ('province_6','Karnali Pradesh'),
+        ('province_7','Sudur Paschim Pradesh'),
+    )
+    province_1 = (
+        ('bhojpur','Bhojpur'),
+        ('dhankuta','Dhankuta'),
+        ('ilam','Ilam'),
+        ('jhapa','jhapa'),
+        ('khotang','Khotang'),
+        ('morang','Morang'),
+        ('okhaldhunga','Okhaldhunga'),
+        ('panchthar','Panchthar'),
+        ('sankhuwasabha','Sankhuwasabha'),
+        ('solukhumbu','Solukhumbu'),
+        ('sunsari','Sunsari'),
+        ('taplejung','Taplejung'),
+        ('terhathum','Terhathum'),
+        ('udayapur','Udayapur'),
+    )
     pass
     # add additional fields in here
     def getRoleName(self):
@@ -70,3 +95,4 @@ class CustomUser(AbstractUser):
    
     def __str__(self):
         return self.email
+    
