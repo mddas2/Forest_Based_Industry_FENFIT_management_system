@@ -304,7 +304,7 @@ def PermissionStore(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def PermissionEdit(request):
+def PermissionEdit(request,id=None):
     return HttpResponse("i am permission edit")
 
 @login_required(login_url=settings.LOGIN_URL)
