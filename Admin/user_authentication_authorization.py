@@ -45,20 +45,19 @@ def Login(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def UserList(request):
-    slug1 = "Users"
-    create_link_name = reverse("UserCreate")
-    all_data = CustomUser.objects.all()
+   slug1 = "Users"
+   create_link_name = reverse("UserCreate")
+   all_data = CustomUser.objects.all()
     # oneuser = all_data.last()
     # return HttpResponse(oneuser.groups.all())
-    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name, 'users':all_data}
-    return render(request , "admin/users/user-list.html",data)
+   data = {'slug1':slug1,'create':True,'create_link_name':create_link_name, 'users':all_data}
+   return render(request , "admin/users/user-list.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AdvanceUserList(request,role_id=None):
     slug1 = "Users"
-    create_link_name = reverse("UserCreate")
-    
+    create_link_name = reverse("UserCreate")    
 
     roles = CustomUser.ROLE_CHOICES
     try:
@@ -136,6 +135,7 @@ def UserStore(request,id=None):
                 messages.INFO(request, 'User cannot inserted !!!')
         if request.POST['permission'] != '0':
             if user:
+                user.user_permissions.clear()
                 permission = Permission.objects.get(id = request.POST['permission'])
                 permission.user_set.add(user)
                 messages.success(request, ' Permission is set to '+ permission.name)
@@ -283,6 +283,7 @@ def GroupDelete(request,id):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def PermissionList(request):
+    # https://docs.djangoproject.com/en/1.8/topics/auth/default/#permission-caching
     action = "PermissionStore"
     slug1 = "Permissions"
     create_link_name = reverse("PermissionList")
