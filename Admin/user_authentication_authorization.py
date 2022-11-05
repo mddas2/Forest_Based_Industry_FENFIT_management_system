@@ -239,7 +239,7 @@ def GroupCreate(request,id=None):
     action = "GroupStore"
     category = Navigation.objects.filter(page_type="group")
 
-    permissions_1_19 = Permission.objects.all()[1:19]
+    permissions_1_19 = Permission.objects.all()[0:19]
     permissions_20_39 = Permission.objects.all()[19:38]
     permissions_40_58 = Permission.objects.all()[38:57]
     #Fetching the data of particular ID
