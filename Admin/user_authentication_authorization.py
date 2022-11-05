@@ -275,12 +275,18 @@ def GroupDelete(request,id):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def PermissionList(request):
+    action = "PermissionStore"
     slug1 = "Permissions"
     create_link_name = reverse("PermissionList")
     all_data = Permission.objects.all()
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name, 'permissions':all_data}
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'permission_create':True, 'permissions':all_data,'action':action}
     return render(request , "admin/permissions/permission-list.html",data)
 
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def PermissionStore(request):
+    return HttpResponse(request.POST.items())
+    return HttpResponse("i am permission store")
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
@@ -291,11 +297,6 @@ def PermissionEdit(request):
 @customized_user_passes_test(is_admin_role)
 def PermissionDelete(request):
     return HttpResponse("i am permission delete")
-
-@login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
-def PermissionStore(request):
-    return HttpResponse("i am permission store")
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
