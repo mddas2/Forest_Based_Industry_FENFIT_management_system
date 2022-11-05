@@ -19,45 +19,46 @@
             {% endif %}
             {% if permission_create == True %}
                 <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" data-bs-toggle="modal" data-bs-target="#add-contact"><i class="fa fa-plus-circle"></i>Create</button>
+                <div id="add-contact" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Add New Permission</h4>
+                                <button type="button" class="btn-close me-1 p-0" data-bs-dismiss="modal" aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body">
+                                {%if id_data%}
+                                <form class="form-horizontal form-material" action="{% url action edit_id=id_data.id %}" method="post" enctype="multipart/form-data" onsubmit="submitForm();" name="navform">
+                                {%else%}
+                                <form class="form-horizontal form-material" action="{% url action %}" method="post" enctype="multipart/form-data" onsubmit="submitForm();" name="navform">
+                                {%endif%}
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <div class="col-md-12 m-b-20">
+                                            <label class="form-label" style="float: left;">Permission Discription (as district)</label>
+                                            <input id="name" name="name" type="text" class="form-control" placeholder="Can approved all application of Kathmandu " required><!----all application goes to admin have permission Kathmandu--->
+                                        </div>
+                                        <div class="col-md-12 m-b-20">
+                                            <label class="form-label" style="float: left;">Permission Code (as district)</label>
+                                            <input id="codename" name="codename" type="text" class="form-control" placeholder="kathmandu" required>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-info waves-effect" data-bs-dismiss="modal">Save</button>
+                                        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </from>
+                            </div>
+                            
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
             {% endif %}
             <!--below is permission modal-->
-            <div id="add-contact" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Add New Permission</h4>
-                            <button type="button" class="btn-close me-1 p-0" data-bs-dismiss="modal" aria-hidden="true"></button>
-                        </div>
-                        <div class="modal-body">
-                            {%if id_data%}
-                            <form class="form-horizontal form-material" action="{% url action edit_id=id_data.id %}" method="post" enctype="multipart/form-data" onsubmit="submitForm();" name="navform">
-                            {%else%}
-                            <form class="form-horizontal form-material" action="{% url action %}" method="post" enctype="multipart/form-data" onsubmit="submitForm();" name="navform">
-                            {%endif%}
-                            {% csrf_token %}
-                                <div class="form-group">
-                                    <div class="col-md-12 m-b-20">
-                                        <label class="form-label" style="float: left;">Permission Discription (as district)</label>
-                                        <input name="name" type="text" class="form-control" placeholder="Can approved all application of Kathmandu " required><!----all application goes to admin have permission Kathmandu--->
-                                    </div>
-                                    <div class="col-md-12 m-b-20">
-                                        <label class="form-label" style="float: left;">Permission Code (as district)</label>
-                                        <input name="codename" type="text" class="form-control" placeholder="kathmandu" required>
-                                    </div>
-                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-info waves-effect" data-bs-dismiss="modal">Save</button>
-                                    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Cancel</button>
-                                </div>
-                            </from>
-                        </div>
-                        
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
+          
             <script>
                 function Create(link){
                       location.href = link

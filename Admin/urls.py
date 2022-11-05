@@ -31,7 +31,6 @@ urlpatterns = [
     path('group-store/<int:id>', user_authentication_authorization.GroupStore, name='GroupStore'),
 
     path('permission-list', user_authentication_authorization.PermissionList, name='PermissionList'),
-    path('permission-edit/<int:id>', user_authentication_authorization.PermissionEdit, name='PermissionEdit'),
     path('permission-delete/<int:id>', user_authentication_authorization.PermissionDelete, name='PermissionDelete'),
     path('permission-store', user_authentication_authorization.PermissionStore, name='PermissionStore'),
 

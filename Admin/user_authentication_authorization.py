@@ -297,20 +297,16 @@ def PermissionStore(request):
             'codename' : request.POST['codename'],
             'content_type_id' : 1
         }
-        Permission.objects.create(**permission_data)
-        Districts.objects.create(**district_data)
+        Permission.objects.update_or_create(codename=request.POST['codename'],defaults=permission_data)
+        Districts.objects.update_or_create(district_name=request.POST['codename'],defaults=district_data)
 
     return redirect(PermissionList)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def PermissionEdit(request,id=None):
-    return HttpResponse("i am permission edit")
-
-@login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
-def PermissionDelete(request):
-    return HttpResponse("i am permission delete")
+def PermissionDelete(request,id):
+    Permission.objects.filter(id=id).delete()
+    return redirect(PermissionList)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
