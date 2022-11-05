@@ -82,12 +82,13 @@ def UserCreate(request,id=None):
     action = "UserStore"
     groups = Group.objects.all()
     roles = CustomUser.ROLE_CHOICES
+    permissions = Permission.objects.all()
     #Fetching the data of particular ID
     get_data = None
     if id:
         # action = "ProductUpdate"
         get_data = CustomUser.objects.get(id=id)  
-    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name,'id_data':get_data, 'action':action,'groups':groups,'roles':roles}
+    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name,'id_data':get_data, 'action':action,'groups':groups,'roles':roles,'permissions':permissions}
     return render(request, "admin/users/user-form.html",data)
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
@@ -131,6 +132,13 @@ def UserStore(request,id=None):
                 group = Group.objects.get(id = request.POST['group'])
                 group.user_set.add(user)
                 messages.success(request, 'Group Permission is set to '+ group.name)
+            else:
+                messages.INFO(request, 'User cannot inserted !!!')
+        if request.POST['permission'] != '0':
+            if user:
+                permission = Permission.objects.get(id = request.POST['permission'])
+                permission.user_set.add(user)
+                messages.success(request, ' Permission is set to '+ permission.name)
             else:
                 messages.INFO(request, 'User cannot inserted !!!')
         request.session['user_id'] = user.id
