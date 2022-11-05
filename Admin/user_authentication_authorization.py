@@ -285,8 +285,22 @@ def PermissionList(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def PermissionStore(request):
-    return HttpResponse(request.POST.items())
-    return HttpResponse("i am permission store")
+    if request.POST:
+        if Districts.objects.all().count()==0:
+            Permission.objects.all().delete()
+            messages.info(request,'all Default Permission Deleted!!')
+        district_data = {
+            'district_name' : request.POST['codename'],            
+        }
+        permission_data = {
+            'name' : request.POST['name'],
+            'codename' : request.POST['codename'],
+            'content_type_id' : 1
+        }
+        Permission.objects.create(**permission_data)
+        Districts.objects.create(**district_data)
+
+    return redirect(PermissionList)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)

@@ -175,3 +175,10 @@ class ContactUs(models.Model):
     def get_date(self):
         return humanize.naturaltime(self.updated_at)
 
+class States(models.Model):
+    state_name = models.CharField(max_length=100, null=True)
+
+class Districts(models.Model):
+    district_name = models.CharField(max_length=100, null=True)
+    get_state = models.ForeignKey(States,related_name="get_districts",on_delete=models.CASCADE,null=True)
+
