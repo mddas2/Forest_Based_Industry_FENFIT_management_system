@@ -298,16 +298,22 @@ def PermissionStore(request):
         if Districts.objects.all().count()==0:
             Permission.objects.all().delete()
             messages.info(request,'all Default Permission Deleted!!')
-        district_data = {
-            'district_name' : request.POST['codename'],            
-        }
         permission_data = {
             'name' : request.POST['name'],
             'codename' : request.POST['codename'],
             'content_type_id' : 1
         }
-        Permission.objects.update_or_create(codename=request.POST['codename'],defaults=permission_data)
-        Districts.objects.update_or_create(district_name=request.POST['codename'],defaults=district_data)
+        if request.POST['id']:
+            perm_id = request.POST['id']
+            distobj,create = Permission.objects.update_or_create(id=perm_id,defaults=permission_data) #edit
+        else:
+            perm_id = 0
+            distobj,create = Permission.objects.update_or_create(codename=request.POST['codename'],defaults=permission_data) #create new
+        district_data = {
+            'id' : distobj.id,
+            'district_name' : request.POST['codename'],            
+        }
+        Districts.objects.update_or_create(id=distobj.id,defaults=district_data)
 
     return redirect(PermissionList)
 
@@ -315,6 +321,7 @@ def PermissionStore(request):
 @customized_user_passes_test(is_admin_role)
 def PermissionDelete(request,id):
     Permission.objects.filter(id=id).delete()
+    Districts.objects.filter(id=id).delete()
     return redirect(PermissionList)
 
 @login_required(login_url=settings.LOGIN_URL)
