@@ -1,6 +1,6 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/royalretailshop/royal_family/
+    - export DEPLOYPATH=/home/radijmdg/fenfitnepal/
     - /bin/cp -r Ecommerce $DEPLOYPATH
     - /bin/cp -r Admin $DEPLOYPATH
     - /bin/cp -r account $DEPLOYPATH
