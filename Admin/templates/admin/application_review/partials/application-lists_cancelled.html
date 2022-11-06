@@ -40,37 +40,38 @@
                                 <td>{{i.id}}</td>
                                 {% with i=i.cancelled_form %}
                                 <td>{{i.get_user_application_detail.owner_full_name}}</td>
-                                <td>
-                                    {% if i.get_user_application_detail.certificate_citizenship %}                                               
-                                    <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                <td class="zoom-gallery">
+                                    {% if i.get_user_application_detail.certificate_citizenship %} 
+                                    <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>
-                                <td>
-                                    {% if i.get_user_application_detail.certificate_company_registration %}                                               
-                                    <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                <td class="zoom-gallery">
+                                    {% if i.get_user_application_detail.certificate_company_registration %}  
+                                    <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                    <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>
-                                <td>    
-                                    {% if i.get_user_application_detail.provisional_account_number %}                                               
-                                    <img src="{{i.get_user_application_detail.provisional_account_number.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                <td class="zoom-gallery">    
+                                    {% if i.get_user_application_detail.provisional_account_number %}        
+                                    <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>   
-                                <td>
-                                    {% if i.get_user_application_detail.auditing %}                                               
-                                    <img src="{{i.get_user_application_detail.auditing.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                <td class="zoom-gallery">
+                                    {% if i.get_user_application_detail.auditing %}    
+                                    <a href="{{i.get_user_application_detail.auditing.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td> 
-                                <td>
-                                    {% if i.get_user_application_detail.tax_paid_certificate %}                                               
-                                    <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}" class="" alt="{{i.product.image1}}" width="80" height="50">
+                                <td class="zoom-gallery">
+                                    {% if i.get_user_application_detail.tax_paid_certificate %}       
+                                    <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
