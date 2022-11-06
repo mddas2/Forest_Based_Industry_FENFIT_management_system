@@ -50,6 +50,90 @@ class CustomUser(AbstractUser):
         ('terhathum','Terhathum'),
         ('udayapur','Udayapur'),
     )
+
+    province_2 = (
+        ('saptari','Saptari'),
+        ('siraha','Siraha'),
+        ('dhanusa','Dhanusa'),
+        ('mahottari','Mahottari'),
+        ('sarlahi','sarlahi'),
+        ('bara','Bara'),
+        ('parsa','Parsa'),
+        ('rautahat','Rautahat'),
+    )
+
+    province_3 = (
+        ('sindhuli','Sindhuli'),
+        ('ramechhap','Ramechhap'),
+        ('dolakha','Dolakha'),
+        ('bhaktapur','Bhaktapur'),
+        ('dhading','Dhading'),
+        ('kathmandu ','Kathmandu'),
+        ('kavrepalanchok','Kavrepalanchok'),
+        ('lalitpur','Lalitpur'),
+        ('nuwakot ','Nuwakot '),
+        ('rasuwa','Rasuwa'),
+        ('sindhupalchok','Sindhupalchok'),
+        ('chitwan','Chitwan'),
+        ('makwanpur','Makwanpur'),
+    )
+
+    province_4 = (
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+    )
+
+    province_5 = (
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+    )
+
+    province_6 = (
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+    )
+
+    province_7 = (
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+        ('sindhuli','Sindhuli'),
+    )
+
     pass
     # add additional fields in here
     def getRoleName(self):

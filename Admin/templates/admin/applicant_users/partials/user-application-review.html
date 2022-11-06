@@ -5,10 +5,10 @@
     <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Application Review Progress bars <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                <h4 class="card-title">Application Review Progress bar <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
                 <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
                 <div class="progress m-t-20">
-                    <div class="progress-bar bg-success" style="width: 45%; height:15px;" role="progressbar">75%</div>
+                    <div class="progress-bar bg-success" style="width: {% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %} ; height:15px;" role="progressbar">{% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %}</div>
                 </div>
             </div>
         </div>
@@ -16,16 +16,16 @@
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
             <h3 class="">FENFIT APPLICATION</h3>
-            <h6 class="card-subtitle text-info">Pending on STATE LEVEL</h6>
+            <h6 class="card-subtitle text-info">{% if id_data.dsc == 'd' %} Pending on DISTRICT {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 's' %} Pending on STATE {{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'c' %} Pending on CENTRAL LEVEL {% elif id_data.dsc == 'approved' %} approved from all level {% else %} User Need to Forward for further Process {% endif %}</h6>
                 <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-                <h2 class="m-t-4"><small class="text-success">(36% completed)</small></h2>
-                <button class="btn btn-primary btn-rounded">Not Approved</button> 
+                <h2 class="m-t-4"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
+                <button class="btn btn-primary btn-rounded">{% if id_data.dsc == 'd' %} DISTRICT {{id_data.get_user_application_detail.district}} NOT APPROVED YET {% elif id_data.dsc == 's' %} STATE {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'c' %} CENTRAL LEVEL NOT APPROVED YET {% elif id_data.dsc == 'approved' %} ALL APPROVED PROCESS COMPLETED {% else %} CLIENT {{id_data.get_user_application_detail.owner_full_name}} NEED TO FORWARD {% endif %}</button> 
         </center>      
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
-           <h3 class="box-title m-t-4">Key Highlights</h3>
+           <h3 class="box-title m-t-4">Comments Highlights</h3>
             <ul class="list-unstyled">
                 <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
                 <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
