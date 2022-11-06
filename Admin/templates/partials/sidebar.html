@@ -41,14 +41,14 @@
         </li>
         
         <li class="nav-small-cap">----USERS</li>
-        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">USERS <span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">प्रयोगकर्ता(USERS)<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="{% url 'AdvanceUserList' role_id=0 %}">User Type</a></li>
-                <li><a href="{% url 'UserList' %}">USERS</a></li>
-                <li><a href="{% url 'RoleList' %}">ROLE</a></li>
-                <li><a href="{% url 'GroupList' %}">Group</a></li><!----Group is combination of different permissions-->
-                <li><a href="{% url 'PermissionList' %}">PERMISSION</a></li>
-                <li><a href="{% url 'UserLogs' %}">LOGS</a></li>
+                <li><a href="{% url 'AdvanceUserList' role_id=0 %}">प्रयोगकर्ता वर्गीकरण</a></li>
+                <li><a href="{% url 'UserList' %}">प्रयोगकर्ता(USERS)</a></li>
+                <li><a href="{% url 'RoleList' %}">भूमिका(Role)</a></li>
+                <li><a href="{% url 'GroupList' %}">प्रदेश संघ(Group)</a></li><!----Group is combination of different permissions-->
+                <li><a href="{% url 'PermissionList' %}">जिल्ला संघ(Permission)</a></li>
+                <!-- <li><a href="{% url 'UserLogs' %}">LOGS</a></li> -->
             </ul>
         </li>
         <li> <a href="{% url 'ChatApp' %}" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">CHAT-APP<span class="badge rounded-pill bg-cyan ms-auto"></span></span></a>

@@ -9,7 +9,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Role Name</th>
+                                <th>प्रदेशको नाम (Role Name)</th>
                                 <th>Role Permission</th>
                                 <th>Actions</th>
                             </tr>
@@ -18,7 +18,7 @@
                             {% for role in groups %}
                             <tr>
                                <td>{{role.id}}</td>
-                               <td>{{role.name}}</td>
+                               <td>Provience {{role.name}}</td>
                                <td>
                                 {% for permission in role.permissions.all %} <span class="label label-success">{{permission.name}}</span> {% endfor %}
                                </td>

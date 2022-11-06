@@ -16,15 +16,30 @@
                             <h5 class="card-title">Add Role</h5>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-label">Role Name</label>
+                                        <label class="form-label">प्रदेश कोड</label>
+                                        <select class="form-control" name="name" data-placeholder="Choose a Category" tabindex="1">
+                                            <option value="0" selected>select</option>
+                                                <option value="1" {% if id_data.role == role_id %} selected {% endif %}>province 1</option>
+                                                <option value="2" {% if id_data.role == role_id %} selected {% endif %}>province 2</option>
+                                                <option value="3" {% if id_data.role == role_id %} selected {% endif %}>province 3</option>
+                                                <option value="4" {% if id_data.role == role_id %} selected {% endif %}>province 4</option>
+                                                <option value="5" {% if id_data.role == role_id %} selected {% endif %}>province 5</option>
+                                                <option value="6" {% if id_data.role == role_id %} selected {% endif %}>province 6</option>
+                                                <option value="7" {% if id_data.role == role_id %} selected {% endif %}>province 7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">प्रदेशको नाम (Role Name)</label>
                                         <input type="text" id="first" name="name" value="{{id_data.name}}" class="form-control" value=""
                                             placeholder="Admin">
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--/span-->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label">Status</label>
                                         <br />
@@ -40,6 +55,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            
                                 <!-- column -->
                                 <div class="col-md-12">
                                     <div class="skin skin-line m-t-30">

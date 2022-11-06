@@ -177,6 +177,7 @@ class ContactUs(models.Model):
 
 class States(models.Model):
     state_name = models.CharField(max_length=100, null=True)
+    state_code =  models.CharField(max_length=100, null=True)
 
 class Districts(models.Model):
     district_name = models.CharField(max_length=100, null=True)
