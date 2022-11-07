@@ -22,9 +22,13 @@ def UserPersonalInformationCreate(request,id=None):
     else:
         slug1 = "User-update" 
     action = "UserPersonalInformationStore"
+    try:
+        state = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
+    except:
+        state = None
     #Fetching the data of particular ID
     id_data = CustomUser.objects.get(id=request.user.id)
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'state':state,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -39,16 +43,14 @@ def UserPersonalInformationStore(request):
     if request.POST:
         data = {
             'first_name' : request.POST['first_name'],
-            'last_name' : request.POST['last_name'],
-            'username' : request.POST['username'],
         }
         # return HttpResponse(data)
         if request.POST['password1']!='':
             data['password'] = password
         user,create = CustomUser.objects.update_or_create(id=request.user.id , defaults=data)
         try:
-            return HttpResponse(request.FILES['profile_image'])
             user.image = request.FILES['profile_image']
+            user.save()
         except:
             pass
         messages.info(request, 'User inserted Successfully !!!')

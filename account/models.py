@@ -153,7 +153,7 @@ class CustomUser(AbstractUser):
     #     'province_6' : (('western rukum','Western Rukum'),('salyan','Salyan'),('dolpa','Dolpa'),('humla','Humla'),('jumla','Jumla'),('kalikot','Kalikot'),('mugu','Mugu'),('surkhet','Surkhet'),('dailekh','Dailekh'),('jajarkot','Jajarkot')),
     #     'province_7' :  (('kailali','Kailali'),('achham','Achham'),('doti','Doti'),('bajhang','Bajhang'),('bajura','Bajura'),('kanchanpur','Kanchanpur'),('dadeldhura ','Dadeldhura'),('baitadi','Baitadi'),('darchula','Darchula'))
     #     }
-    def find_key(d, value):
+    def find_states(d, value):
         for k,v in d.items():
             #print(k)
             if isinstance(v, list):
