@@ -14,9 +14,9 @@ from django.contrib.auth.hashers import make_password
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def AllMemberList(request,pk=None, approved_pending_cancelled=None):
-    slug1 = "सबै प्रयोगकर्ता"
-    all_data = CustomUser.objects.all()   
+def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
+    slug1 = "Order"
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
          if approved_pending_cancelled=='a':
@@ -224,7 +224,7 @@ def CustomerOrder(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def Orders(request, pk=None, approved_pending_cancelled=None):#all application
+def AllApplication(request, pk=None, approved_pending_cancelled=None):#all application
     slug1 = "Order"
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
@@ -293,9 +293,9 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def Delivered(request):
+def ApprovedApplication(request):
     dsc_role = request.user.get_dsc_Role()
-    slug1 = "Delivered Orders"
+    slug1 = "Approved Applicatiton"
 
     all_data = request.user.total_application_form_approved.all()
     
@@ -306,7 +306,7 @@ def Delivered(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def CanclelledOrders(request):
+def CanelledApplication(request):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Canclelled Orders"
     all_data = request.user.total_application_form_cancelled.all()   

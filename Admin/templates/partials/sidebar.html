@@ -17,7 +17,7 @@
                 <li><a href="{% url 'Teams' %}">Teams</a></li>
             </ul>
         </li> -->
-        {% if request.user.role == request.user.USER %}
+        {% if request.user.role != request.user.USER %}
         <li class="nav-small-cap">----USER INFORMATION</li>
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">YOUR INFORMATION<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
@@ -35,18 +35,18 @@
                 <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
                 <li><a href="{% url 'AllMemberList' %}">सबै प्रयोगकर्ता</a></li>
                 <li><a href="{% url 'Pending' %}">अस्वीकृत प्रयोगकर्ता(pending)</a></li>
-                <li><a href="{% url 'Delivered' %}">स्वीकृत प्रयोगकर्ता</a></li>
-                <li><a href="{% url 'CanclelledOrders' %}">अस्वीकार प्रयोगकर्ता</a></li>
+                <li><a href="{% url 'ApprovedApplication' %}">स्वीकृत प्रयोगकर्ता</a></li>
+                <li><a href="{% url 'CanelledApplication' %}">अस्वीकार प्रयोगकर्ता</a></li>
             </ul>
         </li>
 
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">प्रयोगकर्ताको आवेदन फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
-                <li><a href="{% url 'Order' %}">सबै आवेदन फारम</a></li>
+                <li><a href="{% url 'AllApplication' %}">सबै आवेदन फारम</a></li>
                 <li><a href="{% url 'Pending' %}">अस्वीकृत आवेदन फारम(pending)</a></li>
-                <li><a href="{% url 'Delivered' %}">स्वीकृत आवेदन फारम</a></li>
-                <li><a href="{% url 'CanclelledOrders' %}">अस्वीकार आवेदन फारम</a></li>
+                <li><a href="{% url 'ApprovedApplication' %}">स्वीकृत आवेदन फारम</a></li>
+                <li><a href="{% url 'CanelledApplication' %}">अस्वीकार आवेदन फारम</a></li>
             </ul>
         </li>
         

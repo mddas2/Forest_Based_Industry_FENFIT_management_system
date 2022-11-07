@@ -23,7 +23,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <a href="{% url 'Delivered' %}">
+                <a href="{% url 'ApprovedApplication' %}">
                     <h4 class="card-title">स्वीकृत आवेदन फारम</h4>
                     <div class="text-end"> <span class="text-muted">Today Approved Application</span>
                         <h1 class="font-light"><sup><i class="ti-arrow-up text-primary"></i></sup>{{total_approved_form}}</h1>
@@ -41,7 +41,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <a href="{% url 'CanclelledOrders' %}">
+                <a href="{% url 'CanelledApplication' %}">
                     <h4 class="card-title">अस्वीकृत आवेदन फारम</h4>
                     <div class="text-end"> <span class="text-muted">Total Rejected Aapplication</span>
                         <h1 class="font-light"><sup><i class="ti-arrow-down text-info"></i></sup>{{total_rejected_application_form}}</h1>

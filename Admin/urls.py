@@ -95,8 +95,8 @@ urlpatterns = [
     #****************Orders**************************************
     path('customer-order', application_form.CustomerOrder, name='CustomerOrder'),
     #****************Orders**************************************
-    path('all-application', application_form.Orders, name='Order'),
-    path('all-application/<int:pk>/<str:approved_pending_cancelled>', application_form.Orders, name='Order'),
+    path('all-application', application_form.AllApplication, name='AllApplication'),
+    path('all-application/<int:pk>/<str:approved_pending_cancelled>', application_form.AllApplication, name='AllApplication'),
 
     #**** Client messages*****#
     path('client-messages/<int:id>', views.ClientMessage, name='ClientMessage'),
@@ -106,26 +106,26 @@ urlpatterns = [
     path('pending/<int:pk>/<str:approved_pending_cancelled>', application_form.Pending, name='Pending'),
 
     #****************Delivered**************************************
-    path('approved', application_form.Delivered, name='Delivered'),
-    path('approved/<int:pk>/<str:approved_pending_cancelled>', application_form.Delivered, name='Delivered'),
+    path('approved', application_form.ApprovedApplication, name='ApprovedApplication'),
+    path('approved/<int:pk>/<str:approved_pending_cancelled>', application_form.ApprovedApplication, name='ApprovedApplication'),
 
      #****************Delivered**************************************
-    path('referred', application_form.Delivered, name='Delivered'),
-    path('referred/<int:pk>/<str:approved_pending_cancelled>', application_form.Delivered, name='Delivered'),
+    path('referred', application_form.ApprovedApplication, name='ApprovedApplication'),
+    path('referred/<int:pk>/<str:approved_pending_cancelled>', application_form.ApprovedApplication, name='ApprovedApplication'),
     
     #****************CanclelledOrders**************************************
-    path('rejected-application', application_form.CanclelledOrders, name='CanclelledOrders'),
-    path('rejected-application/<int:pk>/<str:approved_pending_cancelled>', application_form.CanclelledOrders, name='CanclelledOrders'),
+    path('rejected-application', application_form.CanelledApplication, name='CanelledApplication'),
+    path('rejected-application/<int:pk>/<str:approved_pending_cancelled>', application_form.CanelledApplication, name='CanclelledOrders'),
         
      #****************Users (प्रयोगकर्ताको सदस्यता फारम) ************************************
     path('all-member-list', application_form.AllMemberList, name='AllMemberList'),
-    path('all-member-list/<int:pk>/<str:approved_pending_cancelled>', application_form.Orders, name='Order'),
+    path('all-member-list/<int:pk>/<str:approved_pending_cancelled>', application_form.AllMemberList, name='AllMemberList'),
 
     path('all-pending-members', application_form.Pending, name='Pending'),
     path('all-member-pending/<int:pk>/<str:approved_pending_cancelled>', application_form.Pending, name='Pending'),
 
-    path('all-approved-approved', application_form.Delivered, name='Delivered'),
-    path('all-approved-member/<int:pk>/<str:approved_pending_cancelled>', application_form.Delivered, name='Delivered'),
+    path('all-approved-member', application_form.ApprovedApplication, name='ApprovedApplication'),
+    path('all-approved-member/<int:pk>/<str:approved_pending_cancelled>', application_form.ApprovedApplication, name='ApprovedApplication'),
 
     #****************Personal user information i.e clients**************************************
     path('personal-information', application_form.UserPersonalInformationCreate, name='UserPersonalInformationCreate'),
