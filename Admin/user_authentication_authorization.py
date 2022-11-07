@@ -24,6 +24,7 @@ def Login(request):
         email = request.POST['email']
         password =  request.POST['password']
         user = authenticate(request=request,username=email, password=password)
+        login_attempt_left = 5
         if user is not None:
            login(request,user,backend='django.contrib.auth.backends.ModelBackend') 
            return redirect('index')          
@@ -360,7 +361,10 @@ def SignUp(request):
         login(request,user,backend='django.contrib.auth.backends.ModelBackend')
             #return HttpResponse("loged in")
         return redirect('index')
-    return render(request , 'admin/authentication/register.html')
+    data = {
+        'districts' : CustomUser.districts,
+    }
+    return render(request , 'admin/authentication/register.html',data)
 def Logout(request):
     logout(request)
     return render(request , 'admin/authentication/login.html')

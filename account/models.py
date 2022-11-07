@@ -6,6 +6,9 @@ class CustomUser(AbstractUser):
     permanent_address = models.CharField(max_length=255 , null=True)
     email = models.EmailField(max_length=255, unique=True)
     username = models.EmailField(max_length=255, unique=False)
+    state_name = models.CharField(max_length=55 , null=True)
+    district_name = models.CharField(max_length=55 , null=True)
+    is_verified = models.BooleanField(default=False)
     image = models.ImageField(upload_to='user/profile', null=True)
     USERNAME_FIELD = 'email'
 
@@ -34,6 +37,7 @@ class CustomUser(AbstractUser):
         'province_6' : ['western rukum','salyan','dolpa','humla','jumla','kalikot','mugu','surkhet','dailekh','jajarkot'],
         'province_7' : ['Kailali','achham','doti','bajhang','bajura','kanchanpur','dadeldhura','baitadi','darchula']
     }
+    districts = sorted(['Kailali','achham','doti','bajhang','bajura','kanchanpur','dadeldhura','baitadi','darchula','western rukum','salyan','dolpa','humla','jumla','kalikot','mugu','surkhet','dailekh','jajarkot','kapilvastu','parasi','rupandehi','arghakhanchi','gulmi','palpa','dang','pyuthan','rolpa','eastern rukum','banke','bardiya','gorkha','kaski','lamjung','syangja','tanahu','manang','baglung','myagdi','parbat','mustang','bhojpur','dhankuta','ilam','jhapa','khotang','morang','okhaldhunga','panchthar','sankhuwasabha','solukhumbu','sunsari','taplejung','terhathum','udayapur','saptari','siraha','dhanusa','mahottari','sarlahi','bara','parsa','rautahat','sindhuli','ramechhap','dolakha','bhaktapur','dhading','kathmandu','kavrepalanchok','lalitpur','nuwakot','rasuwa','sindhupalchok','chitwan','makwanpur'])
     # states = (
     #     ('province_1','Province 1'),
     #     ('province_2','Madhesh Pradesh'),

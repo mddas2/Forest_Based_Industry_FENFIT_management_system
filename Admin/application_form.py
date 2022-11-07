@@ -41,19 +41,16 @@ def UserPersonalInformationStore(request):
             'first_name' : request.POST['first_name'],
             'last_name' : request.POST['last_name'],
             'username' : request.POST['username'],
-            'email' : request.POST['email'],
-            'phone' : request.POST['phone'],
         }
         # return HttpResponse(data)
         if request.POST['password1']!='':
             data['password'] = password
         user,create = CustomUser.objects.update_or_create(id=request.user.id , defaults=data)
         try:
+            return HttpResponse(request.FILES['profile_image'])
             user.image = request.FILES['profile_image']
         except:
             pass
-       
-        request.session['user_id'] = user.id
         messages.info(request, 'User inserted Successfully !!!')
         return redirect(UserPersonalInformationCreate)
 
