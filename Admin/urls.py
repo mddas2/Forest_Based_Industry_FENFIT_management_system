@@ -1,8 +1,9 @@
 from django.urls import path
-from . import application_form, views,user_authentication_authorization,global_views,blogs,teams,home,chatapp,mailapp
+from . import application_form, views,user_authentication_authorization,global_views,blogs,teams,home,chatapp,mailapp,district_state_management
 
 urlpatterns = [
     #**********User Authentication******************************************
+    path('district-state', district_state_management.action, name='DistrictAction'),
     path('', views.index, name='index'),
     path('login',user_authentication_authorization.Login,name='Login'),
     path('signup',user_authentication_authorization.SignUp,name='SignUp'),

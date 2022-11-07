@@ -176,8 +176,8 @@ class ContactUs(models.Model):
         return humanize.naturaltime(self.updated_at)
 
 class States(models.Model):
-    state_name = models.CharField(max_length=100, null=True)
-    state_code =  models.CharField(max_length=100, null=True)
+    state_name = models.CharField(max_length=100, null=True,)
+    state_code =  models.CharField(max_length=100, null=True, unique=True)
 
 class Districts(models.Model):
     district_name = models.CharField(max_length=100, null=True)
