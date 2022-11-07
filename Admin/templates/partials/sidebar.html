@@ -17,14 +17,15 @@
                 <li><a href="{% url 'Teams' %}">Teams</a></li>
             </ul>
         </li> -->
-        {% if request.user.role != request.user.USER %}
+        {% if request.user.role == request.user.USER %}
         <li class="nav-small-cap">----USER INFORMATION</li>
-        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">YOUR INFORMATION<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">सिफारिश फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
-                <li><a href="{% url 'UserPersonalInformationCreate' %}">PERSONAL INFORMATION</a></li>
-                <li><a href="{% url 'UserApplicationFormCreate' %}">APPLICATION</a></li>
-                <li><a href="{% url 'UserApplicationReview' %}">APPLICATION REVIEWED</a></li>
+                <li><a href="{% url 'UserPersonalInformationCreate' %}">प्रोफाइल सेटिङ</a></li>
+                <li><a href="{% url 'MemberAprovalForm' %}">सदस्य सिफारिश फारम</a></li> <!---member approval form-->
+                <li><a href="{% url 'UserApplicationFormCreate' %}">सुविधा अनुप्रयोग फारम</a></li> <!-----APPLICATION Form-->
+                <li><a href="{% url 'UserApplicationReview' %}">आवेदन पुनरावलोकन</a></li> <!----application review---->
                 <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li>
             </ul>
         </li>

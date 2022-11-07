@@ -128,6 +128,21 @@ def UserApplicationFormCreate(request,id=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
+def MemberAprovalForm(request,id=None):
+    create_link_name = reverse("UserPersonalInformationCreate")
+    if id==None:
+        slug1 = "Member Aproval-Form" 
+    else:
+        slug1 = "User-update" 
+    action = "UserApplicationFormStore"
+    #Fetching the data of particular ID
+    id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
+
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    return render(request, "admin/applicant_users/user-application-form.html",data)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_USER_role)
 def UserApplicationFormStore(request):
 
     if request.POST:
