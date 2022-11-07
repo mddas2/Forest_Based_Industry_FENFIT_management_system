@@ -20,11 +20,11 @@ from django.contrib.auth.decorators import user_passes_test
 from axes.models import AccessAttempt
 def Login(request):
     data = {'login_attempt_left':settings.AXES_FAILURE_LIMIT}
+    login_attempt_left = 5
     if request.POST:
         email = request.POST['email']
         password =  request.POST['password']
         user = authenticate(request=request,username=email, password=password)
-        login_attempt_left = 5
         if user is not None:
            login(request,user,backend='django.contrib.auth.backends.ModelBackend') 
            return redirect('index')          
@@ -38,9 +38,9 @@ def Login(request):
              messages.error(request, "incorrect user or password")
              
             #  return render(request , 'admin/authentication/login.html')
-             data = {
-                'login_attempt_left':login_attempt_left
-             }
+    data = {
+       'login_attempt_left':login_attempt_left
+       }
     return render(request , 'admin/authentication/login.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -373,6 +373,6 @@ def SignUp(request):
     return render(request , 'admin/authentication/register.html',data)
 def Logout(request):
     logout(request)
-    return render(request , 'admin/authentication/login.html')
+    return redirect('index')
 
 

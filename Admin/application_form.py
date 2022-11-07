@@ -12,6 +12,61 @@ from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_r
 from account.models import *
 from django.contrib.auth.hashers import make_password
 
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def AllMemberList(request,pk=None, approved_pending_cancelled=None):
+    slug1 = "सबै प्रयोगकर्ता"
+    all_data = CustomUser.objects.all()   
+    if pk and approved_pending_cancelled:
+         ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
+         if approved_pending_cancelled=='a':
+            should_insert = 0
+            try:
+                dsc = ApplicationForm.objects.get(id=pk).dsc
+                if dsc == 'd' and request.user.get_dsc_Role()=='d':
+                    referred_to_dsc = 's'
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_district_approved_by = request.user.id)
+                    should_insert = 1
+                elif dsc == 's' and request.user.get_dsc_Role()=='s':
+                    referred_to_dsc = 'c'
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_state_approved_by=request.user.id)
+                    should_insert = 1
+                elif dsc == 'c' and request.user.get_dsc_Role()=='c':
+                    referred_to_dsc = 'approved'
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    should_insert = 1
+                    #there is no any upper level
+                if should_insert==1:
+                    whoses_form = ApplicationForm.objects.get(id=pk).user_id
+                    # return HttpResponse(whose_form)
+                    application_form_approved_detail_data = {
+                        'approved_form_id' : pk,
+                        'approved_by_id' : request.user.id,
+                        'whose_form' : whoses_form
+                        }
+                    ApplicationFormApprovedDetail.objects.create(**application_form_approved_detail_data)
+                else:
+                    messages.error(request,'can not insert to application_form_approved_detail please report to programmer')
+                    
+                messages.success(request,'form approved successfully!!!')
+            except:
+                messages.error(request,'form not approved')
+         elif approved_pending_cancelled=='c':
+            referred_to_dsc = None #jumps to user(cancelled by all)
+            ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+            whoses_form = ApplicationForm.objects.get(id=pk).user_id
+            application_form_cancelled_detail_data = {
+                    'cancelled_form_id' : pk,
+                    'cancelled_by_id' : request.user.id,
+                    'whose_form' : whoses_form
+                }
+            ApplicationFormCancelledDetail.objects.create(**application_form_cancelled_detail_data)           
+            messages.success(request,'form cancelled successfully!!!')
+
+    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
+    client_msg = ContactUs.objects.filter(read_unread=True)
+    data['client_msg']=client_msg
+    return render(request,'admin/member-approved/application-lists.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)

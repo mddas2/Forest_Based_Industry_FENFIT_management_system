@@ -30,6 +30,16 @@
         </li>
        {% elif request.user.role == request.user.CENTRAL or request.user.role == request.user.STATE or request.user.role == request.user.PRIVATE or request.user.role == request.user.DISTRICT%}
         <li class="nav-small-cap">----CLIENT ACTIVITIES</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">प्रयोगकर्ताको सदस्यता फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
+                <li><a href="{% url 'AllMemberList' %}">सबै प्रयोगकर्ता</a></li>
+                <li><a href="{% url 'Pending' %}">अस्वीकृत प्रयोगकर्ता(pending)</a></li>
+                <li><a href="{% url 'Delivered' %}">स्वीकृत प्रयोगकर्ता</a></li>
+                <li><a href="{% url 'CanclelledOrders' %}">अस्वीकार प्रयोगकर्ता</a></li>
+            </ul>
+        </li>
+
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">प्रयोगकर्ताको आवेदन फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
@@ -40,14 +50,15 @@
             </ul>
         </li>
         
+        
         <li class="nav-small-cap">----USERS</li>
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">प्रयोगकर्ता(USERS)<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{% url 'AdvanceUserList' role_id=0 %}">प्रयोगकर्ता वर्गीकरण</a></li>
                 <li><a href="{% url 'UserList' %}">प्रयोगकर्ता(USERS)</a></li>
                 <li><a href="{% url 'RoleList' %}">भूमिका(Role)</a></li>
-                <li><a href="{% url 'GroupList' %}">प्रदेश संघ(Group)</a></li><!----Group is combination of different permissions-->
-                <li><a href="{% url 'PermissionList' %}">जिल्ला संघ(Permission)</a></li>
+                <!-- <li><a href="{% url 'GroupList' %}">प्रदेश संघ(Group)</a></li>Group is combination of different permissions
+                <li><a href="{% url 'PermissionList' %}">जिल्ला संघ(Permission)</a></li> -->
                 <!-- <li><a href="{% url 'UserLogs' %}">LOGS</a></li> -->
             </ul>
         </li>

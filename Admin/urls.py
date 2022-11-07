@@ -15,6 +15,8 @@ urlpatterns = [
     path('user-store',user_authentication_authorization.UserStore,name='UserStore'),
     path('user-store/<int:id>',user_authentication_authorization.UserStore,name='UserStore'),
     path('user-delete/<int:id>', user_authentication_authorization.UserDelete, name='UserDelete'),
+     
+     #********************************************************************
 
     path('role-list', user_authentication_authorization.RoleList, name='RoleList'),
     path('role-create', user_authentication_authorization.RoleCreate, name='RoleCreate'),
@@ -115,6 +117,15 @@ urlpatterns = [
     path('rejected-application', application_form.CanclelledOrders, name='CanclelledOrders'),
     path('rejected-application/<int:pk>/<str:approved_pending_cancelled>', application_form.CanclelledOrders, name='CanclelledOrders'),
         
+     #****************Users (प्रयोगकर्ताको सदस्यता फारम) ************************************
+    path('all-member-list', application_form.AllMemberList, name='AllMemberList'),
+    path('all-member-list/<int:pk>/<str:approved_pending_cancelled>', application_form.Orders, name='Order'),
+
+    path('all-pending-members', application_form.Pending, name='Pending'),
+    path('all-member-pending/<int:pk>/<str:approved_pending_cancelled>', application_form.Pending, name='Pending'),
+
+    path('all-approved-approved', application_form.Delivered, name='Delivered'),
+    path('all-approved-member/<int:pk>/<str:approved_pending_cancelled>', application_form.Delivered, name='Delivered'),
 
     #****************Personal user information i.e clients**************************************
     path('personal-information', application_form.UserPersonalInformationCreate, name='UserPersonalInformationCreate'),
@@ -129,4 +140,5 @@ urlpatterns = [
 
    #****************Application reviewed application i.e clients check application status**************************************
    path('application-result', application_form.UserApplicationResult, name='UserApplicationResult'),
+   
 ]   

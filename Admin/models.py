@@ -76,11 +76,16 @@ class UserApplicationDetail(models.Model):
     district = models.CharField(max_length=300,null=True)
     state = models.CharField(max_length=300,null=True)
 
+    #member approved detail
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
     certificate_company_registration = models.ImageField(upload_to='user/documents', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
     provisional_account_number = models.ImageField(upload_to='user/documents', null=True) #अस्थायी लेखा नम्बरको पर्तिलिपि
     auditing = models.ImageField(upload_to='user/documents', null=True) #लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि
     tax_paid_certificate = models.ImageField(upload_to='user/documents', null=True) # कर चुक्ता प्रमाण पत्रको पर्तिलिपि
+
+    #for further detail
+    
+
 
 class ApplicationForm(models.Model):
     # product_id = models.IntegerField(default=0)
@@ -113,6 +118,8 @@ class ApplicationFormCancelledDetail(models.Model):
     cancelled_form = models.ForeignKey(ApplicationForm,related_name="application_form_cancelled_detailed",on_delete=models.CASCADE,null=True)
     cancelled_by =  models.ForeignKey(CustomUser,related_name="total_application_form_cancelled",on_delete=models.CASCADE,null=True)
     whose_form = models.CharField(max_length=100,null=True)
+
+
 
 class PageType(models.Model):
     page_name =  models.CharField(max_length=255)  
