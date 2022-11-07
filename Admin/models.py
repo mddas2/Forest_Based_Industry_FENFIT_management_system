@@ -83,7 +83,12 @@ class UserApplicationDetail(models.Model):
     auditing = models.ImageField(upload_to='user/documents', null=True) #लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि
     tax_paid_certificate = models.ImageField(upload_to='user/documents', null=True) # कर चुक्ता प्रमाण पत्रको पर्तिलिपि
 
-    #for further detail
+    #for further application form detail
+    industry_registration = models.ImageField(upload_to='user/documents', null=True) #उद्योग दर्ता
+    income_certificate = models.ImageField(upload_to='user/documents', null=True) #आय प्रमाणपत्र 
+    member_approved_certificate = models.ImageField(upload_to='user/documents', null=True) #सदस्य स्वीकृत प्रमाणपत्र
+    self_declaration_not_on_the_black_list = models.ImageField(upload_to='user/documents', null=True) #कालो सुचीमा नपरेको स्वघोषणा
+    bank_voucher = models.ImageField(upload_to='user/documents', null=True) #bank भौचर को प्रतिलिपि
     
 
 
