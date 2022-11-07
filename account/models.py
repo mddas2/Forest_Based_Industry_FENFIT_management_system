@@ -25,112 +25,6 @@ class CustomUser(AbstractUser):
     )
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True)
     REQUIRED_FIELDS = []
-    states = (
-        ('province_1','Province 1'),
-        ('province_2','Madhesh Pradesh'),
-        ('province_3','Bagmati Pradesh'),
-        ('province_4','Gandaki Pradesh'),
-        ('province_5','Lumbini Pradesh'),
-        ('province_6','Karnali Pradesh'),
-        ('province_7','Sudur Paschim Pradesh'),
-    )
-    province_1 = (
-        ('bhojpur','Bhojpur'),
-        ('dhankuta','Dhankuta'),
-        ('ilam','Ilam'),
-        ('jhapa','jhapa'),
-        ('khotang','Khotang'),
-        ('morang','Morang'),
-        ('okhaldhunga','Okhaldhunga'),
-        ('panchthar','Panchthar'),
-        ('sankhuwasabha','Sankhuwasabha'),
-        ('solukhumbu','Solukhumbu'),
-        ('sunsari','Sunsari'),
-        ('taplejung','Taplejung'),
-        ('terhathum','Terhathum'),
-        ('udayapur','Udayapur'),
-    )
-
-    province_2 = (
-        ('saptari','Saptari'),
-        ('siraha','Siraha'),
-        ('dhanusa','Dhanusa'),
-        ('mahottari','Mahottari'),
-        ('sarlahi','sarlahi'),
-        ('bara','Bara'),
-        ('parsa','Parsa'),
-        ('rautahat','Rautahat'),
-    )
-
-    province_3 = (
-        ('sindhuli','Sindhuli'),
-        ('ramechhap','Ramechhap'),
-        ('dolakha','Dolakha'),
-        ('bhaktapur','Bhaktapur'),
-        ('dhading','Dhading'),
-        ('kathmandu ','Kathmandu'),
-        ('kavrepalanchok','Kavrepalanchok'),
-        ('lalitpur','Lalitpur'),
-        ('nuwakot ','Nuwakot '),
-        ('rasuwa','Rasuwa'),
-        ('sindhupalchok','Sindhupalchok'),
-        ('chitwan','Chitwan'),
-        ('makwanpur','Makwanpur'),
-    )
-
-    province_4 = (
-        ('gorkha','Gorkha'),
-        ('kaski','Kaski'),
-        ('lamjung','Lamjung'),
-        ('syangja','Syangja'),
-        ('tanahu','Tanahu'),
-        ('manang','Manang'),
-        ('baglung','Baglung'),
-        ('myagdi','Myagdi'),
-        ('parbat','Parbat'),
-        ('mustang','Mustang'),
-    )
-
-    province_5 = (
-        ('kapilvastu','Kapilvastu'),
-        ('parasi','Parasi'),
-        ('rupandehi','Rupandehi'),
-        ('arghakhanchi','Arghakhanchi'),
-        ('gulmi','Gulmi'),
-        ('palpa','Palpa'),
-        ('dang','Dang'),
-        ('pyuthan','Pyuthan'),
-        ('rolpa','Rolpa'),
-        ('eastern rukum','Eastern Rukum'),
-        ('banke','Banke'),
-        ('bardiya','Bardiya'),
-    )
-
-    province_6 = (
-        ('western rukum','Western Rukum'),
-        ('salyan','Salyan'),
-        ('dolpa','Dolpa'),
-        ('humla','Humla'),
-        ('jumla','Jumla'),
-        ('kalikot','Kalikot'),
-        ('mugu','Mugu'),
-        ('surkhet','Surkhet'),
-        ('dailekh','Dailekh'),
-        ('jajarkot','Jajarkot'),
-    )
-
-    province_7 = (
-        ('kailali','Kailali'),
-        ('achham','Achham'),
-        ('doti','Doti'),
-        ('bajhang','Bajhang'),
-        ('bajura','Bajura'),
-        ('kanchanpur','Kanchanpur'),
-        ('dadeldhura ','Dadeldhura'),
-        ('baitadi','Baitadi'),
-        ('darchula','Darchula'),
-    )
-
     states_district_dictionary_list = {
         'province_1' : ['bhojpur','dhankuta','ilam','jhapa','khotang','morang','okhaldhunga','panchthar','sankhuwasabha','solukhumbu','sunsari','taplejung','terhathum','udayapur'],
         'province_2' : ['saptari','siraha','dhanusa','mahottari','sarlahi','bara','parsa','rautahat'],
@@ -140,22 +34,129 @@ class CustomUser(AbstractUser):
         'province_6' : ['western rukum','salyan','dolpa','humla','jumla','kalikot','mugu','surkhet','dailekh','jajarkot'],
         'province_7' : ['Kailali','achham','doti','bajhang','bajura','kanchanpur','dadeldhura','baitadi','darchula']
     }
+    # states = (
+    #     ('province_1','Province 1'),
+    #     ('province_2','Madhesh Pradesh'),
+    #     ('province_3','Bagmati Pradesh'),
+    #     ('province_4','Gandaki Pradesh'),
+    #     ('province_5','Lumbini Pradesh'),
+    #     ('province_6','Karnali Pradesh'),
+    #     ('province_7','Sudur Paschim Pradesh'),
+    # )
+    # province_1 = (
+    #     ('bhojpur','Bhojpur'),
+    #     ('dhankuta','Dhankuta'),
+    #     ('ilam','Ilam'),
+    #     ('jhapa','jhapa'),
+    #     ('khotang','Khotang'),
+    #     ('morang','Morang'),
+    #     ('okhaldhunga','Okhaldhunga'),
+    #     ('panchthar','Panchthar'),
+    #     ('sankhuwasabha','Sankhuwasabha'),
+    #     ('solukhumbu','Solukhumbu'),
+    #     ('sunsari','Sunsari'),
+    #     ('taplejung','Taplejung'),
+    #     ('terhathum','Terhathum'),
+    #     ('udayapur','Udayapur'),
+    # )
 
-    states_district_dictionary_tuples = {
-        'province_1' : ( ('bhojpur','Bhojpur'), ('dhankuta','Dhankuta'), ('ilam','Ilam'), ('jhapa','jhapa'), ('khotang','Khotang'), ('morang','Morang'), ('okhaldhunga','Okhaldhunga'),('panchthar','Panchthar'),('sankhuwasabha','Sankhuwasabha'),('solukhumbu','Solukhumbu'),('sunsari','Sunsari'),('taplejung','Taplejung'),('terhathum','Terhathum'),('udayapur','Udayapur')),
-        'province_2' : ( ('saptari','Saptari'), ('siraha','Siraha'),('dhanusa','Dhanusa'),('mahottari','Mahottari'),('sarlahi','sarlahi'),('bara','Bara'),('parsa','Parsa'),('rautahat','Rautahat')),
-        'province_3' : ( ('sindhuli','Sindhuli'),('ramechhap','Ramechhap'), ('dolakha','Dolakha'), ('bhaktapur','Bhaktapur'), ('dhading','Dhading'),('kathmandu ','Kathmandu'), ('kavrepalanchok','Kavrepalanchok'),('lalitpur','Lalitpur'),('nuwakot ','Nuwakot '),('rasuwa','Rasuwa'),('sindhupalchok','Sindhupalchok'),('chitwan','Chitwan'),('makwanpur','Makwanpur')),
-        'province_4' : ( ('gorkha','Gorkha'),('kaski','Kaski'),('lamjung','Lamjung'),('syangja','Syangja'),('tanahu','Tanahu'),('manang','Manang'),('baglung','Baglung'),('myagdi','Myagdi'),('parbat','Parbat'),('mustang','Mustang')),
-        'province_5' :  ( ('kapilvastu','Kapilvastu'),('parasi','Parasi'),('rupandehi','Rupandehi'),('arghakhanchi','Arghakhanchi'),('gulmi','Gulmi'),('palpa','Palpa'),('dang','Dang'),('pyuthan','Pyuthan'),('rolpa','Rolpa'),('eastern rukum','Eastern Rukum'),('banke','Banke'),('bardiya','Bardiya')),
-        'province_6' : (('western rukum','Western Rukum'),('salyan','Salyan'),('dolpa','Dolpa'),('humla','Humla'),('jumla','Jumla'),('kalikot','Kalikot'),('mugu','Mugu'),('surkhet','Surkhet'),('dailekh','Dailekh'),('jajarkot','Jajarkot')),
-        'province_7' :  (('kailali','Kailali'),('achham','Achham'),('doti','Doti'),('bajhang','Bajhang'),('bajura','Bajura'),('kanchanpur','Kanchanpur'),('dadeldhura ','Dadeldhura'),('baitadi','Baitadi'),('darchula','Darchula'))
-        }
+    # province_2 = (
+    #     ('saptari','Saptari'),
+    #     ('siraha','Siraha'),
+    #     ('dhanusa','Dhanusa'),
+    #     ('mahottari','Mahottari'),
+    #     ('sarlahi','sarlahi'),
+    #     ('bara','Bara'),
+    #     ('parsa','Parsa'),
+    #     ('rautahat','Rautahat'),
+    # )
 
+    # province_3 = (
+    #     ('sindhuli','Sindhuli'),
+    #     ('ramechhap','Ramechhap'),
+    #     ('dolakha','Dolakha'),
+    #     ('bhaktapur','Bhaktapur'),
+    #     ('dhading','Dhading'),
+    #     ('kathmandu ','Kathmandu'),
+    #     ('kavrepalanchok','Kavrepalanchok'),
+    #     ('lalitpur','Lalitpur'),
+    #     ('nuwakot ','Nuwakot '),
+    #     ('rasuwa','Rasuwa'),
+    #     ('sindhupalchok','Sindhupalchok'),
+    #     ('chitwan','Chitwan'),
+    #     ('makwanpur','Makwanpur'),
+    # )
 
+    # province_4 = (
+    #     ('gorkha','Gorkha'),
+    #     ('kaski','Kaski'),
+    #     ('lamjung','Lamjung'),
+    #     ('syangja','Syangja'),
+    #     ('tanahu','Tanahu'),
+    #     ('manang','Manang'),
+    #     ('baglung','Baglung'),
+    #     ('myagdi','Myagdi'),
+    #     ('parbat','Parbat'),
+    #     ('mustang','Mustang'),
+    # )
 
+    # province_5 = (
+    #     ('kapilvastu','Kapilvastu'),
+    #     ('parasi','Parasi'),
+    #     ('rupandehi','Rupandehi'),
+    #     ('arghakhanchi','Arghakhanchi'),
+    #     ('gulmi','Gulmi'),
+    #     ('palpa','Palpa'),
+    #     ('dang','Dang'),
+    #     ('pyuthan','Pyuthan'),
+    #     ('rolpa','Rolpa'),
+    #     ('eastern rukum','Eastern Rukum'),
+    #     ('banke','Banke'),
+    #     ('bardiya','Bardiya'),
+    # )
 
+    # province_6 = (
+    #     ('western rukum','Western Rukum'),
+    #     ('salyan','Salyan'),
+    #     ('dolpa','Dolpa'),
+    #     ('humla','Humla'),
+    #     ('jumla','Jumla'),
+    #     ('kalikot','Kalikot'),
+    #     ('mugu','Mugu'),
+    #     ('surkhet','Surkhet'),
+    #     ('dailekh','Dailekh'),
+    #     ('jajarkot','Jajarkot'),
+    # )
 
-    pass
+    # province_7 = (
+    #     ('kailali','Kailali'),
+    #     ('achham','Achham'),
+    #     ('doti','Doti'),
+    #     ('bajhang','Bajhang'),
+    #     ('bajura','Bajura'),
+    #     ('kanchanpur','Kanchanpur'),
+    #     ('dadeldhura ','Dadeldhura'),
+    #     ('baitadi','Baitadi'),
+    #     ('darchula','Darchula'),
+    # )
+
+    # states_district_dictionary_tuples = {
+    #     'province_1' : ( ('bhojpur','Bhojpur'), ('dhankuta','Dhankuta'), ('ilam','Ilam'), ('jhapa','jhapa'), ('khotang','Khotang'), ('morang','Morang'), ('okhaldhunga','Okhaldhunga'),('panchthar','Panchthar'),('sankhuwasabha','Sankhuwasabha'),('solukhumbu','Solukhumbu'),('sunsari','Sunsari'),('taplejung','Taplejung'),('terhathum','Terhathum'),('udayapur','Udayapur')),
+    #     'province_2' : ( ('saptari','Saptari'), ('siraha','Siraha'),('dhanusa','Dhanusa'),('mahottari','Mahottari'),('sarlahi','sarlahi'),('bara','Bara'),('parsa','Parsa'),('rautahat','Rautahat')),
+    #     'province_3' : ( ('sindhuli','Sindhuli'),('ramechhap','Ramechhap'), ('dolakha','Dolakha'), ('bhaktapur','Bhaktapur'), ('dhading','Dhading'),('kathmandu ','Kathmandu'), ('kavrepalanchok','Kavrepalanchok'),('lalitpur','Lalitpur'),('nuwakot ','Nuwakot '),('rasuwa','Rasuwa'),('sindhupalchok','Sindhupalchok'),('chitwan','Chitwan'),('makwanpur','Makwanpur')),
+    #     'province_4' : ( ('gorkha','Gorkha'),('kaski','Kaski'),('lamjung','Lamjung'),('syangja','Syangja'),('tanahu','Tanahu'),('manang','Manang'),('baglung','Baglung'),('myagdi','Myagdi'),('parbat','Parbat'),('mustang','Mustang')),
+    #     'province_5' :  ( ('kapilvastu','Kapilvastu'),('parasi','Parasi'),('rupandehi','Rupandehi'),('arghakhanchi','Arghakhanchi'),('gulmi','Gulmi'),('palpa','Palpa'),('dang','Dang'),('pyuthan','Pyuthan'),('rolpa','Rolpa'),('eastern rukum','Eastern Rukum'),('banke','Banke'),('bardiya','Bardiya')),
+    #     'province_6' : (('western rukum','Western Rukum'),('salyan','Salyan'),('dolpa','Dolpa'),('humla','Humla'),('jumla','Jumla'),('kalikot','Kalikot'),('mugu','Mugu'),('surkhet','Surkhet'),('dailekh','Dailekh'),('jajarkot','Jajarkot')),
+    #     'province_7' :  (('kailali','Kailali'),('achham','Achham'),('doti','Doti'),('bajhang','Bajhang'),('bajura','Bajura'),('kanchanpur','Kanchanpur'),('dadeldhura ','Dadeldhura'),('baitadi','Baitadi'),('darchula','Darchula'))
+    #     }
+    def find_key(d, value):
+        for k,v in d.items():
+            #print(k)
+            if isinstance(v, list):
+                if value in v:
+                    return k
+                else:
+                    pass
     # add additional fields in here
     def getRoleName(self):
         if self.role==1:
