@@ -15,7 +15,7 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
-            <h3 class="">FENFIT APPLICATION</h3>
+            <h3 class="">FENFIT सदस्यको दरखास्त फाराम</h3>
             <h6 class="card-subtitle text-info"> {% if id_data.user.is_verified == True %} You are verified {% else %} Not Verified Yet {% endif %}</h6>
                 <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
@@ -25,15 +25,23 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
-           <h3 class="box-title m-t-4">Comments Highlights</h3>
-           {% if id_data.user.is_verified == True %} 
-            <ul class="list-unstyled">
-                <li><i class="fa fa-check text-success"></i>  structure</li>
-                <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
-                <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
-            </ul>
+            {% if id_data.user.is_verified == True %} 
+                <h3 class="box-title m-t-4">कृपया यो डाउनलोड गर्नुहोस्|</h3>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-check text-success"></i> फेन्फिटको सदस्य हुन पाएकोमा बधाई छ|</li>
+                </ul>
+                <button class="btn btn-success btn-rounded">PRINT</button> 
             {% else %}
-                Do somethings
+                <h3 class="box-title m-t-4">टिप्पणी हाइलाइट्स</h3>
+            {% endif %}
+           {% if id_data.user.is_verified == True %} 
+           
+            {% else %}
+            <ul class="list-unstyled">
+                <li><i class="fa fa-info text-success"></i> के तपाईंको जिल्लाको नाम सही छ?</li>
+                <li><i class="fa fa-info text-success"></i> के तपाईंको सबै कागजात सही छ?</li>
+                <li><i class="fa fa-info text-success"></i> कृपया पर्खनुहोस् यो चाँडै स्वीकृत हुन सक्छ|</li>
+            </ul>
             {% endif %}
         </center>
     </div>
@@ -47,16 +55,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                        <div class="white-box text-center"> <img src="{{id_data.certificate_citizenship.url}}" class="img-responsive"> </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                        <div class="white-box text-center"> <img src="{{id_data.provisional_account_number.url}}" class="img-responsive"> </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                        <div class="white-box text-center"> <img src="{{id_data.auditing.url}}" class="img-responsive"> </div>
                     </div>
 
               
