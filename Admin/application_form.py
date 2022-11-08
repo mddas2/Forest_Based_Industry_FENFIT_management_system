@@ -203,12 +203,14 @@ def MemberAprovalFormReview(request,id=None):
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
-    id_data = UserApplicationDetail.objects.filter(user_id=request.user.id)
-    if id_data.count()>0:
-        data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data.first()}
+
+    try:
+        id_data = request.user.applicationform.all().first().get_user_application_detail
+        # return HttpResponse(id_data.first().get_user_application_detail)
+        data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
         return render(request, "admin/applicant_users/member-approval-form-review.html",data)
-    else:
-        return redirect('UserApplicationFormCreate')
+    except:
+        return redirect('MemberAprovalForm')
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
@@ -218,10 +220,6 @@ def UserApplicationFormStore(request):
         form_detail = {
             'user_id' : request.user.id,
             'owner_full_name' : request.POST['owner_full_name'],
-            'business_name' : request.POST['business_name'],
-            'phone' : request.POST['phone'],
-            'email' : request.POST['email'],
-            'district' : request.POST['district'],
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],
             'tole' : request.POST['tole'],

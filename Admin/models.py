@@ -64,7 +64,7 @@ class HomeNavigation(models.Model):
         return ''
 
 class UserApplicationDetail(models.Model):
-    user_id = models.CharField(max_length=100)
+    user = models.ForeignKey(CustomUser,related_name="applicationdetail",on_delete=models.CASCADE,null=True)
     owner_full_name = models.CharField(max_length=205)
     business_name = models.CharField(max_length=205, null=True)
     municipality = models.CharField(max_length=205,null=True)
