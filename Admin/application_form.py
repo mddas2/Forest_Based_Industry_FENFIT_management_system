@@ -199,10 +199,6 @@ def MemberAprovalFormReview(request,id=None):
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
-    id_data = request.user.applicationform.all().first().get_user_application_detail
-    # return HttpResponse(id_data.user.is_verified)
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
-    return render(request, "admin/applicant_users/member-approval-form-review.html",data) 
     try:
         id_data = request.user.applicationform.all().first().get_user_application_detail
         # return HttpResponse(id_data.user.is_verified)
