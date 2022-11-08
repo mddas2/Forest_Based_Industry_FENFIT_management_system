@@ -134,12 +134,64 @@ def MemberAprovalForm(request,id=None):
         slug1 = "Member Aproval-Form" 
     else:
         slug1 = "User-update" 
-    action = "UserApplicationFormStore"
+    action = "MemberApprovalFormStore"
     #Fetching the data of particular ID
     id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
 
     data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_USER_role)
+def MemberApprovalFormStore(request):
+
+    if request.POST:
+        form_detail = {
+            'user_id' : request.user.id,
+            'owner_full_name' : request.POST['owner_full_name'],
+            'phone' : request.POST['phone'],
+            'email' : request.POST['email'],
+            'district' : request.POST['district'],
+            'municipality' : request.POST['municipality'],
+            'ward_number' : request.POST['ward_number'],
+            'tole' : request.POST['tole'],
+            'state' : request.POST['state'],
+        }
+
+        documents = {} #dictionary of image
+        for im in request.FILES:
+            if im == "certificate_citizenship":
+                documents['certificate_citizenship'] = request.FILES['certificate_citizenship']
+            if im == "certificate_company_registration":
+                documents['certificate_company_registration'] = request.FILES['certificate_company_registration']
+            if im == "provisional_account_number":
+                documents['provisional_account_number'] = request.FILES['provisional_account_number']
+            if im == "auditing":
+                documents['auditing'] = request.FILES['auditing']
+            if im == "tax_paid_certificate":
+                documents['tax_paid_certificate'] = request.FILES['tax_paid_certificate']
+
+        form_detail = {**form_detail , **documents}
+
+        Userform_detail_create,detail_create = UserApplicationDetail.objects.update_or_create(user_id=request.user.id , defaults=form_detail)
+        
+        form_data = {
+            'user_id' : request.user.id,
+            'get_user_application_detail_id' : Userform_detail_create.id,
+        }
+        if request.POST['submits']=='1':
+            dsc = {
+                'dsc' : 'd',
+            }
+            form_data = {**dsc,**form_data}
+            #join dcs and form_data if user press send
+        form,form_create = ApplicationForm.objects.update_or_create(user_id=request.user.id , defaults=form_data)
+        # try:
+        #     user.image = request.FILES['profile_image']
+        # except:
+        #     pass
+        messages.info(request, 'User inserted Successfully !!!')
+        return redirect(UserApplicationFormCreate)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
