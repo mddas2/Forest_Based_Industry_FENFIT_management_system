@@ -75,8 +75,79 @@
                                         </div>
                                         <!--/row-->
                                         <div class="row">
+                                            <div class="col-md-4">
+                                            <div class="nibedan-form">
+                                                <div class="form-logo">
+                                                    <img src="/static/assets/images/logo-2.png">
+                                                </div>
+                                                <h2 class="main-title">सदस्यता आवेदन फारम</h2>
+                                                <div class="nibedan-form-top">
+                                                    <div class="form-top-left">
+                                                        <p>श्रीमान अध्यक्षज्यू<br>
+                                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                                        <label>.........................।</label>
+                                                    </div>
+                                                    <div class="form-top-right">
+                                                        <span class="date">मिति ः ...................</span>
+                                                    </div>
+                                                </div>
+                                                <div class="nibedan-form-body">
+                                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                                                    <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
+                                                        जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
+                                                        प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र तपसिल
+                                                        बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
+                                                    <h5>संलग्न कागजातहरु ः–</h5>
+                                                    <ul>
+                                                        <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+                                                        <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+                                                        <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+        
+                                                        <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+        
+                                                        <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+                                                        <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+        
+                                                    </ul>
+                                                </div>
+                                                <div class="nibedan-form-footer">
+                                                    <div class="user-info">
+                                                        <label style="font-weight: bold;">आवेदक</label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
+                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        {% load staticfiles %}
+                                                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                                    </div>
+                                                    <div class="user-address">
+                                                        <label>ठेगाना ः जिल्ला ................</label>
+                                                        <label>न.पा.÷गा.पा .......................</label>
+                                                        <label>ठेगाना ः जिल्ला ................</label>
+                                                        <label>न.पा.÷गा.पा .......................</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                    </div>              
+                                                </div>
+                                            </div>
+                                            </div>
                                             <!--/span-->
-                                            <div class="col-md-3">
+                                            <div class="col-md-8">
+                                            <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
@@ -90,7 +161,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
@@ -104,7 +175,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
@@ -118,7 +189,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
@@ -131,7 +202,7 @@
                                                     </script>
                                                 {% endif %}
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
@@ -144,80 +215,16 @@
                                                     </script>
                                                 {% endif %}
                                             </div>
+                                            </div>
+                                            </div>
 
-                                        <hr> </div>
+                                            <hr> 
+                                        </div>
                                     <input type="hidden" name="next" value="{{ request.path }}">
-                                    <div class="nibedan-form">
-                                        <div class="form-logo">
-                                            <img src="/static/assets/images/logo-2.png">
-                                        </div>
-                                        <h2 class="main-title">सदस्यता आवेदन फारम</h2>
-                                        <div class="nibedan-form-top">
-                                            <div class="form-top-left">
-                                                <p>श्रीमान अध्यक्षज्यू<br>
-                                                    नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                                <label>.........................।</label>
-                                            </div>
-                                            <div class="form-top-right">
-                                                <span class="date">मिति ः ...................</span>
-                                            </div>
-                                        </div>
-                                        <div class="nibedan-form-body">
-                                            <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                                            <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
-                                                जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
-                                                प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र तपसिल
-                                                बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
-                                            <h5>संलग्न कागजातहरु ः–</h5>
-                                            <ul>
-                                                <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-                                                <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-                                                <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-
-                                                <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-
-                                                <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-                                                <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="nibedan-form-footer">
-                                            <div class="user-info">
-                                                <label style="font-weight: bold;">आवेदक</label>
-                                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
-                                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                {% load staticfiles %}
-                                                <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
-                                            </div>
-                                            <div class="user-address">
-                                                <label>ठेगाना ः जिल्ला ................</label>
-                                                <label>न.पा.÷गा.पा .......................</label>
-                                                <label>ठेगाना ः जिल्ला ................</label>
-                                                <label>न.पा.÷गा.पा .......................</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>              
-                                        </div>
-                                    </div>
+                                    
                                     <style>
                                         .nibedan-form{
                                             padding: 50px 20px;
-                                            max-width: 600px;
                                             border: 1px solid #d9d6d6;
                                         }
                                         .nibedan-form p{
