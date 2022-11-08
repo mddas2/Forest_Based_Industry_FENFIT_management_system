@@ -129,6 +129,8 @@ def UserApplicationFormCreate(request,id=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def MemberAprovalForm(request,id=None):
+    # formd = request.user.applicationform.all().first().user_id
+    # return HttpResponse(formd)
     create_link_name = reverse("MemberAprovalForm")
     if id==None:
         slug1 = "Member Aproval-Form" 

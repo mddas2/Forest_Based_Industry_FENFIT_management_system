@@ -22,12 +22,23 @@
         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">सिफारिश फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
-                <li><a href="{% url 'UserPersonalInformationCreate' %}">प्रोफाइल सेटिङ</a></li>
-                <li><a href="{% url 'MemberAprovalForm' %}">सदस्य सिफारिश फारम</a></li> <!---member approval form-->
-                <li><a href="{% url 'MemberAprovalFormReview' %}">सदस्य आवेदन पुनरावलोकन</a></li> <!---member approval form review--->
-                <li><a href="{% url 'UserApplicationFormCreate' %}">सुविधा अनुप्रयोग फारम</a></li> <!-----APPLICATION Form-->
-                <li><a href="{% url 'UserApplicationReview' %}">आवेदन पुनरावलोकन</a></li> <!----application review---->
-                <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li>
+                <!-- <li><a href="{% url 'UserPersonalInformationCreate' %}">प्रोफाइल सेटिङ</a></li> -->
+                {% if request.user.is_verified == False %}
+                    <li><a href="{% url 'MemberAprovalForm' %}">सदस्य सिफारिश फारम</a></li> <!---member approval form-->
+                {% endif %}
+
+                {% if request.user.applicationform.all.first.user_id ==  request.user.id%}
+                    <li><a href="{% url 'MemberAprovalFormReview' %}"> सदस्य आवेदन पुनरावलोकन l</a></li> <!---member approval form review--->
+                {% endif %}
+                {% if request.user.is_verified == True %}
+                    {% if request.user.applicationform.all.first.dsc != None %}
+                        
+                            <li><a href="{% url 'UserApplicationFormCreate' %}"> सुविधा अनुप्रयोग फारम</a></li> <!-----APPLICATION Form-->
+                        
+                    {% endif %}
+                    <li><a href="{% url 'UserApplicationReview' %}">आवेदन पुनरावलोकन</a></li> <!----application review---->
+                    <!-- <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li> -->
+                {% endif %}
             </ul>
         </li>
        {% elif request.user.role == request.user.CENTRAL or request.user.role == request.user.STATE or request.user.role == request.user.PRIVATE or request.user.role == request.user.DISTRICT%}
