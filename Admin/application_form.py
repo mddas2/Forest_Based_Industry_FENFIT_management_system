@@ -149,13 +149,9 @@ def MemberApprovalFormStore(request):
         form_detail = {
             'user_id' : request.user.id,
             'owner_full_name' : request.POST['owner_full_name'],
-            'phone' : request.POST['phone'],
-            'email' : request.POST['email'],
-            'district' : request.POST['district'],
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],
             'tole' : request.POST['tole'],
-            'state' : request.POST['state'],
         }
 
         documents = {} #dictionary of image
@@ -203,10 +199,13 @@ def MemberAprovalFormReview(request,id=None):
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
-
+    id_data = request.user.applicationform.all().first().get_user_application_detail
+    # return HttpResponse(id_data.user.is_verified)
+    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    return render(request, "admin/applicant_users/member-approval-form-review.html",data) 
     try:
         id_data = request.user.applicationform.all().first().get_user_application_detail
-        # return HttpResponse(id_data.first().get_user_application_detail)
+        # return HttpResponse(id_data.user.is_verified)
         data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
         return render(request, "admin/applicant_users/member-approval-form-review.html",data)
     except:
@@ -219,11 +218,6 @@ def UserApplicationFormStore(request):
     if request.POST:
         form_detail = {
             'user_id' : request.user.id,
-            'owner_full_name' : request.POST['owner_full_name'],
-            'municipality' : request.POST['municipality'],
-            'ward_number' : request.POST['ward_number'],
-            'tole' : request.POST['tole'],
-            'state' : request.POST['state'],
         }
 
         documents = {} #dictionary of image
