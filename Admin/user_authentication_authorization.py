@@ -353,6 +353,7 @@ def SignUp(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         user = CustomUser.objects.create_user(first_name, email, password)
         user.district_name = district_name
+        user.first_name = first_name
         if user:
             user.role = user.USER
         try:
