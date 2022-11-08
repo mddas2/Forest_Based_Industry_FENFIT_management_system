@@ -40,60 +40,283 @@
     <!-- Column -->
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-body">
-                
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+         {% if id_data.user.is_verified == False %}     
+         <div class="row">
+            <div class="col-md-4">
+                <div class="nibedan-form">
+                    <div class="form-logo">
+                        <img src="/static/assets/images/logo-2.png">
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                    </div>              
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h3 class="box-title m-t-40">General Info</h3>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td width="390">Name</td>
-                                        <td> {{id_data.owner_full_name}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td>state</td>
-                                        <td>{{id_data.state}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>district</td>
-                                        <td>{{id_data.district}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Munciplity</td>
-                                        <td>{{id_data.municipality}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ward Number</td>
-                                        <td> {{id_data.ward_number}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tole</td>
-                                        <td> {{id_data.tole}} </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
+                    <h2 class="main-title">सिफारिश गरि पाउ </h2>
+                    <div class="nibedan-form-top">
+                        <div class="form-top-left">
+                            <p>श्रीमान अध्यक्षज्यू<br>
+                                नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                            <label>.........................।</label>
                         </div>
+                        <div class="form-top-right">
+                            <span class="date">मिति ः ...................</span>
+                        </div>
+                    </div>
+                    <div class="nibedan-form-body">
+                        <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                        <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
+                            संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि 
+                            २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार 
+                            उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु 
+                            सुचीकृत हुनुपर्ने ब्यवस्था गरके ोलेनिम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार 
+                            उपलब्ध गराइृदिनु हुन अनुरोध छ । </p>
+                        <h5>संलग्न कागजातहरु ः–</h5>
+                        <ul>
+                            <li>कम्पनी वा फर्म दर्ताको प्रमाण पत्र ।</li>
+                            <li>उद्योग दर्ता र नविकरण पत्र ।</li>
+                            <li>आयकर दर्ता प्रमाण पत्र ।</li>        
+                            <li>कर चुक्ताको प्रमाण पत्र (दर्ता भएको दोस्रो आ.ब.देखि) ।</li>        
+                            <li>नियम ५ (३) बमोजिम सदस्यता अद्यावद्यिक भएको प्रमाण पत्र ।</li>
+
+                            <li>कालो सुचीमा नपरेको स्वघोषणा ।</li>
+                            <li>महासंघको खातामा तोकिएको सिफारिस शुल्क जम्मा गरेको वैक भौचर को प्रतिलिपि ।</li>
+                            <li>नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को पुर्णपालन गर्छु भन्ने स्वघोषणा।</li>        
+                        </ul>
+                    </div>
+                <div class="nibedan-form-footer">
+                    <div class="user-info">
+                        <label style="font-weight: bold;">आवेदक</label>
+                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
+                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                        {% load staticfiles %}
+                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                    </div>
+                    <div class="user-address">
+                        <label>ठेगाना ः जिल्ला ................</label>
+                        <label>न.पा.÷गा.पा .......................</label>
+                        <label>ठेगाना ः जिल्ला ................</label>
+                        <label>न.पा.÷गा.पा .......................</label>
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+            <!--/span-->
+            <div class="col-md-8">
+            <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <hr> 
+        </div>
+          {% else %}
+          <div class="nibedan-form">
+            <div class="form-logo">
+                <img src="/static/assets/images/logo-2.png">
+            </div>
+            <h2 class="main-title">सस्थागत अद्यावद्यिक प्रमाण पत्र </h2>
+            <div class="nibedan-form-top">
+                <div class="form-top-left">
+                    <p>श्रीमान अध्यक्षज्यू<br>
+                        नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                    <label>.........................।</label>
+                </div>
+                <div class="form-top-right">
+                    <span class="date">मिति ः ...................</span>
+                </div>
+            </div>
+            <div class="nibedan-form-body">
+                <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
+                    जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
+                    प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र तपसिल
+                    बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
+                <h5>संलग्न कागजातहरु ः–</h5>
+                <ul>
+                    <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+                    <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+                    <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+
+                    <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+
+                    <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+                    <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+
+                </ul>
+            </div>
+            <div class="nibedan-form-footer">
+                <div class="user-info">
+                    <label style="font-weight: bold;">आवेदक</label>
+                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
+                    <label>दस्तखत ः <span class="user-info-data">saroj Singh Das</span></label>
+                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                    <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                    {% load staticfiles %}
+                    <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                </div>
+                <div class="user-address">
+                    <label>ठेगाना ः जिल्ला ................</label>
+                    <label>न.पा.÷गा.पा .......................</label>
+                    <label>ठेगाना ः जिल्ला ................</label>
+                    <label>न.पा.÷गा.पा .......................</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                </div>              
+            </div>
+        </div>
+          {% endif %}
+
+            <style>
+                .nibedan-form{
+                    padding: 50px 20px;
+                    max-width: 600px;
+                    border: 1px solid #d9d6d6;
+                }
+                .nibedan-form p{
+                    font-size: 14px;
+                    line-height: 24px;
+                    font-weight: 400;
+                    color: #000;
+                    text-align: justify;
+                }
+                .nibedan-form .form-logo{
+                    text-align: center;
+                }
+                .nibedan-form .form-logo img{
+                    max-width: 500px;
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+                h2.main-title{
+                    font-size: 18px;
+                    line-height: 22px;
+                    font-weight: bold;
+                    text-align: center;
+                }
+                .nibedan-form-top{
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    padding: 50px 0;
+                }
+                .form-top-left{
+                    float: left;
+                }
+                .form-top-right{
+                    float: right;
+                }
+                .nibedan-form-body{
+                    position: relative;
+                    display: block;
+                    margin-top: 50px;
+                }
+                .nibedan-form-body h2{
+                    font-size: 16px;
+                    line-height: 22px;
+                    font-weight: bold;
+                    text-align: center;
+                }
+                .nibedan-form-body h5{
+                    font-size: 16px;
+                    line-height: 22px;
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
+                .nibedan-form-body ul li{
+                    font-size: 14px;
+                    line-height: 24px;
+                    font-weight: 400;
+                    color: #000;
+                    text-align: justify;
+                }
+                .nibedan-form-footer .user-info{
+                    text-align: left;
+                    padding-right: 20px;
+                }
+                .nibedan-form-footer .user-info label{
+                    font-size: 14px;
+                    line-height: 24px;
+                    font-weight: 400;
+                    color: #000;
+                    display: block;
+                    margin-bottom: 10px;
+                }
+                .nibedan-form-footer .user-info label img{
+                    max-width: 150px;
+                }
+                .nibedan-form-footer .user-info label .user-info-data{
+                    max-width: 150px;
+                    min-width: 150px;
+                    overflow: hidden;
+                }
+                .nibedan-form-footer .user-address{
+                    margin-top: 20px;
+                }
+                .nibedan-form-footer .user-address label{
+                    font-size: 14px;
+                    line-height: 24px;
+                    font-weight: 400;
+                    color: #000;
+                    display: inline-block;
+                    margin-bottom: 10px;
+                    width: 49%;
+                }
+                @media (max-width:767px) {
+                    .nibedan-form-footer .user-info,
+                    .nibedan-form-footer .user-address{
+                        padding-right: 0;
+                        text-align: center;
+                    }
+                    .nibedan-form-footer .user-address label{
+                        width: 100%;
+                    }
+                }
+            </style>
         </div>
     </div>
     <!-- Column -->

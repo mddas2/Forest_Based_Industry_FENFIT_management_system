@@ -14,17 +14,9 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">उधेागमिको नाम्</label>
-                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
+                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.owner_full_name }}" placeholder="Albert">
                                                 </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">व्यवसायको नाम्</label>
-                                                    <input type="text" id="last" name="business_name" class="form-control" value="{{id_data.business_name}}" placeholder="Einstein ">
-                                                </div>
-                                            </div>
-                                           
+                                            </div>                                           
                                             <!--/span-->
                                         </div>
                                         <!--/row-->
@@ -33,13 +25,13 @@
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">इमेल</label>
-                                                    <input type="email" name="email" value="{{id_data.email}}" class="form-control" required>
+                                                    <input type="email" name="email" value="{{id_data.email}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">सम्पर्क नम्बर</label>
-                                                    <input type="number" name="phone" value="{{id_data.phone}}" class="form-control">
+                                                    <input type="number" name="phone" value="{{id_data.phone}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                                 <!--/span-->
@@ -50,13 +42,13 @@
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">जिल्ला</label>
-                                                    <input type="text" name="district" value="{{id_data.district}}" class="form-control" required>
+                                                    <input type="text" name="district" value="{{id_data.district}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">राज्य(State)</label>
-                                                    <input type="text" name="state" value="{{id_data.state}}" class="form-control">
+                                                    <input type="text" name="state" value="{{id_data.state}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,8 +75,68 @@
                                         </div>
                                         <!--/row-->
                                         <div class="row">
+                                            <div class="col-md-4">
+                                            <div class="nibedan-form">
+                                                <div class="form-logo">
+                                                    <img src="/static/assets/images/logo-2.png">
+                                                </div>
+                                                <h2 class="main-title">सिफारिश गरि पाउ </h2>
+                                                <div class="nibedan-form-top">
+                                                    <div class="form-top-left">
+                                                        <p>श्रीमान अध्यक्षज्यू<br>
+                                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                                        <label>.........................।</label>
+                                                    </div>
+                                                    <div class="form-top-right">
+                                                        <span class="date">मिति ः ...................</span>
+                                                    </div>
+                                                </div>
+                                                <div class="nibedan-form-body">
+                                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                                                    <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
+                                                        संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि 
+                                                        २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार 
+                                                        उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु 
+                                                        सुचीकृत हुनुपर्ने ब्यवस्था गरके ोलेनिम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार 
+                                                        उपलब्ध गराइृदिनु हुन अनुरोध छ । </p>
+                                                    <h5>संलग्न कागजातहरु ः–</h5>
+                                                    <ul>
+                                                        <li>कम्पनी वा फर्म दर्ताको प्रमाण पत्र ।</li>
+                                                        <li>उद्योग दर्ता र नविकरण पत्र ।</li>
+                                                        <li>आयकर दर्ता प्रमाण पत्र ।</li>        
+                                                        <li>कर चुक्ताको प्रमाण पत्र (दर्ता भएको दोस्रो आ.ब.देखि) ।</li>        
+                                                        <li>नियम ५ (३) बमोजिम सदस्यता अद्यावद्यिक भएको प्रमाण पत्र ।</li>
+
+                                                        <li>कालो सुचीमा नपरेको स्वघोषणा ।</li>
+                                                        <li>महासंघको खातामा तोकिएको सिफारिस शुल्क जम्मा गरेको वैक भौचर को प्रतिलिपि ।</li>
+                                                        <li>नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को पुर्णपालन गर्छु भन्ने स्वघोषणा।</li>        
+                                                    </ul>
+                                                </div>
+                                                <div class="nibedan-form-footer">
+                                                    <div class="user-info">
+                                                        <label style="font-weight: bold;">आवेदक</label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
+                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        {% load staticfiles %}
+                                                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                                    </div>
+                                                    <div class="user-address">
+                                                        <label>ठेगाना ः जिल्ला ................</label>
+                                                        <label>न.पा.÷गा.पा .......................</label>
+                                                        <label>ठेगाना ः जिल्ला ................</label>
+                                                        <label>न.पा.÷गा.पा .......................</label>
+                                                    </div>
+                                                </div>
+                                        
+                                            </div>
+                                            </div>
                                             <!--/span-->
-                                            <div class="col-md-3">
+                                            <div class="col-md-8">
+                                            <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
@@ -98,7 +150,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
@@ -112,7 +164,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
@@ -126,7 +178,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
@@ -139,7 +191,7 @@
                                                     </script>
                                                 {% endif %}
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
@@ -152,9 +204,118 @@
                                                     </script>
                                                 {% endif %}
                                             </div>
+                                            </div>
+                                            </div>
 
-                                        <hr> </div>
+                                            <hr> 
+                                        </div>
                                     <input type="hidden" name="next" value="{{ request.path }}">
+                                    
+                                    <style>
+                                        .nibedan-form{
+                                            padding: 50px 20px;
+                                            border: 1px solid #d9d6d6;
+                                        }
+                                        .nibedan-form p{
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            text-align: justify;
+                                        }
+                                        .nibedan-form .form-logo{
+                                            text-align: center;
+                                        }
+                                        .nibedan-form .form-logo img{
+                                            max-width: 500px;
+                                            width: 100%;
+                                            margin-bottom: 20px;
+                                        }
+                                        h2.main-title{
+                                            font-size: 18px;
+                                            line-height: 22px;
+                                            font-weight: bold;
+                                            text-align: center;
+                                        }
+                                        .nibedan-form-top{
+                                            position: relative;
+                                            display: block;
+                                            width: 100%;
+                                            padding: 50px 0;
+                                        }
+                                        .form-top-left{
+                                            float: left;
+                                        }
+                                        .form-top-right{
+                                            float: right;
+                                        }
+                                        .nibedan-form-body{
+                                            position: relative;
+                                            display: block;
+                                            margin-top: 50px;
+                                        }
+                                        .nibedan-form-body h2{
+                                            font-size: 16px;
+                                            line-height: 22px;
+                                            font-weight: bold;
+                                            text-align: center;
+                                        }
+                                        .nibedan-form-body h5{
+                                            font-size: 16px;
+                                            line-height: 22px;
+                                            font-weight: bold;
+                                            text-decoration: underline;
+                                        }
+                                        .nibedan-form-body ul li{
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            text-align: justify;
+                                        }
+                                        .nibedan-form-footer .user-info{
+                                            text-align: left;
+                                            padding-right: 20px;
+                                        }
+                                        .nibedan-form-footer .user-info label{
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            display: block;
+                                            margin-bottom: 10px;
+                                        }
+                                        .nibedan-form-footer .user-info label img{
+                                            max-width: 150px;
+                                        }
+                                        .nibedan-form-footer .user-info label .user-info-data{
+                                            max-width: 150px;
+                                            min-width: 150px;
+                                            overflow: hidden;
+                                        }
+                                        .nibedan-form-footer .user-address{
+                                            margin-top: 20px;
+                                        }
+                                        .nibedan-form-footer .user-address label{
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            display: inline-block;
+                                            margin-bottom: 10px;
+                                            width: 49%;
+                                        }
+                                        @media (max-width:767px) {
+                                            .nibedan-form-footer .user-info,
+                                            .nibedan-form-footer .user-address{
+                                                padding-right: 0;
+                                                text-align: center;
+                                            }
+                                            .nibedan-form-footer .user-address label{
+                                                width: 100%;
+                                            }
+                                        }
+                                    </style>
                                     <div class="form-actions m-t-40">
                                         <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
                                         <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
