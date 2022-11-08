@@ -148,6 +148,9 @@
                                         <hr> </div>
                                     <input type="hidden" name="next" value="{{ request.path }}">
                                     <div class="nibedan-form">
+                                        <div class="form-logo">
+                                            <img src="/static/assets/images/logo-2.png">
+                                        </div>
                                         <h2 class="main-title">सदस्यता आवेदन फारम</h2>
                                         <div class="nibedan-form-top">
                                             <div class="form-top-left">
@@ -180,13 +183,14 @@
                                         </div>
                                         <div class="nibedan-form-footer">
                                             <div class="user-info">
-                                                <label>आवेदक</label>
-                                                <label>उद्यमीको नाम ः..............</label>
-                                                <label>दस्तखत ः...........</label>
-                                                <label>उद्यमीको नाम ः..............</label>
-                                                <label>दस्तखत ः...........</label>
-                                                <label>उद्यमीको नाम ः..............</label>
-                                                <label>दस्तखत ः...........</label>
+                                                <label style="font-weight: bold;">आवेदक</label>
+                                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
+                                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                {% load staticfiles %}
+                                                <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                             </div>
                                             <div class="user-address">
                                                 <label>ठेगाना ः जिल्ला ................</label>
@@ -208,6 +212,14 @@
                                             font-weight: 400;
                                             color: #000;
                                             text-align: justify;
+                                        }
+                                        .nibedan-form .form-logo{
+                                            text-align: center;
+                                        }
+                                        .nibedan-form .form-logo img{
+                                            max-width: 500px;
+                                            width: 100%;
+                                            margin-bottom: 20px;
                                         }
                                         h2.main-title{
                                             font-size: 18px;
@@ -252,8 +264,8 @@
                                             text-align: justify;
                                         }
                                         .nibedan-form-footer .user-info{
-                                            text-align: right;
-                                            padding-right: 100px;
+                                            text-align: left;
+                                            padding-right: 20px;
                                         }
                                         .nibedan-form-footer .user-info label{
                                             font-size: 14px;
@@ -262,6 +274,14 @@
                                             color: #000;
                                             display: block;
                                             margin-bottom: 10px;
+                                        }
+                                        .nibedan-form-footer .user-info label img{
+                                            max-width: 150px;
+                                        }
+                                        .nibedan-form-footer .user-info label .user-info-data{
+                                            max-width: 150px;
+                                            min-width: 150px;
+                                            overflow: hidden;
                                         }
                                         .nibedan-form-footer .user-address{
                                             margin-top: 20px;
