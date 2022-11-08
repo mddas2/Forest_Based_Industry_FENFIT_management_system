@@ -195,3 +195,11 @@ class Districts(models.Model):
     district_name = models.CharField(max_length=100, null=True)
     get_state = models.ForeignKey(States,related_name="get_districts",on_delete=models.CASCADE,null=True)
 
+class BusinessType(models.Model):
+    Businesstype = {
+        'summ_industry':{'code_name':'summ_industry','name_1':'समिल उद्योग','name_2':'प्राथमिक वस्तु उत्पादक','name_3':'गोलिया काठ खरिद','vat':None},
+        'plywood_industry':{'code_name':'plywood_industry','name_1':'प्लाईउड उद्योग','name_2':'प्राथमिक वस्तु उत्पादक','name_3':'गोलिया काठ खरिद','vat':None},
+        'venier_industry':{'code_name':'venier_industry','name_1':'भेनियर उद्योग','name_2':'प्राथमिक वस्तु उत्पादक','name_3':'गोलिया काठ खरिद','vat':None},
+        'furniture industry':{'code_name':'furniture_industry','name_1':'फर्निचर उद्योग','name_2':'समिल दर्ता नभएका पहाडि तथा हिमाली जिल्ला का लागि','vat':None},
+        'chiran_wood_supply':{'code_name':'chiran_wood_supply','name_1':'चिरान काठ आपुर्ति कर्ता','name_2':'सप्लायर्स, महासंघको आन्तरिक प्रयोजनका लागी','vat':None},
+    }
