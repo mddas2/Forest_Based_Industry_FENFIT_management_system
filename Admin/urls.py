@@ -137,6 +137,7 @@ urlpatterns = [
 
          #****************Application user application i.e clients send application to upper level**************************************
     path('member-aproval-form', application_form.MemberAprovalForm, name='MemberAprovalForm'),
+    path('member-approval-form-review', application_form.MemberAprovalFormReview, name='MemberAprovalFormReview'),
 
    #****************Application reviewed application i.e clients check application status**************************************
     path('application-reviewed', application_form.UserApplicationReview, name='UserApplicationReview'),

@@ -129,7 +129,7 @@ def UserApplicationFormCreate(request,id=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def MemberAprovalForm(request,id=None):
-    create_link_name = reverse("UserPersonalInformationCreate")
+    create_link_name = reverse("MemberAprovalForm")
     if id==None:
         slug1 = "Member Aproval-Form" 
     else:
@@ -139,7 +139,24 @@ def MemberAprovalForm(request,id=None):
     id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
 
     data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
-    return render(request, "admin/applicant_users/user-application-form.html",data)
+    return render(request, "admin/applicant_users/user-membership-form.html",data)
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_USER_role)
+def MemberAprovalFormReview(request,id=None):
+    create_link_name = reverse("UserPersonalInformationCreate")
+    if id==None:
+        slug1 = "Application-Form Review Status" 
+    else:
+        slug1 = "User-update" 
+    action = "UserApplicationFormStore"
+    #Fetching the data of particular ID
+    id_data = UserApplicationDetail.objects.filter(user_id=request.user.id)
+    if id_data.count()>0:
+        data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data.first()}
+        return render(request, "admin/applicant_users/member-approval-form-review.html",data)
+    else:
+        return redirect('UserApplicationFormCreate')
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)

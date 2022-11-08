@@ -1,0 +1,195 @@
+     <!-- Info box Content applicant user personal information-->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
+                                {% csrf_token %}
+                                    <div class="form-body">
+                                        <h5 class="card-title">Add Users</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">उधेागमिको नाम्</label>
+                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
+                                                </div>
+                                            </div>                                           
+                                            <!--/span-->
+                                        </div>
+                                        <!--/row-->
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">इमेल</label>
+                                                    <input type="email" name="email" value="{{id_data.email}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">सम्पर्क नम्बर</label>
+                                                    <input type="number" name="phone" value="{{id_data.phone}}" class="form-control">
+                                                </div>
+                                            </div>
+                                                <!--/span-->
+                                            
+                                                <!--/span-->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">जिल्ला</label>
+                                                    <input type="text" name="district" value="{{id_data.district}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">राज्य(State)</label>
+                                                    <input type="text" name="state" value="{{id_data.state}}" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
+                                                    <input type="text" name="municipality" value="{{id_data.municipality}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">वडा नं.</label>
+                                                    <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Tole</label>
+                                                    <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/row-->
+                                        <div class="row">
+                                            <!--/span-->
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                                        <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.certificate_citizenship %}
+                                                    <script>
+                                                        $("#certificate_citizenship").attr("data-default-file", "{{id_data.certificate_citizenship.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
+                                                        <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.certificate_company_registration %}
+                                                    <script>
+                                                        $("#certificate_company_registration").attr("data-default-file", "{{id_data.certificate_company_registration.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                                                        <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.provisional_account_number %}
+                                                    <script>
+                                                        $("#provisional_account_number").attr("data-default-file", "{{id_data.provisional_account_number.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
+                                                        <input name="auditing" type="file" id="auditing" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.auditing %}
+                                                    <script>
+                                                        $("#auditing").attr("data-default-file", "{{id_data.auditing.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                                        <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.tax_paid_certificate %}
+                                                    <script>
+                                                        $("#tax_paid_certificate").attr("data-default-file", "{{id_data.tax_paid_certificate.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+
+                                        <hr> </div>
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <div class="form-actions m-t-40">
+                                        <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
+                                        <button type="button" class="btn btn-dark">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!--==============================================================-->
+                <!-- End PAge Content -->
+                <script>
+          
+                    // Function to check Whether both passwords
+                    // is same or not.
+                    function checkPassword(form) {
+                        password1 = form.password1.value;
+                        password2 = form.password2.value;
+          
+                        // If password not entered
+                        if (password1 == ''){
+                            return true
+                            // alert ("password remain same");
+                        }
+                        // If confirm password not entered
+                        else if (password2 == ''){
+                            return true
+                            // alert ("password remain same");
+                        }
+                        // If Not same return False.    
+                        else if (password1 != password2) {
+                            alert ("\nPassword did not match: Please try again...")
+                            return false;
+                        }
+          
+                        // If same return True.
+                        else{
+                            return true;
+                        }
+                    }
+                </script>
+ 
+                
+                
