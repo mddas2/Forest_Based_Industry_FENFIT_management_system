@@ -11,8 +11,18 @@
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"> {{slug1}} </h5>
+            <div class="card-body">            
+                    <div class="right-page-header">
+                        <div class="d-flex">
+                            <div class="align-self-center">
+                                <h4 class="card-title m-t-10">{{slug1}} </h4>
+                            </div>
+                            <div class="ms-auto">
+                                <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
+                            </div>
+                        </div>
+                    </div>
+             
                 <div class="table-responsive" style="overflow-x: scroll;">
                     <table class="table product-overview">
                         <thead>
@@ -34,55 +44,50 @@
                         </thead>
                         {% if all_data %}
                         <tbody id="tableSearch">
-                            {% for i in all_data %}   
-                                                              
-                            <tr>                
+                            {% for i in all_data %}                               
+                            <tr>
                                 <td>{{i.id}}</td>
-                                {% with i=i.approved_form %}
-                                <td>{{i.get_user_application_detail.owner_full_name}}</td>
+                                <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
                                 <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.certificate_citizenship %} 
-                                    <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>
                                 <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.certificate_company_registration %}  
-                                    <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                    {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
                                     <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>
                                 <td class="zoom-gallery">    
-                                    {% if i.get_user_application_detail.provisional_account_number %}        
-                                    <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% if  i.applicationform.all.first.get_user_application_detail.provisional_account_number %}        
+                                    <a href="{{ i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>   
                                 <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.auditing %}    
-                                    <a href="{{i.get_user_application_detail.auditing.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% if i.applicationform.all.first.get_user_application_detail.auditing %}    
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.auditing.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td> 
                                 <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.tax_paid_certificate %}       
-                                    <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% if  i.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}       
+                                    <a href="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>  <!-- this is quantity-->
-                               
                                 <td>{{i.dsc}}</td>
-                                <td>{{i.get_user_application_detail.district}}</td>
-                                {% endwith %}
+                                <td>{{i.district_name}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
-                                {% with i=i.approved_form %}
-                                 <td><span class="label label-info">{{i.get_date}}</span></td>
+                                 <td><span class="label label-info">{{i.updated_at}}</span></td>
                                  <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
                                  {% if action%}
                                  <td>
@@ -122,7 +127,6 @@
                                  <td style="display:none">{{i.get_shipping_address.email}}</td>
                                  {% endif %}                                                          
                             </tr>
-                            {% endwith %}
                             {% comment %} <script>
                                     $(document).ready(function($){
                                         $(".clickable-row{{forloop.counter}}").click(function() {
@@ -147,13 +151,12 @@
     <div class="card-body">      
         <!-- sample modal content -->
         <!----for loop-->
-       {% for id_data in all_data %}  
+       {% for id_data in all_data %} 
         <div id="order_detail{{id_data.id}}" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
-            {% with id_data=id_data.approved_form %}
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="vcenter">APPLICATION DETAIL</h4>
+                        <h4 class="modal-title" id="vcenter">ORDER DETAIL</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
@@ -195,69 +198,206 @@
                             </div>
                             <!-- column -->
                         </div>
-                        
+                        <!-------content start-->
                         <div class="row">
-                            <!-- Column -->
-                            <div class="col-lg-12">
+                            <div class="col-md-4">
+                            <div class="nibedan-form">
+                                <div class="form-logo">
+                                    <img src="/static/assets/images/logo-2.png">
+                                </div>
+                                <h2 class="main-title">सदस्यता अद्यावद्यिक प्रमाण पत्र</h2>
+                                <div class="nibedan-form-top">
+                                    <div class="form-top-left">
+                                        <p>श्रीमान अध्यक्षज्यू<br>
+                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                        <label>.........................।</label>
+                                    </div>
+                                    <div class="form-top-right">
+                                        <span class="date">मिति ः ...................</span>
+                                    </div>
+                                </div>
+                                <div class="nibedan-form-body">
+                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                                    <p>तपाईले सदस्यता अद्यावद्यिकका लागि मिति २०७९।००।०० मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको 
+                                        विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनुपर्ने दस्तुर समेत बभु mाई सक्नुभएकोलेनेपाल
+                                        वन पैदावार उद्योग ब्यवसायि संघको विधान बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सदस्यता 
+                                        अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । संघको उद्धेश्य परिपुर्तिमा विधान बमोजिम सदस्यहरको हित रक्षार्थ 
+                                        क्रियाशील हुनु हुने छ भन्ने विश्वास लिएको छु । तपाईको कार्यकाल सफल र उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त 
+                                        गर्दछु ।</p>
+                                    
+                                </div>
+                                <div class="nibedan-form-footer">
+                                    <div class="user-info">
+                                        <label style="font-weight: bold;">पद अध्यक्ष</label>
+                                        <label>अध्यक्षको नाम ः <span class="user-info-data">Manoj Singh</span></label>
+                                        {% load staticfiles %}
+                                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-8 img-data-area">
+                            <div class="row">
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
-                                            </div>
-                        
-                                      
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <h3 class="box-title m-t-40">General Info</h3>
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td width="390">Name</td>
-                                                                <td>{{id_data.get_user_application_detail.owner_full_name}} </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>state</td>
-                                                                <td>{{id_data.get_user_application_detail.state}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>district</td>
-                                                                <td>{{id_data.get_user_application_detail.district}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Munciplity</td>
-                                                                <td>{{id_data.get_user_application_detail.municipality}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Ward Number</td>
-                                                                <td> {{id_data.get_user_application_detail.ward_number}} </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Tole</td>
-                                                                <td> {{id_data.get_user_application_detail.tole}} </td>
-                                                            </tr>
-                                                            
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                        <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive">
                                     </div>
                                 </div>
                             </div>
-                            <!-- Column -->
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                        <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive">
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                        <img src="{{id_data.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" class="img-responsive">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                        <img src="{{id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                            <hr> 
                         </div>
+                        <style>
+                            .nibedan-form{
+                                padding: 50px 20px;
+                                max-width: 600px;
+                                border: 1px solid #d9d6d6;
+                            }
+                            .nibedan-form p{
+                                font-size: 14px;
+                                line-height: 24px;
+                                font-weight: 400;
+                                color: #000;
+                                text-align: justify;
+                            }
+                            .nibedan-form .form-logo{
+                                text-align: center;
+                            }
+                            .nibedan-form .form-logo img{
+                                max-width: 500px;
+                                width: 100%;
+                                margin-bottom: 20px;
+                            }
+                            h2.main-title{
+                                font-size: 18px;
+                                line-height: 22px;
+                                font-weight: bold;
+                                text-align: center;
+                            }
+                            .nibedan-form-top{
+                                position: relative;
+                                display: block;
+                                width: 100%;
+                                padding: 50px 0;
+                            }
+                            .form-top-left{
+                                float: left;
+                            }
+                            .form-top-right{
+                                float: right;
+                            }
+                            .nibedan-form-body{
+                                position: relative;
+                                display: block;
+                                margin-top: 50px;
+                            }
+                            .nibedan-form-body h2{
+                                font-size: 16px;
+                                line-height: 22px;
+                                font-weight: bold;
+                                text-align: center;
+                            }
+                            .nibedan-form-body h5{
+                                font-size: 16px;
+                                line-height: 22px;
+                                font-weight: bold;
+                                text-decoration: underline;
+                            }
+                            .nibedan-form-body ul li{
+                                font-size: 14px;
+                                line-height: 24px;
+                                font-weight: 400;
+                                color: #000;
+                                text-align: justify;
+                            }
+                            .nibedan-form-footer .user-info{
+                                text-align: left;
+                                padding-right: 20px;
+                            }
+                            .nibedan-form-footer .user-info label{
+                                font-size: 14px;
+                                line-height: 24px;
+                                font-weight: 400;
+                                color: #000;
+                                display: block;
+                                margin-bottom: 10px;
+                            }
+                            .nibedan-form-footer .user-info label img{
+                                max-width: 150px;
+                            }
+                            .nibedan-form-footer .user-info label .user-info-data{
+                                max-width: 150px;
+                                min-width: 150px;
+                                overflow: hidden;
+                            }
+                            .nibedan-form-footer .user-address{
+                                margin-top: 20px;
+                            }
+                            .nibedan-form-footer .user-address label{
+                                font-size: 14px;
+                                line-height: 24px;
+                                font-weight: 400;
+                                color: #000;
+                                display: inline-block;
+                                margin-bottom: 10px;
+                                width: 49%;
+                            }
+                            .img-data-area img{
+                                max-width: 300px;
+                                min-width: 300px;
+                                max-height: 300px;
+                                object-fit: fill;
+                                border: 1px solid #dbdbdb;
+                                padding: 5px;
+                                object-fit: contain;
+                            }
+                            @media (max-width:767px) {
+                                .nibedan-form-footer .user-info,
+                                .nibedan-form-footer .user-address{
+                                    padding-right: 0;
+                                    text-align: center;
+                                }
+                                .nibedan-form-footer .user-address label{
+                                    width: 100%;
+                                }
+                                .img-data-area img{
+                                    max-width: 100%;
+                                    min-width: auto;
+                                    max-height: initial;
+                                }
+                            }
+                        </style>
+                        <!-------content end-->
                         <!-----close order detail-->
                     </div>
                     <div class="modal-footer">
@@ -268,7 +408,6 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        {% endwith %}
         {% endfor %}
         <!----end for loop  -->
     </div>

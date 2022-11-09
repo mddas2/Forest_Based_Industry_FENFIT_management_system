@@ -121,11 +121,8 @@ urlpatterns = [
     path('all-member-list', application_form.AllMemberList, name='AllMemberList'),
     path('all-member-list/<int:pk>/<str:approved_pending_cancelled>', application_form.AllMemberList, name='AllMemberList'),
 
-    path('all-pending-members', application_form.Pending, name='Pending'),
-    path('all-member-pending/<int:pk>/<str:approved_pending_cancelled>', application_form.Pending, name='Pending'),
-
-    path('all-approved-member', application_form.ApprovedApplication, name='ApprovedApplication'),
-    path('all-approved-member/<int:pk>/<str:approved_pending_cancelled>', application_form.ApprovedApplication, name='ApprovedApplication'),
+    path('all-approved-member', application_form.ApprovedMember, name='ApprovedMember'),
+    path('all-approved-member/<int:pk>/<str:approved_pending_cancelled>', application_form.ApprovedMember, name='ApprovedMember'),
 
     #****************Personal user information i.e clients**************************************
     path('personal-information', application_form.UserPersonalInformationCreate, name='UserPersonalInformationCreate'),
