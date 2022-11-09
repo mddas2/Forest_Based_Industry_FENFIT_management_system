@@ -47,17 +47,17 @@
                             {% for i in all_data %}                               
                             <tr>
                                 <td>{{i.id}}</td>
-                                <td>{{i.get_user_application_detail.owner_full_name}}</td>
+                                <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
                                 <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.certificate_citizenship %} 
-                                    <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
                                 </td>
                                 <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.certificate_company_registration %}  
-                                    <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                    {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
                                     <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
                                     {% else %}
                                         NotFound
