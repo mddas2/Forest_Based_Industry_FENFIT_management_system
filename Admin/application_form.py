@@ -129,8 +129,10 @@ def UserApplicationFormCreate(request,id=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def MemberAprovalForm(request,id=None):
-    # formd = request.user.applicationform.all().first().user_id
-    # return HttpResponse(formd)
+    # business_type = BusinessType.business_type
+    # for bus in business_type:
+    #     return HttpResponse(business_type[bus]['name_1'])
+    business_type = BusinessType.business_type
     create_link_name = reverse("MemberAprovalForm")
     if id==None:
         slug1 = "Member Aproval-Form" 
@@ -139,8 +141,14 @@ def MemberAprovalForm(request,id=None):
     action = "MemberApprovalFormStore"
     #Fetching the data of particular ID
     id_data = request.user
+
+    try:
+        form_data = request.user.applicationform.all().first().get_user_application_detail
+    except:
+        form_data = None
+    
     state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
-    data = {'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -177,19 +185,14 @@ def MemberApprovalFormStore(request):
             'user_id' : request.user.id,
             'get_user_application_detail_id' : Userform_detail_create.id,
         }
-        if request.POST['submits']=='1':
-            dsc = {
-                'dsc' : 'd',
-            }
-            form_data = {**dsc,**form_data}
             #join dcs and form_data if user press send
         form,form_create = ApplicationForm.objects.update_or_create(user_id=request.user.id , defaults=form_data)
         # try:
         #     user.image = request.FILES['profile_image']
         # except:
         #     pass
-        messages.info(request, 'User inserted Successfully !!!')
-        return redirect(UserApplicationFormCreate)
+        messages.info(request, 'Member Approval Form Send Successfully !!!')
+        return redirect(MemberAprovalFormReview)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)

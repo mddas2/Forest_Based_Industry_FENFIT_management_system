@@ -16,7 +16,18 @@
                                                     <label class="form-label">उधेागमिको नाम्</label>
                                                     <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
-                                            </div>                                           
+                                            </div>     
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">व्यवसायको नाम</label>
+                                                    <select class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
+                                                        <option value="0">व्यवसाय चयन गर्नुहोस्</option>
+                                                        {% for business in business_type%}
+                                                            <option value="{{business}}">{{business|title}}</option>
+                                                        {% endfor %}
+                                                </select>
+                                                </div>
+                                            </div>                                        
                                             <!--/span-->
                                         </div>
                                         <!--/row-->
@@ -56,20 +67,20 @@
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">नगरपालिका/गाउँपालिका</label>
-                                                    <input type="text" name="municipality" value="{{id_data.municipality}}" class="form-control" required>
+                                                    <input type="text" name="municipality" value="{{form_data.municipality}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">वडा नं.</label>
-                                                    <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
+                                                    <input type="text" name="ward_number" value="{{form_data.ward_number}}" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">Tole</label>
-                                                    <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
+                                                    <input type="text" name="tole" value="{{form_data.tole}}" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +99,7 @@
                                                         <label><u>{{id_data.district_name|title}} Fenfit Nepal </u></label>
                                                     </div>
                                                     <div class="form-top-right">
-                                                        <span class="date">मिति ः {{id_data.created_at}}</span>
+                                                        <span class="date">मिति ः <u>{{id_data.created_at}}</u></span>
                                                     </div>
                                                 </div>
                                                 <div class="nibedan-form-body">
@@ -101,28 +112,23 @@
                                                     <ul>
                                                         <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
                                                         <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-                                                        <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-        
-                                                        <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-        
-                                                        <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-                                                        <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+                                                        <li>स्थायी लेखा नम्बरको प्रतिलिपि ।</li>        
+                                                        <li>लेखा परिक्षण प्रतिवेदनको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>        
+                                                        <li>कर चुक्ता प्रमाण पत्रको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
         
                                                     </ul>
                                                 </div>
                                                 <div class="nibedan-form-footer">
                                                     <div class="user-info">
                                                         <label style="font-weight: bold;">आवेदक</label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
-                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
+                                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
                                                         {% load staticfiles %}
                                                         <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                                     </div>
                                                     <div class="user-address">
-                                                        <label>ठेगाना ः जिल्ला ................</label>
+                                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
                                                         <label>न.पा.÷गा.पा .......................</label>
                                                         <label>ठेगाना ः जिल्ला ................</label>
                                                         <label>न.पा.÷गा.पा .......................</label>
@@ -141,9 +147,9 @@
                                                         <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify" />
                                                     </div>
                                                 </div>
-                                                {% if id_data.certificate_citizenship %}
+                                                {% if form_data.certificate_citizenship %}
                                                     <script>
-                                                        $("#certificate_citizenship").attr("data-default-file", "{{id_data.certificate_citizenship.url}}");
+                                                        $("#certificate_citizenship").attr("data-default-file", "{{form_data.certificate_citizenship.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -155,9 +161,9 @@
                                                         <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
                                                     </div>
                                                 </div>
-                                                {% if id_data.certificate_company_registration %}
+                                                {% if form_data.certificate_company_registration %}
                                                     <script>
-                                                        $("#certificate_company_registration").attr("data-default-file", "{{id_data.certificate_company_registration.url}}");
+                                                        $("#certificate_company_registration").attr("data-default-file", "{{form_data.certificate_company_registration.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -169,9 +175,9 @@
                                                         <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
                                                     </div>
                                                 </div>
-                                                {% if id_data.provisional_account_number %}
+                                                {% if form_data.provisional_account_number %}
                                                     <script>
-                                                        $("#provisional_account_number").attr("data-default-file", "{{id_data.provisional_account_number.url}}");
+                                                        $("#provisional_account_number").attr("data-default-file", "{{form_data.provisional_account_number.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -183,9 +189,9 @@
                                                         <input name="auditing" type="file" id="auditing" class="dropify" />
                                                     </div>
                                                 </div>
-                                                {% if id_data.auditing %}
+                                                {% if form_data.auditing %}
                                                     <script>
-                                                        $("#auditing").attr("data-default-file", "{{id_data.auditing.url}}");
+                                                        $("#auditing").attr("data-default-file", "{{form_data.auditing.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -196,9 +202,9 @@
                                                         <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
                                                     </div>
                                                 </div>
-                                                {% if id_data.tax_paid_certificate %}
+                                                {% if form_data.tax_paid_certificate %}
                                                     <script>
-                                                        $("#tax_paid_certificate").attr("data-default-file", "{{id_data.tax_paid_certificate.url}}");
+                                                        $("#tax_paid_certificate").attr("data-default-file", "{{form_data.tax_paid_certificate.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -316,7 +322,6 @@
                                     </style>
                                     <div class="form-actions m-t-40">
                                         <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
-                                        <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
                                         <button type="button" class="btn btn-dark">Cancel</button>
                                     </div>
                                 </form>
