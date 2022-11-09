@@ -19,13 +19,15 @@ def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all applic
     slug1 = "सदस्य अनुमोदित फारम"
     all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at') 
     if pk and approved_pending_cancelled:
-        #  return HttpResponse(pk)
          if approved_pending_cancelled=='a':
            CustomUser.objects.filter(id=pk).update(is_verified=True)   
            messages.success(request,'Member approved successfully!!!')       
          elif approved_pending_cancelled=='c':            
             CustomUser.objects.filter(id=pk).update(is_varified=False,is_applyForVerified=False)          
             messages.success(request,'Member cancelled successfully!!!')
+         elif approved_pending_cancelled=='p':            
+            CustomUser.objects.filter(id=pk).update(is_verified=False,is_applyForVerified=True)          
+            messages.success(request,'Member Pending successfully!!!')
 
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)

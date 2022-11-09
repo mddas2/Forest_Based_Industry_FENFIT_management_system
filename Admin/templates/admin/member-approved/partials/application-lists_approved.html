@@ -97,31 +97,29 @@
                                         </a>
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                    {%if i.approved_pending_cancelled == "p" %} 
+                                            <li><a class="dropdown-item"  href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='p'  %}"> 
+                                                {%if i.is_verified == False %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                Pending
+                                                 Pending
+                                            </a></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
+                                                    {%if i.is_verified == True %} 
+                                                <i class="bi bi-check-lg"></i> 
+                                                {% else %} &nbsp; &nbsp;
+                                                    {% endif %}
+                                                 Approved
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="a"  %}">
-                                                {%if i.approved_pending_cancelled == "a" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                Approved
-                                            </a></li>
-                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="c"  %}">
-                                                {%if i.approved_pending_cancelled == "c" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
+                            
+                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
                                                  Cancelled
                                             </a></li>
+                                            
                                         </ul>
-                                        </div>
+                                    </div>
                                  </td>
                                  <td style="display:none">{{i.phone}}</td>  
                                  <td style="display:none">{{i.get_shipping_address.email}}</td>

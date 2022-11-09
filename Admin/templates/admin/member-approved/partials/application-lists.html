@@ -88,7 +88,7 @@
                                 <td>{{i.district_name}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                  <td><span class="label label-info">{{i.updated_at}}</span></td>
-                                 <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
+                                 <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
                                  {% if action%}
                                  <td>
                                    <div class="dropdown">
@@ -97,29 +97,27 @@
                                         </a>
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                    {%if i.approved_pending_cancelled == "p" %} 
+                                            <li><a class="dropdown-item"  href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='p'  %}"> 
+                                                {%if i.is_verified == False %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                Pending
+                                                 Pending
+                                            </a></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
+                                                    {%if i.is_verified == True %} 
+                                                <i class="bi bi-check-lg"></i> 
+                                                {% else %} &nbsp; &nbsp;
+                                                    {% endif %}
+                                                 Approved
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="a"  %}">
-                                                {%if i.approved_pending_cancelled == "a" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                Approved
-                                            </a></li>
-                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="c"  %}">
-                                                {%if i.approved_pending_cancelled == "c" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
+                            
+                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
                                                  Cancelled
                                             </a></li>
+                                            
                                         </ul>
                                         </div>
                                  </td>
