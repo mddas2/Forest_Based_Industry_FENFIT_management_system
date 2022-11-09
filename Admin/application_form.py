@@ -192,7 +192,7 @@ def MemberAprovalFormReview(request,id=None):
     id_data = request.user
     try:
         form_data = request.user.applicationform.all().first().get_user_application_detail
-        # return HttpResponse(id_data.user.is_verified)
+        # return HttpResponse(id_data.is_verified)
         data = {'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
         return render(request, "admin/applicant_users/member-approval-form-review.html",data)
     except:

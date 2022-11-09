@@ -8,7 +8,7 @@
                 <h4 class="card-title">Application Review Progress bar <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
                 <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
                 <div class="progress m-t-20">
-                    <div class="progress-bar bg-success" style="width: {% if id_data.user.is_verified == True %} 100% {% else %} 25% {% endif %} ; height:15px;" role="progressbar">{% if id_data.user.is_verified == True %}100% {% else %} 25{% endif %}</div>
+                    <div class="progress-bar bg-success" style="width: {% if id_data.is_verified == True %} 100% {% else %} 25% {% endif %} ; height:15px;" role="progressbar">{% if id_data.is_verified == True %}100% {% else %} 25{% endif %}</div>
                 </div>
             </div>
         </div>
@@ -16,16 +16,16 @@
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
             <h3 class="">FENFIT सदस्यको दरखास्त फाराम</h3>
-            <h6 class="card-subtitle text-info"> {% if id_data.user.is_verified == True %} You are verified {% else %} Not Verified Yet {% endif %}</h6>
+            <h6 class="card-subtitle text-info"> {% if id_data.is_verified == True %} You are verified {% else %} Not Verified Yet {% endif %}</h6>
                 <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-                <h2 class="m-t-4"><small class="text-success">{% if id_data.user.is_verified == True %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
-                <button class="btn btn-{% if id_data.user.is_verified == True %}success btn-rounded{% else %}primary btn-rounded{% endif %} btn-rounded">{% if id_data.user.is_verified == True %} You are Aproved {% else %} Not Verified Yet{% endif %}</button> 
+                <h2 class="m-t-4"><small class="text-success">{% if id_data.is_verified == True %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
+                <button class="btn btn-{% if id_data.is_verified == True %}success btn-rounded{% else %}primary btn-rounded{% endif %} btn-rounded">{% if id_data.is_verified == True %} You are Aproved {% else %} Not Verified Yet{% endif %}</button> 
         </center>      
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
-            {% if id_data.user.is_verified == True %} 
+            {% if id_data.is_verified == True %} 
                 <h3 class="box-title m-t-4">कृपया यो डाउनलोड गर्नुहोस्|</h3>
                 <ul class="list-unstyled">
                     <li><i class="fa fa-check text-success"></i> फेन्फिटको सदस्य हुन पाएकोमा बधाई छ|</li>
@@ -34,7 +34,7 @@
             {% else %}
                 <h3 class="box-title m-t-4">टिप्पणी हाइलाइट्स</h3>
             {% endif %}
-           {% if id_data.user.is_verified == True %} 
+           {% if id_data.is_verified == True %} 
            
             {% else %}
             <ul class="list-unstyled">
@@ -52,7 +52,7 @@
     <!-- Column -->
     <div class="col-lg-12">
         <div class="card">
-         {% if id_data.user.is_verified == True %}     
+         {% if id_data.is_verified == True %}     
          <div class="row">
             <div class="col-md-4">
             <div class="nibedan-form">
@@ -98,7 +98,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
                     </div>
                 </div>
             </div>

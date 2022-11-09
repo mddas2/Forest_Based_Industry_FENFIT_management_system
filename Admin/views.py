@@ -56,12 +56,13 @@ def index(request, pk=None, pdc=None):
     data = {**data,**data_1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
+    
     if request.user.role==CustomUser.USER:        
         if request.user.is_verified == False:
             return redirect('MemberAprovalForm')
-        elif request.user.is_varified == True and request.user.applicationform.all.dsc == None:
+        elif request.user.is_verified == True and request.user.applicationform.all().first().dsc == None:
             return redirect('MemberAprovalFormReview')
-        elif request.user.is_varified == True and request.user.applicationform.all.dsc != None:
+        elif request.user.is_verified == True and request.user.applicationform.all().first().dsc != None:
             return redirect('UserApplicationFormCreate')
         else:
             return redirect('MemberAprovalFormReview')
