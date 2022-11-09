@@ -21,8 +21,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">व्यवसायको नाम</label>
-                                                    <select class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
-                                                        <option value="0">व्यवसाय चयन गर्नुहोस्</option>
+                                                    <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
+                                                        <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                         {% for business,value in business_type.items%}
                                                             <option value="{{business}}">{{value|get_item:'name_1'}}</option>
                                                         {% endfor %}
@@ -123,16 +123,17 @@
                                                     <div class="user-info">
                                                         <label style="font-weight: bold;">आवेदक</label>
                                                         <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
-                                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
+                                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{business_name}}</span></label>
+                                                        <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
+                                                        <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
                                                         {% load staticfiles %}
                                                         <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                                     </div>
                                                     <div class="user-address">
                                                         <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
-                                                        <label>न.पा.÷गा.पा .......................</label>
-                                                        <label>ठेगाना ः जिल्ला ................</label>
-                                                        <label>न.पा.÷गा.पा .......................</label>
+                                                        <label>न.पा.÷गा.पा <u>{{form_data.municipality}}</u></label>
+                                                        <label>वडा नं.<u>{{form_data.ward_number}}</u></label>
+                                                        <label>टोल <u>{{form_data.tole}}</u></label>
                                                     </div>
                                                 </div>
                                         
@@ -322,7 +323,7 @@
                                         }
                                     </style>
                                     <div class="form-actions m-t-40">
-                                        <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i>SEND</button>
                                         <button type="button" class="btn btn-dark">Cancel</button>
                                     </div>
                                 </form>

@@ -12,11 +12,6 @@ from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_r
 from account.models import *
 from django.contrib.auth.hashers import make_password
 
-from django.template.defaulttags import register
-@register.filter
-def get_item(dictionary, key):
-    return dictionary.get(key)
-
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
@@ -149,20 +144,26 @@ def MemberAprovalForm(request,id=None):
 
     try:
         form_data = request.user.applicationform.all().first().get_user_application_detail
+        business_name = form_data.business_name
+        business_name = BusinessType.business_type[business_name]['name_1']
     except:
+        business_name = form_data.business_name
         form_data = None
     
     state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
-    data = {'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def MemberApprovalFormStore(request):
-
     if request.POST:
+        if request.POST['business_name']=='0':
+            messages.info(request,'Please select Business Type')
+            return redirect(MemberAprovalForm)
         form_detail = {
             'user_id' : request.user.id,
+            'business_name' : request.POST['business_name'],
             'owner_full_name' : request.POST['owner_full_name'],
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],
@@ -209,10 +210,11 @@ def MemberAprovalFormReview(request,id=None):
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
+    id_data = request.user
     try:
-        id_data = request.user.applicationform.all().first().get_user_application_detail
+        form_data = request.user.applicationform.all().first().get_user_application_detail
         # return HttpResponse(id_data.user.is_verified)
-        data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+        data = {'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
         return render(request, "admin/applicant_users/member-approval-form-review.html",data)
     except:
         return redirect('MemberAprovalForm')

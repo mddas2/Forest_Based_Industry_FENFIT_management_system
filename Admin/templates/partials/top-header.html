@@ -11,14 +11,14 @@
                     <!-- Dark Logo icon -->
                     <img src="{% static '/assets/images/fenfit-logo.png' %}" alt="homepage" class="dark-logo" />
                     <!-- Light Logo icon -->
-                    <img src="{% static '/assets/images/fenfit-large-logo.png' %}" alt="homepage" class="light-logo" />
+                    <img src="{% static '/assets/images/fenfit-logo.png' %}" alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
                  <!-- dark Logo text -->
-                 <img src="{% static '/assets/images/fenfit-large-logo.png' %}" alt="homepage" class="dark-logo" />
+                 <img src="{% static '/assets/images/fenfit-logo.png' %}" alt="homepage" class="dark-logo" />
                  <!-- Light Logo text -->    
-                 <img src="{% static '/assets/images/fenfit-large-logo.png' %}" class="light-logo" alt="homepage" /></span></a>
+                 <img src="{% static '/assets/images/fenfit-logo.png' %}" class="light-logo" alt="homepage" /></span></a>
         </div>
         <style>
             .topbar .top-navbar .navbar-header .navbar-brand b{
@@ -30,6 +30,9 @@
             }
             .mini-sidebar  .topbar .top-navbar .navbar-header .navbar-brand b img{
                 max-width: 60px;
+            }
+            .topbar .top-navbar .navbar-header{
+                text-align: center;
             }
         </style>
         <!-- ============================================================== -->
@@ -59,7 +62,7 @@
                 </script>
              
                 <li class="nav-item">
-                    <img src="{% static '/assets/images/logo-2.png' %}" alt="homepage" class="dark-logo" />
+                    <img src="{% static '/assets/images/logo-2.png' %}" alt="homepage" class="dark-logo main-logo" />
                 </li>
             </ul>
            
@@ -235,3 +238,11 @@
         </div>
     </nav>
 </header>
+<style>
+    @media (max-width:767px) {
+                .main-logo{
+                    width: 100%;
+                    margin-top: 20px;
+                }
+            }
+</style>

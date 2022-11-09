@@ -143,10 +143,10 @@
                 <div class="form-top-left">
                     <p>श्रीमान अध्यक्षज्यू<br>
                         नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                    <label>.........................।</label>
+                    <label><u>{{id_data.district_name|title}} Fenfit Nepal </u></label>
                 </div>
                 <div class="form-top-right">
-                    <span class="date">मिति ः ...................</span>
+                    <span class="date">मिति ः <u>{{id_data.created_at}}</u></span>
                 </div>
             </div>
             <div class="nibedan-form-body">
@@ -159,69 +159,73 @@
                 <ul>
                     <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
                     <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-                    <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-
-                    <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-
-                    <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-                    <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+                    <li>स्थायी लेखा नम्बरको प्रतिलिपि ।</li>        
+                    <li>लेखा परिक्षण प्रतिवेदनको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>        
+                    <li>कर चुक्ता प्रमाण पत्रको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
 
                 </ul>
             </div>
             <div class="nibedan-form-footer">
                 <div class="user-info">
                     <label style="font-weight: bold;">आवेदक</label>
-                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
-                    <label>दस्तखत ः <span class="user-info-data">saroj Singh Das</span></label>
-                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                    <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                    <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
+                    <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{business_name}}</span></label>
+                    <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
+                    <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
                     {% load staticfiles %}
                     <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                 </div>
                 <div class="user-address">
-                    <label>ठेगाना ः जिल्ला ................</label>
-                    <label>न.पा.÷गा.पा .......................</label>
-                    <label>ठेगाना ः जिल्ला ................</label>
-                    <label>न.पा.÷गा.पा .......................</label>
+                    <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
+                    <label>न.पा.÷गा.पा <u>{{form_data.municipality}}</u></label>
+                    <label>वडा नं.<u>{{form_data.ward_number}}</u></label>
+                    <label>टोल <u>{{form_data.tole}}</u></label>
                 </div>
             </div>
         
         </div>
     </div>
     <!--/span-->
-    <div class="col-md-8">
+    <div class="col-md-8 img-data-area">
     <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                {% if form_data.certificate_citizenship %}
+                    <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
+                 {% endif %}
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                {% if form_data.certificate_company_registration %}
+                    <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
+                {% endif %}
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                {% if form_data.provisional_account_number %}
+                    <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
+                {% endif %}
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
+                {% if form_data.auditing %}
+                    <img src="{{form_data.auditing.url}}" class="img-responsive">
+                {% endif %}
             </div>
         </div>
     </div>
@@ -326,6 +330,15 @@
                     margin-bottom: 10px;
                     width: 49%;
                 }
+                .img-data-area img{
+                    max-width: 300px;
+                    min-width: 300px;
+                    max-height: 300px;
+                    object-fit: fill;
+                    border: 1px solid #dbdbdb;
+                    padding: 5px;
+                    object-fit: contain;
+                }
                 @media (max-width:767px) {
                     .nibedan-form-footer .user-info,
                     .nibedan-form-footer .user-address{
@@ -334,6 +347,11 @@
                     }
                     .nibedan-form-footer .user-address label{
                         width: 100%;
+                    }
+                    .img-data-area img{
+                        max-width: 100%;
+                        min-width: auto;
+                        max-height: initial;
                     }
                 }
             </style>
