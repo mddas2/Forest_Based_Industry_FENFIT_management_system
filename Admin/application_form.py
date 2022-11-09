@@ -252,11 +252,11 @@ def UserApplicationReview(request,id=None):
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
-    id_data = UserApplicationDetail.objects.filter(user_id=request.user.id)
-    if id_data.count()>0:
-        data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data.first()}
+    try:
+        id_data = request.user.applicationform.all().first()
+        data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
         return render(request, "admin/applicant_users/user-application-review.html",data)
-    else:
+    except:
         return redirect('UserApplicationFormCreate')
 
 @login_required(login_url=settings.LOGIN_URL)
