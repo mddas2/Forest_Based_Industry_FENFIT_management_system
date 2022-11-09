@@ -12,6 +12,11 @@ from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_r
 from account.models import *
 from django.contrib.auth.hashers import make_password
 
+from django.template.defaulttags import register
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application

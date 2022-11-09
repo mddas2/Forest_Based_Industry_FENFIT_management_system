@@ -88,6 +88,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'staticfiles': 'django.templatetags.static',
+                'admin_custom_tag' : 'Admin.custom_tags.custom_tags',
             },
         },
     },

@@ -1,4 +1,5 @@
-     <!-- Info box Content applicant user personal information-->
+{% load admin_custom_tag %}
+    <!-- Info box Content applicant user personal information-->
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- Column -->
@@ -22,8 +23,8 @@
                                                     <label class="form-label">व्यवसायको नाम</label>
                                                     <select class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value="0">व्यवसाय चयन गर्नुहोस्</option>
-                                                        {% for business in business_type%}
-                                                            <option value="{{business}}">{{business|title}}</option>
+                                                        {% for business,value in business_type.items%}
+                                                            <option value="{{business}}">{{value|get_item:'name_1'}}</option>
                                                         {% endfor %}
                                                 </select>
                                                 </div>
