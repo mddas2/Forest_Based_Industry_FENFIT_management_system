@@ -93,7 +93,7 @@
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
-                                                <a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="p"  %}"> 
+                                                <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="p"  %}"> 
                                                     {%if i.approved_pending_cancelled == "p" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
@@ -101,14 +101,14 @@
                                                 Pending
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="a"  %}">
+                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="a"  %}">
                                                 {%if i.approved_pending_cancelled == "a" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
                                                 Approved
                                             </a></li>
-                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="c"  %}">
+                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled="c"  %}">
                                                 {%if i.approved_pending_cancelled == "c" %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;

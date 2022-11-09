@@ -8,7 +8,10 @@ class CustomUser(AbstractUser):
     username = models.EmailField(max_length=255, unique=False)
     state_name = models.CharField(max_length=55 , null=True)
     district_name = models.CharField(max_length=55 , null=True)
+
     is_verified = models.BooleanField(default=False)
+    is_applyForVerified = models.BooleanField(default=False)
+
     image = models.ImageField(upload_to='user/profile', null=True)
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
