@@ -56,8 +56,16 @@ def index(request, pk=None, pdc=None):
     data = {**data,**data_1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
-    if request.user.role==CustomUser.USER:
-        return redirect('UserApplicationReview')
+    if request.user.role==CustomUser.USER:        
+        if request.user.is_verified == False:
+            return redirect('MemberAprovalForm')
+        elif request.user.is_varified == True and request.user.applicationform.all.dsc == None:
+            return redirect('MemberAprovalFormReview')
+        elif request.user.is_varified == True and request.user.applicationform.all.dsc != None:
+            return redirect('UserApplicationFormCreate')
+        else:
+            return redirect('MemberAprovalFormReview')
+    data['client_msg']=client_msg
     return render(request,'admin/home.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)

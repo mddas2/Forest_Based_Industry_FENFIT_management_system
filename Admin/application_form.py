@@ -138,9 +138,9 @@ def MemberAprovalForm(request,id=None):
         slug1 = "User-update" 
     action = "MemberApprovalFormStore"
     #Fetching the data of particular ID
-    id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
-
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    id_data = request.user
+    state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
+    data = {'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)

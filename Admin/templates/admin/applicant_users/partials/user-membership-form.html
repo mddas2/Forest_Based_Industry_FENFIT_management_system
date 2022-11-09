@@ -14,7 +14,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">उधेागमिको नाम्</label>
-                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.owner_full_name }}" placeholder="Albert">
+                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
                                             </div>                                           
                                             <!--/span-->
@@ -42,13 +42,13 @@
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">जिल्ला</label>
-                                                    <input type="text" name="district" value="{{id_data.district}}" class="form-control" disabled>
+                                                    <input type="text" name="district" value="{{id_data.district_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">राज्य(State)</label>
-                                                    <input type="text" name="state" value="{{id_data.state}}" class="form-control" disabled>
+                                                    <input type="text" name="state" value="{{state_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>

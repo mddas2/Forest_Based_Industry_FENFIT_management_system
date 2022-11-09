@@ -30,12 +30,10 @@
                 {% if request.user.applicationform.all.first.user_id ==  request.user.id%}
                     <li><a href="{% url 'MemberAprovalFormReview' %}"> सदस्य आवेदन पुनरावलोकन l</a></li> <!---member approval form review--->
                 {% endif %}
-                {% if request.user.is_verified == True %}
-                    {% if request.user.applicationform.all.first.dsc != None %}
-                        
+                {% if request.user.is_verified == True and request.user.applicationform.all.first.dsc != None %}
+                        {% if request.user.applicationform.all.first.dsc != 'approved' and  request.user.applicationform.all.first.dsc != 'c' %}                        
                             <li><a href="{% url 'UserApplicationFormCreate' %}"> सुविधा अनुप्रयोग फारम</a></li> <!-----APPLICATION Form-->
-                        
-                    {% endif %}
+                        {% endif %}                        
                     <li><a href="{% url 'UserApplicationReview' %}">आवेदन पुनरावलोकन</a></li> <!----application review---->
                     <!-- <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li> -->
                 {% endif %}

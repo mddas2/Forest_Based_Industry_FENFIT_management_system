@@ -343,10 +343,11 @@ def SignUp(request):
         password = request.POST['password']
         district_name = request.POST['district_name']
         check_user_exist = CustomUser.objects.filter(email=email)
-        if district_name:
+        if district_name in CustomUser.districts:
             pass
         else:
-            messages.info('district should not be null')
+            messages.info(request,'district should not be null')
+            return redirect('SignUp')
         if check_user_exist:
             messages.error(request,'This '+ email + ' is already Registered. Contact admin to get your Login Password')
             from django.http import HttpResponseRedirect
