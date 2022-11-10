@@ -196,47 +196,47 @@
     <!--/span-->
     <div class="col-md-8 img-data-area">
     <div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                {% if form_data.certificate_citizenship %}
-                    <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
-                 {% endif %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                    {% if form_data.certificate_citizenship %}
+                        <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
+                     {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                {% if form_data.certificate_company_registration %}
-                    <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
-                {% endif %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
+                    {% if form_data.certificate_company_registration %}
+                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                {% if form_data.provisional_account_number %}
-                    <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
-                {% endif %}
+    
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                    {% if form_data.provisional_account_number %}
+                        <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                {% if form_data.auditing %}
-                    <img src="{{form_data.auditing.url}}" class="img-responsive">
-                {% endif %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
+                    {% if form_data.auditing %}
+                        <img src="{{form_data.auditing.url}}" class="img-responsive">
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
     <hr> 
