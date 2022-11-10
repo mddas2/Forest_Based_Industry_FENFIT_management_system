@@ -195,13 +195,17 @@ def MemberAprovalFormReview(request,id=None):
     #Fetching the data of particular ID
     id_data = request.user
     try:
-        
         form_data = request.user.applicationform.all().first().get_user_application_detail
-        # return HttpResponse(id_data.is_verified)
-        data = {'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
-        return render(request, "admin/applicant_users/member-approval-form-review.html",data)
+        business_name = form_data.business_name
+        business_name = BusinessType.business_type[business_name]['name_1']
     except:
-        return redirect('MemberAprovalForm')
+        form_data = None
+        business_name = None
+
+    data = {'business_name':business_name,'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
+    return render(request, "admin/applicant_users/member-approval-form-review.html",data)
+    
+    return redirect('MemberAprovalForm')
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
