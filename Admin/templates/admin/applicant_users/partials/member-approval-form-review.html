@@ -30,7 +30,7 @@
                 <ul class="list-unstyled">
                     <li><i class="fa fa-check text-success"></i> फेन्फिटको सदस्य हुन पाएकोमा बधाई छ|</li>
                 </ul>
-                <button class="btn btn-success btn-rounded">PRINT</button> 
+                <button class="btn btn-success btn-rounded" onClick="printdiv('div_print');" value=" Print ">PRINT</button> 
             {% else %}
                 <h3 class="box-title m-t-4">टिप्पणी हाइलाइट्स</h3>
             {% endif %}
@@ -53,7 +53,7 @@
     <div class="col-lg-12">
         <div class="card">
          {% if id_data.is_verified == True %}     
-         <div class="row">
+         <div class="row" id="div_print">
             <div class="col-md-4">
             <div class="nibedan-form">
                 <div class="form-logo">
@@ -359,3 +359,130 @@
     </div>
     <!-- Column -->
 </div>
+<script>
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var css = "<style>.nibedan-form{padding: 50px 20px;max-width: 600px;\
+                    border: 1px solid #d9d6d6;\
+                }\
+                .nibedan-form p{\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    text-align: justify;\
+                }.nibedan-form .form-logo{\
+                    text-align: center;\
+                }\
+                .nibedan-form .form-logo img{\
+                    max-width: 500px;\
+                    width: 100%;\
+                    margin-bottom: 20px;\
+                }\
+                h2.main-title{\
+                    font-size: 18px;\
+                    line-height: 22px;\
+                    font-weight: bold;\
+                    text-align: center;\
+                }\
+                .nibedan-form-top{\
+                    position: relative;\
+                    display: block;\
+                    width: 100%;\
+                    padding: 50px 0;\
+                }                .form-top-left{\
+                    float: left;\
+                }\
+                .form-top-right{\
+                    float: right;\
+                }\
+                .nibedan-form-body{\
+                    position: relative;\
+                    display: block;\
+                    margin-top: 50px;\
+                }\
+                .nibedan-form-body h2{\
+                    font-size: 16px;\
+                    line-height: 22px;\
+                    font-weight: bold;\
+                    text-align: center;\
+                }\
+                .nibedan-form-body h5{\
+                    font-size: 16px;\
+                    line-height: 22px;\
+                    font-weight: bold;\
+                    text-decoration: underline;\
+                }\
+                .nibedan-form-body ul li{\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    text-align: justify;\
+                }\
+                .nibedan-form-footer .user-info{\
+                    text-align: left;\
+                    padding-right: 20px;\
+                }\
+                .nibedan-form-footer .user-info label{\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    display: block;\
+                    margin-bottom: 10px;\
+                }\
+                .nibedan-form-footer .user-info label img{\
+                    max-width: 150px;\
+                }\
+                .nibedan-form-footer .user-info label .user-info-data{\
+                    max-width: 150px;\
+                    min-width: 150px;\
+                    overflow: hidden;\
+                }\
+                .nibedan-form-footer .user-address{\
+                    margin-top: 20px;\
+                }\
+                .nibedan-form-footer .user-address label{\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    display: inline-block;\
+                    margin-bottom: 10px;\
+                    width: 49%;\
+                }\
+                .img-data-area img{\
+                    max-width: 300px;\
+                    min-width: 300px;\
+                    max-height: 300px;\
+                    object-fit: fill;\
+                    border: 1px solid #dbdbdb;\
+                    padding: 5px;\
+                    object-fit: contain;\
+                }\
+                @media (max-width:767px) {\
+                    .nibedan-form-footer .user-info,\
+                    .nibedan-form-footer .user-address{\
+                        padding-right: 0;\
+                        text-align: center;\
+                    }\
+                    .nibedan-form-footer .user-address label{\
+                        width: 100%;\
+                    }\
+                    .img-data-area img{\
+                        max-width: 100%;\
+                        min-width: auto;\
+                        max-height: initial;\
+                    }\
+                }\
+            </style>"
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + css + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+  </script>
