@@ -48,7 +48,6 @@ def ApprovedMember(request):
     return render(request,'admin/member-approved/application-lists.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_USER_role)
 def UserPersonalInformationCreate(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
@@ -66,7 +65,6 @@ def UserPersonalInformationCreate(request,id=None):
     return render(request, "admin/applicant_users/user-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_USER_role)
 def UserPersonalInformationStore(request):
     if request.POST['password1'] == request.POST['password2']:
         password = make_password(request.POST['password1'])
@@ -149,6 +147,12 @@ def MemberApprovalFormStore(request):
             'ward_number' : request.POST['ward_number'],
             'tole' : request.POST['tole'],
         }
+
+        try:
+            request.user.first_name = request.POST['owner_full_name']
+            request.user.save()
+        except:
+            pass
 
         documents = {} #dictionary of image
         for im in request.FILES:
