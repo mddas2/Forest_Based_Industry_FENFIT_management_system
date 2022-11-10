@@ -5,8 +5,8 @@
     <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Application Review Progress bar <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
-                <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
+                <h4 class="card-title">सदस्य अनुमोदन प्रगति पट्टी<a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"></a></h4>
+            
                 <div class="progress m-t-20">
                     <div class="progress-bar bg-success" style="width: {% if id_data.is_verified == True %} 100% {% else %} 25% {% endif %} ; height:15px;" role="progressbar">{% if id_data.is_verified == True %}100% {% else %} 25{% endif %}</div>
                 </div>

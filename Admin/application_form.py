@@ -177,6 +177,9 @@ def MemberApprovalFormStore(request):
         #     user.image = request.FILES['profile_image']
         # except:
         #     pass
+        if form:
+            CustomUser.objects.filter(id=request.user.id).update(is_applyForVerified=True)
+            
         messages.info(request, 'Member Approval Form Send Successfully !!!')
         return redirect(MemberAprovalFormReview)
 
@@ -192,6 +195,7 @@ def MemberAprovalFormReview(request,id=None):
     #Fetching the data of particular ID
     id_data = request.user
     try:
+        
         form_data = request.user.applicationform.all().first().get_user_application_detail
         # return HttpResponse(id_data.is_verified)
         data = {'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
@@ -255,6 +259,8 @@ def UserApplicationReview(request,id=None):
     #Fetching the data of particular ID
     try:
         id_data = request.user.applicationform.all().first()
+        # business_name = id_data.business_name
+        # business_name = BusinessType.business_type[business_name]['name_1']
         data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
         return render(request, "admin/applicant_users/user-application-review.html",data)
     except:
