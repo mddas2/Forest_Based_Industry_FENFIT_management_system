@@ -118,8 +118,8 @@
                                                         <label style="font-weight: bold;">आवेदक</label>
                                                         <label>उद्यमीको नाम ः <span class="user-info-data">{{request.user.first_name}}</span></label>
                                                         <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
-                                                        <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
-                                                        <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
+                                                        <label>सम्र्पक नं ः <span class="user-info-data">{{request.user.phone}}</span></label>
+                                                        <label>इमेल ः <span class="user-info-data">{{request.user.email}}</span></label>
                                                         {% load staticfiles %}
                                                         <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                                     </div>
