@@ -5,10 +5,19 @@
     <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Application Review Progress bar <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
-                <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
+                <h4 class="card-title">Application Review Progress bar <a class="get-code" data-bs-toggle="collapse"
+                        href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code"
+                            data-bs-toggle="tooltip"></i></a></h4>
+                <div class="collapse m-t-15" id="pgr2">
+                    <pre
+                        class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre>
+                </div>
                 <div class="progress m-t-20">
-                    <div class="progress-bar bg-success" style="width: {% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %} ; height:15px;" role="progressbar">{% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %}</div>
+                    <div class="progress-bar bg-success"
+                        style="width: {% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %} ; height:15px;"
+                        role="progressbar">{% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif
+                        id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -16,20 +25,29 @@
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
             <h3 class="">FENFIT APPLICATION</h3>
-            <h6 class="card-subtitle text-info">{% if id_data.dsc == 'd' %} Pending on DISTRICT {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 's' %} Pending on STATE {{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'c' %} Pending on CENTRAL LEVEL {% elif id_data.dsc == 'approved' %} approved from all level {% else %} User Need to Forward for further Process {% endif %}</h6>
-                <!-- <h4 class="box-title m-t-40">Application description</h4>
+            <h6 class="card-subtitle text-info">{% if id_data.dsc == 'd' %} Pending on DISTRICT
+                {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 's' %} Pending on STATE
+                {{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'c' %} Pending on CENTRAL LEVEL {%
+                elif id_data.dsc == 'approved' %} approved from all level {% else %} User Need to Forward for further
+                Process {% endif %}</h6>
+            <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-                <h2 class="m-t-4"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
-                <button class="btn btn-primary btn-rounded">{% if id_data.dsc == 'd' %} DISTRICT {{request.user.district_name}} NOT APPROVED YET {% elif id_data.dsc == 's' %} STATE {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'c' %} CENTRAL LEVEL NOT APPROVED YET {% elif id_data.dsc == 'approved' %} ALL APPROVED PROCESS COMPLETED {% else %} CLIENT {{id_data.get_user_application_detail.owner_full_name}} NEED TO FORWARD {% endif %}</button> 
-        </center>      
+            <h2 class="m-t-4"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
+            <button class="btn btn-primary btn-rounded">{% if id_data.dsc == 'd' %} DISTRICT
+                {{request.user.district_name}} NOT APPROVED YET {% elif id_data.dsc == 's' %} STATE
+                {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'c' %} CENTRAL
+                LEVEL NOT APPROVED YET {% elif id_data.dsc == 'approved' %} ALL APPROVED PROCESS COMPLETED {% else %}
+                CLIENT {{id_data.get_user_application_detail.owner_full_name}} NEED TO FORWARD {% endif %}</button>
+        </center>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
-           <h3 class="box-title m-t-4">Comments Highlights</h3>
+            <h3 class="box-title m-t-4">Comments Highlights</h3>
             <ul class="list-unstyled">
                 <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
                 <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
-                <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
+                <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles
+                </li>
             </ul>
         </center>
     </div>
@@ -40,235 +58,294 @@
     <!-- Column -->
     <div class="col-lg-12">
         <div class="card">
-         {% if id_data.user.is_verified == False %}     
-         <div class="row">
-            <div class="col-md-4">
-                <div class="nibedan-form">
-                    <div class="form-logo">
-                        <img src="/static/assets/images/logo-2.png">
-                    </div>
-                    <h2 class="main-title">सिफारिश गरि पाउ </h2>
-                    <div class="nibedan-form-top">
-                        <div class="form-top-left">
-                            <p>श्रीमान अध्यक्षज्यू<br>
-                                नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                            <label>.........................।</label>
-                        </div>
-                        <div class="form-top-right">
-                            <span class="date">मिति ः ...................</span>
-                        </div>
-                    </div>
-                    <div class="nibedan-form-body">
-                        <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                        <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
-                            संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि 
-                            २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार 
-                            उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु 
-                            सुचीकृत हुनुपर्ने ब्यवस्था गरके ोलेनिम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार 
-                            उपलब्ध गराइृदिनु हुन अनुरोध छ । </p>
-                        <h5>संलग्न कागजातहरु ः–</h5>
-                        <ul>
-                            <li>कम्पनी वा फर्म दर्ताको प्रमाण पत्र ।</li>
-                            <li>उद्योग दर्ता र नविकरण पत्र ।</li>
-                            <li>आयकर दर्ता प्रमाण पत्र ।</li>        
-                            <li>कर चुक्ताको प्रमाण पत्र (दर्ता भएको दोस्रो आ.ब.देखि) ।</li>        
-                            <li>नियम ५ (३) बमोजिम सदस्यता अद्यावद्यिक भएको प्रमाण पत्र ।</li>
-
-                            <li>कालो सुचीमा नपरेको स्वघोषणा ।</li>
-                            <li>महासंघको खातामा तोकिएको सिफारिस शुल्क जम्मा गरेको वैक भौचर को प्रतिलिपि ।</li>
-                            <li>नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को पुर्णपालन गर्छु भन्ने स्वघोषणा।</li>        
-                        </ul>
-                    </div>
-                <div class="nibedan-form-footer">
-                    <div class="user-info">
-                        <label style="font-weight: bold;">आवेदक</label>
-                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
-                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                        {% load staticfiles %}
-                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
-                    </div>
-                    <div class="user-address">
-                        <label>ठेगाना ः जिल्ला ................</label>
-                        <label>न.पा.÷गा.पा .......................</label>
-                        <label>ठेगाना ः जिल्ला ................</label>
-                        <label>न.पा.÷गा.पा .......................</label>
-                    </div>
-                </div>
-                
-            </div>
-            </div>
-            <!--/span-->
-            <div class="col-md-8">
+            {% if id_data.user.is_verified == False %}
             <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
-                    </div>
-                </div>
-            </div>
+                <div class="col-md-4">
+                    <div class="nibedan-form">
+                        <div class="form-logo">
+                            <img src="/static/assets/images/logo-2.png">
+                        </div>
+                        <h2 class="main-title">सिफारिश गरि पाउ </h2>
+                        <div class="nibedan-form-top">
+                            <div class="form-top-left">
+                                <p>श्रीमान अध्यक्षज्यू<br>
+                                    नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                <label>.........................।</label>
+                            </div>
+                            <div class="form-top-right">
+                                <span class="date">मिति ः ...................</span>
+                            </div>
+                        </div>
+                        <div class="nibedan-form-body">
+                            <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                            <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
+                                संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि
+                                २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार
+                                उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु
+                                सुचीकृत हुनुपर्ने ब्यवस्था गरके ोलेनिम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार
+                                उपलब्ध गराइृदिनु हुन अनुरोध छ । </p>
+                            <h5>संलग्न कागजातहरु ः–</h5>
+                            <ul>
+                                <li>कम्पनी वा फर्म दर्ताको प्रमाण पत्र ।</li>
+                                <li>उद्योग दर्ता र नविकरण पत्र ।</li>
+                                <li>आयकर दर्ता प्रमाण पत्र ।</li>
+                                <li>कर चुक्ताको प्रमाण पत्र (दर्ता भएको दोस्रो आ.ब.देखि) ।</li>
+                                <li>नियम ५ (३) बमोजिम सदस्यता अद्यावद्यिक भएको प्रमाण पत्र ।</li>
 
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                        <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive">
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
+                                <li>कालो सुचीमा नपरेको स्वघोषणा ।</li>
+                                <li>महासंघको खातामा तोकिएको सिफारिस शुल्क जम्मा गरेको वैक भौचर को प्रतिलिपि ।</li>
+                                <li>नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को
+                                    पुर्णपालन गर्छु भन्ने स्वघोषणा।</li>
+                            </ul>
+                        </div>
+                        <div class="nibedan-form-footer">
+                            <div class="user-info">
+                                <label style="font-weight: bold;">आवेदक</label>
+                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh
+                                        ddddddddddddDas</span></label>
+                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                {% load staticfiles %}
+                                <label>दस्तखत ः <span class="user-info-data"><img
+                                            src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                            </div>
+                            <div class="user-address">
+                                <label>ठेगाना ः जिल्ला ................</label>
+                                <label>न.पा.÷गा.पा .......................</label>
+                                <label>ठेगाना ः जिल्ला ................</label>
+                                <label>न.पा.÷गा.पा .......................</label>
+                            </div>
+                        </div>
 
-            <hr> 
-        </div>
-          {% else %}
-          <div class="nibedan-form">
-            <div class="form-logo">
-                <img src="/static/assets/images/logo-2.png">
-            </div>
-            <h2 class="main-title">सस्थागत अद्यावद्यिक प्रमाण पत्र </h2>
-            <div class="nibedan-form-top">
-                <div class="form-top-left">
-                    <p>श्रीमान अध्यक्षज्यू<br>
-                        नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                    <label>.........................।</label>
+                    </div>
                 </div>
-                <div class="form-top-right">
-                    <span class="date">मिति ः ...................</span>
+                <!--/span-->
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <hr>
             </div>
-            <div class="nibedan-form-body">
-                <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                <p>तपाईले सस्थागत आवद्धताका लागि मिति २०७९।००।०० मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको 
-                    विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले नेपाल 
-                    वन पैदावार उद्योग ब्यवसायि महासंघको विधान को दफा .......बमोजिम मिति २०८०।००।०० सम्म बहाल रहने 
-                    गरि सस्थागत आबद्धताको अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । महासंघको उद्धेश्य परिपुर्तिमा विधान बमोजिम 
-                    सदस्यहरको हित रक्षार्थ क्रियाशील हुनु हुने छ भन्ने विश्वास लिएको छु । तपाईको नेतृत्वको कार्यकाल सफल र 
-                    उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु । </h5>
-            </div>
-            <div class="nibedan-form-footer">
-                <div class="user-info">
-                    <label style="font-weight: bold;">आवेदक</label>
-                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
-                    <label>दस्तखत ः <span class="user-info-data">saroj Singh Das</span></label>
-                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                    <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                    <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                    {% load staticfiles %}
-                    <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
-                </div>
-                <!-- <div class="user-address">
-                    <label>ठेगाना ः जिल्ला ................</label>
-                    <label>न.पा.÷गा.पा .......................</label>
-                    <label>ठेगाना ः जिल्ला ................</label>
-                    <label>न.पा.÷गा.पा .......................</label>
-                </div> -->
-            </div>
+            {% else %}
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                <div class="col-md-4">
+                    <div class="nibedan-form">
+                        <div class="form-logo">
+                            <img src="/static/assets/images/logo-2.png">
+                        </div>
+                        <h2 class="main-title">सस्थागत अद्यावद्यिक प्रमाण पत्र </h2>
+                        <div class="nibedan-form-top">
+                            <div class="form-top-left">
+                                <p>श्रीमान अध्यक्षज्यू<br>
+                                    नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                <label>.........................।</label>
+                            </div>
+                            <div class="form-top-right">
+                                <span class="date">मिति ः ...................</span>
+                            </div>
+                        </div>
+                        <div class="nibedan-form-body">
+                            <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                            <p>तपाईले सस्थागत आवद्धताका लागि मिति २०७९।००।०० मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको
+                                विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले
+                                नेपाल
+                                वन पैदावार उद्योग ब्यवसायि महासंघको विधान को दफा .......बमोजिम मिति २०८०।००।०० सम्म बहाल रहने
+                                गरि सस्थागत आबद्धताको अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । महासंघको उद्धेश्य परिपुर्तिमा
+                                विधान बमोजिम
+                                सदस्यहरको हित रक्षार्थ क्रियाशील हुनु हुने छ भन्ने विश्वास लिएको छु । तपाईको नेतृत्वको कार्यकाल
+                                सफल र
+                                उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु । </h5>
+                        </div>
+                        <div class="nibedan-form-footer">
+                            <div class="user-info">
+                                <label style="font-weight: bold;">आवेदक</label>
+                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
+                                <label>दस्तखत ः <span class="user-info-data">saroj Singh Das</span></label>
+                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                {% load staticfiles %}
+                                <label>दस्तखत ः <span class="user-info-data"><img
+                                            src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                            </div>
+                            <!-- <div class="user-address">
+                            <label>ठेगाना ः जिल्ला ................</label>
+                            <label>न.पा.÷गा.पा .......................</label>
+                            <label>ठेगाना ः जिल्ला ................</label>
+                            <label>न.पा.÷गा.पा .......................</label>
+                        </div> -->
+                        </div>
+
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
+                <!--/span-->
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                    <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                        class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="white-box text-center"> <img src="{{id_data.certificate_company_registration.url}}" class="img-responsive"> </div>
-                </div>              
+
+                <hr>
             </div>
-        </div>
-          {% endif %}
+            {% endif %}
 
             <style>
-                .nibedan-form{
+                .nibedan-form {
                     padding: 50px 20px;
                     max-width: 600px;
                     border: 1px solid #d9d6d6;
                 }
-                .nibedan-form p{
+
+                .nibedan-form p {
                     font-size: 14px;
                     line-height: 24px;
                     font-weight: 400;
                     color: #000;
                     text-align: justify;
                 }
-                .nibedan-form .form-logo{
+
+                .nibedan-form .form-logo {
                     text-align: center;
                 }
-                .nibedan-form .form-logo img{
+
+                .nibedan-form .form-logo img {
                     max-width: 500px;
                     width: 100%;
                     margin-bottom: 20px;
                 }
-                h2.main-title{
+
+                h2.main-title {
                     font-size: 18px;
                     line-height: 22px;
                     font-weight: bold;
                     text-align: center;
                 }
-                .nibedan-form-top{
+
+                .nibedan-form-top {
                     position: relative;
                     display: block;
                     width: 100%;
                     padding: 50px 0;
                 }
-                .form-top-left{
+
+                .form-top-left {
                     float: left;
                 }
-                .form-top-right{
+
+                .form-top-right {
                     float: right;
                 }
-                .nibedan-form-body{
+
+                .nibedan-form-body {
                     position: relative;
                     display: block;
                     margin-top: 50px;
                 }
-                .nibedan-form-body h2{
+
+                .nibedan-form-body h2 {
                     font-size: 16px;
                     line-height: 22px;
                     font-weight: bold;
                     text-align: center;
                 }
-                .nibedan-form-body h5{
+
+                .nibedan-form-body h5 {
                     font-size: 16px;
                     line-height: 22px;
                     font-weight: bold;
                     text-decoration: underline;
                 }
-                .nibedan-form-body ul li{
+
+                .nibedan-form-body ul li {
                     font-size: 14px;
                     line-height: 24px;
                     font-weight: 400;
                     color: #000;
                     text-align: justify;
                 }
-                .nibedan-form-footer .user-info{
+
+                .nibedan-form-footer .user-info {
                     text-align: left;
                     padding-right: 20px;
                 }
-                .nibedan-form-footer .user-info label{
+
+                .nibedan-form-footer .user-info label {
                     font-size: 14px;
                     line-height: 24px;
                     font-weight: 400;
@@ -276,18 +353,22 @@
                     display: block;
                     margin-bottom: 10px;
                 }
-                .nibedan-form-footer .user-info label img{
+
+                .nibedan-form-footer .user-info label img {
                     max-width: 150px;
                 }
-                .nibedan-form-footer .user-info label .user-info-data{
+
+                .nibedan-form-footer .user-info label .user-info-data {
                     max-width: 150px;
                     min-width: 150px;
                     overflow: hidden;
                 }
-                .nibedan-form-footer .user-address{
+
+                .nibedan-form-footer .user-address {
                     margin-top: 20px;
                 }
-                .nibedan-form-footer .user-address label{
+
+                .nibedan-form-footer .user-address label {
                     font-size: 14px;
                     line-height: 24px;
                     font-weight: 400;
@@ -296,13 +377,16 @@
                     margin-bottom: 10px;
                     width: 49%;
                 }
+
                 @media (max-width:767px) {
+
                     .nibedan-form-footer .user-info,
-                    .nibedan-form-footer .user-address{
+                    .nibedan-form-footer .user-address {
                         padding-right: 0;
                         text-align: center;
                     }
-                    .nibedan-form-footer .user-address label{
+
+                    .nibedan-form-footer .user-address label {
                         width: 100%;
                     }
                 }
