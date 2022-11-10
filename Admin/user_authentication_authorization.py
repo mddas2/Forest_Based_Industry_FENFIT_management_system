@@ -48,7 +48,7 @@ def Login(request):
 def UserList(request):
    slug1 = "Users"
    create_link_name = reverse("UserCreate")
-   all_data = CustomUser.objects.all()
+   all_data = CustomUser.objects.filter(role__gte = request.user.role) #gte greater than and lte less than
     # oneuser = all_data.last()
     # return HttpResponse(oneuser.groups.all())
    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name, 'users':all_data}
@@ -119,14 +119,18 @@ def UserStore(request,id=None):
         # return HttpResponse(request.POST['role'])
         if request.POST['role'] != '0':
             if user:
-                role_id = request.POST['role']
-                # role_name = user.SetRoleToUserById(int(role_id))
-                # return HttpResponse(role_name)
-                user.role = role_id
-                user.save()
-                messages.success(request, 'Role is seted')
+                if request.user.role < request.POST['role']:
+                    role_id = request.POST['role']
+                    # role_name = user.SetRoleToUserById(int(role_id))
+                    # return HttpResponse(role_name)
+                    user.role = role_id
+                    user.save()
+                    messages.success(request, 'Role is seted')
+                else:
+                    messages.INFO(request, 'User cannot inserted !!!')
             else:
-                messages.INFO(request, 'User cannot inserted !!!')
+                messages.info(request,'Sorry You can not set Upper Level Role')
+
         if request.POST['group'] != '0':
             if user:
                 group = Group.objects.get(id = request.POST['group'])
