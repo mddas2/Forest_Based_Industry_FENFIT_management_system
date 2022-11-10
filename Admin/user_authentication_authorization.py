@@ -154,9 +154,13 @@ def UserEdit(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def UserDelete(request,id):
-    user = CustomUser.objects.get(id=id).delete()
-    messages.success(request, 'User deleted sucessfully!!!.')
-    return redirect(UserList)
+    try:
+        user = CustomUser.objects.get(id=id).delete()
+        messages.success(request, 'User deleted sucessfully!!!.')
+        return redirect(UserList)
+    except:
+        messages.info(request,"User not found ")
+        return redirect(UserList)
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
