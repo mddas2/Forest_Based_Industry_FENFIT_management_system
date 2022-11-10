@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_role
 from account.models import *
 from django.contrib.auth.hashers import make_password
+from . import bulk_sms
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
@@ -306,7 +307,7 @@ def CustomerOrder(request, pk=None, pdc=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllApplication(request, pk=None, approved_pending_cancelled=None):#all application
-    slug1 = "Order"
+    slug1 = "सिफारिश अनुमोदन"
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
@@ -329,6 +330,8 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     #there is no any upper level
                 if should_insert==1:
                     whoses_form = ApplicationForm.objects.get(id=pk).user_id
+                    to_number = CustomUser.objects.get(id=whoses_form).phone
+                    bulk_sms.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
                     # return HttpResponse(whose_form)
                     application_form_approved_detail_data = {
                         'approved_form_id' : pk,
