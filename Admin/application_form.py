@@ -126,8 +126,9 @@ def MemberAprovalForm(request,id=None):
         business_name = form_data.business_name
         business_name = BusinessType.business_type[business_name]['name_1']
     except:
-        business_name = form_data.business_name
         form_data = None
+        business_name = form_data.business_name
+        
     
     state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
     data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
