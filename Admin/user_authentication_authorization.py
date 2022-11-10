@@ -119,17 +119,15 @@ def UserStore(request,id=None):
         # return HttpResponse(request.POST['role'])
         if request.POST['role'] != '0':
             if user:
-                if request.user.role < request.POST['role']:
+                if int(request.user.role) < int(request.POST['role']):
                     role_id = request.POST['role']
                     # role_name = user.SetRoleToUserById(int(role_id))
                     # return HttpResponse(role_name)
                     user.role = role_id
                     user.save()
                     messages.success(request, 'Role is seted')
-                else:
-                    messages.INFO(request, 'User cannot inserted !!!')
             else:
-                messages.info(request,'Sorry You can not set Upper Level Role')
+                messages.INFO(request,'Sorry You can not set Upper Level Role')
 
         if request.POST['group'] != '0':
             if user:
@@ -144,8 +142,6 @@ def UserStore(request,id=None):
                 permission = Permission.objects.get(id = request.POST['permission'])
                 permission.user_set.add(user)
                 messages.success(request, ' Permission is set to '+ permission.name)
-            else:
-                messages.INFO(request, 'User cannot inserted !!!')
         request.session['user_id'] = user.id
         messages.info(request, 'User inserted Successfully !!!')
         return redirect(UserList)

@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h4 class="card-title">सिफारिश अनुमोदन प्रगति पट्टी<a class="get-code" data-bs-toggle="collapse"
                         href="#pgr2" aria-expanded="true"></a></h4>
- 
+
                 <div class="progress m-t-20">
                     <div class="progress-bar bg-success"
                         style="width: {% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %} ; height:15px;"
@@ -28,8 +28,12 @@
                 Process {% endif %}</h6>
             <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-            <h2 class="m-t-4"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
-            <button class="btn btn-{% if id_data.user.applicationform.all.first.dsc == 'approved' %}success btn-rounded{% else %}primary btn-rounded{% endif %}">{% if id_data.dsc == 'd' %} DISTRICT
+            <h2 class="m-t-4"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif
+                    id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif
+                    id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
+            <button
+                class="btn btn-{% if id_data.user.applicationform.all.first.dsc == 'approved' %}success btn-rounded{% else %}primary btn-rounded{% endif %}">{%
+                if id_data.dsc == 'd' %} DISTRICT
                 {{request.user.district_name}} NOT APPROVED YET {% elif id_data.dsc == 's' %} STATE
                 {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'c' %} CENTRAL
                 LEVEL NOT APPROVED YET {% elif id_data.dsc == 'approved' %} ALL APPROVED PROCESS COMPLETED {% else %}
@@ -39,16 +43,16 @@
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
             {% if id_data.user.applicationform.all.first.dsc == 'approved' %}
-                <h3 class="box-title m-t-4">कृपया यो डाउनलोड गर्नुहोस्|</h3>
-                <ul class="list-unstyled">
-                    <li><i class="fa fa-check text-success"></i> फेन्फिटको सदस्य हुन पाएकोमा बधाई छ|</li>
-                </ul>
-                <button class="btn btn-success btn-rounded" onClick="printdiv('div_print');" value=" Print ">PRINT</button> 
+            <h3 class="box-title m-t-4">कृपया यो डाउनलोड गर्नुहोस्|</h3>
+            <ul class="list-unstyled">
+                <li><i class="fa fa-check text-success"></i> फेन्फिटको सदस्य हुन पाएकोमा बधाई छ|</li>
+            </ul>
+            <button class="btn btn-success btn-rounded" onClick="printdiv('div_print');" value=" Print ">PRINT</button>
             {% else %}
-                <h3 class="box-title m-t-4">टिप्पणी हाइलाइट्स</h3>
+            <h3 class="box-title m-t-4">टिप्पणी हाइलाइट्स</h3>
             {% endif %}
             {% if id_data.user.applicationform.all.first.dsc == 'approved' %}
-           
+
             {% else %}
             <ul class="list-unstyled">
                 <li><i class="fa fa-info text-success"></i> के तपाईंको जिल्लाको नाम सही छ?</li>
@@ -67,7 +71,7 @@
         <div class="card">
             {% if id_data.user.applicationform.all.first.dsc != 'approved' %}
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="nibedan-form">
                         <div class="form-logo">
                             <img src="/static/assets/images/logo-2.png">
@@ -109,11 +113,13 @@
                             <div class="user-info">
                                 <label style="font-weight: bold;">आवेदक</label>
                                 <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
-                                <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{business_name}}</span></label>
+                                <label>उद्योग वा व्यवसायको नाम ः <span
+                                        class="user-info-data">{{business_name}}</span></label>
                                 <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
                                 <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
                                 {% load staticfiles %}
-                                <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                <label>दस्तखत ः <span class="user-info-data"><img
+                                            src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                             </div>
                             <div class="user-address">
                                 <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
@@ -126,15 +132,15 @@
                     </div>
                 </div>
                 <!--/span-->
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                     {% if form_data.certificate_citizenship %}
-                                        <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
-                                     {% endif %}
+                                    <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -143,18 +149,19 @@
                                 <div class="card-body">
                                     <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
                                     {% if form_data.certificate_company_registration %}
-                                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
+                                    <img src="{{form_data.certificate_company_registration.url}}"
+                                        class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
                                     {% if form_data.provisional_account_number %}
-                                        <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
+                                    <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
@@ -164,7 +171,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
                                     {% if form_data.auditing %}
-                                        <img src="{{form_data.auditing.url}}" class="img-responsive">
+                                    <img src="{{form_data.auditing.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
@@ -176,7 +183,7 @@
             </div>
             {% else %}
             <div class="row">
-                <div class="col-md-4" id="div_print">
+                <div class="col-md-6" id="div_print">
                     <div class="nibedan-form">
                         <div class="form-logo">
                             <img src="/static/assets/images/logo-2.png">
@@ -194,37 +201,44 @@
                         </div>
                         <div class="nibedan-form-body">
                             <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                            <p>तपाईले सस्थागत आवद्धताका लागि मिति २०७९।००।०० मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको
-                                विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले
+                            <p>तपाईले सस्थागत आवद्धताका लागि मिति २०७९।००।०० मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ
+                                संस्थाको
+                                विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई
+                                सक्नु भएकोले
                                 नेपाल
-                                वन पैदावार उद्योग ब्यवसायि महासंघको विधान को दफा .......बमोजिम मिति २०८०।००।०० सम्म बहाल रहने
-                                गरि सस्थागत आबद्धताको अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । महासंघको उद्धेश्य परिपुर्तिमा
+                                वन पैदावार उद्योग ब्यवसायि महासंघको विधान को दफा .......बमोजिम मिति २०८०।००।०० सम्म बहाल
+                                रहने
+                                गरि सस्थागत आबद्धताको अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । महासंघको उद्धेश्य
+                                परिपुर्तिमा
                                 विधान बमोजिम
-                                सदस्यहरको हित रक्षार्थ क्रियाशील हुनु हुने छ भन्ने विश्वास लिएको छु । तपाईको नेतृत्वको कार्यकाल
+                                सदस्यहरको हित रक्षार्थ क्रियाशील हुनु हुने छ भन्ने विश्वास लिएको छु । तपाईको नेतृत्वको
+                                कार्यकाल
                                 सफल र
                                 उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु । </h5>
                         </div>
                         <div class="nibedan-form-footer">
                             <div class="user-info">
                                 <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                <label>अध्यक्षको नाम ः <span class="user-info-data">{{id_data.district_name|title}} नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
+                                <label>अध्यक्षको नाम ः <span class="user-info-data">{{id_data.district_name|title}}
+                                        नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                 {% load staticfiles %}
-                                <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                <label>दस्तखत ः <span class="user-info-data"><img
+                                            src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <!--/span-->
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                     {% if form_data.certificate_citizenship %}
-                                        <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
-                                     {% endif %}
+                                    <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -233,18 +247,19 @@
                                 <div class="card-body">
                                     <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
                                     {% if form_data.certificate_company_registration %}
-                                        <img src="{{form_data.certificate_company_registration.url}}" class="img-responsive">
+                                    <img src="{{form_data.certificate_company_registration.url}}"
+                                        class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">अस्थायी लेखा नम्बरको पर्तिलिपि</h4>
                                     {% if form_data.provisional_account_number %}
-                                        <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
+                                    <img src="{{form_data.provisional_account_number.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
@@ -254,7 +269,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
                                     {% if form_data.auditing %}
-                                        <img src="{{form_data.auditing.url}}" class="img-responsive">
+                                    <img src="{{form_data.auditing.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
@@ -523,4 +538,4 @@
         document.body.innerHTML = oldstr;
         return false;
     }
-  </script>
+</script>
