@@ -24,7 +24,7 @@
                                                     <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                         {% for business,value in business_type.items%}
-                                                            <option value="{{business}}">{{value|get_item:'name_1'}}</option>
+                                                            <option value="{{business}}" {% if form_data.business_name == business %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
                                                         {% endfor %}
                                                 </select>
                                                 </div>
