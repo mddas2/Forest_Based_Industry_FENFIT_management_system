@@ -57,7 +57,7 @@
     <!-- Column -->
     <div class="col-lg-12">
         <div class="card">
-            {% if id_data.user.applicationform.all.first.dsc != 'approved' %}
+            {% if id_data.user.applicationform.all.first.dsc == 'approved' %}
             <div class="row">
                 <div class="col-md-6">
                     <div class="nibedan-form">
@@ -184,7 +184,7 @@
                                 <label>.........................।</label>
                             </div>
                             <div class="form-top-right">
-                                <span class="date">मिति ः <u>{{user.request.created_at}}</u></span>
+                                <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
                             </div>
                         </div>
                         <div class="nibedan-form-body">

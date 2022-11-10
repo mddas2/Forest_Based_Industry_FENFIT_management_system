@@ -88,7 +88,7 @@
                                                         <label>.........................।</label>
                                                     </div>
                                                     <div class="form-top-right">
-                                                        <span class="date">मिति ः ...................</span>
+                                                        <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
                                                     </div>
                                                 </div>
                                                 <div class="nibedan-form-body">
@@ -114,20 +114,20 @@
                                                 </div>
                                                 <div class="nibedan-form-footer">
                                                     <div class="user-info">
+                                                        
                                                         <label style="font-weight: bold;">आवेदक</label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh ddddddddddddDas</span></label>
-                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                        <label>दस्तखत ः <span class="user-info-data">Manoj Singh Das</span></label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">Manoj Singh Das</span></label>
+                                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{request.user.first_name}}</span></label>
+                                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
+                                                        <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
+                                                        <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
                                                         {% load staticfiles %}
                                                         <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                                     </div>
                                                     <div class="user-address">
-                                                        <label>ठेगाना ः जिल्ला ................</label>
-                                                        <label>न.पा.÷गा.पा .......................</label>
-                                                        <label>ठेगाना ः जिल्ला ................</label>
-                                                        <label>न.पा.÷गा.पा .......................</label>
+                                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
+                                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality}}</u></label>
+                                                        <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
+                                                        <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
                                                     </div>
                                                 </div>
                                         
