@@ -93,9 +93,9 @@ def UserPersonalInformationStore(request):
 def UserApplicationFormCreate(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
-        slug1 = "Application-Form" 
+        slug1 = "सिफारिस फारम" 
     else:
-        slug1 = "User-update" 
+        slug1 = "सिफारिस फारम" 
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
     id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
@@ -260,7 +260,7 @@ def UserApplicationFormStore(request):
 def UserApplicationReview(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
-        slug1 = "Application-Form Review Status" 
+        slug1 = "सिफारिस फारम पुनरावलोकन स्थिति" 
     else:
         slug1 = "User-update" 
     action = "UserApplicationFormStore"

@@ -57,7 +57,7 @@
     <!-- Column -->
     <div class="col-lg-12">
         <div class="card">
-            {% if id_data.user.applicationform.all.first.dsc == 'approved' %}
+            {% if id_data.user.applicationform.all.first.dsc != 'approved' %}
             <div class="row">
                 <div class="col-md-6">
                     <div class="nibedan-form">
@@ -179,9 +179,8 @@
                         <h2 class="main-title">सस्थागत अद्यावद्यिक प्रमाण पत्र </h2>
                         <div class="nibedan-form-top">
                             <div class="form-top-left">
-                                <p>श्रीमान अध्यक्षज्यू<br>
-                                    नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                <label>.........................।</label>
+                                <p>श्रीमान {{form_data.owner_full_name|title}} ज्यु<br>
+                                    {{form_data.company_name|title}} नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
                             </div>
                             <div class="form-top-right">
                                 <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
@@ -207,7 +206,7 @@
                         <div class="nibedan-form-footer">
                             <div class="user-info">
                                 <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                <label>अध्यक्षको नाम ः <span class="user-info-data">{{id_data.district_name|title}}
+                                <label>अध्यक्ष ः <span class="user-info-data">{{form_data.district|title}}
                                         नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                 {% load staticfiles %}
                                 <label>दस्तखत ः <span class="user-info-data"><img
@@ -225,7 +224,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                     {% if form_data.certificate_citizenship %}
-                                    <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
+                                        <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
