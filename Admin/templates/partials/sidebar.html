@@ -32,9 +32,9 @@
                 {% endif %}
                 {% if request.user.is_verified == True  %}
                         {% if request.user.applicationform.all.first.dsc != 'approved' and  request.user.applicationform.all.first.dsc != 'c' %}                        
-                            <li><a href="{% url 'UserApplicationFormCreate' %}"> सुविधा अनुप्रयोग फारम</a></li> <!-----APPLICATION Form-->
+                            <li><a href="{% url 'UserApplicationFormCreate' %}">सिफारिस फारम</a></li> <!-----APPLICATION Form-->
                         {% endif %}                        
-                    <li><a href="{% url 'UserApplicationReview' %}">आवेदन पुनरावलोकन</a></li> <!----application review---->
+                    <li><a href="{% url 'UserApplicationReview' %}">सिफारिस आवेदन पुनरावलोकन</a></li> <!----application review---->
                     <!-- <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li> -->
                 {% endif %}
             </ul>
