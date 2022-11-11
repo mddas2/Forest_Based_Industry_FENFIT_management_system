@@ -84,18 +84,7 @@
                                                     <input type="text" name="tole" value="{{form_data.tole}}" class="form-control" required>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">सिफारिस शुल्क र सो को वाडफाड </label>
-                                                <select class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" required>
-                                                    <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
-                                                    {% for business_price_category,value in recomendation_price_category.items%}
-                                                        <option value="{{business_price_category}}" {% if form_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
-                                                    {% endfor %}
-                                            </select>
-                                            </div>
-                                        </div>      
+                                        </div>  
                                         <!--/row-->
                                         <div class="row">
                                             <div class="col-md-4">

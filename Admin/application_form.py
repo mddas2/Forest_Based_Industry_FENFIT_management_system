@@ -92,6 +92,7 @@ def UserPersonalInformationStore(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def UserApplicationFormCreate(request,id=None):
+    recomendation_price_category = RecomendationPriceCategory.recommendation_fee
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
         slug1 = "सिफारिस फारम" 
@@ -101,7 +102,7 @@ def UserApplicationFormCreate(request,id=None):
     #Fetching the data of particular ID
     id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
 
-    data = {'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'recomendation_price_category':recomendation_price_category,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -111,7 +112,7 @@ def MemberAprovalForm(request,id=None):
     # for bus in business_type:
     #     return HttpResponse(business_type[bus]['name_1'])
     business_type = BusinessType.business_type
-    recomendation_price_category = RecomendationPriceCategory.recommendation_fee
+    
     create_link_name = reverse("MemberAprovalForm")
     if id==None:
         slug1 = "Member Aproval-Form" 
@@ -131,7 +132,7 @@ def MemberAprovalForm(request,id=None):
         
     
     state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
-    data = {'recomendation_price_category':recomendation_price_category,'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -139,7 +140,10 @@ def MemberAprovalForm(request,id=None):
 def MemberApprovalFormStore(request):
     if request.POST:
         if request.POST['business_name']=='0':
-            messages.info(request,'Please select Business Type')
+            messages.info(request,'Please select व्यवसायको type')
+            return redirect(MemberAprovalForm)
+        if request.POST['business_price_category']=='0':
+            messages.info(request,'Please select सिफारिस शुल्क type')
             return redirect(MemberAprovalForm)
         form_detail = {
             'user_id' : request.user.id,
@@ -219,9 +223,18 @@ def MemberAprovalFormReview(request,id=None):
 def UserApplicationFormStore(request):
 
     if request.POST:
+        if request.POST['business_price_category']=='0':
+            messages.info(request,'Please select सिफारिस शुल्क')
+            return redirect(MemberAprovalForm)
+
         form_detail = {
             'user_id' : request.user.id,
+            'business_price_category' : request.POST['business_price_category'],
         }
+
+        if request.POST['voucher_number'] != None:
+            form_detail['voucher_number'] = request.POST['voucher_number']
+            
 
         documents = {} #dictionary of image
         for im in request.FILES:
@@ -255,7 +268,7 @@ def UserApplicationFormStore(request):
         #     user.image = request.FILES['profile_image']
         # except:
         #     pass
-        messages.info(request, 'User inserted Successfully !!!')
+        messages.info(request, 'सिफारिस फारम saved !!!')
         return redirect(UserApplicationFormCreate)
 
 @login_required(login_url=settings.LOGIN_URL)

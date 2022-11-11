@@ -68,9 +68,11 @@ class UserApplicationDetail(models.Model):
     owner_full_name = models.CharField(max_length=205)
     business_name = models.CharField(max_length=205, null=True)
     business_price_category = models.CharField(max_length=205, null=True)
+    voucher_number = models.CharField(max_length=505, null=True)
     municipality = models.CharField(max_length=205,null=True)
     ward_number = models.CharField(max_length=205 , null=True)
     tole = models.CharField(max_length=205, default=True)
+
 
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
