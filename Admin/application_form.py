@@ -111,6 +111,7 @@ def MemberAprovalForm(request,id=None):
     # for bus in business_type:
     #     return HttpResponse(business_type[bus]['name_1'])
     business_type = BusinessType.business_type
+    recomendation_price_category = RecomendationPriceCategory.recommendation_fee
     create_link_name = reverse("MemberAprovalForm")
     if id==None:
         slug1 = "Member Aproval-Form" 
@@ -130,7 +131,7 @@ def MemberAprovalForm(request,id=None):
         
     
     state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
-    data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'recomendation_price_category':recomendation_price_category,'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -143,6 +144,7 @@ def MemberApprovalFormStore(request):
         form_detail = {
             'user_id' : request.user.id,
             'business_name' : request.POST['business_name'],
+            'business_price_category' : request.POST['business_price_category'],
             'owner_full_name' : request.POST['owner_full_name'],
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],

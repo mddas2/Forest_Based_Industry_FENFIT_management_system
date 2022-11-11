@@ -67,6 +67,7 @@ class UserApplicationDetail(models.Model):
     user = models.ForeignKey(CustomUser,related_name="applicationdetail",on_delete=models.CASCADE,null=True)
     owner_full_name = models.CharField(max_length=205)
     business_name = models.CharField(max_length=205, null=True)
+    business_price_category = models.CharField(max_length=205, null=True)
     municipality = models.CharField(max_length=205,null=True)
     ward_number = models.CharField(max_length=205 , null=True)
     tole = models.CharField(max_length=205, default=True)
@@ -204,7 +205,7 @@ class BusinessType(models.Model):
         'chiran_wood_supply':{'code_name':'chiran_wood_supply','name_1':'चिरान काठ आपुर्ति कर्ता','name_2':'सप्लायर्स, महासंघको आन्तरिक प्रयोजनका लागी','vat':None},
     }
 
-class Payment(models.Model):
+class RecomendationPriceCategory(models.Model):
     recommendation_fee = {
         'less_than_25_lakh':{'code_name':'less_than_25_lakh','name_1':'रु २५ लाख भन्दा कम','start_recommendation_fee':'10000','renewal_fee':'5000'},
         'greater_than_25_lakh_and_less_than_1_crode':{'code_name':'greater_than_25_lakh_and_less_than_1_crode','name_1':'रु २५ लाख भन्दा माथि १ करोड सम्म','start_recommendation_fee':'20000','renewal_fee':'10000'},
