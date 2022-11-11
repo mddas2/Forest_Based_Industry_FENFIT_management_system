@@ -6,4 +6,4 @@ def get_item(dictionary, key):
         # return type(dictionary)
         return dictionary.get(key)
     except:
-        return "please select first सिफारिस शुल्क category"
+        return "None. please select first सिफारिस शुल्क category"

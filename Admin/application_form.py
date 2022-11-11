@@ -142,13 +142,10 @@ def MemberApprovalFormStore(request):
         if request.POST['business_name']=='0':
             messages.info(request,'Please select व्यवसायको type')
             return redirect(MemberAprovalForm)
-        if request.POST['business_price_category']=='0':
-            messages.info(request,'Please select सिफारिस शुल्क type')
-            return redirect(MemberAprovalForm)
         form_detail = {
             'user_id' : request.user.id,
             'business_name' : request.POST['business_name'],
-            'business_price_category' : request.POST['business_price_category'],
+            
             'owner_full_name' : request.POST['owner_full_name'],
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],
