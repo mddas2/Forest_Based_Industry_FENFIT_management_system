@@ -13,10 +13,14 @@ from account.models import *
 from django.contrib.auth.hashers import make_password
 from . import bulk_sms_email
 
+#importing get_template from loader
+from django.template.loader import get_template 
+#import render_to_pdf from util.py 
+from . import html_to_pdf 
+
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
-    # return HttpResponse(approved_pending_cancelled)
     slug1 = "सदस्य अनुमोदित फारम"
     all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at') 
     if pk and approved_pending_cancelled:
@@ -355,6 +359,14 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         subject = "FenFit"
                         email_message = 'Form Approved Successfully'
                         try:
+                            context_dict={
+                                    'name':'Manoj Kumar Das',
+                                    'date':'989',
+                                }
+                            template = get_template('certificate/sifarish.html')
+                            html = template.render(context_dict,request)
+                            pdf = html_to_pdf.render_to_pdf(html)        
+                            return HttpResponse(pdf, content_type='application/pdf')
                             bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                         except:
                             messages.info(request,'Email send fail.')

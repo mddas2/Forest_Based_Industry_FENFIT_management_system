@@ -183,15 +183,18 @@
                                 <p> , ......... सिmारिश पत्र नम्बर : <br>
                                    </p>
                             </div>
-                            <br>
-                            <div class="form-top-left">
-                                <p>श्रीमान {{form_data.owner_full_name|title}} ज्यु<br>
-                                    {{form_data.company_name|title}} नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                            </div>
+                   
                             <div class="form-top-right">
                                 <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
                             </div>
                         </div>
+                        <div class="nibedan-form-top1">
+                            <div class="form-top-left">
+                                <p>श्रीमान {{form_data.owner_full_name|title}} ज्यु<br>
+                                    {{form_data.company_name|title}} नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                            </div>
+                        </div>
+                       
                         <div class="nibedan-form-body">
                             <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
                             <p>तपाईले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि ............जिल्ला संघ । 
@@ -303,6 +306,12 @@
                     display: block;
                     width: 100%;
                     padding: 50px 0;
+                }
+                .nibedan-form-top1 {
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    padding: 10px 0;
                 }
 
                 .form-top-left {
