@@ -350,7 +350,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         to_number = CustomUser.objects.get(id=whoses_form).phone
                         bulk_sms_email.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
 
-                        to_email = ["manojdas.py@gmail.com",]
+                        to_email = [CustomUser.objects.get(id=whoses_form).phone]
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
                         email_message = 'Form Approved Successfully'
