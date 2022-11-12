@@ -11,7 +11,7 @@ from django.shortcuts import redirect
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_role
 from account.models import *
 from django.contrib.auth.hashers import make_password
-from . import bulk_sms
+from . import bulk_sms_email
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
@@ -319,6 +319,7 @@ def CustomerOrder(request, pk=None, pdc=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllApplication(request, pk=None, approved_pending_cancelled=None):#all application
+
     slug1 = "सिफारिश अनुमोदन"
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
@@ -327,6 +328,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
             should_insert = 0
             try:
                 dsc = ApplicationForm.objects.get(id=pk).dsc
+                approved = 0
                 if dsc == 'd' and request.user.get_dsc_Role()=='d':
                     referred_to_dsc = 's'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_district_approved_by = request.user.id)
@@ -339,11 +341,23 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     referred_to_dsc = 'approved'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
+                    approved = 1
+
                     #there is no any upper level
                 if should_insert==1:
                     whoses_form = ApplicationForm.objects.get(id=pk).user_id
-                    to_number = CustomUser.objects.get(id=whoses_form).phone
-                    bulk_sms.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
+                    if approved == 1:
+                        to_number = CustomUser.objects.get(id=whoses_form).phone
+                        bulk_sms_email.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
+
+                        to_email = ["manojdas.py@gmail.com",]
+                        from_email = settings.EMAIL_HOST_PASSWORD
+                        subject = "FenFit"
+                        email_message = 'Form Approved Successfully'
+                        try:
+                            bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
+                        except:
+                            messages.info(request,'Email send fail.')
                     # return HttpResponse(whose_form)
                     application_form_approved_detail_data = {
                         'approved_form_id' : pk,
