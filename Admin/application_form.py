@@ -21,6 +21,7 @@ from . import html_to_pdf
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
+
     slug1 = "सदस्य अनुमोदित फारम"
     all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at') 
     if pk and approved_pending_cancelled:
@@ -343,7 +344,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     should_insert = 1
                 elif dsc == 'c' and request.user.get_dsc_Role()=='c':
                     referred_to_dsc = 'approved'
-                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    #ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
                     approved = 1
 
@@ -354,21 +355,20 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         to_number = CustomUser.objects.get(id=whoses_form).phone
                         bulk_sms_email.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
 
-                        to_email = [CustomUser.objects.get(id=whoses_form).phone]
+                        to_email = [CustomUser.objects.get(id=whoses_form).email]
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
                         email_message = 'Form Approved Successfully'
-                        try:
-                            context_dict={
-                                    'name':'Manoj Kumar Das',
-                                    'date':'989',
-                                }
-                            template = get_template('certificate/sifarish.html')
-                            html = template.render(context_dict,request)
-                            pdf = html_to_pdf.render_to_pdf(html)        
-                            return HttpResponse(pdf, content_type='application/pdf')
-                            bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
-                        except:
+                        context_dict={
+                                'name':'Manoj Kumar Das',
+                                'date':'989',
+                              }
+                        template = get_template('certificate/sifarish.html')
+                        html = template.render(context_dict,request)
+                        pdf = html_to_pdf.render_to_pdf(html) 
+                        try:   
+                            bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)
+                        except:                       
                             messages.info(request,'Email send fail.')
                     # return HttpResponse(whose_form)
                     application_form_approved_detail_data = {
