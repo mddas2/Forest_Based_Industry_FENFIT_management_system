@@ -10,6 +10,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
+                                <th>District Name</th>
                                 <th>Photo</th>
                                 <th>Email</th>
                                 <th>Mobile Number</th>
@@ -30,6 +31,7 @@
                             <tr {% if request.session.user_id == user.id %} class="sucessful-update" {% endif %}>
                                <td>{{user.id}}</td>
                                <td>{{user.first_name}}</td>
+                               <td>{{user.district_name}}</td>
                                <td>    
                                     {% if user.image %}                                               
                                         <img src="{{user.image.url}}" class="" alt="{{user.image}}" width="80" height="50">
@@ -41,7 +43,7 @@
                                <td>{{user.phone}}</td>
                                <td><span class="label label-{% if user.is_active%}success{% else %}primary{% endif %}">{{user.is_active}}</span></td>
                                <td><span class="label label-{% if user.role == 1 %}success{% else %}primary{% endif %}">{{user.getRoleName}}</span></td>
-                               <td><span class="label label-{% if user.groups.first ==  None %}primary{% else %}success{% endif %}"> {% if user.role == 2 %} {{user.groups.all.first}} {% elif user.role == 3 %} {{user.user_permissions.first.codename}} {% else %} None {% endif%}</span></td>
+                               <td><span class="label label-{% if user.groups.first ==  None %}primary{% else %}success{% endif %}">{{user.groups.all.first}}</span></td>
                                 <td>
                                     <a href="{% url 'UserCreate' id=user.id %}" class="text-inverse p-r-10" data-bs-toggle="tooltip" title="" data-original-title="Edit">
                                         <i class="ti-marker-alt"></i>

@@ -128,6 +128,13 @@ def UserStore(request,id=None):
                     messages.success(request, 'Role is seted')
                 else:
                     messages.info(request,'Sorry You can not set Upper Level Role')
+        if request.POST['group'] != '0':
+            if user:
+                group = Group.objects.get(id = request.POST['group'])
+                group.user_set.add(user)
+                messages.success(request, 'Group Permission is set to '+ group.name)
+            else:
+                messages.INFO(request, 'Group not Seted!!!')
 
         request.session['user_id'] = user.id
         messages.info(request, 'User inserted Successfully !!!')
