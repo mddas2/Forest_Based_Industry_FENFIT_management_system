@@ -18,16 +18,11 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-label">प्रदेश कोड</label>
+                                        <label class="form-label">Group(permission) Name</label>
                                         <select class="form-control" name="name" data-placeholder="Choose a Category" tabindex="1">
                                             <option value="0" selected>select</option>
-                                                <option value="1" {% if id_data.role == role_id %} selected {% endif %}>province 1</option>
-                                                <option value="2" {% if id_data.role == role_id %} selected {% endif %}>province 2</option>
-                                                <option value="3" {% if id_data.role == role_id %} selected {% endif %}>province 3</option>
-                                                <option value="4" {% if id_data.role == role_id %} selected {% endif %}>province 4</option>
-                                                <option value="5" {% if id_data.role == role_id %} selected {% endif %}>province 5</option>
-                                                <option value="6" {% if id_data.role == role_id %} selected {% endif %}>province 6</option>
-                                                <option value="7" {% if id_data.role == role_id %} selected {% endif %}>province 7</option>
+                                                <option value="accountant" {% if id_data.role == role_id %} selected {% endif %}>Accountant</option>
+                                                <option value="staff" {% if id_data.role == role_id %} selected {% endif %}>Staff</option>
                                         </select>
                                     </div>
                                 </div>

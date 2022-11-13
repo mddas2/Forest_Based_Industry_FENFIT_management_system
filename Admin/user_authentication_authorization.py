@@ -301,11 +301,7 @@ def PermissionStore(request):
         else:
             perm_id = 0
             distobj,create = Permission.objects.update_or_create(codename=request.POST['codename'],defaults=permission_data) #create new
-        district_data = {
-            'id' : distobj.id,
-            'district_name' : request.POST['codename'],            
-        }
-        Districts.objects.update_or_create(id=distobj.id,defaults=district_data)
+
 
     return redirect(PermissionList)
 
