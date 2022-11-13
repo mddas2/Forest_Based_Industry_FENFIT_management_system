@@ -14,9 +14,9 @@ from django.contrib.auth.hashers import make_password
 from . import bulk_sms_email
 
 #importing get_template from loader
-from django.template.loader import get_template 
+# from django.template.loader import get_template 
 #import render_to_pdf from util.py 
-from . import html_to_pdf 
+# from . import html_to_pdf 
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
@@ -359,15 +359,15 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
                         email_message = 'Form Approved Successfully'
-                        context_dict={
-                                'name':'Manoj Kumar Das',
-                                'date':'989',
-                              }
-                        template = get_template('certificate/sifarish.html')
-                        html = template.render(context_dict,request)
-                        pdf = html_to_pdf.render_to_pdf(html) 
+                        # context_dict={
+                        #         'name':'Manoj Kumar Das',
+                        #         'date':'989',
+                        #       }
+                        # template = get_template('certificate/sifarish.html')
+                        # html = template.render(context_dict,request)
+                        # pdf = html_to_pdf.render_to_pdf(html) 
                         try:   
-                            bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)
+                            bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                         except:                       
                             messages.info(request,'Email send fail.')
                     # return HttpResponse(whose_form)
