@@ -323,6 +323,38 @@ def CustomerOrder(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
+def AccountantPayment(request, pk=None, payment=None):#all application
+    
+    try:
+        if request.user.groups.all().first().name != 'accountant':
+            messages.info(request,'in account something is wrong')
+            return redirect('AllApplication')
+    except:
+        messages.info(request,"accountant something is wrong")
+    slug1 = "सिफारिश अनुमोदन"
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
+    if pk and payment:
+         ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=payment)
+         if payment=='1':
+            should_insert = 0
+            try:
+                dsc = ApplicationForm.objects.get(id=pk).dsc
+                if dsc == 'c' and request.user.get_dsc_Role()=='c':
+                    ApplicationForm.objects.filter(id=pk).update(is_payment=1)
+                    messages.info(request,"payment sucessfull")
+            except:
+                messages.info(request,"payment unsucessfull")
+         elif payment=='0':
+           should_insert = 0
+           dsc = ApplicationForm.objects.get(id=pk).dsc
+           if dsc == 'c' and request.user.get_dsc_Role()=='c':
+                ApplicationForm.objects.filter(id=pk).update(is_payment=0)
+                messages.info(request,"unpaid sucessfull")
+
+    return redirect('AllApplication')
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
 def AllApplication(request, pk=None, approved_pending_cancelled=None):#all application
 
     slug1 = "सिफारिश अनुमोदन"
@@ -344,7 +376,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     should_insert = 1
                 elif dsc == 'c' and request.user.get_dsc_Role()=='c':
                     referred_to_dsc = 'approved'
-                    #ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
                     approved = 1
 

@@ -77,9 +77,9 @@
                                         NotFound
                                     {% endif %}
                                 </td>  <!-- this is quantity-->
-                                <td>{{i.voucher_number}}</td>
-                                <td>{{i.payment_status}}</td>
-                                <td>{{i.get_user_application_detail.district}}</td>
+                                <td>{{i.get_user_application_detail.voucher_number}}</td>
+                                <td>{{i.get_user_application_detail.payment_status}}</td>
+                                <td>{{i.user.district_name}}</td>
                                 {% endwith %}
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                 {% with i=i.approved_form %}

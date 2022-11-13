@@ -34,7 +34,8 @@
                                 <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
                                 <th>लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</th>
                                 <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>   
-                                <th>द्वारा स्थानान्तरण</th> 
+                                <th>Bank Voucher</th> 
+                                <th>भुक्तानी स्थिति</th> 
                                 <th>जिल्ला</th>                                                   
                                 <th>विवरण हेर्नुहोस्</th>
                                 <th>दर्ता गरिएको मिति</th>
@@ -46,7 +47,7 @@
                         <tbody id="tableSearch">
                             {% for i in all_data %}                               
                             <tr>
-                                <td>{{i.id}}</td>
+                                <td>{{i.id}}{{request.user.groups.first.name}}</td>
                                 <td>{{i.get_user_application_detail.owner_full_name}}</td>
                                 <td class="zoom-gallery">
                                     {% if i.get_user_application_detail.certificate_citizenship %} 
@@ -84,8 +85,9 @@
                                         NotFound
                                     {% endif %}
                                 </td>  <!-- this is quantity-->
-                                <td>{{i.dsc}}</td>
-                                <td>{{i.get_user_application_detail.district}}</td>
+                                <td>{{i.get_user_application_detail.voucher_number}}</td>
+                                <td><span class="label label-success">{% if i.get_user_application_detail.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
+                                <td>{{i.user.district_name}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                  <td><span class="label label-info">{{i.get_date}}</span></td>
                                  <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
@@ -97,29 +99,48 @@
                                         </a>
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                    {%if i.approved_pending_cancelled == "p" %} 
+                                            {% if request.user.groups.first.name == 'accountant' %}
+                                            <li><a class="dropdown-item" href="{% url "AccountantPayment" pk=i.id payment="1"  %}">
+                                                {%if i.get_user_application_detail.is_payment == True %} 
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                Pending
-                                                </a>
+                                                Payment
+                                            </a></li>
+                                            <li><a class="dropdown-item" href="{% url "AccountantPayment" pk=i.id payment="0"  %}">
+                                                {%if i.get_user_application_detail.is_payment == False %} 
+                                                <i class="bi bi-check-lg"></i> 
+                                                {% else %} &nbsp; &nbsp;
+                                                    {% endif %}
+                                                Non paid
+                                            </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
-                                                {%if i.approved_pending_cancelled == "a" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                Approved
-                                            </a></li>
-                                            <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
-                                                {%if i.approved_pending_cancelled == "c" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                 Cancelled
-                                            </a></li>
+                                            {% else %}
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
+                                                        {%if i.approved_pending_cancelled == "p" %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Pending
+                                                    </a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
+                                                    {%if i.approved_pending_cancelled == "a" %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Approved
+                                                </a></li>
+                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
+                                                    {%if i.approved_pending_cancelled == "c" %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Cancelled
+                                                </a>
+                                                </li>
+                                            {% endif %}
                                         </ul>
                                         </div>
                                  </td>

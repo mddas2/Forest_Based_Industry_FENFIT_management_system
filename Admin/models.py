@@ -73,9 +73,6 @@ class UserApplicationDetail(models.Model):
     ward_number = models.CharField(max_length=205 , null=True)
     tole = models.CharField(max_length=205, default=True)
 
-    is_payment = models.BooleanField(default=False,null=True)
-
-
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
     district = models.CharField(max_length=300,null=True)
@@ -103,10 +100,13 @@ class ApplicationForm(models.Model):
     user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
     dsc = models.CharField(max_length=20,null=True) # d>district , s=state , c=central
 
+    is_payment = models.BooleanField(default=False,null=True)
+
     district_status = models.BooleanField(default=False) # True and False
     state_status = models.BooleanField(default=False)
     central_status = models.BooleanField(default=False)
     private_status = models.BooleanField(default=False)
+
 
     in_district_approved_by = models.ForeignKey(CustomUser,related_name='approved_form_in_district_level',on_delete=models.DO_NOTHING,null=True)
     in_state_approved_by = models.ForeignKey(CustomUser,related_name='approved_form_in_state_level',on_delete=models.DO_NOTHING,null=True)
