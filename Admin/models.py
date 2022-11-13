@@ -73,6 +73,8 @@ class UserApplicationDetail(models.Model):
     ward_number = models.CharField(max_length=205 , null=True)
     tole = models.CharField(max_length=205, default=True)
 
+    is_payment = models.BooleanField(default=False,null=True)
+
 
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)

@@ -21,10 +21,11 @@
                                 <th>Full Name</th>
                                 <th>नागरिकता पर्तिलिपि</th>
                                 <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                <th>अस्थायी लेखा नम्बरको पर्तिलिपि</th>      
+                                <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
                                 <th>लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</th>
                                 <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>   
-                                <th>द्वारा स्थानान्तरण</th> 
+                                <th>Bank Voucher</th> 
+                                <th>भुक्तानी स्थिति</th> 
                                 <th>जिल्ला</th>                                                   
                                 <th>विवरण हेर्नुहोस्</th>
                                 <th>दर्ता गरिएको मिति</th>
@@ -76,7 +77,8 @@
                                         NotFound
                                     {% endif %}
                                 </td>  <!-- this is quantity-->
-                                <td>{{i.dsc}}</td>
+                                <td>{{i.voucher_number}}</td>
+                                <td>{{i.payment_status}}</td>
                                 <td>{{i.get_user_application_detail.district}}</td>
                                 {% endwith %}
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
