@@ -18,7 +18,7 @@ def SendMailAttachment(subject,message,email_from,pdf,recipient_list):
 
 def SendSms(to,text):
     r = requests.get("http://api.sparrowsms.com/v2/sms/",
-                  params={'token' : 'v2_Z24uSz5obV36qftmaHX6wrX9tiL.vFHx',
+                  params={'token' : 'v2_DQnxdpRc7NFevlo9VDvm68MNTUj.DDJT',
                   'from'  : 'Demo',
                   'to'    : to,
                   'text'  : text})
