@@ -77,17 +77,17 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">सिफारिस शुल्क र सो को वाडफाड </label>
-                                                    <select class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" required>
+                                                    <select id="business_price_select"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
                                                         <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                         {% for business_price_category,value in recomendation_price_category.items%}
-                                                            <option value="{{business_price_category}}" {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
+                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
                                                         {% endfor %}
                                                 </select>
                                                 </div>
                                             </div> 
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label" style="color: red;">बैंक भुगतान भौचर नम्बर(payment Rs {{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee'}} )</label>
+                                                    <label class="form-label" style="color: red;">बैंक भुगतान भौचर नम्बर(payment Rs <span id="businessrice">{{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee'}}</span> )</label>
                                                     <input type="text" name="voucher_number" value="{{id_data.voucher_number}}" class="form-control" required>
                                                 </div>
                                             </div>
@@ -353,6 +353,13 @@
           
                     // Function to check Whether both passwords
                     // is same or not.
+                    $("#business_price_select").change(function() {
+                    const $this = $(this); // Cache $(this)
+                    const price = $this.find(':selected').data('price'); // Get data value
+                    // const selectedVal = $this[0].value;
+                    $("#businessrice").text(price)
+                    });
+             
                     function checkPassword(form) {
                         password1 = form.password1.value;
                         password2 = form.password2.value;
