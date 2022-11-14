@@ -21,11 +21,11 @@ from . import html_to_pdf
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
-    context_dict={'name':'Manoj Kumar Das','date':'989', }
-    template = get_template('certificate/sifarish.html')
-    html = template.render(context_dict,request)
-    pdf = html_to_pdf.render_to_pdf(html) 
-    return pdf
+    # context_dict={'name':'Manoj Kumar Das','date':'989', }
+    # template = get_template('certificate/sifarish.html')
+    # html = template.render(context_dict,request)
+    # pdf = html_to_pdf.render_to_pdf(html) 
+    # return pdf
     slug1 = "सदस्य अनुमोदित फारम"
     all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at') 
     if pk and approved_pending_cancelled:
