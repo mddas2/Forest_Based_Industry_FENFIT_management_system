@@ -50,13 +50,13 @@ def index(request, pk=None, pdc=None):
     }
 
     # return  HttpResp  onse(today_max)
-    slug1 = request.user.getRoleName
+    slug1 = request.user.getRoleNameInNepali()
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=dsc_role).order_by('-updated_at')   
     data = {'slug1':slug1,'create':False,'action':True,'all_data':all_data}
     data = {**data,**data_1}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
-    
+
     if request.user.role==CustomUser.USER:        
         if request.user.is_verified == False:
             return redirect('MemberAprovalForm')
@@ -66,8 +66,11 @@ def index(request, pk=None, pdc=None):
             return redirect('UserApplicationFormCreate')
         else:
             return redirect('MemberAprovalFormReview')
-    data['client_msg']=client_msg
-    return render(request,'admin/home.html',data)
+    elif request.user.isAdmin() == True:
+        data['client_msg']=client_msg
+        return render(request,'admin/home.html',data)
+    else:
+        return HttpResponse("You can not access this dashboard")
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)

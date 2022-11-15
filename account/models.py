@@ -180,6 +180,19 @@ class CustomUser(AbstractUser):
             return 'USER'
         else:
             return 'None'
+    def getRoleNameInNepali(self):
+        if self.role==1:
+            return 'महासंघ'
+        elif self.role==2:
+            state = CustomUser.find_states(self.states_district_dictionary_list , str(self.district_name))
+            return 'प्रदेश महासंघ'+'-' + str(state)
+        elif self.role==3:
+            district = self.district_name
+            return str(district)+' जिल्ला'
+        elif self.role==4:
+            return 'वस्तुगत संघ'
+        else:
+            return 'None'
     def get_dsc_Role(self):
         if self.role==1:
             return 'c'
@@ -207,6 +220,19 @@ class CustomUser(AbstractUser):
             return 'USER'
         else:
             return 'None'
+
+    def isAdmin(self):
+        if self.role==1:
+            return True
+        elif self.role==2:
+            return True
+        elif self.role==3:
+            return True
+        elif self.role==4:
+            return True
+        else:
+            return False
+
    
     def __str__(self):
         return self.email
