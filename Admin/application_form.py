@@ -12,6 +12,7 @@ from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_r
 from account.models import *
 from django.contrib.auth.hashers import make_password
 from . import bulk_sms_email
+from . import nepal_location
 
 #importing get_template from loader
 from django.template.loader import get_template 
@@ -102,6 +103,11 @@ def UserPersonalInformationStore(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def UserApplicationFormCreate(request,id=None):
+
+    # print(nepal_location.VDCbyDistrict(request))
+    total_vdc = nepal_location.VDCbyDistrict(request)
+    
+        # return HttpResponse(vdc)
     recomendation_price_category = RecomendationPriceCategory.recommendation_fee
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
@@ -112,7 +118,7 @@ def UserApplicationFormCreate(request,id=None):
     #Fetching the data of particular ID
     id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
 
-    data = {'recomendation_price_category':recomendation_price_category,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'total_vdc':total_vdc,'recomendation_price_category':recomendation_price_category,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)

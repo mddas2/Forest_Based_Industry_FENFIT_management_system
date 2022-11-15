@@ -29,7 +29,6 @@ from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_
 from django.shortcuts import redirect
 
 
-
 @login_required(login_url=settings.LOGIN_URL)
 # @customized_user_passes_test(is_admin_role)
 @customized_user_passes_test(is_all_role)
