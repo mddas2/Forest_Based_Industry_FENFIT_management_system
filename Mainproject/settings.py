@@ -154,7 +154,7 @@ CLIENT_LOGIN_URL='user_login'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "Admin/static2",
+    BASE_DIR / "Admin/static",
 ]
 # Base url to serve media files
 MEDIA_URL = '/media/'
