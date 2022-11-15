@@ -18,6 +18,7 @@ from django.template.loader import get_template
 #import render_to_pdf from util.py 
 from . import html_to_pdf 
 
+
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application

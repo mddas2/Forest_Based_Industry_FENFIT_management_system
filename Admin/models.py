@@ -63,9 +63,18 @@ class HomeNavigation(models.Model):
             return self.banner_image1.url
         return ''
 
+class UserApplicationRenew(models.Model):
+    voucher_number = models.CharField(max_length=505, null=True)
+    is_payment = models.BooleanField(default=False,null=True)
+    created_at = models.DateTimeField(auto_now=True,null=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True)
+        
+
 class UserApplicationDetail(models.Model):
+    renew = models.ForeignKey(UserApplicationRenew,related_name="UserApplicationDetail",on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(CustomUser,related_name="applicationdetail",on_delete=models.CASCADE,null=True)
     owner_full_name = models.CharField(max_length=205)
+    company_name = models.CharField(max_length=205,null=True)
     business_name = models.CharField(max_length=205, null=True)
     business_price_category = models.CharField(max_length=205, null=True)
     voucher_number = models.CharField(max_length=505, null=True)
@@ -77,6 +86,14 @@ class UserApplicationDetail(models.Model):
     email = models.CharField(max_length=205)
     district = models.CharField(max_length=300,null=True)
     state = models.CharField(max_length=300,null=True)
+
+    authorized_capital_of_company = models.CharField(max_length=205 , null=True) #कम्पनीको अधिकृत पुजी
+    paid_up_capital_of_company = models.CharField(max_length=205 , null=True) #कम्पनीको चुक्ता पुजी
+    transaction_amount = models.CharField(max_length=205 , null=True) # कारोबार रकम
+    tax_amount = models.CharField(max_length=205, null=True) #कर रकम
+    number_of_employees = models.CharField(max_length=205 , null=True) #कामदार तथा कर्मचारि स.ख्या
+    
+
 
     #member approved detail
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
@@ -92,6 +109,8 @@ class UserApplicationDetail(models.Model):
     self_declaration_not_on_the_black_list = models.ImageField(upload_to='user/documents', null=True) #कालो सुचीमा नपरेको स्वघोषणा
     bank_voucher = models.ImageField(upload_to='user/documents', null=True) #bank भौचर को प्रतिलिपि
     
+    created_at = models.DateTimeField(auto_now=True,null=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True)
 
 
 class ApplicationForm(models.Model):

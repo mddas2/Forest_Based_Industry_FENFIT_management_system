@@ -8,7 +8,7 @@
                                 <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
                                 {% csrf_token %}
                                     <div class="form-body">
-                                        <h5 class="card-title">Add Users</h5>
+                                        <h5 class="card-title">सामान्य जानकारी</h5>
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -38,6 +38,8 @@
                                             
                                                 <!--/span-->
                                         </div>
+                                        <hr>
+                                        <h5 class="card-title">स्थान</h5>
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
@@ -73,6 +75,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                   
+                                        <hr>
+                                        <h5 class="card-title">कम्पनीको जानकारी</h5>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -92,7 +97,28 @@
                                                 </div>
                                             </div>
 
-                                        </div>   
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
+                                                    <input type="text" name="municipality" value="{{id_data.municipality}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">वडा नं.</label>
+                                                    <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Tole</label>
+                                                    <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div> 
                                         <!--/row-->
                                         <div class="row">
                                             <div class="col-md-4">

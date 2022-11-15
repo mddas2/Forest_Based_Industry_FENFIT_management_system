@@ -1,6 +1,20 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+#Api of different application in nepal 
+"""
+https://nepallocation.com.np/
+You will need to install requests library:
+python -m pip install requests
 
+import requests
+token = "vZViG4G-do4Ub-x4OzQT0LSJ"
+response = requests.get(
+     "https://nepallocation.com.np/api/v1/district/list",
+     headers={'Authorization': 'Bearer ' + token}
+)
+print(response.json())
+
+"""
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=255 , null=True)
     permanent_address = models.CharField(max_length=255 , null=True)
