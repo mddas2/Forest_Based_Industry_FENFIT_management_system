@@ -58,13 +58,8 @@
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">नगरपालिका/गाउँपालिका</label>
-                                                    <select  class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
-                                                        <option value='0' selected>नगरपालिका/गाउँपालिका चयन गर्नुहोस्</option>
-                                                        {% for vdc in total_vdc %}
-                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{vdc|get_item:'alt_name'}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                   
+                                                
+                                                    <input type="text" value="{{id_data.municipality}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             

@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import *
+from nepallocation.models import *
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.urls import reverse
@@ -105,8 +106,12 @@ def UserPersonalInformationStore(request):
 def UserApplicationFormCreate(request,id=None):
 
     # print(nepal_location.VDCbyDistrict(request))
-    total_vdc = nepal_location.VDCbyDistrict(request)
-    
+    try:
+        total_vdc = Districts.objects.filter(name = request.user.district_name)  
+        total_vdc = total_vdc.first().municipalities.all() 
+        # return HttpResponse(total_vdc.first().alt_name)
+    except:
+        return HttpResponse("you have selected your district name which is not match with our database please contact to admin")
         # return HttpResponse(vdc)
     recomendation_price_category = RecomendationPriceCategory.recommendation_fee
     create_link_name = reverse("UserPersonalInformationCreate")
@@ -144,11 +149,9 @@ def MemberAprovalForm(request,id=None):
         business_name = BusinessType.business_type[business_name]['name_1']
     except:
         form_data = None
-        business_name = None
-        
-    
-    state_name = CustomUser.find_states(request.user.states_district_dictionary_list,request.user.district_name)
-    data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'state_name':state_name,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+        business_name = None        
+
+    data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)

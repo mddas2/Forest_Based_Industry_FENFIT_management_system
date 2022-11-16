@@ -340,7 +340,7 @@ def SignUp(request):
         check_user_exist = CustomUser.objects.filter(email=email)
         district = Districts.objects.filter(name=district_name)
         if district.count()>0:
-            state_name = district.first().state
+            state_name = district.first().state.name
         else:
             messages.info(request,'district should not be null')
             return redirect('SignUp')
@@ -362,8 +362,9 @@ def SignUp(request):
             user.phone = request.POST['phone']
         except:
             pass
-        user.save()
-        login(request,user,backend='django.contrib.auth.backends.ModelBackend')
+        if user:
+            user.save()
+            login(request,user,backend='django.contrib.auth.backends.ModelBackend')
             #return HttpResponse("loged in")
         return redirect('index')
     data = {
