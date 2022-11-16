@@ -40,10 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'axes', #django-axes is a very simple way for you to keep track of failed login attempts, both for the Django admin and for the rest of your site.  The name is sort of a geeky pun, since `axes` can be read interpretted as.
     'Admin', #app1
-    'Ecommerce', #app2
     'mathfilters',
     'rest_framework',
     'account',
+    'nepallocation'
 ]
 
 AUTH_USER_MODEL = "account.CustomUser" 

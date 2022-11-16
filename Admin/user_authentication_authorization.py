@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from PIL import Image
 from .models import *
+from nepallocation.models import *
 from account.models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -337,8 +338,9 @@ def SignUp(request):
         password = request.POST['password']
         district_name = request.POST['district_name']
         check_user_exist = CustomUser.objects.filter(email=email)
-        if district_name in CustomUser.districts:
-            pass
+        district = Districts.objects.filter(name=district_name)
+        if district.count()>0:
+            state_name = district.first().state
         else:
             messages.info(request,'district should not be null')
             return redirect('SignUp')
@@ -348,6 +350,7 @@ def SignUp(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         user = CustomUser.objects.create_user(first_name, email, password)
         user.district_name = district_name
+        user.state_name = state_name
         user.first_name = first_name
         if user:
             user.role = user.USER
@@ -364,7 +367,7 @@ def SignUp(request):
             #return HttpResponse("loged in")
         return redirect('index')
     data = {
-        'districts' : CustomUser.districts,
+        'districts' : Districts.objects.all(),
     }
     return render(request , 'admin/authentication/register.html',data)
 def Logout(request):

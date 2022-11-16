@@ -24,7 +24,7 @@
                             <select class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
                                     <option>Select District</option>
                                     {% for district in districts%}
-                                        <option value="{{district}}">{{district|title}}</option>
+                                        <option value="{{district.name}}">{{district.alt_name|title}}</option>
                                     {% endfor %}
                             </select>
                         </div>
