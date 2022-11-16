@@ -9,7 +9,7 @@
                                 <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
                                 {% csrf_token %}
                                     <div class="form-body">
-                                        <h5 class="card-title">Add Users</h5>
+                                        <h5 class="card-title">फारम</h5>
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -67,13 +67,13 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
                                                     <select  class="form-control" name="municipality" data-placeholder="Choose a Category" tabindex="1"  required>
                                                         <option value='0' selected>नगरपालिका/गाउँपालिका चयन गर्नुहोस्</option>
                                                         {% for vdc in total_vdc %}
-                                                            <option value="{{vdc.name}}" {% if id_data.municipality == vdc.name %} selected {% endif %}>{{vdc.alt_name}}</option>
+                                                            <option value="{{form_data.municipality}}" {% if id_data.municipality == vdc.name %} selected {% endif %}>{{vdc.alt_name}}</option>
                                                         {% endfor %}
                                                     </select>
-                                                    <input type="text" name="municipality" value="{{form_data.municipality}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             
@@ -92,7 +92,7 @@
                                         </div>  
                                         <!--/row-->
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                             <div class="nibedan-form">
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
@@ -145,78 +145,78 @@
                                             </div>
                                             </div>
                                             <!--/span-->
-                                            <div class="col-md-8">
-                                            <div class="row">
                                             <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                        <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                                                <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
+                                                            </div>
+                                                        </div>
+                                                        {% if form_data.certificate_citizenship %}
+                                                            <script>
+                                                                $("#certificate_citizenship").attr("data-default-file", "{{form_data.certificate_citizenship.url}}");
+                                                            </script>
+                                                        {% endif %}
                                                     </div>
-                                                </div>
-                                                {% if form_data.certificate_citizenship %}
-                                                    <script>
-                                                        $("#certificate_citizenship").attr("data-default-file", "{{form_data.certificate_citizenship.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
 
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
-                                                        <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
+                                                    <div class="col-md-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
+                                                                <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
+                                                            </div>
+                                                        </div>
+                                                        {% if form_data.certificate_company_registration %}
+                                                            <script>
+                                                                $("#certificate_company_registration").attr("data-default-file", "{{form_data.certificate_company_registration.url}}");
+                                                            </script>
+                                                        {% endif %}
                                                     </div>
-                                                </div>
-                                                {% if form_data.certificate_company_registration %}
-                                                    <script>
-                                                        $("#certificate_company_registration").attr("data-default-file", "{{form_data.certificate_company_registration.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
 
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                        <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
+                                                    <div class="col-md-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                                                                <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
+                                                            </div>
+                                                        </div>
+                                                        {% if form_data.provisional_account_number %}
+                                                            <script>
+                                                                $("#provisional_account_number").attr("data-default-file", "{{form_data.provisional_account_number.url}}");
+                                                            </script>
+                                                        {% endif %}
                                                     </div>
-                                                </div>
-                                                {% if form_data.provisional_account_number %}
-                                                    <script>
-                                                        $("#provisional_account_number").attr("data-default-file", "{{form_data.provisional_account_number.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
 
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
-                                                        <input name="auditing" type="file" id="auditing" class="dropify" />
+                                                    <div class="col-md-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
+                                                                <input name="auditing" type="file" id="auditing" class="dropify" />
+                                                            </div>
+                                                        </div>
+                                                        {% if form_data.auditing %}
+                                                            <script>
+                                                                $("#auditing").attr("data-default-file", "{{form_data.auditing.url}}");
+                                                            </script>
+                                                        {% endif %}
                                                     </div>
-                                                </div>
-                                                {% if form_data.auditing %}
-                                                    <script>
-                                                        $("#auditing").attr("data-default-file", "{{form_data.auditing.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
-                                                        <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                                            <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
+                                                        </div>
                                                     </div>
+                                                    {% if form_data.tax_paid_certificate %}
+                                                        <script>
+                                                            $("#tax_paid_certificate").attr("data-default-file", "{{form_data.tax_paid_certificate.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if form_data.tax_paid_certificate %}
-                                                    <script>
-                                                        $("#tax_paid_certificate").attr("data-default-file", "{{form_data.tax_paid_certificate.url}}");
-                                                    </script>
-                                                {% endif %}
                                             </div>
-                                            </div>
-                                            </div>
+                                        </div>
 
                                             <hr> 
                                         </div>

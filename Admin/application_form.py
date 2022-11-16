@@ -129,6 +129,12 @@ def UserApplicationFormCreate(request,id=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def MemberAprovalForm(request,id=None):
+    try:
+        total_vdc = Districts.objects.filter(name = request.user.district_name)  
+        total_vdc = total_vdc.first().municipalities.all() 
+        # return HttpResponse(total_vdc.first().alt_name)
+    except:
+        return HttpResponse("you have selected your district name which is not match with our database please contact to admin")
     # business_type = BusinessType.business_type
     # for bus in business_type:
     #     return HttpResponse(business_type[bus]['name_1'])
@@ -136,7 +142,7 @@ def MemberAprovalForm(request,id=None):
     
     create_link_name = reverse("MemberAprovalForm")
     if id==None:
-        slug1 = "Member Aproval-Form" 
+        slug1 = "सदस्यता आवेदन फारम" 
     else:
         slug1 = "User-update" 
     action = "MemberApprovalFormStore"
@@ -151,7 +157,7 @@ def MemberAprovalForm(request,id=None):
         form_data = None
         business_name = None        
 
-    data = {'business_name':business_name,'business_type':business_type,'form_data':form_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'total_vdc':total_vdc,'business_name':business_name,'business_type':business_type,'form_data':form_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -215,7 +221,7 @@ def MemberApprovalFormStore(request):
 def MemberAprovalFormReview(request,id=None):
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
-        slug1 = "Application-Form Review Status" 
+        slug1 = "सदस्य अनुमोदन" 
     else:
         slug1 = "User-update" 
     action = "UserApplicationFormStore"
