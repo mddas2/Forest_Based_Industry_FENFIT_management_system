@@ -93,8 +93,14 @@ def UserPersonalInformationStore(request):
         if request.POST['password1']!='':
             data['password'] = password
         user,create = CustomUser.objects.update_or_create(id=request.user.id , defaults=data)
+        
         try:
             user.image = request.FILES['profile_image']
+            user.save()
+        except:
+            pass
+        try:
+            user.signature = request.FILES['signature']
             user.save()
         except:
             pass
@@ -164,6 +170,7 @@ def MemberAprovalForm(request,id=None):
 @customized_user_passes_test(is_USER_role)
 def MemberApprovalFormStore(request):
     if request.POST:
+       
         if request.POST['business_name']=='0':
             messages.info(request,'Please select व्यवसायको type')
             return redirect(MemberAprovalForm)
@@ -179,6 +186,7 @@ def MemberApprovalFormStore(request):
 
         try:
             request.user.first_name = request.POST['owner_full_name']
+            request.user.signature = request.FILES['signature']
             request.user.save()
         except:
             pass

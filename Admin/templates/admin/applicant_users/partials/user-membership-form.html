@@ -71,7 +71,7 @@
                                                     <select  class="form-control" name="municipality" data-placeholder="Choose a Category" tabindex="1"  required>
                                                         <option value='0' selected>नगरपालिका/गाउँपालिका चयन गर्नुहोस्</option>
                                                         {% for vdc in total_vdc %}
-                                                            <option value="{{form_data.municipality}}" {% if id_data.municipality == vdc.name %} selected {% endif %}>{{vdc.alt_name}}</option>
+                                                            <option value="{{vdc.name}}" {% if id_data.municipality == vdc.name %} selected {% endif %}>{{vdc.alt_name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
@@ -212,6 +212,19 @@
                                                     {% if form_data.tax_paid_certificate %}
                                                         <script>
                                                             $("#tax_paid_certificate").attr("data-default-file", "{{form_data.tax_paid_certificate.url}}");
+                                                        </script>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">हस्ताक्षर को साथ मिति</h4>
+                                                            <input name="signature" type="file" id="signature" class="dropify" />
+                                                        </div>
+                                                    </div>
+                                                    {% if id_data.signature %}
+                                                        <script>
+                                                            $("#signature").attr("data-default-file", "{{id_data.signature.url}}");
                                                         </script>
                                                     {% endif %}
                                                 </div>

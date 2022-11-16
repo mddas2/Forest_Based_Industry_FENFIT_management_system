@@ -13,6 +13,8 @@ class CustomUser(AbstractUser):
     is_applyForVerified = models.BooleanField(default=False)
 
     image = models.ImageField(upload_to='user/profile', null=True)
+    signature = models.ImageField(upload_to='user/documents', null=True) #Signature
+    
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     USERNAME_FIELD = 'email'

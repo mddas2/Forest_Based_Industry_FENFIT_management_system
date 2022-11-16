@@ -352,6 +352,7 @@ def SignUp(request):
         user.district_name = district_name
         user.state_name = state_name
         user.first_name = first_name
+        
         if user:
             user.role = user.USER
         try:

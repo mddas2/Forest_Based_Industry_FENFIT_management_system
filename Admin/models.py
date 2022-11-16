@@ -92,10 +92,8 @@ class UserApplicationDetail(models.Model):
     transaction_amount = models.CharField(max_length=205 , null=True) # कारोबार रकम
     tax_amount = models.CharField(max_length=205, null=True) #कर रकम
     number_of_employees = models.CharField(max_length=205 , null=True) #कामदार तथा कर्मचारि स.ख्या
-    
 
 
-    #member approved detail
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
     certificate_company_registration = models.ImageField(upload_to='user/documents', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
     provisional_account_number = models.ImageField(upload_to='user/documents', null=True) #अस्थायी लेखा नम्बरको पर्तिलिपि
