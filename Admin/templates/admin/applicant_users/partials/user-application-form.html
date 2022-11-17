@@ -77,13 +77,13 @@
                                         </div>
                                    
                                         <hr>
-                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input type="checkbox" checked class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
+                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input id="renew_check" type="checkbox" checked class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
                                     
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group" style="display:None">
                                                     <label class="form-label">सिफारिस शुल्क र सो को वाडफाड( नयाँ प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
-                                                    <select id="business_price_select"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
+                                                    <select id="business_price_select_renew"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
                                                         <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                         {% for business_price_category,value in recomendation_price_category.items%}
                                                             <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
@@ -414,6 +414,11 @@
                 <!--==============================================================-->
                 <!-- End PAge Content -->
                 <script>
+
+                    $("#renew_check").click(function() {
+                        alert("checked")
+                        $("#renew_check").prop("checked", true);
+                    });
           
                     // Function to check Whether both passwords
                     // is same or not.
