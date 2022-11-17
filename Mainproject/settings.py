@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'mathfilters',
     'rest_framework',
     'account',
-    'nepallocation'
+    'nepallocation',
+    'payment',
 ]
 
 AUTH_USER_MODEL = "account.CustomUser" 
