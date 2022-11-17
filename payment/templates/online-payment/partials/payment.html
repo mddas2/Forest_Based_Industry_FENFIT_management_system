@@ -1,488 +1,131 @@
-     <!-- Info box Content applicant user personal information-->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
-                                {% csrf_token %}
-                                    <div class="form-body">
-                                        <h5 class="card-title">सामान्य जानकारी</h5>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">उधेागमिको नाम् <span class="required">*</span></label>
-                                                    <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.owner_full_name }}" placeholder="Albert">
-                                                </div>
-                                            </div>                                           
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-                                        
-                                        <div class="row">
-                                            <div class="col-md-6 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">इमेल<span class="required">*</span></label>
-                                                    <input type="email" name="email" value="{{request.user.email}}" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">सम्पर्क नम्बर<span class="required">*</span></label>
-                                                    <input type="number" name="phone" value="{{request.user.phone}}" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                                <!--/span-->
-                                            
-                                                <!--/span-->
-                                        </div>
-                                        <hr>
-                                        <h5 class="card-title">स्थान</h5>
-                                        <div class="row">
-                                            <div class="col-md-6 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">जिल्ला<span class="required">*</span></label>
-                                                    <input type="text" name="district" value="{{request.user.district_name}}" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">राज्य(State)<span class="required">*</span></label>
-                                                    <input type="text" name="state" value="{{request.user.district_name}}" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">नगरपालिका/गाउँपालिका<span class="required">*</span></label>                                                
-                                                    <input type="text" value="{{id_data.municipality}}" class="form-control" disabled>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">वडा नं.<span class="required">*</span></label>
-                                                    <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">Tole<span class="required">*</span></label>
-                                                    <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                   
-                                        <hr>
-                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input id="renew_check" type="checkbox" class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
-                                    
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group" id="business_price_select_renew_sh" style="display:None">
-                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड(पुरानो प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
-                                                    <select id="business_price_select_renew"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
-                                                        <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
-                                                        {% for business_price_category,value in recomendation_price_category.items%}
-                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'renewal_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
-                                                        {% endfor %}
-                                                   </select>
-                                                </div>
-                                                <div class="form-group" id="business_price_select_sh">
-                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड(नयाँ प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
-                                                    <select id="business_price_select" class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
-                                                        <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
-                                                        {% for business_price_category,value in recomendation_price_category.items%}
-                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
-                                                        {% endfor %}
-                                                   </select>
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-6 ">
-                                                <div class="form-group">
-                                                    <label class="form-label" style="color: red;">बैंक भुगतान भौचर नम्बर(payment Rs <span id="businessrice">{{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee'}}</span> ) <a href="{% url 'OnlinePayment' %}"><button type="button" class="btn btn-success btn-rounded">online payment</button></a> </label>
-                                                    <input type="text" name="voucher_number" value="{{id_data.voucher_number}}" class="form-control" required>
-                                                </div>
-                                            </div>
+<!-- Info box Content applicant user personal information-->
+<!-- ============================================================== -->
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form action=" url action " method="post" enctype="multipart/form-data" enctype="multipart/form-data"
+                    onSubmit="return checkPassword(this)">
+                    {% csrf_token %}
+                    <div class="form-body">
+                        <hr>
+                        <h5 class="card-title">भुक्तानी विवरण</h5>                       
+                        <div class="row">
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
+                                    <input type="text" name="company_name" value="{{id_data.company_name}}"
+                                        class="form-control" required>
+                                </div>
+                            </div>
 
-                                        </div> 
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
-                                                    <input type="text" name="company_name" value="{{id_data.company_name}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">कम्पनीको अधिकृत पुजी<span class="required">*</span></label>
-                                                    <input type="number" name="authorized_capital_of_company" value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">कम्पनीको चुक्ता पुजी<span class="required">*</span></label>
-                                                    <input type="number" name="paid_up_capital_of_company" value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="row">
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">कारोबार रकम<span class="required">*</span></label>
-                                                    <input type="number" name="transaction_amount" value="{{id_data.transaction_amount}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">कर रकम<span class="required">*</span></label>
-                                                    <input type="number" name="tax_amount" value="{{id_data.tax_amount}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <div class="form-group">
-                                                    <label class="form-label">कामदार तथा कर्मचारि स.ख्या<span class="required">*</span></label>
-                                                    <input type="number" name="number_of_employees" value="{{id_data.number_of_employees}}" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <!--/row-->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                            <div class="nibedan-form">
-                                                <div class="form-logo">
-                                                    <img src="/static/assets/images/logo-2.png">
-                                                </div>
-                                                <h2 class="main-title">सिफारिश गरि पाउ </h2>
-                                                <div class="nibedan-form-top">
-                                                    <div class="form-top-left">
-                                                        <p>श्रीमान अध्यक्षज्यू<br>
-                                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                                        <label>.........................।</label>
-                                                    </div>
-                                                    <div class="form-top-right">
-                                                        <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
-                                                    </div>
-                                                </div>
-                                                <div class="nibedan-form-body">
-                                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                                                    <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
-                                                        संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि 
-                                                        २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार 
-                                                        उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु 
-                                                        सुचीकृत हुनुपर्ने ब्यवस्था गरके ोलेनिम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार 
-                                                        उपलब्ध गराइृदिनु हुन अनुरोध छ । </p>
-                                                    <h5>संलग्न कागजातहरु ः–</h5>
-                                                    <ul>
-                                                        <li>कम्पनी वा फर्म दर्ताको प्रमाण पत्र ।</li>
-                                                        <li>उद्योग दर्ता र नविकरण पत्र ।</li>
-                                                        <li>आयकर दर्ता प्रमाण पत्र ।</li>        
-                                                        <li>कर चुक्ताको प्रमाण पत्र (दर्ता भएको दोस्रो आ.ब.देखि) ।</li>        
-                                                        <li>नियम ५ (३) बमोजिम सदस्यता अद्यावद्यिक भएको प्रमाण पत्र ।</li>
-
-                                                        <li>कालो सुचीमा नपरेको स्वघोषणा ।</li>
-                                                        <li>महासंघको खातामा तोकिएको सिफारिस शुल्क जम्मा गरेको वैक भौचर को प्रतिलिपि ।</li>
-                                                        <li>नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को पुर्णपालन गर्छु भन्ने स्वघोषणा।</li>        
-                                                    </ul>
-                                                </div>
-                                                <div class="nibedan-form-footer">
-                                                    <div class="user-info">
-                                                        
-                                                        <label style="font-weight: bold;">आवेदक</label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{request.user.first_name}}</span></label>
-                                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
-                                                        <label>सम्र्पक नं ः <span class="user-info-data">{{request.user.phone}}</span></label>
-                                                        <label>इमेल ः <span class="user-info-data">{{request.user.email}}</span></label>
-                                                        {% load staticfiles %}
-                                                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
-                                                    </div>
-                                                    <div class="user-address">
-                                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
-                                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality}}</u></label>
-                                                        <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
-                                                        <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
-                                                    </div>
-                                                </div>
-                                        
-                                            </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                            <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">नागरिकता पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
-                                                    </div>
-                                                </div>
-                                                {% if id_data.certificate_citizenship %}
-                                                    <script>
-                                                        $("#certificate_citizenship").attr("data-default-file", "{{id_data.certificate_citizenship.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि<span class="required">*</span>​</h4>
-                                                        <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.certificate_company_registration %}
-                                                    <script>
-                                                        $("#certificate_company_registration").attr("data-default-file", "{{id_data.certificate_company_registration.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.provisional_account_number %}
-                                                    <script>
-                                                        $("#provisional_account_number").attr("data-default-file", "{{id_data.provisional_account_number.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="auditing" type="file" id="auditing" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.auditing %}
-                                                    <script>
-                                                        $("#auditing").attr("data-default-file", "{{id_data.auditing.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
-                                                    </div>
-                                                </div>
-                                                {% if id_data.tax_paid_certificate %}
-                                                    <script>
-                                                        $("#tax_paid_certificate").attr("data-default-file", "{{id_data.tax_paid_certificate.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-                                            </div>
-                                            </div>
-
-                                            <hr> 
-                                        </div>
-                                    <input type="hidden" name="next" value="{{ request.path }}">
-                                    
-                                    <style>
-                                        .required{
-                                            color: red;
-                                            font-size: 20px;
-                                        }
-                                        .card-title{
-                                            font-size: 16px;
-                                        }
-                                        .nibedan-form{
-                                            padding: 50px 20px;
-                                            border: 1px solid #d9d6d6;
-                                        }
-                                        .nibedan-form p{
-                                            font-size: 14px;
-                                            line-height: 24px;
-                                            font-weight: 400;
-                                            color: #000;
-                                            text-align: justify;
-                                        }
-                                        .nibedan-form .form-logo{
-                                            text-align: center;
-                                        }
-                                        .nibedan-form .form-logo img{
-                                            max-width: 500px;
-                                            width: 100%;
-                                            margin-bottom: 20px;
-                                        }
-                                        h2.main-title{
-                                            font-size: 18px;
-                                            line-height: 22px;
-                                            font-weight: bold;
-                                            text-align: center;
-                                        }
-                                        .nibedan-form-top{
-                                            position: relative;
-                                            display: block;
-                                            width: 100%;
-                                            padding: 50px 0;
-                                        }
-                                        .form-top-left{
-                                            float: left;
-                                        }
-                                        .form-top-right{
-                                            float: right;
-                                        }
-                                        .nibedan-form-body{
-                                            position: relative;
-                                            display: block;
-                                            margin-top: 50px;
-                                        }
-                                        .nibedan-form-body h2{
-                                            font-size: 16px;
-                                            line-height: 22px;
-                                            font-weight: bold;
-                                            text-align: center;
-                                        }
-                                        .nibedan-form-body h5{
-                                            font-size: 16px;
-                                            line-height: 22px;
-                                            font-weight: bold;
-                                            text-decoration: underline;
-                                        }
-                                        .nibedan-form-body ul li{
-                                            font-size: 14px;
-                                            line-height: 24px;
-                                            font-weight: 400;
-                                            color: #000;
-                                            text-align: justify;
-                                        }
-                                        .nibedan-form-footer .user-info{
-                                            text-align: left;
-                                            padding-right: 20px;
-                                        }
-                                        .nibedan-form-footer .user-info label{
-                                            font-size: 14px;
-                                            line-height: 24px;
-                                            font-weight: 400;
-                                            color: #000;
-                                            display: block;
-                                            margin-bottom: 10px;
-                                        }
-                                        .nibedan-form-footer .user-info label img{
-                                            max-width: 150px;
-                                        }
-                                        .nibedan-form-footer .user-info label .user-info-data{
-                                            max-width: 150px;
-                                            min-width: 150px;
-                                            overflow: hidden;
-                                        }
-                                        .nibedan-form-footer .user-address{
-                                            margin-top: 20px;
-                                        }
-                                        .nibedan-form-footer .user-address label{
-                                            font-size: 14px;
-                                            line-height: 24px;
-                                            font-weight: 400;
-                                            color: #000;
-                                            display: inline-block;
-                                            margin-bottom: 10px;
-                                            width: 49%;
-                                        }
-                                        @media (max-width:767px) {
-                                            .nibedan-form-footer .user-info,
-                                            .nibedan-form-footer .user-address{
-                                                padding-right: 0;
-                                                text-align: center;
-                                            }
-                                            .nibedan-form-footer .user-address label{
-                                                width: 100%;
-                                            }
-                                        }
-                                    </style>
-                                    <div class="form-actions m-t-40">
-                                        <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
-                                        <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
-                                        <button type="button" class="btn btn-dark">Cancel</button>
-                                    </div>
-                                </form>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label class="form-label">कम्पनीको अधिकृत पुजी<span
+                                            class="required">*</span></label>
+                                    <input type="number" name="authorized_capital_of_company"
+                                        value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label class="form-label">कम्पनीको चुक्ता पुजी<span
+                                            class="required">*</span></label>
+                                    <input type="number" name="paid_up_capital_of_company"
+                                        value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Column -->
-                </div>
-                <!--==============================================================-->
-                <!-- End PAge Content -->
-                <script>
+                        <div class="row">
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label class="form-label">कारोबार रकम<span class="required">*</span></label>
+                                    <input type="number" name="transaction_amount"
+                                        value="{{id_data.transaction_amount}}" class="form-control" required>
+                                </div>
+                            </div>
 
-                    $("#renew_check").change(function() {
-                            if(this.checked) {
-                               $("#business_price_select_renew_sh").show()
-                                
-                                    const a = $("#business_price_select_renew"); 
-                                    const price = a.find(':selected').data('price');                   
-                                    $("#businessrice").text(price)
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label class="form-label">कर रकम<span class="required">*</span></label>
+                                    <input type="number" name="tax_amount" value="{{id_data.tax_amount}}"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label class="form-label">कामदार तथा कर्मचारि स.ख्या<span
+                                            class="required">*</span></label>
+                                    <input type="number" name="number_of_employees"
+                                        value="{{id_data.number_of_employees}}" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
 
-                               $("#business_price_select_sh").hide()
+                        <input type="hidden" name="next" value="{{ request.path }}">
 
-                            }
-                            else{
-                                $("#business_price_select_renew_sh").hide()
 
-                                const a = $("#business_price_select"); 
-                                const price = a.find(':selected').data('price');                   
-                                $("#businessrice").text(price)
+                        <div class="form-actions m-t-40">
+                            <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i
+                                    class="fa fa-check"></i> Save</button>
+                            <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i
+                                    class="fa fa-check"></i>Send</button>
+                            <button type="button" class="btn btn-dark">Cancel</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+<!--==============================================================-->
+<!-- End PAge Content -->
+<script>
 
-                                $("#business_price_select_sh").show()
-                            }
-                      });
-          
-                    // Function to check Whether both passwords
-                    // is same or not.
+    $("#renew_check").change(function () {
+        if (this.checked) {
+            $("#business_price_select_renew_sh").show()
 
-                    $("#business_price_select_renew").change(function() {
-                    const $this = $(this); // Cache $(this)
-                    const price = $this.find(':selected').data('price'); // Get data value
-                    // const selectedVal = $this[0].value;
-                    $("#businessrice").text(price)
-                    });
+            const a = $("#business_price_select_renew");
+            const price = a.find(':selected').data('price');
+            $("#businessrice").text(price)
 
-                    $("#business_price_select").change(function() {
-                    const $this = $(this); // Cache $(this)
-                    const price = $this.find(':selected').data('price'); // Get data value
-                    // const selectedVal = $this[0].value;
-                    $("#businessrice").text(price)
-                    });
-                    
-             
-                    function checkPassword(form) {
-                        password1 = form.password1.value;
-                        password2 = form.password2.value;
-          
-                        // If password not entered
-                        if (password1 == ''){
-                            return true
-                            // alert ("password remain same");
-                        }
-                        // If confirm password not entered
-                        else if (password2 == ''){
-                            return true
-                            // alert ("password remain same");
-                        }
-                        // If Not same return False.    
-                        else if (password1 != password2) {
-                            alert ("\nPassword did not match: Please try again...")
-                            return false;
-                        }
-          
-                        // If same return True.
-                        else{
-                            return true;
-                        }
-                    }
-    </script>
- 
- <script>
+            $("#business_price_select_sh").hide()
+
+        }
+        else {
+            $("#business_price_select_renew_sh").hide()
+
+            const a = $("#business_price_select");
+            const price = a.find(':selected').data('price');
+            $("#businessrice").text(price)
+
+            $("#business_price_select_sh").show()
+        }
+    });
+
+    // Function to check Whether both passwords
+    // is same or not.
+
+    $("#business_price_select_renew").change(function () {
+        const $this = $(this); // Cache $(this)
+        const price = $this.find(':selected').data('price'); // Get data value
+        // const selectedVal = $this[0].value;
+        $("#businessrice").text(price)
+    });
+
+    $("#business_price_select").change(function () {
+        const $this = $(this); // Cache $(this)
+        const price = $this.find(':selected').data('price'); // Get data value
+        // const selectedVal = $this[0].value;
+        $("#businessrice").text(price)
+    });
+
+</script>
+
+<script>
     $(function () {
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
@@ -587,4 +230,3 @@
         });
     });
 </script>
-                

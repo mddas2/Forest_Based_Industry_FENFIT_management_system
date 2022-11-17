@@ -48,7 +48,7 @@
 </style>
 </head>
 
-<body class="skin-default fixed-layout">
+<body >
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <div class="loader">
@@ -57,53 +57,14 @@
         </div>
     </div>
    
-    <div id="main-wrapper">
+    <div >
      
       <!-- topbar -->
-      {% include "partials/top-header.html"  %}
+      {% include "partials1/top-header.html"  %}
        
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User Profile-->
-                <div class="user-profile">
-                    <div class="user-pro-body">
-                        {% if user.image %}                                               
-                            <div><img src="{{user.image.url}}" class="" alt="{{user.image.url}}" width="80" height="50" alt="user-img" class="img-circle" style="margin-top: 50px;"></div>
-                        {% else %}
-                            <div><img src="{% static '/assets/images/users/user_logo.png' %}" class="" alt="user image" width="80" height="50" alt="user-img" class="img-circle" style="margin-top: 50px;"></div>                       
-                        {% endif %}
-                        <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{ user.first_name }} <span class="caret"></span></a>
-                            <div class="dropdown-menu animated flipInY">
-                                <!-- text-->
-                                 <a href="{% url 'UserPersonalInformationCreate' %}" class="dropdown-item"><i class="ti-user"></i>प्रोफाइल सेटिङ</a>
-                                 <a href="{% url 'Logout' %}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                                <!-- text-->
-                                <!-- <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a> -->
-                                <!-- text-->
-                                <!-- <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a> -->
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <!-- <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a> -->
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <!-- <a href="{% url 'Logout' %}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a> -->
-                                <!-- text-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sidebar navigation-->
-            
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+  
        
-        <div class="page-wrapper">
+        <div>
             <div class="container-fluid">
                 <!-------content md start--------->
                 {% block contents %}
