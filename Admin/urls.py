@@ -1,5 +1,5 @@
 from django.urls import path
-from . import application_form, views,user_authentication_authorization,global_views,blogs,teams,home,chatapp,mailapp
+from . import application_form, views,user_authentication_authorization,global_views,blogs,teams,home,chatapp,mailapp,html_to_pdf
 
 urlpatterns = [
     #**********User Authentication******************************************
@@ -143,5 +143,6 @@ urlpatterns = [
 
    #****************Application reviewed application i.e clients check application status**************************************
    path('application-result', application_form.UserApplicationResult, name='UserApplicationResult'),
+   path('pdf-report', html_to_pdf.report, name='getPdf'),
    
 ]   

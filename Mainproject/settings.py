@@ -158,6 +158,7 @@ STATICFILES_DIRS = [
 ]
 # Base url to serve media files
 MEDIA_URL = '/media/'
+BASE_URL = "http://127.0.0.1:8000"
 
 import os
 # Path where media is stored
