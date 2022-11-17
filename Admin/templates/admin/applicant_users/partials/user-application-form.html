@@ -57,8 +57,7 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
-                                                
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>                                                
                                                     <input type="text" value="{{id_data.municipality}}" class="form-control" disabled>
                                                 </div>
                                             </div>
@@ -102,21 +101,42 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
-                                                    <input type="text" name="municipality" value="{{id_data.municipality}}" class="form-control" required>
+                                                    <label class="form-label">उद्योग/कम्पनीको नाम</label>
+                                                    <input type="text" name="company_name" value="{{id_data.company_name}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">वडा नं.</label>
-                                                    <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
+                                                    <label class="form-label">कम्पनीको अधिकृत पुजी</label>
+                                                    <input type="text" name="authorized_capital_of_company" value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Tole</label>
-                                                    <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
+                                                    <label class="form-label">कम्पनीको चुक्ता पुजी</label>
+                                                    <input type="text" name="paid_up_capital_of_company" value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">कारोबार रकम</label>
+                                                    <input type="text" name="transaction_amount" value="{{id_data.transaction_amount}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">कर रकम</label>
+                                                    <input type="text" name="tax_amount" value="{{id_data.tax_amount}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">कामदार तथा कर्मचारि स.ख्या</label>
+                                                    <input type="text" name="number_of_employees" value="{{id_data.number_of_employees}}" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div> 

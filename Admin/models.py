@@ -87,11 +87,11 @@ class UserApplicationDetail(models.Model):
     district = models.CharField(max_length=300,null=True)
     state = models.CharField(max_length=300,null=True)
 
-    authorized_capital_of_company = models.CharField(max_length=205 , null=True) #कम्पनीको अधिकृत पुजी
-    paid_up_capital_of_company = models.CharField(max_length=205 , null=True) #कम्पनीको चुक्ता पुजी
-    transaction_amount = models.CharField(max_length=205 , null=True) # कारोबार रकम
-    tax_amount = models.CharField(max_length=205, null=True) #कर रकम
-    number_of_employees = models.CharField(max_length=205 , null=True) #कामदार तथा कर्मचारि स.ख्या
+    authorized_capital_of_company = models.IntegerField() #कम्पनीको अधिकृत पुजी
+    paid_up_capital_of_company = models.IntegerField() #कम्पनीको चुक्ता पुजी
+    transaction_amount = models.IntegerField() # कारोबार रकम
+    tax_amount = models.IntegerField() #कर रकम
+    number_of_employees = models.IntegerField() #कामदार तथा कर्मचारि स.ख्या
 
 
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि

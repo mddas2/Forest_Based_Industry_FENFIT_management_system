@@ -71,7 +71,7 @@
                                                     <select  class="form-control" name="municipality" data-placeholder="Choose a Category" tabindex="1"  required>
                                                         <option value='0' selected>नगरपालिका/गाउँपालिका चयन गर्नुहोस्</option>
                                                         {% for vdc in total_vdc %}
-                                                            <option value="{{vdc.name}}" {% if id_data.municipality == vdc.name %} selected {% endif %}>{{vdc.alt_name}}</option>
+                                                            <option value="{{vdc.name}}" {% if form_data.municipality == vdc.name %} selected {% endif %}>{{vdc.alt_name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
