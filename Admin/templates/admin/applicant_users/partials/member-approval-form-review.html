@@ -18,19 +18,19 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
-            <h3 class="">FENFIT सदस्यको दरखास्त फाराम</h3>
+            <h3 class="card-title">FENFIT सदस्यको दरखास्त फाराम</h3>
             <h6 class="card-subtitle text-info"> {% if id_data.is_verified == True %} You are verified {% else %} Not
                 Verified Yet {% endif %}</h6>
             <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-            <h2 class="m-t-4"><small class="text-success">{% if id_data.is_verified == True %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
-            <button class="btn btn-{% if id_data.is_verified == True %}success btn-rounded{% else %}primary btn-rounded{% endif %} btn-rounded">{% if id_data.is_verified == True %} You are Aproved {% else %} Not Verified Yet{% endif %} </button>
+            <h2 class="m-t-4 card-title"><small class="text-success">{% if id_data.is_verified == True %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
+            <button class="btn btn-{% if id_data.is_verified == True %}success btn-rounded{% else %}primary btn-rounded{% endif %} btn-rounded">{% if id_data.is_verified == True %} Aproved {% else %} Verified Yet{% endif %} </button>
         </center>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
             {% if id_data.is_verified == True %}
-            <h3 class="box-title m-t-4">कृपया यो डाउनलोड गर्नुहोस्|</h3>
+            <h3 class="box-title m-t-4 card-title">कृपया यो डाउनलोड गर्नुहोस्|</h3>
             <ul class="list-unstyled">
                 <li><i class="fa fa-check text-success"></i> फेन्फिटको सदस्य हुन पाएकोमा बधाई छ|</li>
             </ul>
@@ -259,6 +259,9 @@
             {% endif %}
 
             <style>
+                .card-title{
+                    font-size: 16px;
+                }
                 .nibedan-form {
                     padding: 50px 20px;
                     max-width: 600px;

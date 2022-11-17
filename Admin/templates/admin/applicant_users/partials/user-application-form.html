@@ -13,7 +13,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">उधेागमिको नाम्</label>
+                                                    <label class="form-label">उधेागमिको नाम् <span class="required">*</span></label>
                                                     <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.owner_full_name }}" placeholder="Albert">
                                                 </div>
                                             </div>                                           
@@ -24,13 +24,13 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">इमेल</label>
+                                                    <label class="form-label">इमेल<span class="required">*</span></label>
                                                     <input type="email" name="email" value="{{request.user.email}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">सम्पर्क नम्बर</label>
+                                                    <label class="form-label">सम्पर्क नम्बर<span class="required">*</span></label>
                                                     <input type="number" name="phone" value="{{request.user.phone}}" class="form-control" disabled>
                                                 </div>
                                             </div>
@@ -43,13 +43,13 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">जिल्ला</label>
+                                                    <label class="form-label">जिल्ला<span class="required">*</span></label>
                                                     <input type="text" name="district" value="{{request.user.district_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">राज्य(State)</label>
+                                                    <label class="form-label">राज्य(State)<span class="required">*</span></label>
                                                     <input type="text" name="state" value="{{request.user.district_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
@@ -57,31 +57,41 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>                                                
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका<span class="required">*</span></label>                                                
                                                     <input type="text" value="{{id_data.municipality}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">वडा नं.</label>
+                                                    <label class="form-label">वडा नं.<span class="required">*</span></label>
                                                     <input type="text" name="ward_number" value="{{id_data.ward_number}}" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Tole</label>
+                                                    <label class="form-label">Tole<span class="required">*</span></label>
                                                     <input type="text" name="tole" value="{{id_data.tole}}" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
                                    
                                         <hr>
-                                        <h5 class="card-title">कम्पनीको जानकारी</h5>
+                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input type="checkbox" checked class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
+                                    
                                         <div class="row">
                                             <div class="col-md-6">
+                                                <div class="form-group" style="display:None">
+                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड( नयाँ प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
+                                                    <select id="business_price_select"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
+                                                        <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
+                                                        {% for business_price_category,value in recomendation_price_category.items%}
+                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
+                                                        {% endfor %}
+                                                   </select>
+                                                </div>
                                                 <div class="form-group">
-                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड </label>
+                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड(पुरानो प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
                                                     <select id="business_price_select"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
                                                         <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                         {% for business_price_category,value in recomendation_price_category.items%}
@@ -101,20 +111,20 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">उद्योग/कम्पनीको नाम</label>
+                                                    <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
                                                     <input type="text" name="company_name" value="{{id_data.company_name}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">कम्पनीको अधिकृत पुजी</label>
+                                                    <label class="form-label">कम्पनीको अधिकृत पुजी<span class="required">*</span></label>
                                                     <input type="number" name="authorized_capital_of_company" value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">कम्पनीको चुक्ता पुजी</label>
+                                                    <label class="form-label">कम्पनीको चुक्ता पुजी<span class="required">*</span></label>
                                                     <input type="number" name="paid_up_capital_of_company" value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
                                                 </div>
                                             </div>
@@ -122,20 +132,20 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">कारोबार रकम</label>
+                                                    <label class="form-label">कारोबार रकम<span class="required">*</span></label>
                                                     <input type="number" name="transaction_amount" value="{{id_data.transaction_amount}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">कर रकम</label>
+                                                    <label class="form-label">कर रकम<span class="required">*</span></label>
                                                     <input type="number" name="tax_amount" value="{{id_data.tax_amount}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">कामदार तथा कर्मचारि स.ख्या</label>
+                                                    <label class="form-label">कामदार तथा कर्मचारि स.ख्या<span class="required">*</span></label>
                                                     <input type="number" name="number_of_employees" value="{{id_data.number_of_employees}}" class="form-control" required>
                                                 </div>
                                             </div>
@@ -206,7 +216,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                                        <h4 class="card-title">नागरिकता पर्तिलिपि<span class="required">*</span></h4>
                                                         <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
                                                     </div>
                                                 </div>
@@ -220,7 +230,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
+                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि<span class="required">*</span>​</h4>
                                                         <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
                                                     </div>
                                                 </div>
@@ -234,7 +244,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                                                        <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि<span class="required">*</span></h4>
                                                         <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
                                                     </div>
                                                 </div>
@@ -248,7 +258,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
+                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि<span class="required">*</span></h4>
                                                         <input name="auditing" type="file" id="auditing" class="dropify" />
                                                     </div>
                                                 </div>
@@ -261,7 +271,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि<span class="required">*</span></h4>
                                                         <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
                                                     </div>
                                                 </div>
@@ -279,6 +289,13 @@
                                     <input type="hidden" name="next" value="{{ request.path }}">
                                     
                                     <style>
+                                        .required{
+                                            color: red;
+                                            font-size: 20px;
+                                        }
+                                        .card-title{
+                                            font-size: 16px;
+                                        }
                                         .nibedan-form{
                                             padding: 50px 20px;
                                             border: 1px solid #d9d6d6;
@@ -434,5 +451,109 @@
                     }
     </script>
  
-                
+ <script>
+    $(function () {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function () {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+        $("input[name='tch3_22']").TouchSpin({
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function () {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function () {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function () {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function () {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            //templateResult: formatRepo, // omitted for brevity, see the source of this page
+            //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+    });
+</script>
                 

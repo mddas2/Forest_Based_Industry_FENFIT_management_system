@@ -4,9 +4,15 @@
     {% include 'admin/applicant_users/partials/user-application-form.html' %}
 {% endblock %}
 
+{% block optionalcss %}
+{% load staticfiles %}
+    <link href="{% static '/assets/node_modules/switchery/dist/switchery.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
 {% block optionaljs %}
 {% load staticfiles %}
         <!-- jQuery file upload -->
+        <script src="{% static '/assets/node_modules/switchery/dist/switchery.min.js' %}"></script>
         <script src="{% static '/assets/node_modules/dropify/dist/js/dropify.min.js' %}"></script>
         <script>
         $(document).ready(function() {
