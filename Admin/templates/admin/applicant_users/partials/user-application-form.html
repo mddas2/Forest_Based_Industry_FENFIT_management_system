@@ -50,7 +50,7 @@
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
                                                     <label class="form-label">राज्य(State)</label>
-                                                    <input type="text" name="state" value="{{id_data.state}}" class="form-control" disabled>
+                                                    <input type="text" name="state" value="{{request.user.district_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,13 +109,13 @@
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">कम्पनीको अधिकृत पुजी</label>
-                                                    <input type="text" name="authorized_capital_of_company" value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
+                                                    <input type="number" name="authorized_capital_of_company" value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">कम्पनीको चुक्ता पुजी</label>
-                                                    <input type="text" name="paid_up_capital_of_company" value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
+                                                    <input type="number" name="paid_up_capital_of_company" value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div> 
@@ -123,26 +123,26 @@
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">कारोबार रकम</label>
-                                                    <input type="text" name="transaction_amount" value="{{id_data.transaction_amount}}" class="form-control" required>
+                                                    <input type="number" name="transaction_amount" value="{{id_data.transaction_amount}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">कर रकम</label>
-                                                    <input type="text" name="tax_amount" value="{{id_data.tax_amount}}" class="form-control" required>
+                                                    <input type="number" name="tax_amount" value="{{id_data.tax_amount}}" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">कामदार तथा कर्मचारि स.ख्या</label>
-                                                    <input type="text" name="number_of_employees" value="{{id_data.number_of_employees}}" class="form-control" required>
+                                                    <input type="number" name="number_of_employees" value="{{id_data.number_of_employees}}" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div> 
                                         <!--/row-->
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                             <div class="nibedan-form">
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
@@ -201,7 +201,7 @@
                                             </div>
                                             </div>
                                             <!--/span-->
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                             <div class="row">
                                             <div class="col-md-6">
                                                 <div class="card">

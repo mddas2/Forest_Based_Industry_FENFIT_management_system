@@ -176,8 +176,7 @@ def MemberApprovalFormStore(request):
             return redirect(MemberAprovalForm)
         form_detail = {
             'user_id' : request.user.id,
-            'business_name' : request.POST['business_name'],
-            
+            'business_name' : request.POST['business_name'],            
             'owner_full_name' : request.POST['owner_full_name'],
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],
@@ -282,7 +281,17 @@ def UserApplicationFormStore(request):
         form_detail = {**form_detail , **documents}
 
         Userform_detail_create,detail_create = UserApplicationDetail.objects.update_or_create(user_id=request.user.id , defaults=form_detail)
-        
+
+        try:
+            Userform_detail_create.company_name = request.POST['company_name']
+            Userform_detail_create.paid_up_capital_of_company = int(request.POST['paid_up_capital_of_company'])
+            Userform_detail_create.transaction_amount = int(request.POST['transaction_amount'])
+            Userform_detail_create.tax_amount = int(request.POST['tax_amount'])
+            Userform_detail_create.number_of_employees = int(request.POST['number_of_employees'])
+            Userform_detail_create.save()
+        except:
+            messages.info(request,"कृपया कम्पनीको विवरण भर्नुहोस्")
+
         form_data = {
             'user_id' : request.user.id,
             'get_user_application_detail_id' : Userform_detail_create.id,
