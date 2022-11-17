@@ -284,6 +284,7 @@ def UserApplicationFormStore(request):
 
         try:
             Userform_detail_create.company_name = request.POST['company_name']
+            Userform_detail_create.authorized_capital_of_company = int(request.POST['authorized_capital_of_company'])
             Userform_detail_create.paid_up_capital_of_company = int(request.POST['paid_up_capital_of_company'])
             Userform_detail_create.transaction_amount = int(request.POST['transaction_amount'])
             Userform_detail_create.tax_amount = int(request.POST['tax_amount'])
