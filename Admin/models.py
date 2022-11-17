@@ -61,24 +61,18 @@ class HomeNavigation(models.Model):
     def getBannerImage1(self):
         if self.banner_image1 :
             return self.banner_image1.url
-        return ''
-
-class UserApplicationPayment(models.Model):
-    business_name = models.CharField(max_length=205, null=True)
-    business_price_category = models.CharField(max_length=205, null=True)
-    voucher_number = models.CharField(max_length=505, null=True)
-    is_payment = models.BooleanField(default=False,null=True)
-    is_renew = models.BooleanField(default=False,null=True)
-    created_at = models.DateTimeField(auto_now=True,null=True)
-    updated_at = models.DateTimeField(auto_now=True,null=True)
-        
+        return ''        
 
 class UserApplicationDetail(models.Model):
     user = models.ForeignKey(CustomUser,related_name="applicationdetail",on_delete=models.CASCADE,null=True)
     owner_full_name = models.CharField(max_length=205)
     company_name = models.CharField(max_length=205,null=True)
+
     business_name = models.CharField(max_length=205, null=True)
     business_price_category = models.CharField(max_length=205, null=True)
+    is_reniew = models.BooleanField(null=True,default=False)
+    payment_rupees = models.IntegerField(null=True)
+
     voucher_number = models.CharField(max_length=505, null=True)
     municipality = models.CharField(max_length=205,null=True)
     ward_number = models.CharField(max_length=205 , null=True)
@@ -109,10 +103,10 @@ class UserApplicationDetail(models.Model):
 
 
 class ApplicationForm(models.Model):
-    payment = models.ForeignKey(UserApplicationPayment,related_name="UserApplicationForm",on_delete=models.CASCADE,null=True)
 
     get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="applicationform",on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(CustomUser,related_name="applicationform",on_delete=models.CASCADE,null=True)
+
     dsc = models.CharField(max_length=20,null=True) # d>district , s=state , c=central
 
     district_status = models.BooleanField(default=False) # True and False
@@ -131,6 +125,25 @@ class ApplicationForm(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null=True)
     def get_date(self):
         return humanize.naturaltime(self.updated_at)   
+
+class UserApplicationPayment(models.Model):
+    user = models.ForeignKey(CustomUser,related_name="payment",on_delete=models.DO_NOTHING,null=True)
+    get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="payment",on_delete=models.DO_NOTHING,null=True)
+    user_application_form = models.ForeignKey(ApplicationForm,related_name="payment",on_delete=models.DO_NOTHING,null=True)
+
+    mobile_number = models.CharField(max_length=205, null=True)
+    email = models.CharField(max_length=205, null=True)
+
+    owner_full_name = models.CharField(max_length=205,null=True)
+    company_name = models.CharField(max_length=205,null=True)
+
+    business_name = models.CharField(max_length=205, null=True)
+    business_price_category = models.CharField(max_length=205, null=True)
+    voucher_number = models.CharField(max_length=505, null=True)
+    is_payment = models.BooleanField(default=False,null=True)
+    is_renew = models.BooleanField(default=False,null=True)
+    created_at = models.DateTimeField(auto_now=True,null=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True)
 
 class ApplicationFormApprovedDetail(models.Model):
     approved_form = models.ForeignKey(ApplicationForm,related_name="application_form_approved_detailed",on_delete=models.CASCADE,null=True)
