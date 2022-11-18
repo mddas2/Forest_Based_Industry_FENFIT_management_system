@@ -2,81 +2,59 @@
 <!-- ============================================================== -->
 <div class="row">
     <!-- Column -->
-    <div class="col-lg-12">
+    <div class="col-lg-3">
+
+    </div>
+    <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <form action=" url action " method="post" enctype="multipart/form-data" enctype="multipart/form-data"
-                    onSubmit="return checkPassword(this)">
+                <form action="https://uat.esewa.com.np/epay/main" method="POST">
                     {% csrf_token %}
                     <div class="form-body">
                         <hr>
                         <h5 class="card-title">भुक्तानी विवरण</h5>                       
                         <div class="row">
-                            <div class="col-md-4 ">
+                            <div class="col-md-12 ">
                                 <div class="form-group">
-                                    <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
+                                    <label class="form-label">आवेदन दर्ता नम्बर<span class="required">*</span></label>
                                     <input type="text" name="company_name" value="{{id_data.company_name}}"
                                         class="form-control" required>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 ">
+                            <div class="col-md-12 ">
                                 <div class="form-group">
-                                    <label class="form-label">कम्पनीको अधिकृत पुजी<span
+                                    <label class="form-label">जीमेल आईडी<span
                                             class="required">*</span></label>
                                     <input type="number" name="authorized_capital_of_company"
                                         value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-md-4 ">
-                                <div class="form-group">
-                                    <label class="form-label">कम्पनीको चुक्ता पुजी<span
-                                            class="required">*</span></label>
-                                    <input type="number" name="paid_up_capital_of_company"
-                                        value="{{id_data.paid_up_capital_of_company}}" class="form-control" required>
-                                </div>
-                            </div>
+                            
                         </div>
-                        <div class="row">
-                            <div class="col-md-4 ">
-                                <div class="form-group">
-                                    <label class="form-label">कारोबार रकम<span class="required">*</span></label>
-                                    <input type="number" name="transaction_amount"
-                                        value="{{id_data.transaction_amount}}" class="form-control" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 ">
-                                <div class="form-group">
-                                    <label class="form-label">कर रकम<span class="required">*</span></label>
-                                    <input type="number" name="tax_amount" value="{{id_data.tax_amount}}"
-                                        class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 ">
-                                <div class="form-group">
-                                    <label class="form-label">कामदार तथा कर्मचारि स.ख्या<span
-                                            class="required">*</span></label>
-                                    <input type="number" name="number_of_employees"
-                                        value="{{id_data.number_of_employees}}" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/row-->
-
-                        <input type="hidden" name="next" value="{{ request.path }}">
+                
+                            <input value="100" name="tAmt" type="hidden">
+                            <input value="90" name="amt" type="hidden">
+                            <input value="5" name="txAmt" type="hidden">
+                            <input value="2" name="psc" type="hidden">
+                            <input value="3" name="pdc" type="hidden">
+                            <input value="EPAYTEST" name="scd" type="hidden">
+                            <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+                            <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+                            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
 
 
                         <div class="form-actions m-t-40">
                             <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i
-                                    class="fa fa-check"></i> Save</button>
-                            <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i
-                                    class="fa fa-check"></i>Send</button>
-                            <button type="button" class="btn btn-dark">Cancel</button>
+                                    class="fa fa-check"></i>Pay with Esewa</button>
+                           
                         </div>
                 </form>
             </div>
         </div>
+    </div>
+    <div class="col-lg-3">
+
     </div>
     <!-- Column -->
 </div>
@@ -123,110 +101,26 @@
         $("#businessrice").text(price)
     });
 
-</script>
+  function create_post() {
+    console.log("create post is working!") // sanity check
+    $.ajax({
+        url : "create_post/", // the endpoint
+        type : "POST", // http method
+        data : { the_post : $('#post-text').val() }, // data sent with the post request
 
-<script>
-    $(function () {
-        // Switchery
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-        $('.js-switch').each(function () {
-            new Switchery($(this)[0], $(this).data());
-        });
-        // For select 2
-        $(".select2").select2();
-        $('.selectpicker').selectpicker();
-        //Bootstrap-TouchSpin
-        $(".vertical-spin").TouchSpin({
-            verticalbuttons: true
-        });
-        var vspinTrue = $(".vertical-spin").TouchSpin({
-            verticalbuttons: true
-        });
-        if (vspinTrue) {
-            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        // handle a successful response
+        success : function(json) {
+            $('#post-text').val(''); // remove the value from the input
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
-        $("input[name='tch1']").TouchSpin({
-            min: 0,
-            max: 100,
-            step: 0.1,
-            decimals: 2,
-            boostat: 5,
-            maxboostedstep: 10,
-            postfix: '%'
-        });
-        $("input[name='tch2']").TouchSpin({
-            min: -1000000000,
-            max: 1000000000,
-            stepinterval: 50,
-            maxboostedstep: 10000000,
-            prefix: '$'
-        });
-        $("input[name='tch3']").TouchSpin();
-        $("input[name='tch3_22']").TouchSpin({
-            initval: 40
-        });
-        $("input[name='tch5']").TouchSpin({
-            prefix: "pre",
-            postfix: "post"
-        });
-        // For multiselect
-        $('#pre-selected-options').multiSelect();
-        $('#optgroup').multiSelect({
-            selectableOptgroup: true
-        });
-        $('#public-methods').multiSelect();
-        $('#select-all').click(function () {
-            $('#public-methods').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all').click(function () {
-            $('#public-methods').multiSelect('deselect_all');
-            return false;
-        });
-        $('#refresh').on('click', function () {
-            $('#public-methods').multiSelect('refresh');
-            return false;
-        });
-        $('#add-option').on('click', function () {
-            $('#public-methods').multiSelect('addOption', {
-                value: 42,
-                text: 'test 42',
-                index: 0
-            });
-            return false;
-        });
-        $(".ajax").select2({
-            ajax: {
-                url: "https://api.github.com/search/repositories",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
-                    params.page = params.page || 1;
-                    return {
-                        results: data.items,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) {
-                return markup;
-            }, // let our custom formatter work
-            minimumInputLength: 1,
-            //templateResult: formatRepo, // omitted for brevity, see the source of this page
-            //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-        });
     });
+};
 </script>

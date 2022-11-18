@@ -251,14 +251,34 @@ def MemberAprovalFormReview(request,id=None):
 @customized_user_passes_test(is_USER_role)
 def UserApplicationFormStore(request):
 
-    if request.POST:
+    if request.POST:     
+
         if request.POST['business_price_category']=='0':
             messages.info(request,'Please select सिफारिस शुल्क')
             return redirect(MemberAprovalForm)
+        try:
+            if request.POST['is_renew']=='on':
+                is_reniew = 1
+                price_category = request.POST['business_price_category']
+                price = RecomendationPriceCategory.recommendation_fee[price_category]
+                try:
+                    payment_rupees = int(price['renewal_fee'])
+                except:
+                    payment_rupees = None
+        except:
+            is_reniew = 0
+            price_category = request.POST['business_price_category']
+            price = RecomendationPriceCategory.recommendation_fee[price_category]
+            try:
+                payment_rupees = int(price['start_recommendation_fee'])
+            except:
+                payment_rupees = None         
 
         form_detail = {
             'user_id' : request.user.id,
             'business_price_category' : request.POST['business_price_category'],
+            'is_reniew' : is_reniew,
+            'payment_rupees' : payment_rupees
         }
 
         if request.POST['voucher_number'] != None:

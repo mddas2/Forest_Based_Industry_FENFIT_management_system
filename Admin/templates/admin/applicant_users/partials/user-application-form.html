@@ -77,7 +77,7 @@
                                         </div>
                                    
                                         <hr>
-                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input id="renew_check" type="checkbox" class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
+                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input id="renew_check" {% if id_data.is_reniew == True %} checked {% endif%} name="is_renew" type="checkbox" class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
                                     
                                         <div class="row">
                                             <div class="col-md-6">
@@ -101,8 +101,8 @@
                                                 </div>
                                             </div> 
                                             <div class="col-md-6 ">
-                                                <div class="form-group">
-                                                    <label class="form-label" style="color: red;">बैंक भुगतान भौचर नम्बर(payment Rs <span id="businessrice">{{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee'}}</span> ) <a href="{% url 'OnlinePayment' %}"><button type="button" class="btn btn-success btn-rounded">online payment</button></a> </label>
+                                                <div class="form-group"> <!-----{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee}}'--->
+                                                    <label class="form-label" style="color: red;">बैंक भुगतान भौचर नम्बर(payment Rs <span id="businessrice">{{id_data.payment_rupees}}</span> ) <a href="{% url 'OnlinePayment' %}"><button type="button" class="btn btn-success btn-rounded">online payment</button></a> </label>
                                                     <input type="text" name="voucher_number" value="{{id_data.voucher_number}}" class="form-control" required>
                                                 </div>
                                             </div>
