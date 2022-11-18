@@ -8,7 +8,7 @@
                                 <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
                                 {% csrf_token %}
                                     <div class="form-body">
-                                        <h5 class="card-title">सामान्य जानकारी</h5>
+                                        <h5 class="card-title">सामान्य जानकारी {{id_data.id}}</h5>
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-6">

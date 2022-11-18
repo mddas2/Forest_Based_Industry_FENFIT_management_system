@@ -8,7 +8,7 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <form action="https://uat.esewa.com.np/epay/main" method="POST">
+                <form action="{% url 'PaymentWith' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-body">
                         <hr>
@@ -17,8 +17,7 @@
                             <div class="col-md-12 ">
                                 <div class="form-group">
                                     <label class="form-label">आवेदन दर्ता नम्बर<span class="required">*</span></label>
-                                    <input type="text" name="company_name" value="{{id_data.company_name}}"
-                                        class="form-control" required>
+                                    <input type="number" name="application_id" class="form-control" required>
                                 </div>
                             </div>
 
@@ -26,23 +25,11 @@
                                 <div class="form-group">
                                     <label class="form-label">जीमेल आईडी<span
                                             class="required">*</span></label>
-                                    <input type="number" name="authorized_capital_of_company"
-                                        value="{{id_data.authorized_capital_of_company}}" class="form-control" required>
+                                    <input type="email" name="email_id" class="form-control" required>
                                 </div>
                             </div>
                             
                         </div>
-                
-                            <input value="100" name="tAmt" type="hidden">
-                            <input value="90" name="amt" type="hidden">
-                            <input value="5" name="txAmt" type="hidden">
-                            <input value="2" name="psc" type="hidden">
-                            <input value="3" name="pdc" type="hidden">
-                            <input value="EPAYTEST" name="scd" type="hidden">
-                            <input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
-                            <input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
-                            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-
 
                         <div class="form-actions m-t-40">
                             <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i
