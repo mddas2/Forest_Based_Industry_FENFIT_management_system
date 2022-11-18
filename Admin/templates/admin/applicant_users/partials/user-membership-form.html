@@ -14,13 +14,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">उधेागमिको नाम्</label>
+                                                    <label class="form-label">उधेागमिको नाम्<span class="required">*</span></label>
                                                     <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
                                             </div>     
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">व्यवसायको नाम</label>
+                                                    <label class="form-label">व्यवसायको नाम<span class="required">*</span></label>
                                                     <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                         {% for business,value in business_type.items%}
@@ -36,13 +36,13 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">इमेल</label>
+                                                    <label class="form-label">इमेल <span class="required">*</span></label>
                                                     <input type="email" name="email" value="{{id_data.email}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">सम्पर्क नम्बर</label>
+                                                    <label class="form-label">सम्पर्क नम्बर<span class="required">*</span></label>
                                                     <input type="number" name="phone" value="{{id_data.phone}}" class="form-control" disabled>
                                                 </div>
                                             </div>
@@ -53,40 +53,46 @@
                                         <div class="row">
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">जिल्ला</label>
+                                                    <label class="form-label">जिल्ला<span class="required">*</span></label>
                                                     <input type="text" name="district" value="{{id_data.district_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">राज्य(State)</label>
+                                                    <label class="form-label">राज्य(State)<span class="required">*</span></label>
                                                     <input type="text" name="state" value="{{id_data.state_name}}" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4" id="district_org_sh">
                                                 <div class="form-group">
-                                                    <label class="form-label">सदस्य हुन चाहेको संघ</label>
+                                                    <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
+                                                    <input type="text" name="company_name" value="{{form_data.company_name}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">सदस्य हुन चाहेको संघ<span class="required">*</span></label>
                                                     <select class="form-control" name="union_type" id="district_private_select" data-placeholder="Choose a Category" tabindex="1" required>
-                                                        <option value='district' selected>जिल्ला</option>
-                                                        <option value="private" {% if form_data.business_name == business %} selected {% endif %}> बस्तुगत संघ</option>
+                                                        <option value='district' {% if form_data.union_type == 'district' %} selected {% endif %}>जिल्ला</option>
+                                                        <option value="private" {% if form_data.union_type == 'private' %} selected {% endif %}> बस्तुगत संघ</option>
                                                     </select>
                                                 </div>
                                             </div>          
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group" id="private_org_sh">
-                                                    <label class="form-label">सदस्य हुन चाहेको नाम</label>
+                                                    <label class="form-label">सदस्य हुन चाहेको संघको नाम<span class="required">*</span></label>
                                                     <select class="form-control" name="union_name" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value='0' selected>संघ चयन गर्नुहोस्</option>
                                                         {% for organizataion in private_organization%}
-                                                            <option value="{{organizataion.email}}" {% if form_data.business_name == business %} selected {% endif %}>{{organizataion.email}}</option>
+                                                            <option value="{{organizataion.email}}" {% if form_data.union_name == organizataion.email %} selected {% endif %}>{{organizataion.email}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
-                                                <div class="col-md-6" id="district_org_sh">
+                                                <div class="col-md-4" id="district_org_sh">
                                                     <div class="form-group">
-                                                        <label class="form-label">जिल्ला</label>
+                                                        <label class="form-label">जिल्ला<span class="required">*</span></label>
                                                         <input type="text" name="district" value="{{id_data.district_name}}" class="form-control" disabled>
                                                     </div>
                                                 </div>
@@ -98,7 +104,7 @@
                                         <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">नगरपालिका/गाउँपालिका</label>
+                                                    <label class="form-label">नगरपालिका/गाउँपालिका<span class="required">*</span></label>
                                                     <select  class="form-control" name="municipality" data-placeholder="Choose a Category" tabindex="1"  required>
                                                         <option value='0' selected>नगरपालिका/गाउँपालिका चयन गर्नुहोस्</option>
                                                         {% for vdc in total_vdc %}
@@ -110,13 +116,13 @@
                                             
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">वडा नं.</label>
+                                                    <label class="form-label">वडा नं.<span class="required">*</span></label>
                                                     <input type="text" name="ward_number" value="{{form_data.ward_number}}" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Tole</label>
+                                                    <label class="form-label">Tole<span class="required">*</span></label>
                                                     <input type="text" name="tole" value="{{form_data.tole}}" class="form-control" required>
                                                 </div>
                                             </div>
@@ -181,7 +187,7 @@
                                                     <div class="col-md-6">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                                                <h4 class="card-title">नागरिकता पर्तिलिपि<span class="required">*</span></h4>
                                                                 <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
                                                             </div>
                                                         </div>
@@ -195,7 +201,7 @@
                                                     <div class="col-md-6">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
+                                                                <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि<span class="required">*</span>​</h4>
                                                                 <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
                                                             </div>
                                                         </div>
@@ -209,7 +215,7 @@
                                                     <div class="col-md-6">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                                                                <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि<span class="required">*</span></h4>
                                                                 <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
                                                             </div>
                                                         </div>
@@ -223,7 +229,7 @@
                                                     <div class="col-md-6">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
+                                                                <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि<span class="required">*</span></h4>
                                                                 <input name="auditing" type="file" id="auditing" class="dropify" />
                                                             </div>
                                                         </div>
@@ -236,7 +242,7 @@
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि<span class="required">*</span></h4>
                                                             <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
                                                         </div>
                                                     </div>
@@ -249,7 +255,7 @@
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h4 class="card-title">हस्ताक्षर को साथ मिति</h4>
+                                                            <h4 class="card-title">हस्ताक्षर को साथ मिति<span class="required">*</span></h4>
                                                             <input name="signature" type="file" id="signature" class="dropify" />
                                                         </div>
                                                     </div>
@@ -267,6 +273,13 @@
                                     <input type="hidden" name="next" value="{{ request.path }}">
                                     
                                     <style>
+                                        .required{
+                                            color: red;
+                                            font-size: 20px;
+                                        }
+                                        .card-title{
+                                            font-size: 16px;
+                                        }
                                         .nibedan-form{
                                             padding: 50px 20px;
                                             border: 1px solid #d9d6d6;

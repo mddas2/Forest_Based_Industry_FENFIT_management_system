@@ -198,7 +198,8 @@ def MemberApprovalFormStore(request):
             'ward_number' : request.POST['ward_number'],
             'tole' : request.POST['tole'],
             'union_type' : union_type,
-            'union_name' : union_name
+            'union_name' : union_name,
+            'company_name' : request.POST['company_name']
 
         }
 
