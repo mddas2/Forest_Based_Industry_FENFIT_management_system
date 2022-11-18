@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
     image = models.ImageField(upload_to='user/profile', null=True)
     signature = models.ImageField(upload_to='user/documents', null=True) #Signature
     
-    created_at = models.DateTimeField(auto_now=True,null=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     USERNAME_FIELD = 'email'
 

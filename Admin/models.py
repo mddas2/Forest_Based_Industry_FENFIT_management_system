@@ -101,7 +101,7 @@ class UserApplicationDetail(models.Model):
     self_declaration_not_on_the_black_list = models.ImageField(upload_to='user/documents', null=True) #कालो सुचीमा नपरेको स्वघोषणा
     bank_voucher = models.ImageField(upload_to='user/documents', null=True) #bank भौचर को प्रतिलिपि
     
-    created_at = models.DateTimeField(auto_now=True,null=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
 
@@ -124,7 +124,7 @@ class ApplicationForm(models.Model):
 
     approved_pending_cancelled = models.CharField(max_length=10,null=True) #a>approved , c>cancelled , p>pending
 
-    created_at = models.DateTimeField(auto_now=True,null=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     def get_date(self):
         return humanize.naturaltime(self.updated_at)   
@@ -145,7 +145,8 @@ class UserApplicationPayment(models.Model):
     voucher_number = models.CharField(max_length=505, null=True)
     is_payment = models.BooleanField(default=False,null=True)
     is_renew = models.BooleanField(default=False,null=True)
-    created_at = models.DateTimeField(auto_now=True,null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
 class ApplicationFormApprovedDetail(models.Model):

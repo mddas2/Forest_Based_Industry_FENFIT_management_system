@@ -199,8 +199,7 @@ def MemberApprovalFormStore(request):
             'tole' : request.POST['tole'],
             'union_type' : union_type,
             'union_name' : union_name,
-            'company_name' : request.POST['company_name']
-
+            'company_name' : request.POST['company_name'],
         }
 
         try:
