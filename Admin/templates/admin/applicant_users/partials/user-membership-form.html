@@ -65,6 +65,37 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">सदस्य हुन चाहेको संघ</label>
+                                                    <select class="form-control" name="district_private_select" id="district_private_select" data-placeholder="Choose a Category" tabindex="1" required>
+                                                        <option value='district' selected>जिल्ला</option>
+                                                        <option value="private" {% if form_data.business_name == business %} selected {% endif %}> बस्तुगत संघ</option>
+                                                    </select>
+                                                </div>
+                                            </div>          
+                                            <div class="col-md-6">
+                                                <div class="form-group" id="private_org_sh">
+                                                    <label class="form-label">सदस्य हुन चाहेको नाम</label>
+                                                    <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
+                                                        <option value='0' selected>संघ चयन गर्नुहोस्</option>
+                                                        {% for organizataion in private_organization%}
+                                                            <option value="{{organizataion.email}}" {% if form_data.business_name == business %} selected {% endif %}>{{organizataion.email}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6" id="district_org_sh">
+                                                    <div class="form-group">
+                                                        <label class="form-label">जिल्ला</label>
+                                                        <input type="text" name="district" value="{{id_data.district_name}}" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            
+                                            
+                                            <!--/span-->
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4 ">
                                                 <div class="form-group">
                                                     <label class="form-label">नगरपालिका/गाउँपालिका</label>
@@ -353,7 +384,27 @@
                 <!--==============================================================-->
                 <!-- End PAge Content -->
                 <script>
-          
+                    var private_district = $("#district_private_select").val()
+                    if(private_district=="district"){
+                        $("#district_org_sh").show()
+                        $("#private_org_sh").hide()
+                    }
+                    else if(private_district=="private"){
+                        $("#district_org_sh").hide()
+                        $("#private_org_sh").show()
+                    }
+                    $("#district_private_select").change(function() {
+                        if(this.value=="private"){
+                            $("#district_org_sh").hide()
+                            $("#private_org_sh").show()
+                        }
+                        else if(this.value=="district"){
+                            $("#district_org_sh").show()
+                            $("#private_org_sh").hide()
+                        }
+                    });
+
+                  
                     // Function to check Whether both passwords
                     // is same or not.
                     function checkPassword(form) {

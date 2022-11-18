@@ -155,6 +155,8 @@ def MemberAprovalForm(request,id=None):
     #Fetching the data of particular ID
     id_data = request.user
 
+    private_organization = CustomUser.objects.filter(role = CustomUser.PRIVATE )
+
     try:
         form_data = request.user.applicationform.all().first().get_user_application_detail
         business_name = form_data.business_name
@@ -163,7 +165,7 @@ def MemberAprovalForm(request,id=None):
         form_data = None
         business_name = None        
 
-    data = {'total_vdc':total_vdc,'business_name':business_name,'business_type':business_type,'form_data':form_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    data = {'private_organization':private_organization,'total_vdc':total_vdc,'business_name':business_name,'business_type':business_type,'form_data':form_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
