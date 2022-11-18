@@ -1,5 +1,6 @@
 from django.template.defaulttags import register
 from nepallocation.models import *
+from Admin.models import BusinessType
 
 @register.filter
 def get_item(dictionary, key):
@@ -9,10 +10,26 @@ def get_item(dictionary, key):
     except:
         return "None. please select first सिफारिस शुल्क category"
 
+
+@register.filter
+def get_StateName(name):
+    try:
+        return States.objects.get(name=name).alt_name 
+    except:
+        return name 
+
 @register.filter
 def get_districtName(name):
     try:
         return Districts.objects.get(name=name).alt_name 
+    except:
+        return name  
+
+
+@register.filter
+def get_MuncipalityName(name):
+    try:
+        return Municipality.objects.get(name=name).alt_name 
     except:
         return name      
 
@@ -27,5 +44,13 @@ def get_NepaliDate(date):
         # return nepali_date.strftime('%K-%n-%D (%k %N %G)')   
     except:
         return date
+
+@register.filter
+def get_NepaliBusinessName(eng_name):
+    try:
+        business_name = BusinessType.business_type[eng_name]['name_1']
+        return business_name
+    except:
+        return eng_name
 
     

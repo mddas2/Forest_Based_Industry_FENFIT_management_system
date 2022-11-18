@@ -154,51 +154,14 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="vcenter">ORDER DETAIL</h4>
+                        <h4 class="modal-title" id="vcenter">सदस्य विवरण</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
-                        <!-----order detail-->
-
-                        <div class="row">
-
-                            <!-- column -->
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Application Review Progress bars <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
-                                        <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
-                                        <div class="progress m-t-20">
-                                            <div class="progress-bar bg-success" style="width: {% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %} ; height:15px;" role="progressbar">{% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <center>
-                                    <h3 class="">FENFIT APPLICATION</h3>
-                                    <h6 class="card-subtitle text-info">{% if id_data.dsc == 'd' %} Pending on DISTRICT {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 's' %} Pending on STATE {{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'c' %} Pending on CENTRAL LEVEL {% elif id_data.dsc == 'approved' %} approved from all level {% else %} User Need to Forward for further Process {% endif %}</h6>
-                                        <!-- <h4 class="box-title m-t-40">Application description</h4>
-                                        <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-                                        <h2 class="m-t-4"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
-                                        <button class="btn btn-primary btn-rounded">{% if id_data.dsc == 'd' %} DISTRICT {{id_data.get_user_application_detail.district}} NOT APPROVED YET {% elif id_data.dsc == 's' %} STATE {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'c' %} CENTRAL LEVEL NOT APPROVED YET {% elif id_data.dsc == 'approved' %} ALL APPROVED PROCESS COMPLETED {% else %} CLIENT {{id_data.get_user_application_detail.owner_full_name}} NEED TO FORWARD {% endif %}</button> 
-                                </center>      
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <center>
-                                   <h3 class="box-title m-t-4">Comments Highlights</h3>
-                                    <ul class="list-unstyled">
-                                        <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
-                                        <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
-                                        <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
-                                    </ul>
-                                </center>
-                            </div>
-                            <!-- column -->
-                        </div>
+                   
                         <!-------content start-->
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                             <div class="nibedan-form">
                                 <div class="form-logo">
                                     <img src="/static/assets/images/logo-2.png">
@@ -208,10 +171,10 @@
                                     <div class="form-top-left">
                                         <p>श्रीमान अध्यक्षज्यू<br>
                                             नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                        <label><u>{{id_data.district_name|title}} Fenfit Nepal </u></label>
+                                        <label><u>जिल्ला {{id_data.district_name|get_districtName}}</u></label>
                                     </div>
                                     <div class="form-top-right">
-                                        <span class="date">मिति ः <u>{{id_data.created_at}}</u></span>
+                                       <span class="date">मिति ः <u>{{id_data.updated_at|get_NepaliDate}}</u></span>
                                     </div>
                                 </div>
                                 <div class="nibedan-form-body">
@@ -234,15 +197,15 @@
                                     <div class="user-info">
                                         <label style="font-weight: bold;">आवेदक</label>
                                         <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
-                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
+                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{business_name}}{{id_data.applicationform.all.first.get_user_application_detail.business_name|get_NepaliBusinessName}}</span></label>
                                         <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
                                         <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
                                         {% load staticfiles %}
                                         <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                     </div>
                                     <div class="user-address">
-                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
-                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality}}</u></label>
+                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
+                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality|get_MuncipalityName}}</u></label>
                                         <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
                                         <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
                                     </div>
@@ -251,9 +214,9 @@
                             </div>
                             </div>
                             <!--/span-->
-                            <div class="col-md-8 img-data-area">
+                            <div class="col-md-6 img-data-area">
                             <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
@@ -263,7 +226,7 @@
                                      </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
@@ -274,7 +237,7 @@
                                 </div>
                             </div>
         
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
@@ -285,7 +248,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
@@ -301,6 +264,9 @@
                             <hr> 
                         </div>
                         <style>
+                            .card-title{
+                                font-size: 16px;
+                             }
                             .nibedan-form{
                                 padding: 50px 20px;
                                 max-width: 600px;
