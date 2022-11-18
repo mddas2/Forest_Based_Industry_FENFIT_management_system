@@ -68,6 +68,9 @@ class UserApplicationDetail(models.Model):
     owner_full_name = models.CharField(max_length=205)
     company_name = models.CharField(max_length=205,null=True)
 
+    union_type = models.CharField(max_length=205,null=True)
+    union_name = models.CharField(max_length=205,null=True)
+
     business_name = models.CharField(max_length=205, null=True)
     business_price_category = models.CharField(max_length=205, null=True)
     is_reniew = models.BooleanField(null=True,default=False)

@@ -172,6 +172,20 @@ def MemberAprovalForm(request,id=None):
 @customized_user_passes_test(is_USER_role)
 def MemberApprovalFormStore(request):
     if request.POST:
+
+        if request.POST['union_type'] == 'private':
+            union_type = "private" #सदस्य हुन चाहेको संघ
+            if request.POST['union_name'] !='0':
+                union_name = request.POST['union_name']
+            else:
+                messages.info(request,"सदस्य हुन चाहेको संघ चयन गर्नुहोस्")        
+                return redirect(MemberAprovalForm)        
+        elif request.POST['union_type'] == 'district':
+            union_type = "district"
+            union_name = request.user.district_name        
+        else:
+            messages.info(request,'सदस्य हुन चाहेको संघ चयन गर्नुहोस्')
+            return redirect(MemberAprovalForm)
        
         if request.POST['business_name']=='0':
             messages.info(request,'Please select व्यवसायको type')
@@ -183,6 +197,9 @@ def MemberApprovalFormStore(request):
             'municipality' : request.POST['municipality'],
             'ward_number' : request.POST['ward_number'],
             'tole' : request.POST['tole'],
+            'union_type' : union_type,
+            'union_name' : union_name
+
         }
 
         try:

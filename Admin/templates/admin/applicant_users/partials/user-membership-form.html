@@ -68,7 +68,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">सदस्य हुन चाहेको संघ</label>
-                                                    <select class="form-control" name="district_private_select" id="district_private_select" data-placeholder="Choose a Category" tabindex="1" required>
+                                                    <select class="form-control" name="union_type" id="district_private_select" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value='district' selected>जिल्ला</option>
                                                         <option value="private" {% if form_data.business_name == business %} selected {% endif %}> बस्तुगत संघ</option>
                                                     </select>
@@ -77,7 +77,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group" id="private_org_sh">
                                                     <label class="form-label">सदस्य हुन चाहेको नाम</label>
-                                                    <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
+                                                    <select class="form-control" name="union_name" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value='0' selected>संघ चयन गर्नुहोस्</option>
                                                         {% for organizataion in private_organization%}
                                                             <option value="{{organizataion.email}}" {% if form_data.business_name == business %} selected {% endif %}>{{organizataion.email}}</option>
