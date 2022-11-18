@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <section id="wrapper">
     <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);overflow:scroll;">
-        <div class="login-box card">
+        <div class="login-box card" style="width: 26%;">
             {% if messages%}
                 {%for message in messages%}
                     <div class="alert alert-danger" role="alert">
@@ -12,7 +12,8 @@
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" action="{% url 'SignUp' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <a href="javascript:void(0)" class="db"><center><img src="{% static '/assets/images/radiant-logo.png' %}" alt="Home" /></center></a>
+                    <a href="javascript:void(0)" class="db"><center><img style="max-width: 101%;
+                        margin-bottom: 21px;" src="{% static '/assets/images/logo-2.png' %}" alt="Home" /></center></a>
                     <h3 class="text-center m-b-20">Sign Up</h3>
                     <div class="form-group">
                         <div class="col-xs-12">
@@ -50,9 +51,9 @@
                         </div>
                     </div>
                     <!-----image-->
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="col-md-6 ">
+                        <div class="card ">
+                            <div class="card-body" >
                                 <h4 class="card-title">Profile Image</h4>
                                 <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
                             </div>
