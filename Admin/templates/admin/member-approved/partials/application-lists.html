@@ -44,7 +44,91 @@
                         </thead>
                         {% if all_data %}
                         <tbody id="tableSearch">
-                            {% for i in all_data %}                               
+                            {% for i in all_data %}
+                              {% if request.user.role == request.user.PRIVATE and i.union_name == request.user.email%} 
+                                      <!----this is for private sangha-->            
+                                <tr>
+                                    <td>{{i.id}}</td>
+                                    <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                        <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>
+                                    <td class="zoom-gallery">    
+                                        {% if  i.applicationform.all.first.get_user_application_detail.provisional_account_number %}        
+                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>   
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.auditing %}    
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.auditing.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td> 
+                                    <td class="zoom-gallery">
+                                        {% if  i.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}       
+                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>  <!-- this is quantity-->
+                                    <td>{{i.dsc}}</td>
+                                    <td>{{i.district_name}}</td>
+                                    <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
+                                    <td><span class="label label-info">{{i.updated_at}}</span></td>
+                                    <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                    {% if action%}
+                                    <td>
+                                    <div class="dropdown">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical" style="color: red;"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item"  href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='p'  %}"> 
+                                                    {%if i.is_verified == False %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Pending
+                                                </a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
+                                                        {%if i.is_verified == True %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Approved
+                                                    </a>
+                                                </li>
+                                
+                                                <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
+                                                    Cancelled
+                                                </a></li>
+                                                
+                                            </ul>
+                                            </div>
+                                    </td>
+                                    <td style="display:none">{{i.phone}}</td>  
+                                    <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                    {% endif %}                                                          
+                                </tr>
+            
+                            {% else %}
                             <tr>
                                 <td>{{i.id}}</td>
                                 <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
@@ -87,13 +171,13 @@
                                 <td>{{i.dsc}}</td>
                                 <td>{{i.district_name}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
-                                 <td><span class="label label-info">{{i.updated_at}}</span></td>
-                                 <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
-                                 {% if action%}
-                                 <td>
-                                   <div class="dropdown">
+                                <td><span class="label label-info">{{i.updated_at}}</span></td>
+                                <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                {% if action%}
+                                <td>
+                                <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                           <i class="bi bi-three-dots-vertical" style="color: red;"></i>
+                                        <i class="bi bi-three-dots-vertical" style="color: red;"></i>
                                         </a>
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -102,7 +186,7 @@
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                 Pending
+                                                Pending
                                             </a></li>
                                             <li>
                                                 <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
@@ -110,29 +194,22 @@
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                 Approved
+                                                Approved
                                                 </a>
                                             </li>
                             
                                             <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
-                                                 Cancelled
+                                                Cancelled
                                             </a></li>
                                             
                                         </ul>
                                         </div>
-                                 </td>
-                                 <td style="display:none">{{i.phone}}</td>  
-                                 <td style="display:none">{{i.get_shipping_address.email}}</td>
-                                 {% endif %}                                                          
+                                </td>
+                                <td style="display:none">{{i.phone}}</td>  
+                                <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                {% endif %}                                                          
                             </tr>
-                            {% comment %} <script>
-                                    $(document).ready(function($){
-                                        $(".clickable-row{{forloop.counter}}").click(function() {
-                                            window.location = $(this).data("href");
-                                        });
-                                    });
-                            </script> {% endcomment %}
-                    
+                            {% endif%}
                             {% endfor %}
                         </tbody>
                         {% endif %}

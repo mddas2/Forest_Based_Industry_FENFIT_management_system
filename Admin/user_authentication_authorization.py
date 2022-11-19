@@ -49,7 +49,10 @@ def Login(request):
 def UserList(request):
    slug1 = "Users"
    create_link_name = reverse("UserCreate")
-   all_data = CustomUser.objects.filter(role__gte = request.user.role).exclude(role=CustomUser.PRIVATE) #gte greater than and lte less than
+   if request.user.role == CustomUser.PRIVATE:
+        all_data = CustomUser.objects.filter(role__gte = request.user.role) #gte greater than and lte less than
+   else:
+        all_data = CustomUser.objects.filter(role__gte = request.user.role).exclude(role=CustomUser.PRIVATE) #gte greater than and lte less than
     # oneuser = all_data.last()
     # return HttpResponse(oneuser.groups.all())
    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name, 'users':all_data}
@@ -93,7 +96,7 @@ def UserCreate(request,id=None):
     data = {'slug1':slug1,'create':True,'create_link_name':create_link_name,'id_data':get_data, 'action':action,'groups':groups,'roles':roles,'permissions':permissions}
     return render(request, "admin/users/user-form.html",data)
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def UserStore(request,id=None):
 
     if request.POST['password1'] == request.POST['password2']:
@@ -141,14 +144,10 @@ def UserStore(request,id=None):
         request.session['user_id'] = user.id
         messages.info(request, 'User inserted Successfully !!!')
         return redirect(UserList)
-    
-@login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
-def UserEdit(request):
-    return HttpResponse("i am useredit")
+
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def UserDelete(request,id):
     try:
         user = CustomUser.objects.get(id=id).delete()
@@ -211,7 +210,7 @@ def RoleStore(request,id=None):
         return redirect(RoleList)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def RoleDelete(request,id):
     groupobj = Group.objects.get(id=id)
     groupobj.delete()
