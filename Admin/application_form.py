@@ -30,7 +30,7 @@ def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all applic
     # pdf = html_to_pdf.render_to_pdf(html) 
     # return pdf
     slug1 = "सदस्य अनुमोदित फारम"
-    all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at') 
+    all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,district_name=request.user.district_name).order_by('-updated_at') 
     if pk and approved_pending_cancelled:
          if approved_pending_cancelled=='a':
            CustomUser.objects.filter(id=pk).update(is_verified=True)   

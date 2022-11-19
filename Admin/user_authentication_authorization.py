@@ -16,7 +16,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User,Group,Permission
 from django.urls import reverse
 from django.contrib.auth.hashers import make_password
-from Admin.decorators import customized_user_passes_test,is_admin_role
+from Admin.decorators import customized_user_passes_test,is_admin_role,is_central_role
 from django.contrib.auth.decorators import user_passes_test
 from axes.models import AccessAttempt
 def Login(request):
@@ -49,16 +49,17 @@ def Login(request):
 def UserList(request):
    slug1 = "Users"
    create_link_name = reverse("UserCreate")
-   all_data = CustomUser.objects.filter(role__gte = request.user.role) #gte greater than and lte less than
+   all_data = CustomUser.objects.filter(role__gte = request.user.role).exclude(role=CustomUser.PRIVATE) #gte greater than and lte less than
     # oneuser = all_data.last()
     # return HttpResponse(oneuser.groups.all())
    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name, 'users':all_data}
    return render(request , "admin/users/user-list.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def AdvanceUserList(request,role_id=None):
-    slug1 = "Users"
+    
+    slug1 = "Users classified according to roles"
     create_link_name = reverse("UserCreate")    
 
     roles = CustomUser.ROLE_CHOICES

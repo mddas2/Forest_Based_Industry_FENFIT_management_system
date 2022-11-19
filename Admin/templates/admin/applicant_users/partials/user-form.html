@@ -8,7 +8,7 @@
                                 <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
                                 {% csrf_token %}
                                     <div class="form-body">
-                                        <h5 class="card-title">Add Users</h5>
+                                        <h5 class="card-title">Profile Setting</h5>
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -43,7 +43,7 @@
                                              <div class="col-md-3 ">
                                                 <div class="form-group">
                                                     <label class="form-label">State</label>
-                                                    <input type="text" name="state" value="{{state}}"  class="form-control" disabled>
+                                                    <input type="text" name="state" value="{{id_data.state_name}}"  class="form-control" disabled>
                                                 </div>
                                              </div>
                                                 <!--/span-->
