@@ -30,7 +30,20 @@ def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all applic
     # pdf = html_to_pdf.render_to_pdf(html) 
     # return pdf
     slug1 = "सदस्य अनुमोदित फारम"
-    all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,district_name=request.user.district_name).order_by('-updated_at') 
+
+    district_name = request.user.district_name
+    state_name = request.user.state_name
+
+    if request.user.role==CustomUser.DISTRICT:
+        all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,district_name=district_name).order_by('-updated_at') 
+    if request.user.role==CustomUser.PRIVATE:
+        all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,union_name=request.usesr.union_name).order_by('-updated_at') 
+    elif request.user.role==CustomUser.STATE:
+         all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,state_name=state_name).order_by('-updated_at')
+    elif request.user.role==CustomUser.CENTRAL:
+         all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at')
+
+
     if pk and approved_pending_cancelled:
          if approved_pending_cancelled=='a':
            CustomUser.objects.filter(id=pk).update(is_verified=True)   
@@ -203,8 +216,11 @@ def MemberApprovalFormStore(request):
         }
 
         try:
+            request.user.union_type : union_type
+            request.user.union_name : union_name
             request.user.first_name = request.POST['owner_full_name']
             request.user.signature = request.FILES['signature']
+            request.user.company_name : request.POST['company_name']
             request.user.save()
         except:
             pass

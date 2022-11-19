@@ -12,6 +12,10 @@ class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
     is_applyForVerified = models.BooleanField(default=False)
 
+    company_name = models.CharField(max_length=205,null=True)
+    union_type = models.CharField(max_length=205,null=True)
+    union_name = models.CharField(max_length=205,null=True)
+
     image = models.ImageField(upload_to='user/profile', null=True)
     signature = models.ImageField(upload_to='user/documents', null=True) #Signature
     
