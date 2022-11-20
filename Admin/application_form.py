@@ -141,8 +141,11 @@ def UserApplicationFormCreate(request,id=None):
     action = "UserApplicationFormStore"
     #Fetching the data of particular ID
     id_data = UserApplicationDetail.objects.filter(user_id=request.user.id).first()
-
-    data = {'total_vdc':total_vdc,'recomendation_price_category':recomendation_price_category,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
+    try:
+        approved_admin = CustomUser.objects.get(email = id_data.union_name)
+    except:
+        approved_admin = None
+    data = {'approved_admin':approved_admin,'total_vdc':total_vdc,'recomendation_price_category':recomendation_price_category,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-application-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)

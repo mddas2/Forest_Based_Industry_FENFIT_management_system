@@ -157,19 +157,23 @@
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
                                                 </div>
-                                                <h2 class="main-title">सिफारिश गरि पाउ </h2>
+                                                <h5 class="main-title">बिषय : वन उद्यम सुचिकरण सिफारिश गरि दिने सम्वन्धमा</h5>
                                                 <div class="nibedan-form-top">
                                                     <div class="form-top-left">
+                                                        {% if request.user.union_type == 'district' %}<p>श्रीमान अध्यक्षज्यू<br>
+                                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ<br>जिल्ला {{request.user.district_name|get_districtName}} </p>
+                                                        {% else %}
                                                         <p>श्रीमान अध्यक्षज्यू<br>
-                                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                                        <label>.........................।</label>
+                                                            {{approved_admin.company_name}}<br>वस्तुगत संघ</p>
+                                                        {% endif %}
+                                                       
                                                     </div>
                                                     <div class="form-top-right">
-                                                        <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
+                                                        <span class="date">मिति: <u>{{id_data.created_at|get_NepaliDate}}</u></span>
                                                     </div>
                                                 </div>
                                                 <div class="nibedan-form-body">
-                                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                                                    <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
                                                     <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
                                                         संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि 
                                                         २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार 
@@ -193,16 +197,16 @@
                                                     <div class="user-info">
                                                         
                                                         <label style="font-weight: bold;">आवेदक</label>
-                                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{request.user.first_name}}</span></label>
-                                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
-                                                        <label>सम्र्पक नं ः <span class="user-info-data">{{request.user.phone}}</span></label>
-                                                        <label>इमेल ः <span class="user-info-data">{{request.user.email}}</span></label>
+                                                        <label>उद्यमीको नाम : <span class="user-info-data">{{request.user.first_name}}</span></label>
+                                                        <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
+                                                        <label>सम्र्पक नं : <span class="user-info-data">{{request.user.phone}}</span></label>
+                                                        <label>इमेल : <span class="user-info-data">{{request.user.email}}</span></label>
                                                         {% load staticfiles %}
-                                                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                                        <label>दस्तखत : <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                                                     </div>
                                                     <div class="user-address">
-                                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name}}</u></label>
-                                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality}}</u></label>
+                                                        <label>ठेगाना :जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
+                                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality|get_MuncipalityName}}</u></label>
                                                         <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
                                                         <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
                                                     </div>
@@ -315,8 +319,8 @@
                                             width: 100%;
                                             margin-bottom: 20px;
                                         }
-                                        h2.main-title{
-                                            font-size: 18px;
+                                        h5.main-title{
+                                            font-size: 14px;
                                             line-height: 22px;
                                             font-weight: bold;
                                             text-align: center;
