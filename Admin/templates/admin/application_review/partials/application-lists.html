@@ -47,7 +47,7 @@
                         <tbody id="tableSearch">
                             {% for i in all_data %}                               
                             <tr>
-                                <td>{{i.id}}{{request.user.groups.first.name}}</td>
+                                <td>{{i.id}}</td>
                                 <td>{{i.get_user_application_detail.owner_full_name}}</td>
                                 <td class="zoom-gallery">
                                     {% if i.get_user_application_detail.certificate_citizenship %} 
