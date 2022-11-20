@@ -87,13 +87,12 @@ def UserCreate(request,id=None):
     action = "UserStore"
     groups = Group.objects.all()
     roles = CustomUser.ROLE_CHOICES
-    permissions = Permission.objects.all()
     #Fetching the data of particular ID
     get_data = None
     if id:
         # action = "ProductUpdate"
         get_data = CustomUser.objects.get(id=id)  
-    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name,'id_data':get_data, 'action':action,'groups':groups,'roles':roles,'permissions':permissions}
+    data = {'slug1':slug1,'create':True,'create_link_name':create_link_name,'id_data':get_data, 'action':action,'groups':groups,'roles':roles}
     return render(request, "admin/users/user-form.html",data)
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_central_role)
@@ -158,7 +157,7 @@ def UserDelete(request,id):
         return redirect(UserList)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def RoleList(request):
     slug1 = "Role"
     create_link_name = reverse("RoleCreate")   
@@ -167,7 +166,7 @@ def RoleList(request):
     return render(request , "admin/role/role-list.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def RoleCreate(request,id=None):
     create_link_name = reverse("RoleCreate")
     if id==None:
@@ -192,7 +191,7 @@ def RoleCreate(request,id=None):
     return render(request, "admin/role/role-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def RoleStore(request,id=None):
     if request.POST['name']=="":
         messages.info(request, "Please Fill Group Name")
@@ -219,7 +218,7 @@ def RoleDelete(request,id):
 
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def GroupList(request):
     slug1 = "Groups"
     create_link_name = reverse("GroupCreate")
@@ -229,7 +228,7 @@ def GroupList(request):
     return render(request , "admin/group/group-list.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def GroupCreate(request,id=None):
     create_link_name = reverse("GroupCreate")
     if id==None:
@@ -254,7 +253,7 @@ def GroupCreate(request,id=None):
     return render(request, "admin/group/group-form.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def GroupStore(request,id=None):
     if request.POST['name']=="":
         messages.info(request, "Please Fill Group Name")
@@ -273,7 +272,7 @@ def GroupStore(request,id=None):
         return redirect(GroupList)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def GroupDelete(request,id):
     groupobj = Group.objects.get(id=id)
     groupobj.delete()
@@ -281,7 +280,7 @@ def GroupDelete(request,id):
     return redirect(GroupList)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def PermissionList(request):
     # https://docs.djangoproject.com/en/1.8/topics/auth/default/#permission-caching
     action = "PermissionStore"
@@ -314,7 +313,7 @@ def PermissionStore(request):
     return redirect(PermissionList)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
 def PermissionDelete(request,id):
     Permission.objects.filter(id=id).delete()
     Districts.objects.filter(id=id).delete()

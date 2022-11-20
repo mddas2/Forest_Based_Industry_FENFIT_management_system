@@ -42,7 +42,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Roles</label>
-                                                    <select class="form-control" name="role" data-placeholder="Choose a Category" tabindex="1" onchange="StateDistrictDisplay(this.value)">
+                                                    <select class="form-control" name="role" data-placeholder="Choose a Category" tabindex="1">
                                                         <option value="0" selected>select</option>
                                                         {%for role_id,role_name in roles %}
                                                             <option value="{{role_id}}" {% if id_data.role == role_id %} selected {% endif %}>{{role_name}}</option>
@@ -58,18 +58,6 @@
                                                         <option value="0" selected>select</option>
                                                         {%for group in groups %}
                                                             <option value="{{group.id}}" {% if id_data.groups.all.first.id == group.id %} selected {% endif %}>{{group.name}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6" id="permission_district" style="display: none;">
-                                                <div class="form-group">
-                                                    <label class="form-label">Permissions</label>
-                                                    <select class="form-control" name="permission" data-placeholder="Choose a Category" tabindex="1">
-                                                        <option value="0" selected>select</option>
-                                                        {%for permission in permissions %}
-                                                            <option value="{{permission.id}}" {% if id_data.groups.all.first.id == group.id %} selected {% endif %}>{{permission.name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
@@ -150,16 +138,7 @@
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <script>
-                    function StateDistrictDisplay(state_district){
-                        if(state_district == '2'){
-                            $('#group_states').css("display", "block");
-                            $('#permission_district').css("display", "none");
-                        }
-                        else if(state_district=='3'){
-                            $('#permission_district').css("display", "block");
-                            $('#group_states').css("display", "none");
-                        }
-                    }
+             
                     // Function to check Whether both passwords
                     // is same or not.
                     function checkPassword(form) {
