@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <!-----image-->
-                    <div class="col-md-6 ">
+                    <div class="col-md-8 ">
                         <div class="card ">
                             <div class="card-body" >
                                 <h4 class="card-title">Profile Image</h4>
@@ -69,8 +69,8 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="customCheck1" name="agree">
-                                <label class="form-check-label" for="customCheck1">I agree to all <a href="javascript:void(0)">Terms</a></label> 
+                                <input type="checkbox" name="term_condition" class="form-check-input" id="customCheck1" required>
+                                <label class="form-check-label" for="customCheck1">I agree to all <a target="_blank" href="{% static '/termcondition/term-and-condition.pdf' %}">Terms</a></label> 
                             </div> 
                         </div>
                     </div>

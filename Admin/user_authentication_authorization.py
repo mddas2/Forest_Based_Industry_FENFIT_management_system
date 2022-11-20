@@ -59,7 +59,7 @@ def UserList(request):
    return render(request , "admin/users/user-list.html",data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_central_role)
+@customized_user_passes_test(is_admin_role)
 def AdvanceUserList(request,role_id=None):
     
     slug1 = "Users classified according to roles"
