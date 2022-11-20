@@ -195,7 +195,14 @@ def MemberApprovalFormStore(request):
                 return redirect(MemberAprovalForm)        
         elif request.POST['union_type'] == 'district':
             union_type = "district"
-            union_name = request.user.district_name        
+            distrct = request.user.district_name
+            try:
+                union_name=CustomUser.objects.filter(district_name=distrct,role=CustomUser.DISTRICT).first().email     
+            except:
+                try:
+                    union_name=CustomUser.objects.filter(state_name=request.user.state_name,role=CustomUser.STATE).first().email
+                except:
+                    union_name=CustomUser.objects.filter(role=CustomUser.CENTRAL).first().email
         else:
             messages.info(request,'सदस्य हुन चाहेको संघ चयन गर्नुहोस्')
             return redirect(MemberAprovalForm)
@@ -215,15 +222,20 @@ def MemberApprovalFormStore(request):
             'company_name' : request.POST['company_name'],
         }
 
+        user_data = {
+            'union_type' : union_type,
+            'union_name' : union_name,
+            'company_name' : request.POST['company_name'],
+            'first_name' : request.POST['owner_full_name'],
+        }
         try:
-            request.user.union_type : union_type
-            request.user.union_name : union_name
-            request.user.first_name = request.POST['owner_full_name']
-            request.user.signature = request.FILES['signature']
-            request.user.company_name : request.POST['company_name']
-            request.user.save()
+            signature = request.FILES['signature']
+            user_data['signature']
         except:
             pass
+
+        CustomUser.objects.update_or_create(id=request.user.id,defaults=user_data)
+        
 
         documents = {} #dictionary of image
         for im in request.FILES:
@@ -278,10 +290,10 @@ def MemberAprovalFormReview(request,id=None):
         business_name = None
 
     try:
-        approved_admin = CustomUser.objects.get(id_data.union_name)
+        approved_admin = CustomUser.objects.get(email = id_data.union_name)
     except:
         approved_admin = None
-    return HttpResponse(CustomUser.objects.get(id=id_data.id).union_namec)
+    # return HttpResponse(CustomUser.objects.get(id=id_data.id).union_namec)
     data = {'approved_admin':approved_admin,'business_name':business_name,'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
 
     return render(request, "admin/applicant_users/member-approval-form-review.html",data)

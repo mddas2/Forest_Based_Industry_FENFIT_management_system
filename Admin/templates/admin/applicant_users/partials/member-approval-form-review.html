@@ -79,7 +79,7 @@
                                     {{id_data.company_name}} फर्म । कम्पनी </p>
                             </div>                            
                             <div class="form-top-right">
-                                <span class="date">मिति ः <u>{{id_data.updated_at|get_NepaliDate}}</u></span>
+                                <span class="date">मिति : <u>{{id_data.updated_at|get_NepaliDate}}</u></span>
                             </div>
                         </div>
                         <div class="nibedan-form-body">
@@ -98,8 +98,7 @@
                                 {% load staticfiles %}
                                 <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                 {% load staticfiles %}
-                                <label>दस्तखत : <span class="user-info-data"><img
-                                            src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                <label>दस्तखत : <span class="user-info-data"><img  src="{% if approved_admin.signature %} {{approved_admin.signature.url}} {% endif %}"></span></label>
                             </div>
                         </div>
 
