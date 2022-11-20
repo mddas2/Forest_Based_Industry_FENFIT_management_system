@@ -63,38 +63,42 @@
                         <div class="form-logo">
                             <img src="/static/assets/images/logo-2.png">
                         </div>
-                        <h2 class="main-title">सदस्यता अद्यावद्यिक प्रमाण पत्र</h2>
+                        <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
+                        <!-- <h4 class="main-title">सदस्यता अद्यावद्यिक प्रमाण पत्र</h4> -->
+                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.district_name|get_districtName}}<br> सदस्यता अद्यावद्यिक प्रमाण पत्र ।</h6>
+                        <div class="nibedan-form-top">
+                            
+                            <div class="form-top-left">
+                                <p><u>{{id_data.id}}</u><br>
+                                    अद्यावद्यिक नम्बर</p>
+                            </div>
+                        </div>
                         <div class="nibedan-form-top">
                             <div class="form-top-left">
-                                <p>श्रीमान अध्यक्षज्यू<br>
-                                    नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                <label><u>{{id_data.first_name}} Fenfit Nepal </u></label>
-                            </div>
+                                <p>श्रीमान {{id_data.first_name}} ज्यू<br>
+                                    {{id_data.company_name}} फर्म । कम्पनी </p>
+                            </div>                            
                             <div class="form-top-right">
-                                <span class="date">मिति ः <u>{{id_data.created_at}}</u></span>
+                                <span class="date">मिति ः <u>{{id_data.updated_at|get_NepaliDate}}</u></span>
                             </div>
                         </div>
                         <div class="nibedan-form-body">
-                            <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                            <p>तपाईले सदस्यता अद्यावद्यिकका लागि मिति २०७९।००।०० मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ
-                                संस्थाको
-                                विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनुपर्ने दस्तुर समेत बभु mाई
-                                सक्नुभएकोलेनेपाल
-                                वन पैदावार उद्योग ब्यवसायि संघको विधान बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सदस्यता
-                                अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । संघको उद्धेश्य परिपुर्तिमा विधान बमोजिम
-                                सदस्यहरको हित रक्षार्थ
-                                क्रियाशील हुनु हुने छ भन्ने विश्वास लिएको छु । तपाईको कार्यकाल सफल र उत्कृष्ट रहोस भन्ने
-                                शुभकामना ब्यक्त
-                                गर्दछु ।</p>
+                            <p>तपाईले सदस्यता अद्यावद्यिकका लागि मिति {{id_data.updated_at|get_NepaliDate}} मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको 
+                                विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले ं(जुन संघ 
+                                वा बस्तुगत संघ छनौट गरेर आवेदन गरेको हुन्छ त्यहि संघ वा वस्तुगत संघको नाम आउने वनाउनेसंघको विधान 
+                                बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सदस्यता अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । संघको 
+                                उद्धेश्य परिपुर्तिमा विधान बमोजिम सदस्यहरकोहित रक्षार्थ क्रियाशील हुनुहुनेछ भन्नेविश्वास लिएकोछु। तपाइर्क ो
+                                कार्यकाल सफल र उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु । </p>
 
                         </div>
                         <div class="nibedan-form-footer">
                             <div class="user-info">
                                 <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                <label>अध्यक्षको नाम ः <span class="user-info-data">{{id_data.district_name|title}}
-                                        नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
+                                <label>नाम :<span class="user-info-data">{{approved_admin.first_name}}</span></label>
                                 {% load staticfiles %}
-                                <label>दस्तखत ः <span class="user-info-data"><img
+                                <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
+                                {% load staticfiles %}
+                                <label>दस्तखत : <span class="user-info-data"><img
                                             src="{% static '/assets/images/signature.jpeg' %}"></span></label>
                             </div>
                         </div>
@@ -534,3 +538,4 @@
         return false;
     }
 </script>
+                           

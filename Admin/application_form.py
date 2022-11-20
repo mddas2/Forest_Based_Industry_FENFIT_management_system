@@ -176,8 +176,8 @@ def MemberAprovalForm(request,id=None):
         business_name = BusinessType.business_type[business_name]['name_1']
     except:
         form_data = None
-        business_name = None        
-
+        business_name = None   
+    
     data = {'private_organization':private_organization,'total_vdc':total_vdc,'business_name':business_name,'business_type':business_type,'form_data':form_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'id_data':id_data}
     return render(request, "admin/applicant_users/user-membership-form.html",data)
 
@@ -277,7 +277,13 @@ def MemberAprovalFormReview(request,id=None):
         form_data = None
         business_name = None
 
-    data = {'business_name':business_name,'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
+    try:
+        approved_admin = CustomUser.objects.get(id_data.union_name)
+    except:
+        approved_admin = None
+    return HttpResponse(CustomUser.objects.get(id=id_data.id).union_namec)
+    data = {'approved_admin':approved_admin,'business_name':business_name,'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
+
     return render(request, "admin/applicant_users/member-approval-form-review.html",data)
     
     return redirect('MemberAprovalForm')
