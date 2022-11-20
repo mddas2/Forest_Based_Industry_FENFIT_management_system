@@ -63,9 +63,13 @@
                         <div class="form-logo">
                             <img src="/static/assets/images/logo-2.png">
                         </div>
-                        <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
-                        <!-- <h4 class="main-title">सदस्यता अद्यावद्यिक प्रमाण पत्र</h4> -->
-                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.district_name|get_districtName}}<br> सदस्यता अद्यावद्यिक प्रमाण पत्र ।</h6>
+                        {% if id_data.union_type == 'private' %}
+                            <h5 style="font-weight: 600;"><center>{{approved_admin.company_name}}</center></h5>
+                            <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> सदस्यता अद्यावद्यिक प्रमाण पत्र ।</h6>
+                        {% else %}
+                            <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
+                            <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.district_name|get_districtName}}<br> सदस्यता अद्यावद्यिक प्रमाण पत्र ।</h6>
+                        {% endif %}
                         <div class="nibedan-form-top">
                             
                             <div class="form-top-left">
