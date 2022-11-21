@@ -80,9 +80,10 @@ class CustomUser(AbstractUser):
             return 'प्रदेश महासंघ'+'-' + str(state)
         elif self.role==3:
             district = self.district_name
-            return str(district)+' जिल्ला'
+            return str(district)+' जिल्ला संघ'
         elif self.role==4:
-            return 'वस्तुगत संघ'
+            company_name = self.company_name
+            return str(company_name) + 'वस्तुगत संघ'
         else:
             return 'None'
     def get_dsc_Role(self):

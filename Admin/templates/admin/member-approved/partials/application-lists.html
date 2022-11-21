@@ -297,7 +297,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive">
+                                                {% if id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship %}
+                                                    <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive">
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -305,7 +307,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र</h4>
-                                                <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive">
+                                                {% if id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration %}
+                                                    <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive">
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -314,7 +318,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                <img src="{{id_data.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" class="img-responsive">
+                                                {% if id_data.applicationform.all.first.get_user_application_detail.provisional_account_number %}
+                                                     <img src="{{id_data.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" class="img-responsive">
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -322,7 +328,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
-                                                <img src="{{id_data.applicationform.all.first.get_user_application_detail.auditing.url}}" class="img-responsive">
+                                                {% if id_data.applicationform.all.first.get_user_application_detail.auditing %}
+                                                    <img src="{{id_data.applicationform.all.first.get_user_application_detail.auditing.url}}" class="img-responsive">
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -330,7 +338,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
-                                                <img src="{{id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive">
+                                                {% if id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}
+                                                    <img src="{{id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive">
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>

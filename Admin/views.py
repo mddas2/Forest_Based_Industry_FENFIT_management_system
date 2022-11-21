@@ -33,8 +33,16 @@ from django.shortcuts import redirect
 # @customized_user_passes_test(is_admin_role)
 @customized_user_passes_test(is_all_role)
 def index(request, pk=None, pdc=None):
-    today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
-    today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+    if request.user.role == CustomUser.DISTRICT:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-updated_at')  
+    elif request.user.role == CustomUser.STATE:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-updated_at')  
+    elif request.user.role == CustomUser.PRIVATE:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-updated_at') 
+    elif request.user.role == CustomUser.CENTRAL:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at') 
+    else:
+        all_data = None 
     
     dsc_role = request.user.get_dsc_Role()
     total_pending_application_form = ApplicationForm.objects.filter(dsc=dsc_role).count()
@@ -49,8 +57,7 @@ def index(request, pk=None, pdc=None):
     }
 
     # return  HttpResp  onse(today_max)
-    slug1 = request.user.getRoleNameInNepali()
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=dsc_role).order_by('-updated_at')   
+    slug1 = request.user.getRoleNameInNepali() 
     data = {'slug1':slug1,'create':False,'action':True,'all_data':all_data}
     data = {**data,**data_1}
     client_msg = ContactUs.objects.filter(read_unread=True)
