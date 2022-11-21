@@ -90,7 +90,7 @@ class UserApplicationDetail(models.Model):
 
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
     certificate_company_registration = models.ImageField(upload_to='user/documents', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
-    provisional_account_number = models.ImageField(upload_to='user/documents', null=True) #अस्थायी लेखा नम्बरको पर्तिलिपि
+    provisional_account_number = models.ImageField(upload_to='user/documents', null=True) #स्थायी लेखा नम्बरको पर्तिलिपि
     auditing = models.ImageField(upload_to='user/documents', null=True) #लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि
     tax_paid_certificate = models.ImageField(upload_to='user/documents', null=True) # कर चुक्ता प्रमाण पत्रको पर्तिलिपि
 
