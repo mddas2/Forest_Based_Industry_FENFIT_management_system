@@ -470,9 +470,15 @@ def AccountantPayment(request, pk=None, payment=None):#all application
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllApplication(request, pk=None, approved_pending_cancelled=None):#all application
-
     slug1 = "सिफारिश अनुमोदन"
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
+    if request.user.role == CustomUser.DISTRICT:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-updated_at')  
+    elif request.user.role == CustomUser.STATE:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-updated_at')  
+    elif request.user.role == CustomUser.PRIVATE:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-updated_at') 
+         
+
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
          if approved_pending_cancelled=='a':
