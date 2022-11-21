@@ -190,12 +190,12 @@
                         <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
                         <div class="nibedan-form-top">
                             <div class="form-top-left">
-                                <p> , {{form_data.id}} सिफारिश पत्र नम्बर : <br>
+                                <p>{{form_data.id}} सिफारिश पत्र नम्बर : <br>
                                    </p>
                             </div>
                    
                             <div class="form-top-right">
-                                <span class="date">मिति ः <u>{{request.user.created_at}}</u></span>
+                                <span class="date">मिति ः <u>{{id_data.created_at|get_NepaliDate}}</u></span>
                             </div>
                         </div>
                         <div class="nibedan-form-top1">

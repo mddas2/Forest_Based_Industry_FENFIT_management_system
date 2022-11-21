@@ -204,16 +204,32 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                <div class="white-box text-center">
+                                                    {% if id_data.get_user_application_detail.certificate_citizenship %}     
+                                                         <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive">
+                                                    {% endif %}
+                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                <div class="white-box text-center">
+                                                    {% if id_data.get_user_application_detail.certificate_company_registration %}     
+                                                         <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> 
+                                                     {% endif %}
+                                                </div>
                                             </div>
                                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                <div class="white-box text-center"> 
+                                                    {% if id_data.get_user_application_detail.provisional_account_number %}     
+                                                         <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive">
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="white-box text-center"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive"> </div>
+                                                <div class="white-box text-center">
+                                                    {% if id_data.get_user_application_detail.auditing %}     
+                                                         <img src="{{id_data.get_user_application_detail.auditing.url}}" class="img-responsive"> 
+                                                    {% endif %}
+                                                </div>
                                             </div>
                         
                                       
