@@ -174,12 +174,11 @@
                                                 </div>
                                                 <div class="nibedan-form-body">
                                                     <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
-                                                    <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेिखत वन श्रोतलाई सदुपयोग गरि राष्ट्रिय
-                                                        संमृद्धिमा योगदान पुरयाउने ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि 
-                                                        २०७९को नियम १२८र नियम १२८को उप नियममा.२मा नेपाल वन पैदावार 
-                                                        उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु 
-                                                        सुचीकृत हुनुपर्ने ब्यवस्था गरके ोलेनिम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार 
-                                                        उपलब्ध गराइृदिनु हुन अनुरोध छ । </p>
+                                                    <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेखित वन श्रोतलाई सदुपयोग गरि राष्ट्रिय संमृद्धिमा योगदान पुरयाउने 
+                                                        ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि २०७९को नियम १२८र नियम १२८को उप नियममा.२मा 
+                                                        नेपाल वन पैदावार उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु सुचीकृत 
+                                                        हुनु पर्ने ब्यवस्था गरेको ले निम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार उपलब्ध गराइृदिनु हुन 
+                                                        अनुरोध छ । </p>
                                                     <h5>संलग्न कागजातहरु ः–</h5>
                                                     <ul>
                                                         <li>कम्पनी वा फर्म दर्ताको प्रमाण पत्र ।</li>
@@ -198,11 +197,11 @@
                                                         
                                                         <label style="font-weight: bold;">आवेदक</label>
                                                         <label>उद्यमीको नाम : <span class="user-info-data">{{request.user.first_name}}</span></label>
-                                                        <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name}}</span></label>
+                                                        <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">{{id_data.applicationform.all.first.get_user_application_detail.business_name|get_NepaliBusinessName}}</span></label>
                                                         <label>सम्र्पक नं : <span class="user-info-data">{{request.user.phone}}</span></label>
                                                         <label>इमेल : <span class="user-info-data">{{request.user.email}}</span></label>
                                                         {% load staticfiles %}
-                                                        <label>दस्तखत : <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                                        <label>दस्तखत : <span class="user-info-data"><img src="{% if request.user.signature %}{{request.user.signature.url}} {% endif %}"></span></label>
                                                     </div>
                                                     <div class="user-address">
                                                         <label>ठेगाना :जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
