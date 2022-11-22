@@ -88,5 +88,6 @@ def report(request):
     response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
     response.write(pdf) 
     # response.write(pdf1)
-    return response
+    # return response
+    return pdf
         
