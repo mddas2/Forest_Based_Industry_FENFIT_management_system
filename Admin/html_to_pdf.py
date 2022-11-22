@@ -1,12 +1,5 @@
-from django.http import HttpResponse
-import io
-from reportlab.pdfgen import canvas
-from io import BytesIO, StringIO
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from datetime import datetime
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import pdfmetrics
+
+
 from django.templatetags.static import static
 from django.conf import settings
 
@@ -17,77 +10,83 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 
+from django.http import HttpResponse
+import io
+from reportlab.pdfgen import canvas
+from io import BytesIO, StringIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from datetime import datetime
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
 
 def report(request):
+    pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.ttf")))
+    pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.ttf")))
+    pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/Times.ttf")))
+    pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
     response = HttpResponse(content_type="application/pdf")
     d = datetime.today().strftime('%Y-%m-%d')
     response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
 
     import io
     buffer = BytesIO()
+    styles=getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+
+    styles1=getSampleStyleSheet()
+    styles1.add(ParagraphStyle(name='gargi', alignment=TA_JUSTIFY,fontName='gargi', fontSize=18,leading=24))
 
     doc = SimpleDocTemplate(buffer,pagesize=letter,
                             rightMargin=72,leftMargin=72,
                             topMargin=72,bottomMargin=18)
     Story=[]
-    logo = "python_logo.png"
-    magName = "Pythonista"
-    issueNum = 12
-    subPrice = "99.00"
-    limitedDate = "03/05/2010"
-    freeGift = "tin foil hat"
+    logo = settings.BASE_URL+static("/assets/images/logo-2.png")
 
-    formatted_time = time.ctime()
-    full_name = "Mike Driscoll"
-    address_parts = ["411 State St.", "Marshalltown, IA 50158"]
+    buffer1 = BytesIO()
+    p = canvas.Canvas (buffer1, pagesize=A4)
+    p.setFillColorRGB(0, 0,0)
+    p.drawImage(logo,30,740,550,75,mask='auto')
+    p.save()
+    pdf1 = buffer1.getvalue()
+    buffer1.close()
 
-    #im = Image(logo, 2*inch, 2*inch)
-    #Story.append(im)
+    title = "नेपाल वन पैदावार उद्योग व्यवसायी संघ जिल्ला सुनसरी सदस्यता अद्यावद्यिक प्रमाण पत्र ।"
 
-    styles=getSampleStyleSheet()
-    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-    ptext = '%s' % formatted_time
+    im = Image(logo, 450,60)
+    Story.append(im)
 
+    Story.append(Spacer(1, 12))
+    ptext = '%s' % title
+    Story.append(Paragraph(ptext, styles1["gargi"]))
+    Story.append(Spacer(1, 12))
+
+    var1='v'
+    ptext = """तपाईले सदस्यता अद्यावद्यिकका लागि मिति 2079-08-04 मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले ं(जुन संघ वा बस्तुगत संघ छनौट गरेर आवेदन गरेको हुन्छ त्यहि संघ वा वस्तुगत संघको नाम आउने वनाउनेसंघको विधान बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सदस्यता अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । संघको उद्धेश्य परिपुर्तिमा विधान बमोजिम सदस्यहरकोहित रक्षार्थ क्रियाशील हुनुहुनेछ भन्नेविश्वास लिएकोछु। तपाइर्क ो कार्यकाल सफल र उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु %s ।""" % (var1)
+            
+    Story.append(Paragraph(ptext, styles1["gargi"]))
+    Story.append(Spacer(1, 12))
+
+    ptext = 'Thank you'
     Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 12))
 
-    # Create return address
-    ptext = '%s' % full_name
-    Story.append(Paragraph(ptext, styles["Normal"]))       
-    for part in address_parts:
-        ptext = '%s' % part.strip()
-        Story.append(Paragraph(ptext, styles["Normal"]))   
-
-    Story.append(Spacer(1, 12))
-    ptext = 'Dear %s:' % full_name.split()[0].strip()
-    Story.append(Paragraph(ptext, styles["Normal"]))
-    Story.append(Spacer(1, 12))
-
-    ptext = 'We would like to welcome you to our subscriber base for %s Magazine! \
-            You will receive %s issues at the excellent introductory price of $%s. Please respond by\
-            %s to start receiving your subscription and get the following free gift: %s.' % (magName, 
-                                                                                                    issueNum,
-                                                                                                    subPrice,
-                                                                                                    limitedDate,
-                                                                                                    freeGift)
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
-
-
-    ptext = 'Thank you very much and we look forward to serving you.'
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Spacer(1, 12))
     ptext = 'Sincerely,'
     Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 48))
+
     ptext = 'Ima Sucker'
     Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 12))
     doc.build(Story)
-
-
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=gugus.pdf'
-    response.write(buffer.getvalue()) 
+    pdf = buffer.getvalue()
+    buffer.close()
+    # response = HttpResponse(content_type='application/pdf') #for download
+    # response['Content-Disposition'] = 'attachment; filename=gugus.pdf' #for download
+    response = HttpResponse(content_type="application/pdf")
+    d = datetime.today().strftime('%Y-%m-%d')
+    response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
+    response.write(pdf) 
+    # response.write(pdf1)
     return response
         
