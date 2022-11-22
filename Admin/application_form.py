@@ -508,6 +508,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                 if should_insert==1:
                     whoses_form = ApplicationForm.objects.get(id=pk).user_id
                     if approved == 1:
+                        messages.success(request,'form approved successfully!!!')
                         UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
                         to_number = CustomUser.objects.get(id=whoses_form).phone
                         bulk_sms_email.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
@@ -522,7 +523,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                               }
                         template = get_template('certificate/sifarish.html')
                         html = template.render(context_dict,request)
-                        pdf = html_to_pdf.render_to_pdf(html) 
+                        pdf = html_to_pdf.report(html) 
                         try:   
                             bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                         except:                       
@@ -536,8 +537,6 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     ApplicationFormApprovedDetail.objects.create(**application_form_approved_detail_data)
                 else:
                     messages.error(request,'can not insert to application_form_approved_detail please report to programmer')
-                    
-                messages.success(request,'form approved successfully!!!')
             except:
                 messages.error(request,'form not approved')
          elif approved_pending_cancelled=='c':
