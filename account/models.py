@@ -16,6 +16,11 @@ class CustomUser(AbstractUser):
     union_type = models.CharField(max_length=205,null=True)
     union_name = models.CharField(max_length=205,null=True)
 
+    approved_name = models.CharField(max_length=205,null=True)
+    approved_email = models.CharField(max_length=205,null=True)
+    approved_signature = models.ImageField(upload_to='user/documents', null=True)
+    approved_company_name =models.CharField(max_length=205,null=True)
+
     image = models.ImageField(upload_to='user/profile', null=True)
     signature = models.ImageField(upload_to='user/documents', null=True) #Signature
     

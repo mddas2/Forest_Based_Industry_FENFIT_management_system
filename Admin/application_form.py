@@ -507,6 +507,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                 if should_insert==1:
                     whoses_form = ApplicationForm.objects.get(id=pk).user_id
                     if approved == 1:
+                        UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
                         to_number = CustomUser.objects.get(id=whoses_form).phone
                         bulk_sms_email.SendSms(to_number,"Congratulation Your Form is approved successfully by FENFIT")
 

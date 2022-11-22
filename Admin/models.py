@@ -87,6 +87,10 @@ class UserApplicationDetail(models.Model):
     tax_amount = models.IntegerField(null=True) #कर रकम
     number_of_employees = models.IntegerField(null=True) #कामदार तथा कर्मचारि स.ख्या
 
+    approved_name = models.CharField(max_length=205,null=True)
+    approved_email = models.CharField(max_length=205,null=True)
+    approved_signature = models.ImageField(upload_to='user/documents', null=True)
+    approved_company_name =models.CharField(max_length=205,null=True)
 
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
     certificate_company_registration = models.ImageField(upload_to='user/documents', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
