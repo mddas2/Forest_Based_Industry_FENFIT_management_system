@@ -10,76 +10,84 @@ from reportlab.pdfbase import pdfmetrics
 from django.templatetags.static import static
 from django.conf import settings
 
+import time
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+
+
 def report(request):
     response = HttpResponse(content_type="application/pdf")
     d = datetime.today().strftime('%Y-%m-%d')
     response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
 
+    import io
     buffer = BytesIO()
-    p = canvas.Canvas (buffer, pagesize=A4)
 
-    #Data to print  
-    # data = {
-    # "Posts": [{"title":"Bython","Views" :500}, {"title": "JavaScript", "views":500}],
-    # "Videos" :[{"title": "Python Prooramming", "Likes":500}],
-    # "Blogs": [{"nane":"Report Lab","Likes":500, "claps":500}],
-    # }
+    doc = SimpleDocTemplate(buffer,pagesize=letter,
+                            rightMargin=72,leftMargin=72,
+                            topMargin=72,bottomMargin=18)
+    Story=[]
+    logo = "python_logo.png"
+    magName = "Pythonista"
+    issueNum = 12
+    subPrice = "99.00"
+    limitedDate = "03/05/2010"
+    freeGift = "tin foil hat"
 
-    pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.ttf")))
-    pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.ttf")))
-    pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/Times.ttf")))
-    pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
-    
-    # Start writing the POF here
-    p.setFillColorRGB(0, 0,0)
-    p.drawImage(settings.BASE_URL+static("/assets/images/logo-2.png"),30,740,550,75,mask='auto')
-    p.line(25, 730,575, 730)
+    formatted_time = time.ctime()
+    full_name = "Mike Driscoll"
+    address_parts = ["411 State St.", "Marshalltown, IA 50158"]
 
-    p.setFont("Preeti", 22, leading=None)
-    p.drawString(450,690,"ldlt M") #miti
+    #im = Image(logo, 2*inch, 2*inch)
+    #Story.append(im)
 
-    p.setFont("Times", 15, leading=None)
-    p.drawString(493,690,d) #date
+    styles=getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+    ptext = '%s' % formatted_time
 
-    p.setFont("Preeti", 22, leading=None)
-    p.drawString(25,650,">Ldfg cWoIfHo',") #xirman
-    p.drawString(25,625,"g]kfn jg k}bfjf/ pBf]u Joj;foL ;+3")
+    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Spacer(1, 12))
 
-    p.setFont("Preeti-Bold", 22, leading=None)
-    p.drawString(200,550,"laifo M ;b:otf ;DaGwdf . ")#bisaya 550
+    # Create return address
+    ptext = '%s' % full_name
+    Story.append(Paragraph(ptext, styles["Normal"]))       
+    for part in address_parts:
+        ptext = '%s' % part.strip()
+        Story.append(Paragraph(ptext, styles["Normal"]))   
 
-    # p.setFont("Preeti", 22, leading=None)
-    # p.drawString(25,505,""";~rfns . k|f]k|fO6/ &gt;L ============= ;Mldn ÷ e]lgo/ tyf KnfO{p8 ÷ """) 
-    # p.drawString(25,480,"""==============n] pBf]u btf{ k|df0fkq ;fy pBf]u ;&#39;lrs[t ug{sf nflu l;kmfl/;""") 
-    # p.drawString(25,455,""" dfu ul/ ===============lhNnf ;+3 . j:t&#39;ut ;+3 dfkm{t o; sfof{nodf lgj]bg """) 
-    # p.drawString(25,430,"""lbg&#39; ePsf]df pBf]u btf{ k|df0fkqsf] cfwf/ / =================k|b]z""") 
-    # p.drawString(25,405,"""dxf;+3 . j:t&#39;ut ;+3sf] l;kmfl/zsf cfwf/df df jg lgodfjnL, @)&amp;( sf] lgod !#! sf]""") 
-    # p.drawString(25,380,"""k}/jL ug]{ o; lhNnf ;+3sf] ljwfgsf] clwgdf /lx gLlt, sfo{s|d tyf lg0f{ox?""") 
-    # p.drawString(25,355,"""pklgod -@_ adf]lhd ;~rfns . k|f]k|fO6/ &gt;L =============""")
+    Story.append(Spacer(1, 12))
+    ptext = 'Dear %s:' % full_name.split()[0].strip()
+    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Spacer(1, 12))
 
-    p.setFont("gargi", 22, leading=None)
-    p.drawString(25,505,""" """) 
-    p.drawString(25,480,""" """) 
-    p.drawString(25,455,""" """) 
-    p.drawString(25,430,""" """) 
-    p.drawString(25,405,""" """) 
-    p.drawString(25,380,""" """) 
-    p.drawString(25,355,""" """)
-
-    p.drawString(350,210,"""cWoIf M """) 
-    p.drawString(350,180,"""b:tvt M""") 
-    p.drawImage(settings.BASE_URL+static("/assets/images/signature.jpeg"),410,180,80,60,mask='auto') 
+    ptext = 'We would like to welcome you to our subscriber base for %s Magazine! \
+            You will receive %s issues at the excellent introductory price of $%s. Please respond by\
+            %s to start receiving your subscription and get the following free gift: %s.' % (magName, 
+                                                                                                    issueNum,
+                                                                                                    subPrice,
+                                                                                                    limitedDate,
+                                                                                                    freeGift)
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
 
 
+    ptext = 'Thank you very much and we look forward to serving you.'
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Spacer(1, 12))
+    ptext = 'Sincerely,'
+    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Spacer(1, 48))
+    ptext = 'Ima Sucker'
+    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Spacer(1, 12))
+    doc.build(Story)
 
-    #Render data
-   
 
-    p.setTitle(f'Report on {d}')
-#     p.showPage()
-    p.save()
-    pdf = buffer.getvalue()
-    buffer. close()
-    response.write(pdf) #hide for gmail
-    return response #hide for gmail
-    # return pdf      #unhide for gmail
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=gugus.pdf'
+    response.write(buffer.getvalue()) 
+    return response
+        
