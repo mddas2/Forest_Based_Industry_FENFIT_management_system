@@ -66,5 +66,6 @@ def report(request):
     p.save()
     pdf = buffer.getvalue()
     buffer. close()
-#     response.write(pdf)
-    return pdf
+    response.write(pdf) #hide for gmail
+    return response #hide for gmail
+    # return pdf      #unhide for gmail
