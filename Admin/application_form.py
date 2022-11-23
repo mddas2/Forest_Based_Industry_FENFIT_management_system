@@ -445,12 +445,11 @@ def AccountantPayment(request):#all application
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')
     if request.POST:
         pk = request.POST['pk']
-        payment = request.POST['payment']  
+        payment = request.POST['payment']
         if pk and payment:
             ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=payment)
             if payment=='1':
-                should_insert = 0
-                
+                should_insert = 0                
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 application_detail =  ApplicationForm.objects.get(id=pk).get_user_application_detail
                 # return HttpResponse(application_detail.applicationform.all().first().id)
@@ -472,6 +471,7 @@ def AccountantPayment(request):#all application
                         'is_payment' : True
                     }
                     UserApplicationPayment.objects.create(**payment_data)
+                    ApplicationForm.objects.filter(id=pk).update(is_payment=1)
                     messages.info(request,"payment sucessfull")            
             
             elif payment=='0':

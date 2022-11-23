@@ -130,6 +130,9 @@ class ApplicationForm(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
+
+    is_payment = models.BooleanField(null=True,default=False)
+    
     def get_date(self):
         return humanize.naturaltime(self.updated_at)   
 
