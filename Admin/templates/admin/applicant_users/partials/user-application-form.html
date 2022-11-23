@@ -77,7 +77,7 @@
                                         </div>
                                    
                                         <hr>
-                                        <h5 class="card-title">कम्पनीको जानकारी &nbsp &nbsp <input id="renew_check" {% if id_data.is_reniew == True %} checked {% endif%} name="is_renew" type="checkbox" class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
+                                        <h5 class="card-title">कम्पनीको जानकारी  &nbsp &nbsp <input id="renew_check" {% if id_data.is_reniew == True %} checked {% endif%} name="is_renew" type="checkbox" class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
                                     
                                         <div class="row">
                                             <div class="col-md-6">
@@ -99,6 +99,12 @@
                                                         {% endfor %}
                                                    </select>
                                                 </div>
+                                                <!-- <div class="col-md-8 ">
+                                                    <div class="form-group">
+                                                        <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
+                                                        <input type="number" id="amount_to_select" name="amount_to_select" value="{{amount_to_select}}" class="form-control" required>
+                                                    </div>
+                                                </div> -->
                                             </div> 
                                             <div class="col-md-6 ">
                                                 <div class="form-group"> <!-----{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee}}'--->
@@ -457,6 +463,9 @@
                     $("#businessrice").text(price)
                     });
                     
+                    // $("#amount_to_select").keyup(function(){
+                    //     num = $("#amount_to_select").val()
+                    // });
              
                     function checkPassword(form) {
                         password1 = form.password1.value;
