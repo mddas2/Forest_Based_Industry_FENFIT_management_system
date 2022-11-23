@@ -98,11 +98,11 @@
                         <div class="nibedan-form-footer">
                             <div class="user-info">
                                 <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                <label>नाम :<span class="user-info-data">{{approved_admin.first_name}}</span></label>
+                                <label>नाम :<span class="user-info-data">{{request.user.approved_name}}</span></label>
                                 {% load staticfiles %}
                                 <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                 {% load staticfiles %}
-                                <label>दस्तखत : <span class="user-info-data"><img  src="{% if approved_admin.signature %} {{approved_admin.signature.url}} {% endif %}"></span></label>
+                                <label>दस्तखत : <span class="user-info-data"><img  src="{% if request.user.approved_signature %} {{request.user.approved_signature.url}} {% endif %}"></span></label>
                             </div>
                         </div>
 
