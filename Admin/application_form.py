@@ -433,7 +433,7 @@ def CustomerOrder(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def AccountantPayment(request, pk=None, payment=None , payment_id = None):#all application
+def AccountantPayment(request):#all application
     
     try:
         if request.user.groups.all().first().name != 'accountant':
@@ -442,14 +442,18 @@ def AccountantPayment(request, pk=None, payment=None , payment_id = None):#all a
     except:
         messages.info(request,"accountant something is wrong")
     slug1 = "सिफारिश अनुमोदन"
-    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')   
-    if pk and payment:
-         ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=payment)
-         if payment=='1':
-            should_insert = 0
-            try:
+    all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')
+    if request.POST:
+        pk = request.POST['pk']
+        payment = request.POST['payment']  
+        if pk and payment:
+            ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=payment)
+            if payment=='1':
+                should_insert = 0
+                
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 application_detail =  ApplicationForm.objects.get(id=pk).get_user_application_detail
+                # return HttpResponse(application_detail.applicationform.all().first().id)
                 if dsc == 'c' and request.user.get_dsc_Role()=='c':
                     payment_data = {
                         'is_renew' : application_detail.is_reniew,
@@ -458,8 +462,8 @@ def AccountantPayment(request, pk=None, payment=None , payment_id = None):#all a
                         'voucher_number' : application_detail.voucher_number,
                         'business_name' : application_detail.business_name,
                         'user' : application_detail.user,
-                        'get_user_application_detail' : application_detail.get_user_application_detail,
-                        'user_application_form' : application_detail.user_application_form,
+                        'get_user_application_detail' : application_detail,
+                        'user_application_form' : application_detail.applicationform.all().first(),
                         'mobile_number' : application_detail.user.phone,
                         'email' : application_detail.user.email,
                         'owner_full_name' : application_detail.owner_full_name,
@@ -467,17 +471,15 @@ def AccountantPayment(request, pk=None, payment=None , payment_id = None):#all a
                         'who_payment' : request.user.email,
                         'is_payment' : True
                     }
-                    UserApplicationPayment.objects.update_or_create(id=payment_id,defaults=payment_data)
-                    messages.info(request,"payment sucessfull")
-            except:
-                messages.info(request,"payment unsucessfull")
-         elif payment=='0':
-           should_insert = 0
-           dsc = ApplicationForm.objects.get(id=pk).dsc
-           if dsc == 'c' and request.user.get_dsc_Role()=='c':
-                ApplicationForm.objects.filter(id=pk).update(is_payment=0)
-                messages.info(request,"unpaid sucessfull")
-
+                    UserApplicationPayment.objects.create(**payment_data)
+                    messages.info(request,"payment sucessfull")            
+            
+            elif payment=='0':
+                should_insert = 0
+                dsc = ApplicationForm.objects.get(id=pk).dsc
+                if dsc == 'c' and request.user.get_dsc_Role()=='c':
+                        ApplicationForm.objects.filter(id=pk).update(is_payment=0)
+                        messages.info(request,"unpaid sucessfull")
     return redirect('AllApplication')
 
 @login_required(login_url=settings.LOGIN_URL)
