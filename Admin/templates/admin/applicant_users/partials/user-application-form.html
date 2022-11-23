@@ -423,7 +423,6 @@
                 <!--==============================================================-->
                 <!-- End PAge Content -->
                 <script>
-
                     $("#renew_check").change(function() {
                             if(this.checked) {
                                $("#business_price_select_renew_sh").show()
@@ -463,9 +462,9 @@
                     $("#businessrice").text(price)
                     });
                     
-                    // $("#amount_to_select").keyup(function(){
-                    //     num = $("#amount_to_select").val()
-                    // });
+                    $("#amount_to_select").keyup(function(){
+                        num = $("#amount_to_select").val()
+                    });
              
                     function checkPassword(form) {
                         password1 = form.password1.value;
