@@ -433,7 +433,7 @@ def CustomerOrder(request, pk=None, pdc=None):
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def AccountantPayment(request, pk=None, payment=None):#all application
+def AccountantPayment(request, pk=None, payment=None , payment_id = None):#all application
     
     try:
         if request.user.groups.all().first().name != 'accountant':
@@ -449,8 +449,25 @@ def AccountantPayment(request, pk=None, payment=None):#all application
             should_insert = 0
             try:
                 dsc = ApplicationForm.objects.get(id=pk).dsc
+                application_detail =  ApplicationForm.objects.get(id=pk).get_user_application_detail
                 if dsc == 'c' and request.user.get_dsc_Role()=='c':
-                    ApplicationForm.objects.filter(id=pk).update(is_payment=1)
+                    payment_data = {
+                        'is_renew' : application_detail.is_reniew,
+                        'business_price_category' : application_detail.business_price_category,
+                        'payment_rupees' : application_detail.payment_rupees,
+                        'voucher_number' : application_detail.voucher_number,
+                        'business_name' : application_detail.business_name,
+                        'user' : application_detail.user,
+                        'get_user_application_detail' : application_detail.get_user_application_detail,
+                        'user_application_form' : application_detail.user_application_form,
+                        'mobile_number' : application_detail.user.phone,
+                        'email' : application_detail.user.email,
+                        'owner_full_name' : application_detail.owner_full_name,
+                        'company_name' : application_detail.company_name,
+                        'who_payment' : request.user.email,
+                        'is_payment' : True
+                    }
+                    UserApplicationPayment.objects.update_or_create(id=payment_id,defaults=payment_data)
                     messages.info(request,"payment sucessfull")
             except:
                 messages.info(request,"payment unsucessfull")

@@ -146,9 +146,12 @@ class UserApplicationPayment(models.Model):
 
     business_name = models.CharField(max_length=205, null=True)
     business_price_category = models.CharField(max_length=205, null=True)
+    payment_rupees = models.IntegerField(null=True)
     voucher_number = models.CharField(max_length=505, null=True)
-    is_payment = models.BooleanField(default=False,null=True)
+    who_payment = models.CharField(max_length=205,null=True)
     is_renew = models.BooleanField(default=False,null=True)
+
+    is_payment = models.BooleanField(default=False,null=True)
 
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
