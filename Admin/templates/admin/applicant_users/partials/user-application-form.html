@@ -80,31 +80,13 @@
                                         <h5 class="card-title">कम्पनीको जानकारी  &nbsp &nbsp <input id="renew_check" {% if id_data.is_reniew == True %} checked {% endif%} name="is_renew" type="checkbox" class="js-switch" data-color="#f62d51" data-size="small" /> Renew</h5>
                                     
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group" id="business_price_select_renew_sh" style="display:None">
-                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड(पुरानो प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
-                                                    <select id="business_price_select_renew"class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
-                                                        <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
-                                                        {% for business_price_category,value in recomendation_price_category.items%}
-                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'renewal_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
-                                                        {% endfor %}
-                                                   </select>
-                                                </div>
-                                                <div class="form-group" id="business_price_select_sh">
-                                                    <label class="form-label">सिफारिस शुल्क र सो को वाडफाड(नयाँ प्रयोगकर्ताका लागि)<span class="required">*</span> </label>
-                                                    <select id="business_price_select" class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
-                                                        <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
-                                                        {% for business_price_category,value in recomendation_price_category.items%}
-                                                            <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
-                                                        {% endfor %}
-                                                   </select>
-                                                </div>
-                                                <!-- <div class="col-md-8 ">
+                                            <div class="col-md-6">                                             
+                                               <div class="col-md-8 ">
                                                     <div class="form-group">
-                                                        <label class="form-label">उद्योग/कम्पनीको नाम<span class="required">*</span></label>
+                                                        <label class="form-label">सिफारिस शुल्क र सो को वाडफाड<span class="required">*</span></label>
                                                         <input type="number" id="amount_to_select" name="amount_to_select" value="{{amount_to_select}}" class="form-control" required>
                                                     </div>
-                                                </div> -->
+                                                </div> 
                                             </div> 
                                             <div class="col-md-6 ">
                                                 <div class="form-group"> <!-----{recomendation_price_category|get_item:id_data.business_price_category|get_item:'start_recommendation_fee}}'--->
@@ -464,6 +446,7 @@
                     
                     $("#amount_to_select").keyup(function(){
                         num = $("#amount_to_select").val()
+                        $("#businessrice").text(num)
                     });
              
                     function checkPassword(form) {
