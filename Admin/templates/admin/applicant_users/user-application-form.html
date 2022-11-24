@@ -57,17 +57,9 @@
         });
         //Ajax for business price category
 
-    $(document).ready(function () {
-        renew_check
-        
+    $(document).ready(function () {      
         // catch the form's submit event
         $('#amount_to_select').keyup(function () {
-            if($('#renew_check').checked==true){
-                alert("checked")
-            }
-            else{
-                alert("non checked")
-            }
             // create an AJAX call
             num = $("#amount_to_select").val()
             $.ajax({
@@ -76,7 +68,12 @@
                 // on success
                 success: function (response) {
                     if (response.price_category) {
-                        $("#businessrice").text(response.price_category.start_recommendation_fee)
+                        if($('#renew_check').is(":checked")){
+                            $("#businessrice").text(response.price_category.renewal_fee)
+                        }
+                        else{
+                            $("#businessrice").text(response.price_category.start_recommendation_fee)
+                        }
                     }
                     else{
                         

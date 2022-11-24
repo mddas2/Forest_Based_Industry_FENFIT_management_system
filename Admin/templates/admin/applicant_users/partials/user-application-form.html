@@ -406,25 +406,30 @@
                 <!-- End PAge Content -->
                 <script>
                     $("#renew_check").change(function() {
-                            if(this.checked) {
-                               $("#business_price_select_renew_sh").show()
-                                
-                                    const a = $("#business_price_select_renew"); 
-                                    const price = a.find(':selected').data('price');                   
-                                    $("#businessrice").text(price)
-
-                               $("#business_price_select_sh").hide()
-
+                        num = $("#amount_to_select").val()
+                        $.ajax({
+                            data: {'ammount':num}, // get the form data
+                            url: "{% url 'BusinessPriceCategory' %}",
+                            // on success
+                            success: function (response) {
+                                if (response.price_category) {
+                                    if($('#renew_check').is(":checked")){
+                                        $("#businessrice").text(response.price_category.renewal_fee)
+                                    }
+                                    else{
+                                        $("#businessrice").text(response.price_category.start_recommendation_fee)
+                                    }
+                                }
+                                else{
+                                    
+                                }
+                            },
+                            // on error
+                            error: function (response) {
+                                // alert the error if any error occured
+                                console.log(response.responseJSON.errors)
                             }
-                            else{
-                                $("#business_price_select_renew_sh").hide()
-
-                                const a = $("#business_price_select"); 
-                                const price = a.find(':selected').data('price');                   
-                                $("#businessrice").text(price)
-
-                                $("#business_price_select_sh").show()
-                            }
+                        });
                       });
           
                     // Function to check Whether both passwords
