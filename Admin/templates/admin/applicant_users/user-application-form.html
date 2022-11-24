@@ -63,7 +63,7 @@
             // create an AJAX call
             num = $("#amount_to_select").val()
             $.ajax({
-                data: {'ammount':num}, // get the form data
+                data: {'ammount':num,'ajax':'1'}, // get the form data
                 url: "{% url 'BusinessPriceCategory' %}",
                 // on success
                 success: function (response) {

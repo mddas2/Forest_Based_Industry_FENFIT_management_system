@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_role
 from account.models import *
 from django.contrib.auth.hashers import make_password
+from payment.payment import BusinessPriceCategory
 from . import bulk_sms_email
 from . import nepal_location
 
@@ -184,7 +185,6 @@ def MemberAprovalForm(request,id=None):
 @customized_user_passes_test(is_USER_role)
 def MemberApprovalFormStore(request):
     if request.POST:
-
         if request.POST['union_type'] == 'private':
             union_type = "private" #सदस्य हुन चाहेको संघ
             if request.POST['union_name'] !='0':
@@ -302,25 +302,32 @@ def MemberAprovalFormReview(request,id=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def UserApplicationFormStore(request):
-
-    if request.POST:     
-
-        if request.POST['business_price_category']=='0':
-            messages.info(request,'Please select सिफारिस शुल्क')
-            return redirect(MemberAprovalForm)
+    import json
+    if request.POST:
+        # response = json.loads(response)
+        # return HttpResponse(response)
         try:
             if request.POST['is_renew']=='on':
                 is_reniew = 1
-                price_category = request.POST['business_price_category']
-                price = RecomendationPriceCategory.recommendation_fee[price_category]
+                # transaction_amount = request.POST['transaction_amount']
+                request.GET.params={'ammount':45}
+                response = BusinessPriceCategory(request)
+                response = json.loads(response)
+                # return HttpResponse(response)
+                price_category = response['price_category']
+                # return HttpResponse(price_category)
+                price = price_category['renewal_fee']
                 try:
                     payment_rupees = int(price['renewal_fee'])
                 except:
                     payment_rupees = None
         except:
             is_reniew = 0
-            price_category = request.POST['business_price_category']
-            price = RecomendationPriceCategory.recommendation_fee[price_category]
+            request.GET.params={'ammount':45}
+            response = BusinessPriceCategory(request)
+            response = json.loads(response)
+            price_category = response['price_category']
+            price = price_category['recommendation_fee']
             try:
                 payment_rupees = int(price['start_recommendation_fee'])
             except:
@@ -328,7 +335,7 @@ def UserApplicationFormStore(request):
 
         form_detail = {
             'user_id' : request.user.id,
-            'business_price_category' : request.POST['business_price_category'],
+            'business_price_category' : price_category['code_name'],
             'is_reniew' : is_reniew,
             'payment_rupees' : payment_rupees
         }
