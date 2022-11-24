@@ -21,6 +21,8 @@ import requests
 from nepallocation.models import States,Districts,Municipality
 
 from django.http import HttpResponse
+from django.http import JsonResponse
+
 token = "vZViG4G-do4Ub-x4OzQT0LSJ"
 
 def GetStates(request):
@@ -30,7 +32,11 @@ def GetStates(request):
           )
      states =  response.json()['data']
      states = states['data']
-     return HttpResponse(states)
+     # return HttpResponse(states)
+     response = {
+          'data' : states,
+     }
+     return JsonResponse(response)   
 
 def GetDistricts(request):
      response = requests.get(
@@ -40,7 +46,13 @@ def GetDistricts(request):
 
      districts = response.json()['data']
      districts = districts['data']
-     return HttpResponse(districts)
+     # return HttpResponse(districts)
+
+     response = {
+          'data' : districts,
+     }
+     return JsonResponse(response)   
+
 
 def GetVdc(request):
      response = requests.get(

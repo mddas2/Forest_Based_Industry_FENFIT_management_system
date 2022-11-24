@@ -33,8 +33,8 @@
             $("#district_sh").hide()
         }
         else if(users == 'district'){
-            $("#state_sh").show()
             $("#district_sh").show()
+            $("#state_sh").hide()
             $("#private_sh").hide()
         }
         else if(users == 'private'){
@@ -47,8 +47,59 @@
             $("#state_sh").hide()
             $("#district_sh").hide()
         }
-        
-
     });
+
+
+ $(document).ready(function () {      
+        // catch the form's submit event
+        $( "#users_value" ).change(function() {
+            // create an AJAX call
+            var state_district = $(this).val()
+            if(state_district == 'state'){
+                id = "#state_value"
+                url = "{% url 'GetStates' %}"
+            }
+            else if(state_district == 'district'){
+                id = "#district_value"
+                url = "{% url 'GetDistricts' %}"
+            }
+            $.ajax({
+                 // get the form data
+                url: url,
+                // on success
+                success: function (response) {
+                    if (response) {
+                        
+                        if(state_district == 'district'){
+                            $('#district_value').empty();
+                                $.each(response.data, function( index, value ) {
+                                    $("#district_value").append($('<option>', {value:value.name, text:value.alt_name}));
+                                });   
+                            }
+                        else if(state_district == 'state'){
+                            $('#state_value').empty();
+                                $.each(response.data, function( index, value ) {
+                                    $("#state_value").append($('<option>', {value:value.name, text:value.alt_name}));
+                                }); 
+                        }
+                       
+                                          
+                    }
+                    else{
+                        alert("please contact to Admin")
+                    }
+                },
+                // on error
+                error: function (response) {
+                    // alert the error if any error occured
+                    console.log(response.responseJSON.errors)
+                }
+            });
+
+            return false;
+        });
+    })
+
+
 </script>
 {% endblock %}
