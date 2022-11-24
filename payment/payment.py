@@ -33,13 +33,16 @@ def PaymentWith(request):
 def EsewaPayment(request):
     return HttpResponse("esewa payment")
 
-def BusinessPriceCategory(request): 
+def BusinessPriceCategory(request,ammount = None): 
     recommendation_fee = RecomendationPriceCategory.recommendation_fee
 
     try:
         ammount = int(request.GET['ammount'])
     except:
-        ammount = 1000000000
+        if ammount:
+            pass
+        else:
+            ammount=9999999999999999
     try:
         ajax = request.GET['ajax']
     except:

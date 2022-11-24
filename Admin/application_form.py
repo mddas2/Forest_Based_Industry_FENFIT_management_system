@@ -309,9 +309,11 @@ def UserApplicationFormStore(request):
         try:
             if request.POST['is_renew']=='on':
                 is_reniew = 1
-                # transaction_amount = request.POST['transaction_amount']
-                request.GET.params={'ammount':45}
-                response = BusinessPriceCategory(request)
+                try:
+                    transaction_amount = int(request.POST['transaction_amount'])
+                except:
+                    transaction_amount = 9999999999
+                response = BusinessPriceCategory(request,transaction_amount)
                 response = json.loads(response)
                 # return HttpResponse(response)
                 price_category = response['price_category']
@@ -323,10 +325,12 @@ def UserApplicationFormStore(request):
                     payment_rupees = None
         except:
             is_reniew = 0
-            request.GET.params={'ammount':45}
-            response = BusinessPriceCategory(request)
+            try:
+                transaction_amount = int(request.POST['transaction_amount'])
+            except:
+                transaction_amount = 9999999999
+            response = BusinessPriceCategory(request,transaction_amount)
             response = json.loads(response)
-            # return HttpResponse(response['price_category'])
             price_category = response['price_category']
             price = price_category['start_recommendation_fee']
             try:

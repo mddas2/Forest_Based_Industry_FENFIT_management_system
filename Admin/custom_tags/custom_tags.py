@@ -1,6 +1,6 @@
 from django.template.defaulttags import register
 from nepallocation.models import *
-from Admin.models import BusinessType
+from Admin.models import BusinessType,RecomendationPriceCategory
 
 @register.filter
 def get_item(dictionary, key):
@@ -52,5 +52,15 @@ def get_NepaliBusinessName(eng_name):
         return business_name
     except:
         return eng_name
+
+@register.filter
+def getPriceCategoryNepaliName(code_name):
+    nepali_name = RecomendationPriceCategory.recommendation_fee[code_name]['name_1']
+    return nepali_name
+    try:
+        nepali_name = RecomendationPriceCategory.recommendation_fee[code_name]['code_name']
+        return nepali_name
+    except:
+        return code_name
 
     
