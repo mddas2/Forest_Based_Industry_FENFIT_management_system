@@ -40,8 +40,13 @@ def BusinessPriceCategory(request):
         ammount = int(request.GET['ammount'])
     except:
         ammount = 1000000000
-    
-    if ammount < 2500000:
+
+    if ammount == 0:
+        response = {
+            'price_category' : recommendation_fee['old_unregistered_non_payment']
+        }
+        return JsonResponse(response)
+    elif ammount < 2500000:
         response = {
             'price_category' : recommendation_fee['less_than_25_lakh']
         }
@@ -57,7 +62,7 @@ def BusinessPriceCategory(request):
         }
         return JsonResponse(response)
 
-    elif ammount >=30000000:
+    elif ammount >= 30000000:
         response = {
             'price_category' : recommendation_fee['greater_than_3_crode']
         }
