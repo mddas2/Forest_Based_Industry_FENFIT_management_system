@@ -4,8 +4,51 @@
     {% include 'admin/authentication/partials/login.html' %}
 {% endblock %}
 
+{% block optionalcss %}
+    <style>
+        #state_sh{
+            display: none;
+        }
+        #district_sh{
+            display: none;
+        }
+        #private_sh{
+            display: none;
+        }
+    </style>
+{% endblock %}
+
 {% block optionaljs %}
 <script>
-    
+    $( "#users_value" ).change(function() {
+        var users = $(this).val()
+        if(users == 'centeral'){
+            $("#private_sh").hide()
+            $("#state_sh").hide()
+            $("#district_sh").hide()
+        }
+        else if(users == 'state'){
+            $("#state_sh").show()
+            $("#private_sh").hide()
+            $("#district_sh").hide()
+        }
+        else if(users == 'district'){
+            $("#state_sh").show()
+            $("#district_sh").show()
+            $("#private_sh").hide()
+        }
+        else if(users == 'private'){
+            $("#private_sh").show()
+            $("#state_sh").hide()
+            $("#district_sh").hide()
+        }
+        else if(users == 'client'){
+            $("#private_sh").hide()
+            $("#state_sh").hide()
+            $("#district_sh").hide()
+        }
+        
+
+    });
 </script>
 {% endblock %}

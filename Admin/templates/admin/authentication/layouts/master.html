@@ -13,14 +13,16 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static '/assets/images/favicon.png' %}">
-    <title>Radiant InfoTech Nepal Pvt. Ltd. | IT Company of Nepal | Web Development | Web Designing | Graphic Designing | Web Designer | Authorized Company of Digital Signature | Authorized G Suite Colud Partner for Nepal | Authorized G Suite Reseller in Nepal | Software Development | Web Hosting | Domain Registration</title>
+    <title>Fenfit Nepal</title>
     
     <!--login page css -->
     <link href="{% static '/assets/dist/css/pages/login-register-lock.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static '/assets/node_modules/dropify/dist/css/dropify.min.css' %}"><!----for form image page image upload-->
     <!-- Custom CSS -->
     <link href="{% static '/assets/dist/css/style.min.css' %}" rel="stylesheet">
-    
+    {% block optionalcss %}
+
+    {% endblock %}
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,7 +39,7 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Elite admin</p>
+            <p class="loader__label">Fenfit admin</p>
         </div>
     </div>
     <!-- ============================================================== -->
