@@ -318,7 +318,7 @@ def UserApplicationFormStore(request):
                 # return HttpResponse(price_category)
                 price = price_category['renewal_fee']
                 try:
-                    payment_rupees = int(price['renewal_fee'])
+                    payment_rupees = int(price)
                 except:
                     payment_rupees = None
         except:
@@ -326,10 +326,11 @@ def UserApplicationFormStore(request):
             request.GET.params={'ammount':45}
             response = BusinessPriceCategory(request)
             response = json.loads(response)
+            # return HttpResponse(response['price_category'])
             price_category = response['price_category']
-            price = price_category['recommendation_fee']
+            price = price_category['start_recommendation_fee']
             try:
-                payment_rupees = int(price['start_recommendation_fee'])
+                payment_rupees = int(price)
             except:
                 payment_rupees = None         
 
