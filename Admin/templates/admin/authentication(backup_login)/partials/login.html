@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <section id="wrapper">
-    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);overflow: scroll;">
+    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
         <div class="login-box card">
             {% if messages%}
                 {%for message in messages%}
@@ -15,47 +15,6 @@
                     {% csrf_token %}
                     <a href="javascript:void(0)" class="db"><center><img src="{% static '/assets/images/fenfit-logo.png' %}" alt="Home" /></center></a>
                     <h3 class="text-center m-b-20">Sign In</h3>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <select id="users" class="form-control" name="users" data-placeholder="Choose a Category" tabindex="1" required>
-                                    <option>प्रयोग कर्ताहरु</option>                                    
-                                        <option value="1">सामान्य आवेदक</option>    
-                                        <option value="2">व्यवस्थापक महासंघ</option>
-                                        <option value="3">व्यवस्थापक प्रदेश महासंघ</option>
-                                        <option value="4">व्यवस्थापक जिल्ला संघ</option>                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <select id="state" class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
-                                    <option>प्रदेशको नाम</option>
-                                    {% for district in districts%}
-                                        <option name="state" value="{{state.name}}">{{state.alt_name|title}}</option>
-                                    {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <select id="district" class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
-                                    <option>जिल्लाको नाम</option>बस्तुगत संघ
-                                    {% for district in districts%}
-                                        <option value="{{district.name}}">{{district.alt_name|title}}</option>
-                                    {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <select id="district" class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
-                                    <option>बस्तुगत संघको नाम</option>
-                                    {% for district in districts%}
-                                        <option value="{{district.name}}">{{district.alt_name|title}}</option>
-                                    {% endfor %}
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="email" required="" placeholder="Email" name="email"> </div>

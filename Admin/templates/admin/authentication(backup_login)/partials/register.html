@@ -1,0 +1,91 @@
+{% load staticfiles %}
+<section id="wrapper">
+    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);overflow:scroll;">
+        <div class="login-box card" style="width: 26%;">
+            {% if messages%}
+                {%for message in messages%}
+                    <div class="alert alert-danger" role="alert">
+                        <center>{{message}}</center>
+                    </div>
+            {%endfor%}
+            {%endif%}
+            <div class="card-body">
+                <form class="form-horizontal form-material" id="loginform" action="{% url 'SignUp' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <a href="javascript:void(0)" class="db"><center><img style="max-width: 101%;
+                        margin-bottom: 21px;" src="{% static '/assets/images/logo-2.png' %}" alt="Home" /></center></a>
+                    <h3 class="text-center m-b-20">Sign Up</h3>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" name="full_name" required placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <select class="form-control" name="district_name" data-placeholder="Choose a Category" tabindex="1" required>
+                                    <option>Select District</option>
+                                    {% for district in districts%}
+                                        <option value="{{district.name}}">{{district.alt_name|title}}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="email" name="email" required="" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="number" name="phone" required="" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" name="password" required="" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" required="password" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <!-----image-->
+                    <div class="col-md-8 ">
+                        <div class="card ">
+                            <div class="card-body" >
+                                <h4 class="card-title">Profile Image</h4>
+                                <input name="profile_image" type="file" id="input-file-now2" class="dropify" />
+                            </div>
+                        </div>
+                        {% if id_data.image %}
+                            <script>
+                                $("#input-file-now2").attr("data-default-file", "{{id_data.image.url}}");
+                            </script>
+                        {% endif %}
+                    </div>
+                    
+                    <!----image-->
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <input type="checkbox" name="term_condition" class="form-check-input" id="customCheck1" required>
+                                <label class="form-check-label" for="customCheck1">I agree to all <a target="_blank" href="{% static '/termcondition/term-and-condition.pdf' %}">Terms</a></label> 
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="form-group text-center p-b-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg w-100 btn-rounded text-uppercase waves-effect waves-light text-white" type="submit">Sign Up</button>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            Already have an account? <a href="{% url 'Login' %}" class="text-info m-l-5"><b>Sign In</b></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
