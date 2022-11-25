@@ -215,8 +215,8 @@
                     </div>
                 </div>
                 <!--/span-->
-                <div class="col-md-6 img-data-area">
-                    <div class="row">
+                <div class="col-md-6 ">
+                    <div class="row img-data-area">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
@@ -260,6 +260,49 @@
                             </div>
                         </div>
                     </div>
+                    {% if id_data.member_admin == 'admin' %}
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body" style="overflow:scroll ;">
+                                <h4 class="card-title">कार्य समितिका पदाधिकारिहरु</h4>                                                        
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th>Name</th>
+                                                <th>POST</th>
+                                                <th>Email</th>
+                                                <th>Number</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for team in request.user.teams.all %}
+                                            <tr>
+                                                
+                                                <td>{{team.name}}</td>
+                                                <td><span class="label label-success">{{team.post}}</span></td>
+                                                <td>{{team.email}}</td>
+                                                <td>{{team.phone}}</td>
+                                                <td>    
+                                                    {% if team.image %}                                               
+                                                        <img src="{{team.image.url}}" class="kk" alt="{{team.name}}" height="40">
+                                                    {% else %}
+                                                        none
+                                                    {% endif %}
+                                                </td>   
+                                                <td><a href="{% url 'DeleteTeam' id=team.id %}"><span class="label label-danger">delete</span></a> </td>
+                                            </tr>
+                                            {% endfor %}
+                                                                            
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
                 </div>
                 <hr>
             </div>

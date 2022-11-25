@@ -245,7 +245,7 @@
                                                                                     none
                                                                                 {% endif %}
                                                                             </td>   
-                                                                            <td><button class="label label-danger"><a href="{% url 'DeleteTeam' id=team.id %}">delete</a></button> </td>
+                                                                            <td><a href="{% url 'DeleteTeam' id=team.id %}"><span class="label label-danger">delete</span></a> </td>
                                                                         </tr>
                                                                         {% endfor %}
                                                                                                         
