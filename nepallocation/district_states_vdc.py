@@ -19,11 +19,32 @@ https://nepallocation.com.np/api/v1/district/12/municipalities
 """
 import requests
 from nepallocation.models import States,Districts,Municipality
-
+from account.models import CustomUser
 from django.http import HttpResponse
+from django.core import serializers
 from django.http import JsonResponse
 
 token = "vZViG4G-do4Ub-x4OzQT0LSJ"
+
+def GetMember(request):
+     members = CustomUser.objects.filter(role = CustomUser.PRIVATE , is_verified = 1).all()
+     all_objects = list(members)
+     data = serializers.serialize('json', all_objects)
+     import json
+     data = json.dumps(data)
+     print(data[0])
+     response = {
+          'data' : data,
+     }
+     
+     return JsonResponse(response)
+     # response = {
+     #      'members' : member,
+     # }
+     # response = json.dumps(response)
+     # return HttpResponse(response)
+ 
+     
 
 def GetStates(request):
      response = requests.get(

@@ -38,7 +38,7 @@
             $("#private_sh").hide()
         }
         else if(users == 'private'){
-            $("#private_sh").show()
+            $("#private_sh").hide()
             $("#state_sh").hide()
             $("#district_sh").hide()
         }
@@ -63,6 +63,10 @@
                 id = "#district_value"
                 url = "{% url 'GetDistricts' %}"
             }
+            else if(state_district == 'private'){
+                id = "#district_value"
+                url = "{% url 'GetMember' %}"
+            }
             $.ajax({
                  // get the form data
                 url: url,
@@ -78,6 +82,13 @@
                             }
                         else if(state_district == 'state'){
                             $('#state_value').empty();
+                                $.each(response.data, function( index, value ) {
+                                    $("#state_value").append($('<option>', {value:value.name, text:value.alt_name}));
+                                }); 
+                        }
+                        else if(state_district == 'private'){
+                            console.log(response)
+                            $('#private_value').empty();
                                 $.each(response.data, function( index, value ) {
                                     $("#state_value").append($('<option>', {value:value.name, text:value.alt_name}));
                                 }); 

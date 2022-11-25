@@ -8,4 +8,6 @@ urlpatterns = [
     path('vdc', district_states_vdc.GetVdc, name='GetVdc'),
     path('insert', district_states_vdc.InsertAll, name='Insert'),
 
+    path('member', district_states_vdc.GetMember, name='GetMember'),
+
 ]
