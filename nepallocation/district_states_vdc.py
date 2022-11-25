@@ -21,28 +21,22 @@ import requests
 from nepallocation.models import States,Districts,Municipality
 from account.models import CustomUser
 from django.http import HttpResponse
-from django.core import serializers
 from django.http import JsonResponse
+from django.core import serializers
+from django.core.serializers import json
 
 token = "vZViG4G-do4Ub-x4OzQT0LSJ"
 
 def GetMember(request):
-     members = CustomUser.objects.filter(role = CustomUser.PRIVATE , is_verified = 1).all()
-     all_objects = list(members)
-     data = serializers.serialize('json', all_objects)
      import json
-     data = json.dumps(data)
-     print(data[0])
+     members = CustomUser.objects.filter(role = CustomUser.PRIVATE, is_verified = 1).all()
+     response = serializers.serialize('json', list(members),fields=('first_name','email','company_name'),ensure_ascii=False)
+     response = json.loads(response)
      response = {
-          'data' : data,
+          'data' : response
      }
-     
      return JsonResponse(response)
-     # response = {
-     #      'members' : member,
-     # }
-     # response = json.dumps(response)
-     # return HttpResponse(response)
+ 
  
      
 

@@ -38,7 +38,7 @@
             $("#private_sh").hide()
         }
         else if(users == 'private'){
-            $("#private_sh").hide()
+            $("#private_sh").show()
             $("#state_sh").hide()
             $("#district_sh").hide()
         }
@@ -87,10 +87,9 @@
                                 }); 
                         }
                         else if(state_district == 'private'){
-                            console.log(response)
                             $('#private_value').empty();
                                 $.each(response.data, function( index, value ) {
-                                    $("#state_value").append($('<option>', {value:value.name, text:value.alt_name}));
+                                    $("#private_value").append($('<option>', {value:value['fields']['email'], text:value['fields']['company_name']}));
                                 }); 
                         }
                        
