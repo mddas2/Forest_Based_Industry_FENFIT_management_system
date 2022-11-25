@@ -134,4 +134,12 @@ class CustomUser(AbstractUser):
    
     def __str__(self):
         return self.email
+
+class TeamMember(models.Model):
+    admin = models.ForeignKey(CustomUser,related_name="teams",on_delete=models.CASCADE,null=True)
+    name = models.CharField(max_length=2000,null=True)
+    post = models.CharField(max_length=2000,null=True)
+    email = models.CharField(max_length=2000,null=True)
+    phone = models.CharField(max_length=2000,null=True)
+    image = models.ImageField(upload_to='user/teams', null=True)
     

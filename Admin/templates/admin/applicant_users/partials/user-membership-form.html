@@ -12,13 +12,22 @@
                                         <h5 class="card-title">फारम</h5>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">सदस्य/संस्थागत<span class="required">*</span></label>
+                                                    <select id="member_admin" class="form-control" name="member_admin" data-placeholder="Choose a Category" tabindex="1" required>
+                                                        <option value='member' {% if form_data.union_type == 'district' %} selected {% endif %}>सदस्य हुन चाहेको </option>
+                                                        <option value="admin" {% if form_data.union_type == 'private' %} selected {% endif %}> संस्थागत आबध्दता</option>
+                                                    </select>
+                                                </div>
+                                            </div>  
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label">उधेागमिको नाम्<span class="required">*</span></label>
                                                     <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
                                             </div>     
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label">व्यवसायको नाम<span class="required">*</span></label>
                                                     <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
@@ -131,7 +140,7 @@
 
                                         <!-- Info box Content -->
                                                    <!-- ============================================================== -->
-                                                   <div class="row">
+                                                   <div class="row" id="team_sh" style="display:none;">
                                                        <!-- Column -->
                                                        <div class="col-lg-12">
                                                            <div class="card">
@@ -156,14 +165,14 @@
                                                                                                <div class="col-md-6">
                                                                                                    <div class="form-group">
                                                                                                        <label class="form-label">Name</label>
-                                                                                                       <input type="text" id="team_name1" name="fname1" class="form-control" value=""  placeholder="Name of the member"> 
+                                                                                                       <input type="text" id="team_name1" name="team_name1" class="form-control"   placeholder="Name of the member"> 
                                                                                                    </div>
                                                                                                </div>
                                                                                                <!--/span-->
                                                                                                <div class="col-md-6">
                                                                                                    <div class="form-group">
                                                                                                        <label class="form-label">Post</label>
-                                                                                                       <input type="text" name="team_post1" id="lastName" class="form-control" value="" placeholder="Post of member"> 
+                                                                                                       <input type="text" name="team_post1" class="form-control" placeholder="Post of member"> 
                                                                                                    </div>
                                                                                                </div>
                                                                                                <!--/span-->
@@ -208,68 +217,6 @@
                                                    </div>
                                                    <!-- ============================================================== -->
                                                    <!-- End PAge Content -->
-                                   <script>
-                                       $(document).ready(function(){
-                                               $('#addmember').click(function(){         
-                                                   var i = $('#count').val();
-                                                   var i = parseInt(i) + 1 ;
-                                                   $('#count').val(i)
-                                                   var hi = `
-                                                               <img src="https://plus1group.com.au/wp-content/uploads/2018/07/1_Circle_Wealth.png" class="img-circle" style="margin-bottom: -36px;" width="50px" height="50px">
-                                                               <div id="team1" class="row mt-2" style="border: inset;">
-                                                                   <input type='hidden'  name='teamid`+i+`' value=''>
-                                                                   <div class="col-md-9 mt-4">                                                   
-                                                                       <div class="row">
-                                                                           <div class="col-md-6">
-                                                                               <div class="form-group">
-                                                                                   <label class="form-label">Name</label>
-                                                                                   <input type="text" id="pname" name="fname`+i+`" class="form-control" value=""  placeholder="Name of the member"> </div>
-                                                                           </div>
-                                                                           <!--/span-->
-                                                                           <div class="col-md-6">
-                                                                               <div class="form-group">
-                                                                                   <label class="form-label">Post</label>
-                                                                                   <input type="text" name="fpost`+i+`" id="lastName" class="form-control" value="" placeholder="Post of member"> </div>
-                                                                           </div>
-                                                                           <!--/span-->
-                                                                       </div>
-                                                                       <div class="row">                                    
-                                                                           <div class="col-md-6 ">
-                                                                               <div class="form-group">
-                                                                                   <label class="form-label">Email Address</label>
-                                                                                   <input type="email" name="team_email`+i+`" class="form-control" rows="4">
-                                                                               </div>
-                                                                           </div>                                                
-                                                                       
-                                                                           <div class="col-md-6 ">
-                                                                               <div class="form-group">
-                                                                                   <label class="form-label">Mobile number</label>
-                                                                                   <input type="number" name="team_phone`+i+`" class="form-control" rows="4">
-                                                                               </div>
-                                                                           </div>
-                                                                       </div>
-                                                                   </div>
-                                                                   <div class="col-md-3">
-                                                                       <div class="card">
-                                                                           <div class="card-body">
-                                                                           <label class="form-label">Profile Picture</label>
-                                                                               <input name="team_image`+i+`" type="file" id="input-file-now" class="dropify" />
-                                                                           </div>
-                                                                       </div>
-                                                                   </div>
-                                                               </div>  
-                                                           `;
-                                   
-                                                   $("#team1").after(hi);
-                                                   // console.log("hi");
-                                               });
-                                   
-                                               
-                                               
-                                           });
-                                               
-                                                               
-                                   </script>
                                         <!------devraj team member end-->
                                         <!--/row-->
                                         <div class="row">
@@ -559,7 +506,16 @@
                             $("#district_org_sh").show()
                             $("#private_org_sh").hide()
                         }
-                    });
+                    })
+                    $("#member_admin").change(function() {
+                        if(this.value=="member"){
+                            $("#team_sh").hide()
+                        }
+                        else if(this.value=="admin"){
+                            $("#team_sh").show()
+                        }
+                    })
+                    
 
                   
                     // Function to check Whether both passwords
@@ -591,5 +547,63 @@
                     }
                 </script>
  
-                
+ <script>
+    $(document).ready(function(){
+            $('#addmember').click(function(){         
+                var i = $('#count').val();
+                var i = parseInt(i) + 1 ;
+                $('#count').val(i)
+                var hi = `
+                            <img src="https://plus1group.com.au/wp-content/uploads/2018/07/1_Circle_Wealth.png" class="img-circle" style="margin-bottom: -36px;" width="50px" height="50px">
+                            <div id="team1" class="row mt-2" style="border: inset;">
+                                <input type='hidden'  name='teamid`+i+`' value=''>
+                                <div class="col-md-9 mt-4">                                                   
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Name</label>
+                                                <input type="text" id="pname" name="fname`+i+`" class="form-control" value=""  placeholder="Name of the member"> </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Post</label>
+                                                <input type="text" name="fpost`+i+`" id="lastName" class="form-control" value="" placeholder="Post of member"> </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <div class="row">                                    
+                                        <div class="col-md-6 ">
+                                            <div class="form-group">
+                                                <label class="form-label">Email Address</label>
+                                                <input type="email" name="team_email`+i+`" class="form-control" rows="4">
+                                            </div>
+                                        </div>                                                
+                                    
+                                        <div class="col-md-6 ">
+                                            <div class="form-group">
+                                                <label class="form-label">Mobile number</label>
+                                                <input type="number" name="team_phone`+i+`" class="form-control" rows="4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                        <label class="form-label">Profile Picture</label>
+                                            <input name="team_image`+i+`" type="file" id="input-file-now" class="dropify" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        `;
+
+                $("#team1").after(hi);
+                // console.log("hi");
+            });            
+            
+        });           
+                            
+</script>
                 

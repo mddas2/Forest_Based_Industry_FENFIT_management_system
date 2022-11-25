@@ -185,6 +185,8 @@ def MemberAprovalForm(request,id=None):
 @customized_user_passes_test(is_USER_role)
 def MemberApprovalFormStore(request):
     if request.POST:
+        if request.POST['member_admin'] == 'admin':
+            AddTeam(request)
         if request.POST['union_type'] == 'private':
             union_type = "private" #सदस्य हुन चाहेको संघ
             if request.POST['union_name'] !='0':
@@ -623,3 +625,31 @@ def CanelledApplication(request):
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     return render(request,'admin/application_review/application-lists.html',data)
+
+def AddTeam(request):
+    # return HttpResponse(request.POST.items())
+    count = int(request.POST['count'])
+    for i in range(count):
+        i=i+1
+        teamid = request.POST.get('teamid'+str(i),False)
+        if(teamid == ""):
+            teamid = None     
+                      
+        data2 = {
+           'admin' : request.user,
+           'name' : request.POST.get('team_name'+str(i),False),
+           'post' : request.POST.get('team_post'+str(i),False),
+           'email' :  request.POST.get('team_email'+str(i),False),
+           'phone' :  request.POST.get('team_phone'+str(i),False),
+          }      
+        for j in request.FILES:
+            if "team_image"+str(i) == j :
+                data2['image']= request.FILES["team_image"+str(i)]
+                           
+        if(data2['name'] != "" and data2['post'] != "" ):
+            TeamMember.objects.update_or_create(email=teamid, defaults=data2)
+            return 1
+        else:
+            messages.error(request,"Name and Post Can Not be empty !")
+            return 1
+            # return 1
