@@ -150,7 +150,7 @@
                                                             <input type="hidden" name="next" value="{{ request.path }}">                                    
                                                             <div id="team">
                                                                 <div class="mt-2" style="height: 42px;">
-                                                                    <h5 class="card-title" style="position: absolute;">Team Field</h5>
+                                                                    <h5 class="card-title" style="position: absolute;">कार्य समितिका पदाधिकारि फारम</h5>
                                                                     <button id="addmember" type="button" style="float: right;" class="btn btn-success text-white"> <i class="fa fa-plus"></i> Add Member</button>
                                                                         <input type='hidden' id="count"  name="count" value="{% if team|length == 0 %} 1 {%endif%}">
                                                                 </div> 
@@ -214,71 +214,42 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Basic Table</h4>
-                                                        <h6 class="card-subtitle">Add class <code>.table</code></h6>
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>#</th>
-                                                                        <th>First Name</th>
-                                                                        <th>Last Name</th>
-                                                                        <th>Username</th>
-                                                                        <th>Role</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>Deshmukh</td>
-                                                                        <td>Prohaska</td>
-                                                                        <td>@Genelia</td>
-                                                                        <td><span class="label label-danger">admin</span> </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td>Deshmukh</td>
-                                                                        <td>Gaylord</td>
-                                                                        <td>@Ritesh</td>
-                                                                        <td><span class="label label-info">member</span> </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>3</td>
-                                                                        <td>Sanghani</td>
-                                                                        <td>Gusikowski</td>
-                                                                        <td>@Govinda</td>
-                                                                        <td><span class="label label-warning">developer</span> </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>4</td>
-                                                                        <td>Roshan</td>
-                                                                        <td>Rogahn</td>
-                                                                        <td>@Hritik</td>
-                                                                        <td><span class="label label-success">supporter</span> </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>5</td>
-                                                                        <td>Joshi</td>
-                                                                        <td>Hickle</td>
-                                                                        <td>@Maruti</td>
-                                                                        <td><span class="label label-info">member</span> </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>6</td>
-                                                                        <td>Nigam</td>
-                                                                        <td>Eichmann</td>
-                                                                        <td>@Sonu</td>
-                                                                        <td><span class="label label-success">supporter</span> </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
+                                            {% if id_data.member_admin == 'admin' %}
+                                                <div class="col-lg-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कार्य समितिका पदाधिकारिहरु</h4>                                                        
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>Name</th>
+                                                                            <th>POST</th>
+                                                                            <th>Email</th>
+                                                                            <th>Number</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {% for team in teams %}
+                                                                        <tr>
+                                                                            <td>{{team.id}}</td>
+                                                                            <td>{{team.name}}</td>
+                                                                            <td>{{team.post}}</td>
+                                                                            <td>{{team.email}}</td>
+                                                                            <td>{{team.number}}</td>
+                                                                            <td><span class="label label-danger">admin</span> </td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                                                        
+                                                                    
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            {% endif %}
                                         </div>
 
                                         <div class="row">
