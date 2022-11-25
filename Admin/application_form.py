@@ -654,3 +654,10 @@ def AddTeam(request):
             messages.error(request,"Name and Post Can Not be empty !")
             return 1
             # return 1
+
+def DeleteTeam(request,id=None):
+    try:
+        TeamMember.objects.get(id=id).delete()
+    except:
+        pass
+    return redirect('MemberAprovalForm')

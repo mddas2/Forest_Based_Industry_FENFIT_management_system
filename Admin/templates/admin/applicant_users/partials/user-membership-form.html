@@ -231,14 +231,21 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {% for team in teams %}
+                                                                        {% for team in request.user.teams.all %}
                                                                         <tr>
                                                                             <td>{{team.id}}</td>
                                                                             <td>{{team.name}}</td>
-                                                                            <td>{{team.post}}</td>
+                                                                            <td><span class="label label-success">{{team.post}}</span></td>
                                                                             <td>{{team.email}}</td>
-                                                                            <td>{{team.number}}</td>
-                                                                            <td><span class="label label-danger">admin</span> </td>
+                                                                            <td>{{team.phone}}</td>
+                                                                            <td>    
+                                                                                {% if team.image %}                                               
+                                                                                    <img src="{{team.image.url}}" class="" alt="{{team.name}}" width="80" height="50">
+                                                                                {% else %}
+                                                                                    none
+                                                                                {% endif %}
+                                                                            </td>   
+                                                                            <td><button class="label label-danger"><a href="{% url 'DeleteTeam' id=team.id %}">delete</a></button> </td>
                                                                         </tr>
                                                                         {% endfor %}
                                                                                                         

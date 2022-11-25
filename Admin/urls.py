@@ -84,14 +84,8 @@ urlpatterns = [
     path('blogs-delete/<int:pk>', blogs.BlogsDelete, name='BlogsDelete'),
 
     #****************Teams**************************************
-    path('teams', teams.Teams, name='Teams'),
-    path('teams/<int:pk>', teams.Teams, name='Teams'),
-    # path('/teams-create/<int:pk>/', teams.TeamsCreate, name="TeamsCreate"),
-    # path('/teams-create/', teams.TeamsCreate, name='TeamsCreate'),
-    path('teams-store', teams.TeamsStore, name='TeamsStore'),
-    path('teams-store/<int:pk>', teams.TeamsStore, name='TeamsStore'),
-    path('teams-delete/<int:pk>', teams.TeamsDelete, name='TeamsDelete'),
-
+    
+    path('teams-delete/<int:id>', application_form.DeleteTeam, name='DeleteTeam'),
     #****************Orders**************************************
     path('customer-order', application_form.CustomerOrder, name='CustomerOrder'),
     #****************Orders**************************************
