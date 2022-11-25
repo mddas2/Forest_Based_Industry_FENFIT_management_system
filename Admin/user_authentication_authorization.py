@@ -23,11 +23,29 @@ def Login(request):
     data = {'login_attempt_left':settings.AXES_FAILURE_LIMIT}
     login_attempt_left = 5
     if request.POST:
+        try:
+            different_users = request.POST['users'] #it checks, is actual user have role ? which match what they choose.
+        except:
+            different_users == "none"
         email = request.POST['email']
         password =  request.POST['password']
         user = authenticate(request=request,username=email, password=password)
         if user is not None:
-           login(request,user,backend='django.contrib.auth.backends.ModelBackend') 
+           role = user.role
+           if different_users == 'central':
+                form_role = 1
+           elif different_users == 'state':
+                form_role = 2
+           elif different_users == 'district':
+                form_role = 3
+           elif different_users == 'private':
+                form_role = 4
+           elif different_users == 'client':
+                form_role = 5
+           else:
+                form_role = 0
+           if role != form_role:
+                return  HttpResponse("role match different")              
            return redirect('index')          
         else:
              try:
