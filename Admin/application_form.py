@@ -228,6 +228,7 @@ def MemberApprovalFormStore(request):
             'union_name' : union_name,
             'company_name' : request.POST['company_name'],
             'first_name' : request.POST['owner_full_name'],
+            'member_admin' : request.POST['member_admin'],
         }
         try:
             signature = request.FILES['signature']

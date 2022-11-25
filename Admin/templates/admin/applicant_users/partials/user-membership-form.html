@@ -16,8 +16,8 @@
                                                 <div class="form-group">
                                                     <label class="form-label">सदस्य/संस्थागत<span class="required">*</span></label>
                                                     <select id="member_admin" class="form-control" name="member_admin" data-placeholder="Choose a Category" tabindex="1" required>
-                                                        <option value='member' {% if form_data.union_type == 'district' %} selected {% endif %}>सदस्य हुन चाहेको </option>
-                                                        <option value="admin" {% if form_data.union_type == 'private' %} selected {% endif %}> संस्थागत आबध्दता</option>
+                                                        <option value='member' {% if id_data.member_admin == 'member' %} selected {% endif %}>सदस्य हुन चाहेको </option>
+                                                        <option value="admin" {% if id_data.member_admin == 'admin' %} selected {% endif %}> संस्थागत आबध्दता</option>
                                                     </select>
                                                 </div>
                                             </div>  
@@ -136,89 +136,151 @@
                                                 </div>
                                             </div>
                                         </div>  
-                                        <!-------devraj team members------------>
+                                        <!----team member list-->
+                                        
+                                        <!-------team members forms------------>
 
                                         <!-- Info box Content -->
                                                    <!-- ============================================================== -->
-                                                   <div class="row" id="team_sh" style="display:none;">
-                                                       <!-- Column -->
-                                                       <div class="col-lg-12">
-                                                           <div class="card">
-                                                               <div class="card-body">                                                                   
-                                                                       <div class="form-body">
-                                                                           <input type="hidden" name="next" value="{{ request.path }}">
-                                                                                                                  
-                                                                           <div id="team">
-                                                                               <div class="mt-2" style="height: 42px;">
-                                                                                   <h5 class="card-title" style="position: absolute;">Team Field</h5>
-                                                                                   <button id="addmember" type="button" style="float: right;" class="btn btn-success text-white"> <i class="fa fa-plus"></i> Add Member</button>
-                                                                                       <input type='hidden' id="count"  name="count" value="{% if team|length == 0 %} 1 {%endif%}">
-                                                                               </div> 
+                                        <div class="row" id="team_sh" {% if id_data.member_admin == 'member' %} style="display:none;" {% endif %}>
+                                            <div class="col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-body">                                                                   
+                                                            <div class="form-body">
+                                                            <input type="hidden" name="next" value="{{ request.path }}">                                    
+                                                            <div id="team">
+                                                                <div class="mt-2" style="height: 42px;">
+                                                                    <h5 class="card-title" style="position: absolute;">Team Field</h5>
+                                                                    <button id="addmember" type="button" style="float: right;" class="btn btn-success text-white"> <i class="fa fa-plus"></i> Add Member</button>
+                                                                        <input type='hidden' id="count"  name="count" value="{% if team|length == 0 %} 1 {%endif%}">
+                                                                </div> 
+                                                            
+                                                                <div id="team1">
+                                                                    <img src="https://plus1group.com.au/wp-content/uploads/2018/07/1_Circle_Wealth.png" class="img-circle" style="margin-bottom: -36px;" width="50px" height="50px">                                          
+                                                                                                                
+                                                                    <div class="row mt-2" style="border: inset;">
+                                                                        <input type='hidden'  name="teamid1" value="">
+                                                                        <div class="col-md-9 mt-4">                                                   
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label">Name</label>
+                                                                                        <input type="text" id="team_name1" name="team_name1" class="form-control"   placeholder="Name of the member"> 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--/span-->
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label">Post</label>
+                                                                                        <input type="text" name="team_post1" class="form-control" placeholder="Post of member"> 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!--/span-->
+                                                                            </div>
+                                                                            <div class="row">                                    
+                                                                                <div class="col-md-6 ">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label">Email Address</label>
+                                                                                        <input type="email" name="team_email1" class="form-control" rows="4">
+                                                                                    </div>
+                                                                                </div>                                                
                                                                             
-                                                                               <div id="team1">
-                                                                                   <img src="https://plus1group.com.au/wp-content/uploads/2018/07/1_Circle_Wealth.png" class="img-circle" style="margin-bottom: -36px;" width="50px" height="50px">                                          
-                                                                                                                                
-                                                                                   <div class="row mt-2" style="border: inset;">
-                                                                                       <input type='hidden'  name="teamid1" value="">
-                                                                                       <div class="col-md-9 mt-4">                                                   
-                                                                                           <div class="row">
-                                                                                               <div class="col-md-6">
-                                                                                                   <div class="form-group">
-                                                                                                       <label class="form-label">Name</label>
-                                                                                                       <input type="text" id="team_name1" name="team_name1" class="form-control"   placeholder="Name of the member"> 
-                                                                                                   </div>
-                                                                                               </div>
-                                                                                               <!--/span-->
-                                                                                               <div class="col-md-6">
-                                                                                                   <div class="form-group">
-                                                                                                       <label class="form-label">Post</label>
-                                                                                                       <input type="text" name="team_post1" class="form-control" placeholder="Post of member"> 
-                                                                                                   </div>
-                                                                                               </div>
-                                                                                               <!--/span-->
-                                                                                           </div>
-                                                                                           <div class="row">                                    
-                                                                                               <div class="col-md-6 ">
-                                                                                                   <div class="form-group">
-                                                                                                       <label class="form-label">Email Address</label>
-                                                                                                       <input type="email" name="team_email1" class="form-control" rows="4">
-                                                                                                   </div>
-                                                                                               </div>                                                
-                                                                                           
-                                                                                               <div class="col-md-6 ">
-                                                                                                   <div class="form-group">
-                                                                                                       <label class="form-label">Mobile number
-                                                                                                       <input type="number" name="team_phone1" class="form-control" rows="4">
-                                                                                                   </div>
-                                                                                               </div>
-                                                                                           </div>
-                                                                                       </div>
-                                                                                       <div class="col-md-3">
-                                                                                           <div class="card">
-                                                                                               <div class="card-body">
-                                                                                               <label class="form-label">Profile Picture</label> <br>                                                            
-                                                                                                   <input name="team_image1" type="file" id="input-file-now" class="dropify" />
-                                                                                                   </div>
-                                                                                           </div>
-                                                                                       </div>
-                                                                                   </div>                                                            
-                                                                               </div>
-                                                                         
-                                                                           </div>
-                                                                           <!--team end-->
-                                                                           
-                                                                       </div>
-                                                                           
-                                                                   </form>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                                       <!-- Column -->
-                                                   </div>
-                                                   <!-- ============================================================== -->
-                                                   <!-- End PAge Content -->
-                                        <!------devraj team member end-->
-                                        <!--/row-->
+                                                                                <div class="col-md-6 ">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label">Mobile number
+                                                                                        <input type="number" name="team_phone1" class="form-control" rows="4">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                <label class="form-label">Profile Picture</label> <br>                                                            
+                                                                                    <input name="team_image1" type="file" id="input-file-now" class="dropify" />
+                                                                                    </div>
+                                                                                    <style>
+                                                                                        .dropify-wrapper{
+                                                                                            height: 120px;
+                                                                                        }
+                                                                                    </style>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>                                                            
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Basic Table</h4>
+                                                        <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>First Name</th>
+                                                                        <th>Last Name</th>
+                                                                        <th>Username</th>
+                                                                        <th>Role</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td>Deshmukh</td>
+                                                                        <td>Prohaska</td>
+                                                                        <td>@Genelia</td>
+                                                                        <td><span class="label label-danger">admin</span> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>2</td>
+                                                                        <td>Deshmukh</td>
+                                                                        <td>Gaylord</td>
+                                                                        <td>@Ritesh</td>
+                                                                        <td><span class="label label-info">member</span> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>3</td>
+                                                                        <td>Sanghani</td>
+                                                                        <td>Gusikowski</td>
+                                                                        <td>@Govinda</td>
+                                                                        <td><span class="label label-warning">developer</span> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>4</td>
+                                                                        <td>Roshan</td>
+                                                                        <td>Rogahn</td>
+                                                                        <td>@Hritik</td>
+                                                                        <td><span class="label label-success">supporter</span> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>5</td>
+                                                                        <td>Joshi</td>
+                                                                        <td>Hickle</td>
+                                                                        <td>@Maruti</td>
+                                                                        <td><span class="label label-info">member</span> </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>6</td>
+                                                                        <td>Nigam</td>
+                                                                        <td>Eichmann</td>
+                                                                        <td>@Sonu</td>
+                                                                        <td><span class="label label-success">supporter</span> </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-6">
                                             <div class="nibedan-form">

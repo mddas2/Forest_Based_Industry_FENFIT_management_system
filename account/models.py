@@ -24,6 +24,8 @@ class CustomUser(AbstractUser):
     image = models.ImageField(upload_to='user/profile', null=True)
     signature = models.ImageField(upload_to='user/documents', null=True) #Signature
     
+    member_admin =  models.CharField(max_length=205,null=True)#सदस्य/संस्थागत*
+
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     USERNAME_FIELD = 'email'
