@@ -12,6 +12,8 @@ class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
     is_applyForVerified = models.BooleanField(default=False)
 
+    apply_role_type = models.IntegerField(null=True)
+
     company_name = models.CharField(max_length=205,null=True)
     union_type = models.CharField(max_length=205,null=True)
     union_name = models.CharField(max_length=205,null=True)
