@@ -23,10 +23,12 @@ def Login(request):
     data = {'login_attempt_left':settings.AXES_FAILURE_LIMIT}
     login_attempt_left = 5
     if request.POST:
+        # return HttpResponse(request.POST)
         try:
             different_users = request.POST['users'] #it checks, is actual user have role ? which match what they choose.
         except:
             different_users == "none"
+
         email = request.POST['email']
         password =  request.POST['password']
         user = authenticate(request=request,username=email, password=password)
@@ -35,17 +37,31 @@ def Login(request):
            if different_users == 'central':
                 form_role = 1
            elif different_users == 'state':
-                form_role = 2
+                is_state_match = False
+                form_role = 0
+                if 'state_name' in request.POST:
+                    states = request.POST['state_name']
+                    if user.state_name == states:
+                        is_state_match = True
+                        form_role = 2
            elif different_users == 'district':
-                form_role = 3
+                is_district_match = False
+                form_role = 0
+                if 'district_name' in request.POST:
+                    district = request.POST['district_name']
+                    if user.district_name == district:
+                        is_district_match = True
+                        form_role = 3
            elif different_users == 'private':
                 form_role = 4
            elif different_users == 'client':
                 form_role = 5
            else:
                 form_role = 0
-           if role != form_role:
-                return  HttpResponse("role match different")              
+           if role == form_role:
+                login(request,user,backend='django.contrib.auth.backends.ModelBackend') 
+           else:
+                messages.info(request,"role does not match")       
            return redirect('index')          
         else:
              try:
