@@ -12,22 +12,32 @@
                                         <h5 class="card-title">फारम</h5>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">सदस्य/संस्थागत<span class="required">*</span></label>
                                                     <select id="member_admin" class="form-control" name="member_admin" data-placeholder="Choose a Category" tabindex="1" required>
-                                                        <option value='member' {% if id_data.member_admin == 'member' %} selected {% endif %}>सदस्य हुन चाहेको </option>
+                                                        <option value='member' {% if id_data.member_admin == 'member' %} selected {% endif %}>सामान्य सदस्य हुन चाहेको </option>
                                                         <option value="admin" {% if id_data.member_admin == 'admin' %} selected {% endif %}> संस्थागत आबध्दता</option>
                                                     </select>
                                                 </div>
-                                            </div>  
-                                            <div class="col-md-4">
+                                            </div>
+                                            <div class="col-md-6" id="role_type_sh">
+                                                <div class="form-group">
+                                                    <label class="form-label">संघको प्रकार<span class="required">*</span></label>
+                                                    <select id="role_type" class="form-control" name="role_type" data-placeholder="Choose a Category" tabindex="1">
+                                                        <option value='4' {% if id_data.role == '4' %} selected {% endif %}>{{id_data.company_name}} बस्तुगत संघ</option>
+                                                        <option value='3' {% if id_data.role == '3' %} selected {% endif %}>जिल्ला संघ</option>
+                                                        <option value='2' {% if id_data.role == '2' %} selected {% endif %}>प्रदेश संघ</option>
+                                                    </select>
+                                                </div>
+                                            </div>   
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">उधेागमिको नाम्<span class="required">*</span></label>
                                                     <input type="text" id="first" name="owner_full_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert">
                                                 </div>
                                             </div>     
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label">व्यवसायको नाम<span class="required">*</span></label>
                                                     <select class="form-control" name="business_name" data-placeholder="Choose a Category" tabindex="1" required>
@@ -644,6 +654,23 @@
             });            
             
         });           
-                            
+        
+        role_type = $( "#member_admin").val()
+        if(role_type == 'admin'){
+            $("#role_type_sh").show()
+        }
+        else if(role_type == 'member'){
+            $("#role_type_sh").hide()
+        }
+        
+        $( "#member_admin" ).change(function() {
+        var role_type = $(this).val()
+        if(role_type == 'admin'){
+            $("#role_type_sh").show()
+        }
+        else if(role_type == 'member'){
+            $("#role_type_sh").hide()
+        }
+     });
 </script>
                 

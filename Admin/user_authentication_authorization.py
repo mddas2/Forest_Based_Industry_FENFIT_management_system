@@ -27,7 +27,8 @@ def Login(request):
         try:
             different_users = request.POST['users'] #it checks, is actual user have role ? which match what they choose.
         except:
-            different_users == "none"
+            messages.info(request,"Please select user type")
+            different_users = "none"
 
         email = request.POST['email']
         password =  request.POST['password']
