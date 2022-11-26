@@ -239,12 +239,11 @@ def MemberApprovalFormStore(request):
         }
         try:
             signature = request.FILES['signature']
-            user_data['signature']
+            user_data['signature'] = signature
         except:
             pass
 
-        CustomUser.objects.update_or_create(id=request.user.id,defaults=user_data)
-        
+        CustomUser.objects.update_or_create(id=request.user.id, defaults=user_data)        
 
         documents = {} #dictionary of image
         for im in request.FILES:
