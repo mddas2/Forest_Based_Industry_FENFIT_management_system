@@ -25,9 +25,9 @@
                                                 <div class="form-group">
                                                     <label class="form-label">संघको प्रकार<span class="required">*</span></label>
                                                     <select id="role_type" class="form-control" name="role_type" data-placeholder="Choose a Category" tabindex="1">
-                                                        <option value='4' {% if id_data.role == '4' %} selected {% endif %}>{{id_data.company_name}} बस्तुगत संघ</option>
-                                                        <option value='3' {% if id_data.role == '3' %} selected {% endif %}>जिल्ला संघ</option>
-                                                        <option value='2' {% if id_data.role == '2' %} selected {% endif %}>प्रदेश संघ</option>
+                                                        <option value='4' {% if id_data.apply_role_type == 4 %} selected {% endif %}>{{id_data.company_name}} बस्तुगत संघ</option>
+                                                        <option value='3' {% if id_data.apply_role_type == 3 %} selected {% endif %}>जिल्ला संघ</option>
+                                                        <option value='2' {% if id_data.apply_role_type == 2 %} selected {% endif %}>प्रदेश संघ</option>
                                                     </select>
                                                 </div>
                                             </div>   
@@ -275,7 +275,7 @@
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
                                                 </div>
-                                                <h2 class="main-title">सदस्यता आवेदन फारम</h2>
+                                                <h2 class="main-title">{% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता फारम {% else %} सदस्यता आवेदन फारम {% endif %}</h2>
                                                 <div class="nibedan-form-top">
                                                     <div class="form-top-left">
                                                         <p>श्रीमान अध्यक्षज्यू<br>
@@ -287,7 +287,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="nibedan-form-body">
-                                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
+                                                    <h2>बिषय ः {% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
                                                     <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
                                                         जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
                                                         प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र तपसिल

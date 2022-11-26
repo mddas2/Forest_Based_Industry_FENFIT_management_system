@@ -187,6 +187,13 @@ def MemberApprovalFormStore(request):
     if request.POST:
         if request.POST['member_admin'] == 'admin':
             AddTeam(request)
+            apply_role_type = request.POST['role_type']
+            request.user.apply_role_type = apply_role_type
+            request.user.save()
+        else:
+            request.user.apply_role_type = CustomUser.USER
+            request.user.save()
+
         if request.POST['union_type'] == 'private':
             union_type = "private" #सदस्य हुन चाहेको संघ
             if request.POST['union_name'] !='0':
@@ -292,7 +299,7 @@ def MemberAprovalFormReview(request,id=None):
         business_name = None
 
     try:
-        approved_admin = CustomUser.objects.get(email = id_data.union_name)
+        approved_admin = CustomUser.objects.get(email = id_data.approved_email)
     except:
         approved_admin = None
     # return HttpResponse(CustomUser.objects.get(id=id_data.id).union_namec)
@@ -651,7 +658,7 @@ def AddTeam(request):
             TeamMember.objects.update_or_create(email=teamid, defaults=data2)
             return 1
         else:
-            messages.error(request,"Name and Post Can Not be empty !")
+            messages.error(request,"Name and Post of Teams Can Not be empty !")
             return 1
             # return 1
 
