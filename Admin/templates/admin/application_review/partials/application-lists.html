@@ -45,6 +45,8 @@
                                 <th>स्थिति</th>
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
                                     <th>बिल नम्बर</th>   
+                                {% elif request.user.role == request.user.CENTRAL %}
+                                    <th>बिल नम्बर</th>  
                                 {% endif %}
                                 <th style="display:none">email</th>                            
                             </tr>
@@ -113,6 +115,10 @@
                                                 </div> 
                                     
                                             </form>                                    
+                                        </td>
+                                        {% elif request.user.role == request.user.CENTRAL %}
+                                        <td>             
+                                            {{i.bill_number}}                             
                                         </td>
                                         {% endif %}
                                         {% if action%}
