@@ -574,7 +574,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         to_number = CustomUser.objects.get(id=whoses_form).phone
                         user_sms = CustomUser.objects.get(id=whoses_form)
                         form_sms = ApplicationForm.objects.get(id=pk)
-                        sms = "Congratulation Your Form is approved successfully by FENFIT \n name"+ str(user_sms.first_name)+"application id: " + str(form_sms)
+                        sms = "Congratulation Your Form is approved successfully by FENFIT \n name"+ str(user_sms.first_name)+"\n application id: " + str(form_sms.id)
                         bulk_sms_email.SendSms(to_number, sms)
 
                         to_email = [CustomUser.objects.get(id=whoses_form).email]
