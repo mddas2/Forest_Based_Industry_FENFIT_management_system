@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.urls import reverse
 from django.shortcuts import redirect
-from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_role
+from Admin.decorators import customized_user_passes_test,is_admin_role,is_USER_role,is_central_role
 from account.models import *
 from django.contrib.auth.hashers import make_password
 from payment.payment import BusinessPriceCategory
@@ -457,7 +457,18 @@ def CustomerOrder(request, pk=None, pdc=None):
     return render(request,'admin/customer_orders/order.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)
-@customized_user_passes_test(is_admin_role)
+@customized_user_passes_test(is_central_role)
+def BillAdd(request):#all application
+    # return HttpResponse(request.POST.items())
+    obj = ApplicationForm.objects.get(id=request.POST['form_id'])
+    obj.bill_number = request.POST['bill_number']
+    obj.save()
+    return redirect("/")
+
+
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_central_role)
 def AccountantPayment(request):#all application
     
     try:

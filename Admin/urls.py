@@ -93,6 +93,7 @@ urlpatterns = [
     path('all-application/<int:pk>/<str:approved_pending_cancelled>', application_form.AllApplication, name='AllApplication'),
 
     path('all-application-accountant-payment', application_form.AccountantPayment, name='AccountantPayment'),
+    path('all-application-accountant-bill-store', application_form.BillAdd, name='BillAdd'),
     #**** Client messages*****#
     path('client-messages/<int:id>', views.ClientMessage, name='ClientMessage'),
 

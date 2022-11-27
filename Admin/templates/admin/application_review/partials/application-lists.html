@@ -98,11 +98,13 @@
                                         <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
                                         <td>             
-                                            <form class="form-horizontal form-material" id="loginform" action="{% url 'Login' %}" method="POST">                            
+                                            <form class="form-horizontal form-material" id="bill_form" action="{% url 'BillAdd' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
                                                 <div class="form-group ">
                                                     <div class="row">
                                                     <div class="col-md-8">
-                                                        <input id="bill_number" class="form-control" type="text" required="" value="{{i.bill_number}}" placeholder="बिल नम्बर" name="email"> 
+                                                        <input id="bill_number" class="form-control" type="text" required="" value="{{i.bill_number}}" placeholder="बिल नम्बर" name="bill_number"> 
                                                     </div>
                                                     <div class="col-md-4 ">
                                                         <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>

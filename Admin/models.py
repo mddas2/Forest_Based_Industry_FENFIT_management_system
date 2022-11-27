@@ -132,7 +132,7 @@ class ApplicationForm(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
     is_payment = models.BooleanField(null=True,default=False)
-    bill_number = models.CharField(max_length=205,null=True)
+    bill_number = models.CharField(max_length=205,default='')
 
     
     def get_date(self):
