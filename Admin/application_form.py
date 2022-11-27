@@ -582,7 +582,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                                 'name':'Manoj Kumar Das',
                                 'date':'989',
                               }
-                        pdf = html_to_pdf.report(request) 
+                        pdf = html_to_pdf.report(request,whoses_form) 
                         try:   
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                             bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)

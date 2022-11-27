@@ -3,6 +3,8 @@
 from django.templatetags.static import static
 from django.conf import settings
 
+from .models import CustomUser
+
 import time
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
@@ -20,7 +22,7 @@ from datetime import datetime
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-def report(request):
+def report(request,whose_form):
     pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.ttf")))
     pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.ttf")))
     pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/Times.ttf")))
@@ -61,8 +63,17 @@ def report(request):
     Story.append(Paragraph(ptext, styles1["gargi"]))
     Story.append(Spacer(1, 12))
 
-    var1='v'
-    ptext = """तपाईले सदस्यता अद्यावद्यिकका लागि मिति 2079-08-04 मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले ं(जुन संघ वा बस्तुगत संघ छनौट गरेर आवेदन गरेको हुन्छ त्यहि संघ वा वस्तुगत संघको नाम आउने वनाउनेसंघको विधान बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सदस्यता अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । संघको उद्धेश्य परिपुर्तिमा विधान बमोजिम सदस्यहरकोहित रक्षार्थ क्रियाशील हुनुहुनेछ भन्नेविश्वास लिएकोछु। तपाइर्क ो कार्यकाल सफल र उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु %s ।""" % (var1)
+    var1=''
+
+    user_obj = CustomUser.objects.get(id=whose_form)
+    user_detail = user_obj.UserApplicationDetail
+    owner_full_name = user_detail.owner_full_name
+    company_name = user_detail.company_name  
+    business_name =  user_detail.owner_full_name
+    district = user_obj.district_name
+
+
+    ptext = """ सञ्चालक । प्रोप्राइटर श्री नबिन स:मिल / भेनियर तथा प्लाईउड / Radiant Nepal ले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि सुनसरी जिल्ला संघ वस्तुगत संघ माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र प्रदेश महासंघ वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम सञ्चालक । प्रोप्राइटर श्री user को Radiant Nepal उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत गरिदिनु हुन अनुरोध छ । %s ।""" % (var1)
             
     Story.append(Paragraph(ptext, styles1["gargi"]))
     Story.append(Spacer(1, 12))
@@ -82,7 +93,7 @@ def report(request):
     pdf = buffer.getvalue()
     buffer.close()
     return pdf #for gmail
-    
+
     #for download
     response = HttpResponse(content_type='application/pdf') #for download
     response['Content-Disposition'] = 'attachment; filename=certificate.pdf' #for download
