@@ -44,7 +44,7 @@
                     <div class="form-group" id="private_sh">
                         <div class="col-xs-12">
                             <select id="private_value" class="form-control" name="private_name" data-placeholder="Choose a Category" tabindex="1">
-                                    <option>बस्तुगत संघको नाम</option>
+                                    <option disabled>बस्तुगत संघको नाम</option>
                                     {% for private in privates%}
                                         <option value="{{private.email}}">{{private.company_name}}</option>
                                     {% endfor %}
