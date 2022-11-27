@@ -654,13 +654,15 @@
             });            
             
         });           
-        
+    
         role_type = $( "#member_admin").val()
         if(role_type == 'admin'){
             $("#role_type_sh").show()
+            
         }
         else if(role_type == 'member'){
             $("#role_type_sh").hide()
+            $("#team_sh").hide()
         }
         
         $( "#member_admin" ).change(function() {
