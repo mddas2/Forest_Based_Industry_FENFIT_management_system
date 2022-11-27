@@ -105,7 +105,7 @@
                                                     <select class="form-control" name="union_name" data-placeholder="Choose a Category" tabindex="1" required>
                                                         <option value='0' selected>संघ चयन गर्नुहोस्</option>
                                                         {% for organizataion in private_organization%}
-                                                            <option value="{{organizataion.email}}" {% if form_data.union_name == organizataion.email %} selected {% endif %}>{{organizataion.email}}</option>
+                                                            <option value="{{organizataion.email}}" {% if form_data.union_name == organizataion.email %} selected {% endif %}>{{organizataion.company_name}}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>
