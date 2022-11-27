@@ -23,7 +23,7 @@ def Login(request):
     data = {'login_attempt_left':settings.AXES_FAILURE_LIMIT}
     login_attempt_left = 5
     if request.POST:
-        # return HttpResponse(request.POST)
+        return HttpResponse(request.POST)
         try:
             different_users = request.POST['users'] #it checks, is actual user have role ? which match what they choose.
         except:
