@@ -25,8 +25,8 @@ from . import html_to_pdf
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
-    # pdf = html_to_pdf.report(request) 
-    # return pdf
+    #for download return pdf 
+    
     slug1 = "सदस्य अनुमोदित फारम"
 
     district_name = request.user.district_name
@@ -584,8 +584,8 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                               }
                         pdf = html_to_pdf.report(request) 
                         try:   
-                            bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
-                            # bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)
+                            # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
+                            bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)
                         except:                       
                             messages.info(request,'Email send fail.')
                     # return HttpResponse(whose_form)
@@ -614,6 +614,16 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
+
+    try:
+        if pdf:
+            response = HttpResponse(content_type='application/pdf') #for download
+            response['Content-Disposition'] = 'attachment; filename=certificate.pdf' #for download
+            response.write(pdf)
+            return response
+    except:
+        pass
+
     return render(request,'admin/application_review/application-lists.html',data)
 
 @login_required(login_url=settings.LOGIN_URL)

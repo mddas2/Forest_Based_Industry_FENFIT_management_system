@@ -81,13 +81,18 @@ def report(request):
     doc.build(Story)
     pdf = buffer.getvalue()
     buffer.close()
-    # response = HttpResponse(content_type='application/pdf') #for download
-    # response['Content-Disposition'] = 'attachment; filename=gugus.pdf' #for download
+    return pdf #for gmail
+    
+    #for download
+    response = HttpResponse(content_type='application/pdf') #for download
+    response['Content-Disposition'] = 'attachment; filename=certificate.pdf' #for download
+    response.write(pdf)
+    return response
+
+    #for pdf
     response = HttpResponse(content_type="application/pdf")
     d = datetime.today().strftime('%Y-%m-%d')
     response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
-    response.write(pdf) 
-    # response.write(pdf1)
-    # return response
+    response.write(pdf)   
     return pdf
         
