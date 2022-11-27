@@ -25,6 +25,8 @@ from . import html_to_pdf
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
+    # pdf = html_to_pdf.report(request) 
+    # return pdf
     slug1 = "सदस्य अनुमोदित फारम"
 
     district_name = request.user.district_name
