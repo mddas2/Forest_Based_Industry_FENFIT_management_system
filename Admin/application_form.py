@@ -26,7 +26,14 @@ from . import html_to_pdf
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
     #for download return pdf 
-    
+    form = ApplicationForm.objects.get(id=12)
+    pdf = html_to_pdf.report(request,form)
+    response = HttpResponse(content_type="application/pdf")
+    # d = datetime.today().strftime('%Y-%m-%d')
+    response['Content Disposition'] = f'inline; filenane="s.pdf"'
+    response.write(pdf)   
+    return response
+        
     slug1 = "सदस्य अनुमोदित फारम"
 
     district_name = request.user.district_name
