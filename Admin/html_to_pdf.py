@@ -1,5 +1,3 @@
-
-
 from django.templatetags.static import static
 from django.conf import settings
 
@@ -22,7 +20,7 @@ from datetime import datetime
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-def report(request,whose_form):
+def report(request,form):
     pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.TTF")))
     pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.TTF")))
     pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.TTF")))
@@ -65,15 +63,15 @@ def report(request,whose_form):
 
     var1=''
 
-    # user_obj = CustomUser.objects.get(id=whose_form)
-    # user_detail = user_obj.UserApplicationDetail
-    # owner_full_name = user_detail.owner_full_name
-    # company_name = user_detail.company_name  
-    # business_name =  user_detail.owner_full_name
-    # district = user_obj.district_name
+    
+    owner_full_name = str(form.get_user_application_detail.owner_full_name) #1,5
+    company_name = str(form.get_user_application_detail.company_name)  #3,6
+    business_name =  str(form.get_user_application_detail.owner_full_name) #2
+ 
+    union_type = str(form.get_user_application_detail.union_type) #4,7
+ 
 
-
-    ptext = """ सञ्चालक । प्रोप्राइटर श्री नबिन स:मिल / भेनियर तथा प्लाईउड / Radiant Nepal ले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि सुनसरी जिल्ला संघ वस्तुगत संघ माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र प्रदेश महासंघ वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम सञ्चालक । प्रोप्राइटर श्री user को Radiant Nepal उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत गरिदिनु हुन अनुरोध छ । %s ।""" % (var1)
+    ptext = f" सञ्चालक । प्रोप्राइटर श्री {owner_full_name} स:मिल / {business_name} / {company_name} ले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {union_type}  सुनसरी जिल्ला संघ वस्तुगत संघ माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र प्रदेश महासंघ वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम सञ्चालक । प्रोप्राइटर श्री {owner_full_name} को {company_name} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत गरिदिनु हुन अनुरोध छ ।"
             
     Story.append(Paragraph(ptext, styles1["gargi"]))
     Story.append(Spacer(1, 12))
@@ -106,4 +104,3 @@ def report(request,whose_form):
     response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
     response.write(pdf)   
     return pdf
-        
