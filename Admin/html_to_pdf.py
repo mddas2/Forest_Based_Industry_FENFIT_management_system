@@ -40,59 +40,65 @@ def report(request,form):
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
 
-    styles1=getSampleStyleSheet()
-    styles1.add(ParagraphStyle(name='gargi', alignment=TA_JUSTIFY,fontName='gargi', fontSize=18,leading=24))
+    gargi_style=getSampleStyleSheet()
+    gargi_style.add(ParagraphStyle(name='gargi', alignment=TA_JUSTIFY,fontName='gargi', fontSize=18,leading=28))
+
+    preeti_style=getSampleStyleSheet()
+    preeti_style.add(ParagraphStyle(name='Preeti', alignment=TA_JUSTIFY,fontName='Preeti', fontSize=24,leading=25))
 
     doc = SimpleDocTemplate(buffer,pagesize=letter,
                             rightMargin=72,leftMargin=72,
                             topMargin=72,bottomMargin=18)
     Story=[]
-    logo = settings.BASE_URL+static("/assets/images/logo-2.png")
 
-    buffer1 = BytesIO()
-    p = canvas.Canvas (buffer1, pagesize=A4)
-    p.setFillColorRGB(0, 0,0)
-    p.drawImage(logo,30,740,550,75,mask='auto')
-    p.save()
-    pdf1 = buffer1.getvalue()
-    buffer1.close()
-
-    title = "नेपाल वन पैदावार उद्योग व्यवसायी संघ जिल्ला सुनसरी सदस्यता अद्यावद्यिक प्रमाण पत्र ।"
-
+    logo = settings.BASE_URL+static("/assets/images/logo-2.png")    
     im = Image(logo, 450,60)
     Story.append(im)
 
-    Story.append(Spacer(1, 12))
+    title = "laifo M sf7, bfp/fdf cfwfl/t pBf]u ;'lrs[tsf nflu l;kmfl/; kq"
+    Story.append(Spacer(1, 35))
     ptext = '%s' % title
-    Story.append(Paragraph(ptext, styles1["gargi"]))
-    Story.append(Spacer(1, 12))
+    Story.append(Paragraph(ptext, preeti_style["Preeti"]))
 
-    var1=''
-
-    
+        
     owner_full_name = str(form.get_user_application_detail.owner_full_name) #1,5
     company_name = str(form.get_user_application_detail.company_name)  #3,6
     business_name =  str(form.get_user_application_detail.owner_full_name) #2
- 
     union_type = str(form.get_user_application_detail.union_type) #4,7
- 
 
+    shree = f"{form.id} सिफारिश पत्र नम्बर"
+    Story.append(Spacer(1, 10))
+    ptext = '%s' % shree
+    Story.append(Paragraph(ptext,  gargi_style["gargi"]))
+
+    shree = """>L l8lehg jg sfof{no"""
+    Story.append(Spacer(1, 10))
+    ptext = '%s' % shree
+    Story.append(Paragraph(ptext,  preeti_style["Preeti"]))
+
+    shree = f"{form.user.district_name}"
+    Story.append(Spacer(1, 2))
+    ptext = '%s' % shree
+    Story.append(Paragraph(ptext,gargi_style["gargi"]))
+ 
+    Story.append(Spacer(1, 30))
     ptext = f" सञ्चालक । प्रोप्राइटर श्री {owner_full_name} स:मिल / {business_name} / {company_name} ले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {union_type}  सुनसरी जिल्ला संघ वस्तुगत संघ माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र प्रदेश महासंघ वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम सञ्चालक । प्रोप्राइटर श्री {owner_full_name} को {company_name} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत गरिदिनु हुन अनुरोध छ ।"
             
-    Story.append(Paragraph(ptext, styles1["Preeti"]))
+    Story.append(Paragraph(ptext, gargi_style["gargi"]))
     Story.append(Spacer(1, 12))
 
-    ptext = 'Thank you'
-    Story.append(Paragraph(ptext, styles["Normal"]))
-    Story.append(Spacer(1, 12))
+    logo = settings.BASE_URL+form.get_user_application_detail.approved_signature.url 
+    im = Image(logo, 120,60)
+    Story.append(im)
 
-    ptext = 'Sincerely,'
-    Story.append(Paragraph(ptext, styles["Normal"]))
-    Story.append(Spacer(1, 48))
+    ptext = 'पद कार्यकारी निर्देशक'
+    Story.append(Paragraph(ptext, gargi_style["gargi"]))
+    Story.append(Spacer(1, 0))
 
-    ptext = 'Ima Sucker'
-    Story.append(Paragraph(ptext, styles["Normal"]))
-    Story.append(Spacer(1, 12))
+    ptext = f'नाम:{form.get_user_application_detail.approved_name}'
+    Story.append(Paragraph(ptext, gargi_style["gargi"]))
+    Story.append(Spacer(1, 1))
+
     doc.build(Story)
     pdf = buffer.getvalue()
     buffer.close()
