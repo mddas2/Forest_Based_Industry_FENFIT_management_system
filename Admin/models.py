@@ -132,6 +132,8 @@ class ApplicationForm(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
     is_payment = models.BooleanField(null=True,default=False)
+    bill_number = models.CharField(max_length=205,null=True)
+
     
     def get_date(self):
         return humanize.naturaltime(self.updated_at)   
@@ -155,6 +157,7 @@ class UserApplicationPayment(models.Model):
     is_renew = models.BooleanField(default=False,null=True)
 
     is_payment = models.BooleanField(default=False,null=True)
+    bill_number = models.CharField(max_length=205,null=True)
 
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
