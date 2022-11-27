@@ -29,18 +29,23 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Full Name</th>
-                                <th>नागरिकता पर्तिलिपि</th>
-                                <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
-                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th> 
-                                {% if request.user.groups.first.name == 'accountant' %}  
+                                {% if request.user.groups.first.name != 'accountant' %}  
+                                    <th>नागरिकता पर्तिलिपि</th>
+                                    <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
+                                    <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
+                                    <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>
+                                {% endif %}
+                                {% if request.user.role == request.user.CENTRAL %}
                                     <th>Bank Voucher</th> 
                                 {% endif %}
                                 <th>भुक्तानी स्थिति</th> 
                                 <th>जिल्ला</th>                                                   
                                 <th>विवरण हेर्नुहोस्</th>
                                 <th>दर्ता गरिएको मिति</th>
-                                <th>स्थिति</th>   
+                                <th>स्थिति</th>
+                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
+                                    <th>बिल नम्बर</th>   
+                                {% endif %}
                                 <th style="display:none">email</th>                            
                             </tr>
                         </thead>
@@ -51,37 +56,39 @@
                                     <tr>
                                         <td>{{i.id}}</td>
                                         <td>{{i.get_user_application_detail.owner_full_name}}</td>
-                                        <td class="zoom-gallery">
-                                            {% if i.get_user_application_detail.certificate_citizenship %} 
-                                            <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                            {% else %}
-                                                NotFound
-                                            {% endif %}
-                                        </td>
-                                        <td class="zoom-gallery">
-                                            {% if i.get_user_application_detail.certificate_company_registration %}  
-                                            <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
-                                            <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
-                                            {% else %}
-                                                NotFound
-                                            {% endif %}
-                                        </td>
-                                        <td class="zoom-gallery">    
-                                            {% if i.get_user_application_detail.provisional_account_number %}        
-                                            <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                            {% else %}
-                                                NotFound
-                                            {% endif %}
-                                        </td>   
+                                        {% if request.user.groups.first.name != 'accountant' %}  
+                                            <td class="zoom-gallery">
+                                                {% if i.get_user_application_detail.certificate_citizenship %} 
+                                                <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                                {% else %}
+                                                    NotFound
+                                                {% endif %}
+                                            </td>
+                                            <td class="zoom-gallery">
+                                                {% if i.get_user_application_detail.certificate_company_registration %}  
+                                                <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                                <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                                {% else %}
+                                                    NotFound
+                                                {% endif %}
+                                            </td>
+                                            <td class="zoom-gallery">    
+                                                {% if i.get_user_application_detail.provisional_account_number %}        
+                                                <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                                {% else %}
+                                                    NotFound
+                                                {% endif %}
+                                            </td>   
 
-                                        <td class="zoom-gallery">
-                                            {% if i.get_user_application_detail.tax_paid_certificate %}       
-                                            <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                            {% else %}
-                                                NotFound
-                                            {% endif %}
-                                        </td>  <!-- this is quantity-->
-                                        {% if request.user.groups.first.name == 'accountant' %}
+                                            <td class="zoom-gallery">
+                                                {% if i.get_user_application_detail.tax_paid_certificate %}       
+                                                <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                                {% else %}
+                                                    NotFound
+                                                {% endif %}
+                                            </td>  <!-- this is quantity-->
+                                        {% endif %}
+                                        {% if request.user.role == request.user.CENTRAL%}
                                             <td>{{i.get_user_application_detail.voucher_number}}</td>
                                         {% endif %}
                                         <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
@@ -89,6 +96,23 @@
                                         <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                         <td><span class="label label-info">{{i.get_date}}</span></td>
                                         <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
+                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
+                                        <td>             
+                                            <form class="form-horizontal form-material" id="loginform" action="{% url 'Login' %}" method="POST">                            
+                                                <div class="form-group ">
+                                                    <div class="row">
+                                                    <div class="col-md-8">
+                                                        <input id="bill_number" class="form-control" type="text" required="" value="{{i.bill_number}}" placeholder="बिल नम्बर" name="email"> 
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
+                                                    </div>
+                                                </div>
+                                                </div> 
+                                    
+                                            </form>                                    
+                                        </td>
+                                        {% endif %}
                                         {% if action%}
                                         <td>
                                         <div class="dropdown">
@@ -152,6 +176,7 @@
                                                 </ul>
                                                 </div>
                                         </td>
+                                        
                                         <td style="display:none">{{i.phone}}</td>  
                                         <td style="display:none">{{i.get_shipping_address.email}}</td>
                                         {% endif %}                                                          
