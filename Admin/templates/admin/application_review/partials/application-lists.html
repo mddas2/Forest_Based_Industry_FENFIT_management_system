@@ -32,9 +32,10 @@
                                 <th>नागरिकता पर्तिलिपि</th>
                                 <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
                                 <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
-                                <th>लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</th>
-                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>   
-                                <th>Bank Voucher</th> 
+                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th> 
+                                {% if request.user.groups.first.name == 'accountant' %}  
+                                    <th>Bank Voucher</th> 
+                                {% endif %}
                                 <th>भुक्तानी स्थिति</th> 
                                 <th>जिल्ला</th>                                                   
                                 <th>विवरण हेर्नुहोस्</th>
@@ -52,14 +53,14 @@
                                         <td>{{i.get_user_application_detail.owner_full_name}}</td>
                                         <td class="zoom-gallery">
                                             {% if i.get_user_application_detail.certificate_citizenship %} 
-                                            <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                            <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                             {% else %}
                                                 NotFound
                                             {% endif %}
                                         </td>
                                         <td class="zoom-gallery">
                                             {% if i.get_user_application_detail.certificate_company_registration %}  
-                                            <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                            <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
                                             <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
                                             {% else %}
                                                 NotFound
@@ -67,26 +68,22 @@
                                         </td>
                                         <td class="zoom-gallery">    
                                             {% if i.get_user_application_detail.provisional_account_number %}        
-                                            <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                            <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                             {% else %}
                                                 NotFound
                                             {% endif %}
                                         </td>   
-                                        <td class="zoom-gallery">
-                                            {% if i.get_user_application_detail.auditing %}    
-                                            <a href="{{i.get_user_application_detail.auditing.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                            {% else %}
-                                                NotFound
-                                            {% endif %}
-                                        </td> 
+
                                         <td class="zoom-gallery">
                                             {% if i.get_user_application_detail.tax_paid_certificate %}       
-                                            <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                            <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                             {% else %}
                                                 NotFound
                                             {% endif %}
                                         </td>  <!-- this is quantity-->
-                                        <td>{{i.get_user_application_detail.voucher_number}}</td>
+                                        {% if request.user.groups.first.name == 'accountant' %}
+                                            <td>{{i.get_user_application_detail.voucher_number}}</td>
+                                        {% endif %}
                                         <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
                                         <td>{{i.user.district_name}}</td>
                                         <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>

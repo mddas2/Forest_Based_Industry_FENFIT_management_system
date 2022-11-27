@@ -63,13 +63,7 @@
                                         NotFound
                                     {% endif %}
                                 </td>   
-                                <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.auditing %}    
-                                    <a href="{{i.get_user_application_detail.auditing.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                    {% else %}
-                                        NotFound
-                                    {% endif %}
-                                </td> 
+                          
                                 <td class="zoom-gallery">
                                     {% if i.get_user_application_detail.tax_paid_certificate %}       
                                     <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
