@@ -26,13 +26,13 @@ from . import html_to_pdf
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
     #for download return pdf 
-    form = ApplicationForm.objects.get(id=12)
-    pdf = html_to_pdf.report(request,form)
-    response = HttpResponse(content_type="application/pdf")
-    # d = datetime.today().strftime('%Y-%m-%d')
-    response['Content Disposition'] = f'inline; filenane="s.pdf"'
-    response.write(pdf)   
-    return response
+    # form = ApplicationForm.objects.get(id=12)
+    # pdf = html_to_pdf.report(request,form)
+    # response = HttpResponse(content_type="application/pdf")
+    # # d = datetime.today().strftime('%Y-%m-%d')
+    # response['Content Disposition'] = f'inline; filenane="s.pdf"'
+    # response.write(pdf)   
+    # return response
         
     slug1 = "सदस्य अनुमोदित फारम"
 
@@ -588,11 +588,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
                         email_message = 'बधाई तपाईंको फारम फेन्फिटद्वारा सफलतापूर्वक स्वीकृत गरिएको छ.\n '
-                        context_dict={
-                                'name':'Manoj Kumar Das',
-                                'date':'989',
-                              }
-                        pdf = html_to_pdf.report(request,whoses_form) 
+                        pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
                         try:   
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                             bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)
