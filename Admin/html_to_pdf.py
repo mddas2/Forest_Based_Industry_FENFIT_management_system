@@ -21,10 +21,16 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 def report(request,form):
-    pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.TTF")))
-    pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.TTF")))
-    pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.TTF")))
+    # pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.TTF")))
+    # pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.TTF")))
+    # pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.TTF")))
+    # pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
+
+    pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.ttf")))
+    pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.ttf")))
+    pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.ttf")))
     pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
+
     response = HttpResponse(content_type="application/pdf")
     d = datetime.today().strftime('%Y-%m-%d')
     response['Content Disposition'] = f'inline; filenane="{d}.pdf"'
@@ -73,7 +79,7 @@ def report(request,form):
 
     ptext = f" सञ्चालक । प्रोप्राइटर श्री {owner_full_name} स:मिल / {business_name} / {company_name} ले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {union_type}  सुनसरी जिल्ला संघ वस्तुगत संघ माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र प्रदेश महासंघ वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम सञ्चालक । प्रोप्राइटर श्री {owner_full_name} को {company_name} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत गरिदिनु हुन अनुरोध छ ।"
             
-    Story.append(Paragraph(ptext, styles1["gargi"]))
+    Story.append(Paragraph(ptext, styles1["Preeti"]))
     Story.append(Spacer(1, 12))
 
     ptext = 'Thank you'
