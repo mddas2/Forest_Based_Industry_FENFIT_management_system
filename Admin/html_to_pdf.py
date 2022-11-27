@@ -65,12 +65,12 @@ def report(request,whose_form):
 
     var1=''
 
-    user_obj = CustomUser.objects.get(id=whose_form)
-    user_detail = user_obj.UserApplicationDetail
-    owner_full_name = user_detail.owner_full_name
-    company_name = user_detail.company_name  
-    business_name =  user_detail.owner_full_name
-    district = user_obj.district_name
+    # user_obj = CustomUser.objects.get(id=whose_form)
+    # user_detail = user_obj.UserApplicationDetail
+    # owner_full_name = user_detail.owner_full_name
+    # company_name = user_detail.company_name  
+    # business_name =  user_detail.owner_full_name
+    # district = user_obj.district_name
 
 
     ptext = """ सञ्चालक । प्रोप्राइटर श्री नबिन स:मिल / भेनियर तथा प्लाईउड / Radiant Nepal ले उद्योग दर्ता प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि सुनसरी जिल्ला संघ वस्तुगत संघ माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र प्रदेश महासंघ वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम सञ्चालक । प्रोप्राइटर श्री user को Radiant Nepal उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत गरिदिनु हुन अनुरोध छ । %s ।""" % (var1)
