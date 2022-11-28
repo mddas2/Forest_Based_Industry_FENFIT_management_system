@@ -104,6 +104,8 @@ class UserApplicationDetail(models.Model):
     member_approved_certificate = models.ImageField(upload_to='user/documents', null=True) #सदस्य स्वीकृत प्रमाणपत्र
     self_declaration_not_on_the_black_list = models.ImageField(upload_to='user/documents', null=True) #कालो सुचीमा नपरेको स्वघोषणा
     bank_voucher = models.ImageField(upload_to='user/documents', null=True) #bank भौचर को प्रतिलिपि
+
+    industry_certificate = models.ImageField(upload_to='user/documents', null=True) #उद्योग प्रमाणपत्र को प्रतिलिपि
     
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)

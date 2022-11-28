@@ -89,7 +89,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label class="form-label">सिफारिस शुल्क र सो को वाडफाड <span class="required">*</span></label>
-                                                    <input type="text" name="amount_to_select" value="{{id_data.business_price_category|getPriceCategoryNepaliName}}" class="form-control" disabled>
+                                                    <input type="text" name="amount_to_select" value="{{id_data.business_price_category|getPriceCategoryNepaliName}}" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -161,7 +161,7 @@
                                                     <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेखित वन श्रोतलाई सदुपयोग गरि राष्ट्रिय संमृद्धिमा योगदान पुरयाउने 
                                                         ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि २०७९को नियम १२८र नियम १२८को उप नियममा.२मा 
                                                         नेपाल वन पैदावार उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु सुचीकृत 
-                                                        हुनु पर्ने ब्यवस्था गरेको ले निम्न कागजात र दस्तुर राखि निवेदन गरेको छु सो अनुसार उपलब्ध गराइृदिनु हुन 
+                                                        हुनु पर्ने ब्यवस्था गरेको ले निम्न कागजात र दस्तुर राखि नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को पुर्णपालन गर्छु भन्ने स्वघोषणा सहित निवेदन गरेको छु सो अनुसार सिफारिस उपलब्ध गराइृदिनु हुन 
                                                         अनुरोध छ । </p>
                                                     <h5>संलग्न कागजातहरु ः–</h5>
                                                     <ul>
@@ -173,7 +173,7 @@
 
                                                         <li>कालो सुचीमा नपरेको स्वघोषणा ।</li>
                                                         <li>महासंघको खातामा तोकिएको सिफारिस शुल्क जम्मा गरेको वैक भौचर को प्रतिलिपि ।</li>
-                                                        <li>नेपाल वन पैदावार उद्योग ब्यवसायि महासंघको आचार संहिता र प्रचलित नेपाल कानुन को पुर्णपालन गर्छु भन्ने स्वघोषणा।</li>        
+    
                                                     </ul>
                                                 </div>
                                                 <div class="nibedan-form-footer">
@@ -245,13 +245,13 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="auditing" type="file" id="auditing" class="dropify" />
+                                                        <h4 class="card-title">बैंक डिपोजिट भौचर <!----लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि---><span class="required">*</span></h4>
+                                                        <input name="bank_voucher" type="file" id="bank_voucher" class="dropify" />
                                                     </div>
                                                 </div>
-                                                {% if id_data.auditing %}
+                                                {% if id_data.bank_voucher %}
                                                     <script>
-                                                        $("#auditing").attr("data-default-file", "{{id_data.auditing.url}}");
+                                                        $("#bank_voucher").attr("data-default-file", "{{id_data.bank_voucher.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>
@@ -265,6 +265,19 @@
                                                 {% if id_data.tax_paid_certificate %}
                                                     <script>
                                                         $("#tax_paid_certificate").attr("data-default-file", "{{id_data.tax_paid_certificate.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">उद्योग प्रमाणपत्र<span class="required">*</span></h4>
+                                                        <input name="industry_certificate" type="file" id="industry_certificate" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.industry_certificate %}
+                                                    <script>
+                                                        $("#industry_certificate").attr("data-default-file", "{{id_data.industry_certificate.url}}");
                                                     </script>
                                                 {% endif %}
                                             </div>

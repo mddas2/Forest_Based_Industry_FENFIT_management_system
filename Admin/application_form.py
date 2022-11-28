@@ -379,6 +379,11 @@ def UserApplicationFormStore(request):
                 documents['auditing'] = request.FILES['auditing']
             if im == "tax_paid_certificate":
                 documents['tax_paid_certificate'] = request.FILES['tax_paid_certificate']
+            if im == "bank_voucher":
+                documents['bank_voucher'] = request.FILES['bank_voucher']
+            if im == "industry_certificate":
+                documents['industry_certificate'] = request.FILES['industry_certificate']
+            
 
         form_detail = {**form_detail , **documents}
 
