@@ -135,6 +135,7 @@ class ApplicationForm(models.Model):
 
     is_payment = models.BooleanField(null=True,default=False)
     bill_number = models.CharField(max_length=205,default='')
+    payment_get = models.CharField(max_length=205,default='')
 
     
     def get_date(self):

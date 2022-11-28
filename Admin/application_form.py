@@ -480,6 +480,15 @@ def BillAdd(request):#all application
     return redirect("/")
 
 
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_central_role)
+def PaymentGet(request):#all application
+    # return HttpResponse(request.POST.items())
+    obj = ApplicationForm.objects.get(id=request.POST['form_id'])
+    obj.payment_get = request.POST['payment_get']
+    obj.save()
+    return redirect("/")
+
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_central_role)
