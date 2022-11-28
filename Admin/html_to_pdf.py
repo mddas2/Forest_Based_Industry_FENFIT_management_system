@@ -21,15 +21,15 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 def report(request,form):
-    # pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.TTF")))
-    # pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.TTF")))
-    # pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.TTF")))
-    # pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
-
-    pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.ttf")))
-    pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.ttf")))
-    pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.ttf")))
+    pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.TTF")))
+    pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.TTF")))
+    pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.TTF")))
     pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
+
+    # pdfmetrics.registerFont(TTFont("Preeti", settings.BASE_URL+static("/assets/fonts/Preeti-Font.ttf")))
+    # pdfmetrics.registerFont(TTFont("Preeti-Bold", settings.BASE_URL+static("/assets/fonts/Preeti-Bold.ttf")))
+    # pdfmetrics.registerFont(TTFont("Times", settings.BASE_URL+static("/assets/fonts/TIMES.ttf")))
+    # pdfmetrics.registerFont(TTFont("gargi", settings.BASE_URL+static("/assets/fonts/gargi.ttf")))
 
     response = HttpResponse(content_type="application/pdf")
     d = datetime.today().strftime('%Y-%m-%d')
@@ -87,9 +87,12 @@ def report(request,form):
     Story.append(Paragraph(ptext, gargi_style["gargi"]))
     Story.append(Spacer(1, 12))
 
-    logo = settings.BASE_URL+form.get_user_application_detail.approved_signature.url 
-    im = Image(logo, 120,60)
-    Story.append(im)
+    try:
+        logo = settings.BASE_URL+form.get_user_application_detail.approved_signature.url 
+        im = Image(logo, 120,60)
+        Story.append(im)
+    except:
+        pass
 
     ptext = 'पद कार्यकारी निर्देशक'
     Story.append(Paragraph(ptext, gargi_style["gargi"]))
