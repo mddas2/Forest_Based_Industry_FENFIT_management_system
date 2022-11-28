@@ -86,8 +86,9 @@
                                             NotFound
                                         {% endif %}
                                     </td>  <!-- this is quantity-->
-                                    <td>{{i.dsc}}</td>
                                     <td>{{i.district_name}}</td>
+                                    <td>{{i.dsc}}</td>
+                                    
                                     <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                     <td><span class="label label-info">{{i.updated_at}}</span></td>
                                     <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
@@ -239,56 +240,59 @@
                         <!-------content start-->
                         <div class="row">
                             <div class="col-md-6">
-                            <div class="nibedan-form">
-                                <div class="form-logo">
-                                    <img src="/static/assets/images/logo-2.png">
-                                </div>
-                                <h2 class="main-title">सदस्यता आवेदन फारम</h2>
-                                <div class="nibedan-form-top">
-                                    <div class="form-top-left">
-                                        <p>श्रीमान अध्यक्षज्यू<br>
-                                            नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                        <label><u>जिल्ला {{id_data.district_name|get_districtName}}</u></label>
+                                <div class="nibedan-form">
+                                    <div class="form-logo">
+                                        <img src="/static/assets/images/logo-2.png">
                                     </div>
-                                    <div class="form-top-right">
-                                       <span class="date">मिति ः <u>{{id_data.updated_at|get_NepaliDate}}</u></span>
+                                    <h2 class="main-title">{% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता फारम {% else %} सदस्यता आवेदन फारम {% endif %}</h2>
+                                    <div class="nibedan-form-top">
+                                        <div class="form-top-left">
+                                            <p>श्रीमान अध्यक्षज्यू<br>
+                                                नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                            <label><u>जिल्ला {{id_data.district_name|get_districtName}}</u></label>
+                                        </div>
+                                        <div class="form-top-right">
+                                            <span class="date">मिति ः <u>{{form_data.updated_at|get_NepaliDate}}</u></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="nibedan-form-body">
-                                    <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2>
-                                    <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
-                                        जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
-                                        प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र तपसिल
-                                        बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
-                                    <h5>संलग्न कागजातहरु ः–</h5>
-                                    <ul>
-                                        <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
-                                        <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
-                                        <li>स्थायी लेखा नम्बरको प्रतिलिपि ।</li>        
-                                        <li>लेखा परिक्षण प्रतिवेदनको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>        
-                                        <li>कर चुक्ता प्रमाण पत्रको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
-                    
-                                    </ul>
-                                </div>
-                                <div class="nibedan-form-footer">
-                                    <div class="user-info">
-                                        <label style="font-weight: bold;">आवेदक</label>
-                                        <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
-                                        <label>उद्योग वा व्यवसायको नाम ः <span class="user-info-data">{{business_name}}{{id_data.applicationform.all.first.get_user_application_detail.business_name|get_NepaliBusinessName}}</span></label>
-                                        <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
-                                        <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
-                                        {% load staticfiles %}
-                                        <label>दस्तखत ः <span class="user-info-data"><img src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                                    <div class="nibedan-form-body">
+                                        <h2>बिषय ः {% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
+                                        <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
+                                            जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
+                                            प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र
+                                            तपसिल
+                                            बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
+                                        <h5>संलग्न कागजातहरु ः–</h5>
+                                        <ul>
+                                            <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+                                            <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+                                            <li>स्थायी लेखा नम्बरको प्रतिलिपि ।</li>
+                                            <li>लेखा परिक्षण प्रतिवेदनको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
+                                            <li>कर चुक्ता प्रमाण पत्रको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
+            
+                                        </ul>
                                     </div>
-                                    <div class="user-address">
-                                        <label>ठेगाना ः जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
-                                        <label>न.पा.÷गा.पा <u>{{id_data.applicationform.all.first.get_user_application_detail.municipality|get_MuncipalityName}}</u></label>
-                                        <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
-                                        <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
+                                    <div class="nibedan-form-footer">
+                                        <div class="user-info">
+                                            <label style="font-weight: bold;">आवेदक</label>
+                                            <label>उद्यमीको नाम ः <span class="user-info-data">{{id_data.first_name}}</span></label>
+                                            <label>उद्योग वा व्यवसायको नाम ः <span
+                                                    class="user-info-data">{{business_name}}</span></label>
+                                            <label>सम्र्पक नं ः <span class="user-info-data">{{id_data.phone}}</span></label>
+                                            <label>इमेल ः <span class="user-info-data">{{id_data.email}}</span></label>
+                                            {% load staticfiles %}
+                                            <label>दस्तखत ः <span class="user-info-data">
+                                                {% if id_data.signature %} <img src="{{ id_data.signature.url }}"> {% endif %} </span></label>
+                                        </div>
+                                        <div class="user-address">
+                                            <label>ठेगाना ः जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
+                                            <label>न.पा.÷गा.पा <u>{{form_data.municipality|get_MuncipalityName}}</u></label>
+                                            <label>वडा नं.<u>{{form_data.ward_number}}</u></label>
+                                            <label>टोल <u>{{form_data.tole}}</u></label>
+                                        </div>
                                     </div>
+            
                                 </div>
-                                
-                            </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6 img-data-area">
@@ -345,7 +349,49 @@
                                         </div>
                                     </div>
                                     
+                                 </div>
+                                 {% if id_data.member_admin == 'admin' %}
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-body" style="overflow:scroll ;">
+                                                <h4 class="card-title">कार्य समितिका पदाधिकारिहरु</h4>                                                        
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                
+                                                                <th>Name</th>
+                                                                <th>POST</th>
+                                                                <th>Email</th>
+                                                                <th>Number</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for team in id_data.teams.all %}
+                                                            <tr>                                                                
+                                                                <td>{{team.name}}</td>
+                                                                <td><span class="label label-success">{{team.post}}</span></td>
+                                                                <td>{{team.email}}</td>
+                                                                <td>{{team.phone}}</td>
+                                                                <td>    
+                                                                    {% if team.image %}                                               
+                                                                        <img src="{{team.image.url}}" class="kk" alt="{{team.name}}" height="40">
+                                                                    {% else %}
+                                                                        none
+                                                                    {% endif %}
+                                                                </td>   
+                                                                <td><a href="{% url 'DeleteTeam' id=team.id %}"><span class="label label-danger">delete</span></a> </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                                                            
+                                                        
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                 {% endif %}
                             </div>
                             <hr> 
                         </div>

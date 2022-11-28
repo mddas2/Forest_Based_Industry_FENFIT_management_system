@@ -188,7 +188,7 @@ def UserDelete(request,id):
         messages.success(request, 'User deleted sucessfully!!!.')
         return redirect(UserList)
     except:
-        messages.info(request,"User not found ")
+        messages.info(request,"foreign key constraint fails CONSTRAINT error")
         return redirect(UserList)
 
 @login_required(login_url=settings.LOGIN_URL)
