@@ -169,6 +169,7 @@ def UserStore(request,id=None):
                     messages.info(request,'Sorry You can not set Upper Level Role')
         if request.POST['group'] != '0':
             if user:
+                user.groups.clear()
                 group = Group.objects.get(id = request.POST['group'])
                 group.user_set.add(user)
                 messages.success(request, 'Group Permission is set to '+ group.name)
