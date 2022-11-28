@@ -42,7 +42,7 @@ def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all applic
     if request.user.role==CustomUser.DISTRICT:
         all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,district_name=district_name).order_by('-updated_at') 
     if request.user.role==CustomUser.PRIVATE:
-        all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,union_name=request.user.union_name).order_by('-updated_at') 
+        all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,union_name=request.user.email).order_by('-updated_at') 
     elif request.user.role==CustomUser.STATE:
          all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,state_name=state_name).order_by('-updated_at')
     elif request.user.role==CustomUser.CENTRAL:
