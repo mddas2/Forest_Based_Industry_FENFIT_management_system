@@ -3,7 +3,16 @@
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">User Overview</h5>
+                <div class="right-page-header">
+                    <div class="d-flex">
+                        <div class="align-self-center">
+                            <h4 class="card-title m-t-10">Users List </h4>
+                        </div>
+                        <div class="ms-auto">
+                            <input type="text" id="search_users" placeholder="search users" class="form-control">
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive m-t-30">
                     <table class="table product-overview">
                         <thead>
@@ -23,7 +32,7 @@
                                 {% endif %}
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table">
                             {% for user in users %}
                             <style>
                                 .sucessful-update{
@@ -86,5 +95,13 @@ function Delete(url){
           
         }
       })
-}
+    }
+    $(document).ready(function(){
+            $("#search_users").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table tr").filter(function() {                
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+            });
+        });
 </script>
