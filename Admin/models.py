@@ -142,7 +142,7 @@ class ApplicationForm(models.Model):
         return humanize.naturaltime(self.updated_at)   
 
 class UserApplicationPayment(models.Model):
-    user = models.ForeignKey(CustomUser,related_name="payment",on_delete=models.DO_NOTHING,null=True)
+    user = models.ForeignKey(CustomUser,related_name="payment",on_delete=models.CASCADE,null=True)
     get_user_application_detail = models.ForeignKey(UserApplicationDetail,related_name="payment",on_delete=models.DO_NOTHING,null=True)
     user_application_form = models.ForeignKey(ApplicationForm,related_name="payment",on_delete=models.DO_NOTHING,null=True)
 

@@ -6,16 +6,17 @@
             <div class="contact-page-aside">
                 <!-- .left-aside-column-->
                 <div class="left-aside bg-light-part">
-                    <ul class="list-style-none">
+                    <ul class="list-style-none" style="background-color: white;  margin-left: -20px; margin-right: -20px; padding-left: 20px;padding-left: 20px;">
                         <li class="box-label"><a href="javascript:void(0)">ROLE LEVEL
-                                <span>123</span></a></li>
+                                <span>12</span></a></li>
                         <li class="divider"></li>
                         <li><a href="{% url 'AdvanceUserList' role_id=0 %}">ALL <span><!--some value---></span></a></li>
                         {% for id,role in roles %}
                             <li><a href="{% url 'AdvanceUserList' role_id=id %}">{{role}} <span><!--some value---></span></a></li>
                         {% endfor %}
                     </ul>
-                </div>
+                </div>    
+    
                 <!-- /.left-aside-column-->
                 <div class="right-aside ">
                     <div class="right-page-header">
@@ -24,14 +25,14 @@
                                 <h4 class="card-title m-t-10">Users List </h4>
                             </div>
                             <div class="ms-auto">
-                                <input type="text" id="demo-input-search2" placeholder="search contacts" class="form-control">
+                                <input type="text" id="search_users" placeholder="search users" class="form-control">
                             </div>
                         </div>
                     </div>
                     
                     
                     <div class="table-responsive" style="overflow-x:scroll;">
-                        <table class="table product-overview" >
+                        <table class="table product-overview">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -48,7 +49,7 @@
                                     {% endif %}
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table">
                                 {% for user in users %}
                                 <style>
                                     .sucessful-update{
@@ -113,6 +114,14 @@ function Delete(url){
           
         }
       })
-}
+    }
+        $(document).ready(function(){
+            $("#search_users").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table tr").filter(function() {                
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+            });
+        });
 </script>
 <!-- href="{% url 'UserDelete' id=user.id %}" -->
