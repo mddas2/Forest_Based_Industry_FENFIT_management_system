@@ -14,11 +14,6 @@
 
 {% endblock %}
 
-{% block optionalcss %}
-{% load staticfiles %}
-    <link href="{% static '/assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css' %}" rel="stylesheet">
-{% endblock %}
-
 {% block optionaljs %}
 {% load staticfiles %}
         <!-- jQuery file upload -->
@@ -70,3 +65,7 @@
 </script>
 {% endblock %}
 
+{% block optionalcss %}
+{% load staticfiles %}
+    <link href="{% static '/assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css' %}" rel="stylesheet">
+{% endblock %}
