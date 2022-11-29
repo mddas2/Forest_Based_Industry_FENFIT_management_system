@@ -10,22 +10,23 @@
 
                 <div class="progress m-t-20">
                     <div class="progress-bar bg-success"
-                        style="width: {% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %} ; height:15px;"
-                        role="progressbar">{% if id_data.dsc == 'd' %} 25% {% elif id_data.dsc == 's' %} 50% {% elif id_data.dsc == 'c' %} 75% {% elif id_data.dsc == 'approved' %} 100% {% else %} 25% {% endif %}
+                        style="width: {% if id_data.dsc == 'district' %} 15% {% elif id_data.dsc == 'state' %} 30% {% elif id_data.dsc == 'central_accountant' %} 45% {% elif id_data.dsc == 'central_admin' %} 60% {% elif id_data.dsc == 'central_ceo' %} 75%  {% elif id_data.dsc == 'approved' %} 100%  {% else %} 15% {% endif %} ; height:15px;"
+                        role="progressbar">{% if id_data.dsc == 'district' %} 15% {% elif id_data.dsc == 'state' %} 30% {% elif id_data.dsc == 'central_accountant' %} 45% {% elif id_data.dsc == 'central_admin' %} 60% {% elif id_data.dsc == 'central_ceo' %} 75%  {% elif id_data.dsc == 'approved' %} 100%  {% else %} 15% {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+                                                                                
     <div class="col-lg-4 col-md-4 col-sm-6">
         <center>
             <h3 class="card-title">FENFIT APPLICATION</h3>
-            <h6 class="card-subtitle text-info">{% if id_data.dsc == 'd' %} Pending on DISTRICT {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 's' %} Pending on STATE {{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'c' %} Pending on CENTRAL LEVEL {% elif id_data.dsc == 'approved' %} approved from all level {% else %} User Need to Forward for further Process {% endif %}</h6>
+            <h6 class="card-subtitle text-info">{% if id_data.dsc == 'district' %} Pending on जिल्ला संघ {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 'state' %} Pending on प्रदेश संघ{{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'central_accountant' %} Pending on महासंघ लेखापाल {% elif id_data.dsc == 'central_admin' %} Pending on महासंघ व्यवस्थापक {% elif id_data.dsc == 'central_ceo' %} Pending on महासंघ मुख्य व्यवस्थापक {% else %} User Need to Forward for further Process {% endif %}</h6>
             <!-- <h4 class="box-title m-t-40">Application description</h4>
                 <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
-            <h2 class="m-t-4 card-title"><small class="text-success">{% if id_data.dsc == 'd' %} (25% COMPLETED) {% elif id_data.dsc == 's' %} (50% COMPLETED) {% elif id_data.dsc == 'c' %} (75% COMPLETED) {% elif  id_data.dsc == 'approved' %} (100% COMPLETED) {% else %} (25% COMPLETED) {% endif %}</small></h2>
+            <h2 class="m-t-4 card-title"><small class="text-success">{% if id_data.dsc == 'district' %} (15% COMPLETED) {% elif id_data.dsc == 'state' %} (35% COMPLETED) {% elif id_data.dsc == 'central_accountant' %} (45% COMPLETED) {% elif id_data.dsc == 'central_admin' %} (60% COMPLETED) {% elif id_data.dsc == 'central_ceo' %} (75% COMPLETED)  {% elif id_data.dsc == 'approved' %} (100% COMPLETED)  {% else %} (15% COMPLETED) {% endif %}</small></h2>
             <button
-                class="btn btn-sm btn-{% if id_data.user.applicationform.all.first.dsc == 'approved' %}success btn-rounded{% else %}primary btn-rounded{% endif %}">{% if id_data.dsc == 'd' %} DISTRICT {{request.user.district_name}} NOT APPROVED YET {% elif id_data.dsc == 's' %} STATE {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'c' %} CENTRAL LEVEL NOT APPROVED YET {% elif id_data.dsc == 'approved' %} ALL APPROVED PROCESS COMPLETED {% else %} CLIENT {{id_data.get_user_application_detail.owner_full_name}} NEED TO FORWARD {% endif %}</button>
+                class="btn btn-sm btn-{% if id_data.user.applicationform.all.first.dsc == 'approved' %}success btn-rounded{% else %}primary btn-rounded{% endif %}">{% if id_data.dsc == 'district' %} जिल्ला संघ {{request.user.district_name}} NOT APPROVED YET {% elif id_data.dsc == 'state' %} प्रदेश संघ {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'central_accountant' %} महासंघ लेखापालले अझै स्वीकृत गेरेको छैन {% elif id_data.dsc == 'central_admin' %} प्रशासकले अझै स्वीकृत गेरेको छैन| {% elif id_data.dsc == 'central_ceo' %}मुख्य प्रशासकले अझै स्वीकृत गेरेको छैन|  {% elif id_data.dsc == 'approved' %} (100% COMPLETED)  {% else %} (15% COMPLETED) {% endif %}</button>
         </center>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6">
