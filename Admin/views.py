@@ -45,6 +45,7 @@ def index(request, pk=None, pdc=None):
         all_data = None 
     
     dsc_role = request.user.get_dsc_Role()
+    # return HttpResponse(dsc_role)
     total_pending_application_form = ApplicationForm.objects.filter(dsc=dsc_role).count()
     total_approved_form = request.user.total_application_form_approved.all().count()
     total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
@@ -57,7 +58,7 @@ def index(request, pk=None, pdc=None):
     }
 
     # return  HttpResp  onse(today_max)
-    slug1 = request.user.getRoleNameInNepali() 
+    slug1 = str(request.user.getRoleNameInNepali()) 
     data = {'slug1':slug1,'create':False,'action':True,'all_data':all_data}
     data = {**data,**data_1}
     client_msg = ContactUs.objects.filter(read_unread=True)

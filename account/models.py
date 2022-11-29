@@ -83,7 +83,20 @@ class CustomUser(AbstractUser):
             return 'None'
     def getRoleNameInNepali(self):
         if self.role==1:
-            return 'महासंघ'
+            try:
+                permission_name = str(self.groups.all().first())
+            except:
+                permission_name = 'none'
+            if permission_name == 'ceo':
+                permission = ' मुख्य व्यवस्थापक'
+            elif permission_name == 'admin':
+                permission = ' व्यवस्थापक'
+            elif permission_name == 'accountant':
+               permission = ' लेखापाल'
+            else:
+                permission = ''
+            return 'महासंघ ' + permission
+
         elif self.role==2:
             state = self.state_name
             return 'प्रदेश महासंघ'+'-' + str(state)
@@ -97,15 +110,28 @@ class CustomUser(AbstractUser):
             return 'None'
     def get_dsc_Role(self):
         if self.role==1:
-            return 'c'
+            try:
+                permission_name = str(self.groups.all().first())
+            except:
+                permission_name = 'none'
+
+            if permission_name == 'ceo':
+                return 'central_ceo'
+            elif permission_name == 'admin':
+                return 'central_admin'
+            elif permission_name == 'accountant':
+                return 'central_accountant'
+            else:
+                return 'none'
+            
         elif self.role==2:
-            return 's'
+            return 'state'
         elif self.role==3:
-            return 'd'
+            return 'district'
         elif self.role==4:
-            return 'p'
+            return 'private'
         elif self.role==5:
-            return 'u'
+            return 'user'
         else:
             return 'None'
 
