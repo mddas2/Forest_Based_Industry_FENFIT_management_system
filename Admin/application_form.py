@@ -406,7 +406,7 @@ def UserApplicationFormStore(request):
         }
         if request.POST['submits']=='1':
             dsc = {
-                'dsc' : 'd',
+                'dsc' : 'district',
             }
             form_data = {**dsc,**form_data}
             #join dcs and form_data if user press send
@@ -512,7 +512,7 @@ def AccountantPayment(request):#all application
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 application_detail =  ApplicationForm.objects.get(id=pk).get_user_application_detail
                 # return HttpResponse(application_detail.applicationform.all().first().id)
-                if dsc == 'c' and request.user.get_dsc_Role()=='c':
+                if dsc == 'central_accountant' and request.user.role==CustomUser.CENTRAL and request.user.groups.all().first()=="accountant":
                     payment_data = {
                         'is_renew' : application_detail.is_reniew,
                         'business_price_category' : application_detail.business_price_category,
@@ -536,7 +536,7 @@ def AccountantPayment(request):#all application
             elif payment=='0':
                 should_insert = 0
                 dsc = ApplicationForm.objects.get(id=pk).dsc
-                if dsc == 'c' and request.user.get_dsc_Role()=='c':
+                if dsc == 'central_accountant' and request.user.get_dsc_Role()=='c' and request.user.groups.all().first()=="accountant":
                         ApplicationForm.objects.filter(id=pk).update(is_payment=0)
                         messages.info(request,"unpaid sucessfull")
     return redirect('AllApplication')
@@ -572,16 +572,24 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
             try:
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 approved = 0
-                if dsc == 'd' and request.user.get_dsc_Role()=='d':
-                    referred_to_dsc = 's'
+                if dsc == 'district' and request.user.get_dsc_Role()=='d':
+                    referred_to_dsc = 'state'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_district_approved_by = request.user.id)
                     should_insert = 1
-                elif dsc == 's' and request.user.get_dsc_Role()=='s':
-                    referred_to_dsc = 'c'
+                elif dsc == 'state' and request.user.get_dsc_Role()=='s':
+                    referred_to_dsc = 'central_accountant' #first application goes to central of accountant
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_state_approved_by=request.user.id)
                     should_insert = 1
-                elif dsc == 'c' and request.user.get_dsc_Role()=='c':
-                    referred_to_dsc = 'approved'
+                elif dsc == 'central_accountant' and request.user.get_dsc_Role()=='c':
+                    referred_to_dsc = 'central_admin' 
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    should_insert = 1
+                elif dsc == 'central_admin' and request.user.get_dsc_Role()=='c':
+                    referred_to_dsc = 'central_ceo'  #after central accountant forward second application goes to central of admin
+                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    should_insert = 1
+                elif dsc == 'central_ceo' and request.user.get_dsc_Role()=='c':
+                    referred_to_dsc = 'approved' #approved
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
                     approved = 1
