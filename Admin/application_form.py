@@ -15,6 +15,7 @@ from django.contrib.auth.hashers import make_password
 from payment.payment import BusinessPriceCategory
 from . import bulk_sms_email
 from . import nepal_location
+from django.db.models import Q
 
 #importing get_template from loader
 from django.template.loader import get_template 
@@ -507,12 +508,17 @@ def AccountantPayment(request):#all application
         payment = request.POST['payment']
         if pk and payment:
             ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=payment)
+            
             if payment=='1':
-                should_insert = 0                
-                dsc = ApplicationForm.objects.get(id=pk).dsc
+                should_insert = 0     
+                app_form_obj = ApplicationForm.objects.get(id=pk)           
+                dsc = app_form_obj.dsc
+                bill_number = app_form_obj.bill_number
+                payment_get = app_form_obj.payment_get
+
                 application_detail =  ApplicationForm.objects.get(id=pk).get_user_application_detail
                 # return HttpResponse(application_detail.applicationform.all().first().id)
-                if dsc == 'central_accountant' and request.user.role==CustomUser.CENTRAL and request.user.groups.all().first()=="accountant":
+                if dsc == 'central_accountant' and request.user.get_dsc_Role()=='central_accountant':
                     payment_data = {
                         'is_renew' : application_detail.is_reniew,
                         'business_price_category' : application_detail.business_price_category,
@@ -527,18 +533,36 @@ def AccountantPayment(request):#all application
                         'owner_full_name' : application_detail.owner_full_name,
                         'company_name' : application_detail.company_name,
                         'who_payment' : request.user.email,
-                        'is_payment' : True
+                        'is_payment' : True,
+                        'bill_number' : bill_number,
+                        'payment_get' : payment_get,
+
                     }
-                    UserApplicationPayment.objects.create(**payment_data)
-                    ApplicationForm.objects.filter(id=pk).update(is_payment=1)
-                    messages.info(request,"payment sucessfull")            
+                    UserApplicationPayment.objects.update_or_create(bill_number=bill_number,defaults=payment_data)
+                    ApplicationForm.objects.filter(id=pk).update(is_payment=1,dsc="central_admin")
+                    whoses_form = app_form_obj.user_id
+                    application_form_approved_detail_data = {
+                        'approved_form_id' : pk,
+                        'approved_by_id' : request.user.id,
+                        'whose_form' : whoses_form
+                        }
+                    ApplicationFormApprovedDetail.objects.create(**application_form_approved_detail_data)
+                    messages.info(request,"payment sucessfull")  
+                else:
+                    messages.error(request,"payment unsucessfull") 
+
             
             elif payment=='0':
                 should_insert = 0
                 dsc = ApplicationForm.objects.get(id=pk).dsc
-                if dsc == 'central_accountant' and request.user.get_dsc_Role()=='c' and request.user.groups.all().first()=="accountant":
-                        ApplicationForm.objects.filter(id=pk).update(is_payment=0)
+                if dsc == 'central_accountant' and request.user.get_dsc_Role()=='central_accountant':
+                        application_form = ApplicationForm.objects.filter(id=pk).first()
+                        application_form.is_payment = 0
+                        application_form.save()
+                        bill_number = application_form.bill_number
+                        payment = UserApplicationPayment.objects.filter(bill_number=bill_number).update(is_payment = 0)
                         messages.info(request,"unpaid sucessfull")
+
     return redirect('AllApplication')
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -553,17 +577,12 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
     elif request.user.role == CustomUser.PRIVATE:
         all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-updated_at') 
     elif request.user.role == CustomUser.CENTRAL:
-        try:
-            if request.user.groups.first().name == 'accountant':
-                all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')
-            else:
-                all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),is_payment=True).order_by('-updated_at') 
-        except:
-            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),is_payment=True).order_by('-updated_at') 
-    elif request.user.role == CustomUser.CENTRAL:
-        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),is_payment=True).order_by('-updated_at') 
+        if request.user.get_dsc_Role() == 'central_accountant':
+            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('-updated_at') #admin can view both data from accountant and self
+        else:
+            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at') 
     else:
-        all_data = None         
+        all_data = None          
 
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)
@@ -572,23 +591,23 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
             try:
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 approved = 0
-                if dsc == 'district' and request.user.get_dsc_Role()=='d':
+                if dsc == 'district' and request.user.get_dsc_Role()=='district':
                     referred_to_dsc = 'state'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_district_approved_by = request.user.id)
                     should_insert = 1
-                elif dsc == 'state' and request.user.get_dsc_Role()=='s':
+                elif dsc == 'state' and request.user.get_dsc_Role()=='state':
                     referred_to_dsc = 'central_accountant' #first application goes to central of accountant
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_state_approved_by=request.user.id)
                     should_insert = 1
-                elif dsc == 'central_accountant' and request.user.get_dsc_Role()=='c':
+                elif dsc == 'central_accountant' and request.user.get_dsc_Role()=='central_accountant':
                     referred_to_dsc = 'central_admin' 
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
-                elif dsc == 'central_admin' and request.user.get_dsc_Role()=='c':
+                elif dsc == 'central_admin' and request.user.get_dsc_Role()=='central_admin':
                     referred_to_dsc = 'central_ceo'  #after central accountant forward second application goes to central of admin
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
-                elif dsc == 'central_ceo' and request.user.get_dsc_Role()=='c':
+                elif dsc == 'central_ceo' and request.user.get_dsc_Role()=='central_ceo':
                     referred_to_dsc = 'approved' #approved
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
@@ -604,7 +623,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         user_sms = CustomUser.objects.get(id=whoses_form)
                         form_sms = ApplicationForm.objects.get(id=pk)
                         sms = "Congratulation Your Form is approved successfully by FENFIT \n name"+ str(user_sms.first_name)+"\n application id: " + str(form_sms.id)
-                        bulk_sms_email.SendSms(to_number, sms)
+                        # bulk_sms_email.SendSms(to_number, sms)
 
                         to_email = [CustomUser.objects.get(id=whoses_form).email]
                         from_email = settings.EMAIL_HOST_PASSWORD
@@ -624,7 +643,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         }
                     ApplicationFormApprovedDetail.objects.create(**application_form_approved_detail_data)
                 else:
-                    messages.error(request,'can not insert to application_form_approved_detail please report to programmer')
+                    messages.error(request,'can not approved form')
             except:
                 messages.error(request,'form not approved')
          elif approved_pending_cancelled=='c':
@@ -658,7 +677,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
 @customized_user_passes_test(is_admin_role)
 def Pending(request, pk=None, approved_pending_cancelled=None):
     dsc_role = request.user.get_dsc_Role()
-    slug1 = "Pending Orders"
+    slug1 = "Pending Application"
     all_data = ApplicationForm.objects.filter(dsc=dsc_role).order_by('-updated_at')   
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  

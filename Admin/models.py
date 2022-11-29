@@ -161,6 +161,8 @@ class UserApplicationPayment(models.Model):
 
     is_payment = models.BooleanField(default=False,null=True)
     bill_number = models.CharField(max_length=205,null=True)
+    payment_get = models.CharField(max_length=205,default='')
+
 
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)

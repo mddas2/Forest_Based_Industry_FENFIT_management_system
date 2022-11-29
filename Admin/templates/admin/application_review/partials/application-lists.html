@@ -61,7 +61,7 @@
                             {% for i in all_data %}          
                                             
                                     <tr>
-                                        <td>{{i.id}}</td>
+                                        <td>{{i.id}}sds{% if i.bill_number != '' %} {{i.bill_number}}not null{%endif%}</td>
                                         <td>{{i.get_user_application_detail.owner_full_name}}</td>
                                         {% if request.user.groups.first.name != 'accountant' %}  
                                             <td class="zoom-gallery">
@@ -150,68 +150,70 @@
                                         </td>
                                         {% endif %}
                                         {% if action%}
-                                        <td>
-                                        <div class="dropdown">
-                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-three-dots-vertical" style="color: red;"></i>
-                                                </a>
-
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    {% if request.user.groups.first.name == 'accountant' %}
-                                                    <li>
-                                                        <form id = "payment_yes" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
-                                                            <input type="hidden" name="pk" value="{{i.id}}"> 
-                                                            <input type="hidden" name="payment" value="1"> 
-                                                            <a class="dropdown-item" onclick="document.forms['payment_yes'].submit();" href="#">
-                                                        </form>
-                                                        {%if i.is_payment == True %} 
-                                                        <i class="bi bi-check-lg"></i> 
-                                                        {% else %} &nbsp; &nbsp;
-                                                            {% endif %}
-                                                        Payment
-                                                    </a></li>
-                                                    <li>
-                                                        <form id = "payment_no" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
-                                                            <input type="hidden" name="pk" value="{{i.id}}"> 
-                                                            <input type="hidden" name="payment" value="0"> 
-                                                            <a class="dropdown-item" onclick="document.forms['payment_no'].submit();" href="#">
-                                                        </form>
-                                                        {%if i.is_payment == False %} 
-                                                        <i class="bi bi-check-lg"></i> 
-                                                        {% else %} &nbsp; &nbsp;
-                                                            {% endif %}
-                                                        Non paid
-                                                    </a>
-                                                    </li>
-                                                    {% else %}
-                                                        <li>
-                                                            <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                                {%if i.approved_pending_cancelled == "p" %} 
-                                                            <i class="bi bi-check-lg"></i> 
-                                                            {% else %} &nbsp; &nbsp;
-                                                                {% endif %}
-                                                            Pending
-                                                            </a>
-                                                        </li>
-                                                        <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
-                                                            {%if i.approved_pending_cancelled == "a" %} 
-                                                            <i class="bi bi-check-lg"></i> 
-                                                            {% else %} &nbsp; &nbsp;
-                                                                {% endif %}
-                                                            Approved
-                                                        </a></li>
-                                                        <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
-                                                            {%if i.approved_pending_cancelled == "c" %} 
-                                                            <i class="bi bi-check-lg"></i> 
-                                                            {% else %} &nbsp; &nbsp;
-                                                                {% endif %}
-                                                            Cancelled
+                                        {% if i.bill_number != '' and i.payment_get != ''%}
+                                            <td>
+                                                <div class="dropdown">
+                                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-three-dots-vertical" style="color: red;"></i>
                                                         </a>
-                                                        </li>
-                                                    {% endif %}
-                                                </ul>
+
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            {% if request.user.groups.first.name == 'accountant' %}
+                                                            <li>
+                                                                <form id = "payment_yes" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
+                                                                    <input type="hidden" name="pk" value="{{i.id}}"> 
+                                                                    <input type="hidden" name="payment" value="1"> 
+                                                                    <a class="dropdown-item" onclick="document.forms['payment_yes'].submit();" href="#">
+                                                                </form>
+                                                                {%if i.is_payment == True %} 
+                                                                <i class="bi bi-check-lg"></i> 
+                                                                {% else %} &nbsp; &nbsp;
+                                                                    {% endif %}
+                                                                Payment
+                                                            </a></li>
+                                                            <li>
+                                                                <form id = "payment_no" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
+                                                                    <input type="hidden" name="pk" value="{{i.id}}"> 
+                                                                    <input type="hidden" name="payment" value="0"> 
+                                                                    <a class="dropdown-item" onclick="document.forms['payment_no'].submit();" href="#">
+                                                                </form>
+                                                                {%if i.is_payment == False %} 
+                                                                <i class="bi bi-check-lg"></i> 
+                                                                {% else %} &nbsp; &nbsp;
+                                                                    {% endif %}
+                                                                Non paid
+                                                            </a>
+                                                            </li>
+                                                            {% else %}
+                                                                <li>
+                                                                    <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
+                                                                        {%if i.approved_pending_cancelled == "p" %} 
+                                                                    <i class="bi bi-check-lg"></i> 
+                                                                    {% else %} &nbsp; &nbsp;
+                                                                        {% endif %}
+                                                                    Pending
+                                                                    </a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
+                                                                    {%if i.approved_pending_cancelled == "a" %} 
+                                                                    <i class="bi bi-check-lg"></i> 
+                                                                    {% else %} &nbsp; &nbsp;
+                                                                        {% endif %}
+                                                                    Approved
+                                                                </a></li>
+                                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
+                                                                    {%if i.approved_pending_cancelled == "c" %} 
+                                                                    <i class="bi bi-check-lg"></i> 
+                                                                    {% else %} &nbsp; &nbsp;
+                                                                        {% endif %}
+                                                                    Cancelled
+                                                                </a>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
                                                 </div>
-                                        </td>
+                                            </td>
+                                        {% endif %}
                                         
                                         <td style="display:none">{{i.phone}}</td>  
                                         <td style="display:none">{{i.get_shipping_address.email}}</td>
