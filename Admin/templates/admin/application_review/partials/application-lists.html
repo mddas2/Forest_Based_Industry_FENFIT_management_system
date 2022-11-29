@@ -260,8 +260,9 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="nibedan-form">
+                                        <div class="col-md-6" id="div_print_application">
+                                            <button onClick="printdiv('div_print_application');">print</button>
+                                            <div class="nibedan-form" >
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
                                                 </div>
@@ -321,9 +322,56 @@
                                         
                                             </div>
                                         </div>
-                                        <!--/span-->
-                                        <div class="col-md-6">
-                                            <div class="row">
+                                           <!---certificate-->                                        
+                                        <div class="col-md-6" id="div_print_certificate">
+                                            <button onClick="printdiv('div_print_certificate');">print</button>
+                                            <div class="nibedan-form">
+                                                <div class="form-logo">
+                                                    <img src="/static/assets/images/logo-2.png">
+                                                </div>
+                                                <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
+                                                <div class="nibedan-form-top">
+                                                    <div class="form-top-left">
+                                                        <p>{{form_data.id}} सिफारिश पत्र नम्बर : <br>
+                                                            </p>
+                                                    </div>
+                                            
+                                                    <div class="form-top-right">
+                                                        <span class="date">मिति ः <u>{{id_data.created_at|get_NepaliDate}}</u></span>
+                                                    </div>
+                                                </div>
+                                                <div class="nibedan-form-top1">
+                                                    <div class="form-top-left">
+                                                        <p>श्री डिभिजन वन कार्यालय,<br>
+                                                            {{request.user.district_name|get_districtName}} जिल्ला  </p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="nibedan-form-body">
+                                                    <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
+                                                    <p>सञ्चालक । प्रोप्राइटर श्री {{request.user.first_name}} स:मिल / भेनियर तथा प्लाईउड / {{request.user.company_name}} ले उद्योग दर्ता 
+                                                        प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {% if request.user.union_type == 'district' %} {{request.user.district_name|get_districtName}} जिल्ला संघ {% else %} {{approved_admin.company_name}} {% endif %} वस्तुगत संघ 
+                                                        माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र {% if request.user.union_type == 'district' %} {{approved_admin.state_name|get_StateName}} प्रदेश महासंघ {% else %} {{approved_admin.company_name}} {% endif %}
+                                                        वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम 
+                                                        सञ्चालक । प्रोप्राइटर श्री {{request.user.first_name}} को {{request.user.company_name}} {{id_data.applicationform.all.first.get_user_application_detail.business_name|get_NepaliBusinessName}} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत 
+                                                        गरिदिनु हुन अनुरोध छ ।</h5>
+                                                </div>
+                                                <div class="nibedan-form-footer">
+                                                    <div class="user-info">
+                                                        <label style="font-weight: bold;">पद कार्यकारी निर्देशक</label>
+                                                        <label>नाम: <span class="user-info-data">{{approved_admin.first_name}}</span></label>
+                                                        {% load staticfiles %}
+                                                        <label>दस्तखत : <span class="user-info-data"><img
+                                                                    src="{% if approved_admin.signature %} {{approved_admin.signature.url}} {% endif %}"}></span></label>
+                                                    </div>
+                                                </div>
+                        
+                                            </div>
+                                        </div>                                           
+                                           <hr>
+                                            <!------certificate------>                                    
+                                        <div class="col-md-6" id="div_print_document">
+                                            <div class="row" id="documents">
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
@@ -580,8 +628,7 @@
                             function printdiv(printpage) {
                                 var headstr = "<html><head><title></title></head><body>";
                                 var footstr = "</body>";
-                                var css = "<style>.nibedan-form{padding: 50px 20px;max-width: 600px;\
-                                            border: 1px solid #d9d6d6;\
+                                var css = "<style>.nibedan-form{padding: 0px 30px;max-width: 100%;\
                                         }\
                                         .nibedan-form p{\
                                             font-size: 14px;\
@@ -683,7 +730,7 @@
                                             .nibedan-form-footer .user-info,\
                                             .nibedan-form-footer .user-address{\
                                                 padding-right: 0;\
-                                                text-align: center;\
+                                                text-align: left;\
                                             }\
                                             .nibedan-form-footer .user-address label{\
                                                 width: 100%;\
