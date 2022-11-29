@@ -496,7 +496,7 @@ def CertificateUpload(request):#all application
     # return HttpResponse(request.POST.items()    
     try:
         obj = ApplicationForm.objects.get(id=request.POST['form_id'])
-        obj.get_user_application_detail.certificate = request.FILES['signature']
+        obj.get_user_application_detail.application_certificate = request.FILES['certificate']
         obj.save()
     except:
         messages.error("certificate can't be upload")

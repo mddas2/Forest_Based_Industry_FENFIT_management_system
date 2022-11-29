@@ -107,6 +107,8 @@ class UserApplicationDetail(models.Model):
 
     industry_certificate = models.ImageField(upload_to='user/documents', null=True) #उद्योग प्रमाणपत्र को प्रतिलिपि
     
+    application_certificate =  models.FileField(upload_to='user/documents', null=True)
+    
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
