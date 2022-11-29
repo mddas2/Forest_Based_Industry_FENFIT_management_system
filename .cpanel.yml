@@ -2,6 +2,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/radijmdg/fenfitnepal/
     - /bin/cp -r nepallocation $DEPLOYPATH
+    - /bin/cp -r report $DEPLOYPATH
     - /bin/cp -r payment $DEPLOYPATH
     - /bin/cp -r Admin $DEPLOYPATH
     - /bin/cp -r account $DEPLOYPATH
