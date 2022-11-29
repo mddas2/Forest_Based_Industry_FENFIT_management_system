@@ -84,11 +84,11 @@
         </li> -->
         {% endif %}       
     
-        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">रिपोर्ट<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">रिपोर्ट<span class="badge rounded-pill bg-cyan ms-auto">2</span></span></a>
             <ul aria-expanded="false" class="collapse">
                 {% if request.user.role == request.user.CENTRAL %}
-                    <li><a href="{% url 'UserList' %}">सिफारिस रिपोर्ट</a></li>
-                    <li><a href="{% url 'AdvanceUserList' role_id=0 %}">प्रयोगकर्ता वर्गीकरण</a></li>
+                    <li><a href="{% url 'ApplicationFormReport' %}">सिफारिस रिपोर्ट</a></li>
+                    <li><a href="{% url 'MembershipReport' %}">प्रयोगकर्ताको सदस्यता रिपोर्ट</a></li>
                 {% endif %}
             </ul>
         </li>
