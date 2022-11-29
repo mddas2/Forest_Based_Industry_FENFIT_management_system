@@ -253,8 +253,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
-                        <!-----order detail-->
-                        
+                        <!-----order detail-->                        
                         <div class="row">
                             <!-- Column -->
                             <div class="col-lg-12">
@@ -332,7 +331,7 @@
                                                 <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
                                                 <div class="nibedan-form-top">
                                                     <div class="form-top-left">
-                                                        <p>{{form_data.id}} सिफारिश पत्र नम्बर : <br>
+                                                        <p>{{id_data.id}} सिफारिश पत्र नम्बर : <br>
                                                             </p>
                                                     </div>
                                             
@@ -343,17 +342,17 @@
                                                 <div class="nibedan-form-top1">
                                                     <div class="form-top-left">
                                                         <p>श्री डिभिजन वन कार्यालय,<br>
-                                                            {{request.user.district_name|get_districtName}} जिल्ला  </p>
+                                                            {{id_data.user.district_name|get_districtName}} जिल्ला  </p>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="nibedan-form-body">
                                                     <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
-                                                    <p>सञ्चालक । प्रोप्राइटर श्री {{request.user.first_name}} स:मिल / भेनियर तथा प्लाईउड / {{request.user.company_name}} ले उद्योग दर्ता 
-                                                        प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {% if request.user.union_type == 'district' %} {{request.user.district_name|get_districtName}} जिल्ला संघ {% else %} {{approved_admin.company_name}} {% endif %} वस्तुगत संघ 
-                                                        माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र {% if request.user.union_type == 'district' %} {{approved_admin.state_name|get_StateName}} प्रदेश महासंघ {% else %} {{approved_admin.company_name}} {% endif %}
+                                                    <p>सञ्चालक । प्रोप्राइटर श्री {{id_data.user.first_name}} स:मिल / भेनियर तथा प्लाईउड / {{id_data.user.company_name}} ले उद्योग दर्ता 
+                                                        प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {% if id_data.user.union_type == 'district' %} {{id_data.user.district_name|get_districtName}} जिल्ला संघ {% else %} {{id_data.user.company_name}} {% endif %} वस्तुगत संघ 
+                                                        माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र {% if id_data.user.union_type == 'district' %} {{approved_admin.state_name|get_StateName}} प्रदेश महासंघ {% else %} {{id_data.user.company_name}} {% endif %}
                                                         वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम 
-                                                        सञ्चालक । प्रोप्राइटर श्री {{request.user.first_name}} को {{request.user.company_name}} {{id_data.applicationform.all.first.get_user_application_detail.business_name|get_NepaliBusinessName}} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत 
+                                                        सञ्चालक । प्रोप्राइटर श्री {{id_data.user.first_name}} को {{id_data.user.company_name}} {{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत 
                                                         गरिदिनु हुन अनुरोध छ ।</h5>
                                                 </div>
                                                 <div class="nibedan-form-footer">
