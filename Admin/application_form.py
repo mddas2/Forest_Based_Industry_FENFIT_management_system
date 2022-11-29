@@ -490,6 +490,19 @@ def PaymentGet(request):#all application
     obj.save()
     return redirect("/")
 
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_central_role)
+def CertificateUpload(request):#all application
+    # return HttpResponse(request.POST.items()    
+    try:
+        obj = ApplicationForm.objects.get(id=request.POST['form_id'])
+        obj.get_user_application_detail.certificate = request.FILES['signature']
+        obj.save()
+    except:
+        messages.error("certificate can't be upload")
+        pass
+    return redirect("/")
+
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_central_role)
