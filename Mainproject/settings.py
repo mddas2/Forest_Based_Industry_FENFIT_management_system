@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account',
     'nepallocation',
     'payment',
+    'report',
 ]
 
 AUTH_USER_MODEL = "account.CustomUser" 
