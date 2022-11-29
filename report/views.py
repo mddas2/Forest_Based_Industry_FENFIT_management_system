@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 def ApplicationFormReport(request):
      formsobj = ApplicationForm.objects.all()
      data={
-        'applicationforms' : formsobj,
+        'all_data' : formsobj,
     }
      return render(request,'report/application-lists.html',data)
 
