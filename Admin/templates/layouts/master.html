@@ -177,6 +177,10 @@
     <!-- ============================================================== -->
 
     <!-- Bootstrap tether Core JavaScript -->
+    {% block optionaljs %}
+
+    {% endblock %}
+  
     <script src="{% static '/assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{% static '/assets/dist/js/perfect-scrollbar.jquery.min.js' %}"></script>
@@ -198,9 +202,7 @@
     <script src="{% static '/assets/node_modules/morrisjs/morris.min.js' %}"></script>
     <!--Custom JavaScript -->
     <script src="{% static '/assets/dist/js/ecom-dashboard.js' %}"></script>
-    {% block optionaljs %}
 
-    {% endblock %}
   
 </body>
 
