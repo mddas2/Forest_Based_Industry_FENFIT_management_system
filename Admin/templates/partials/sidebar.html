@@ -83,6 +83,18 @@
             </ul>
         </li> -->
         {% endif %}       
+    
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">प्रयोगकर्ता(USERS)<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="{% url 'UserList' %}">Reports</a></li>
+                {% if request.user.role == request.user.CENTRAL %}
+                    <li><a href="{% url 'AdvanceUserList' role_id=0 %}">प्रयोगकर्ता वर्गीकरण</a></li>
+                    <li><a href="{% url 'RoleList' %}">भूमिका(Role)</a></li>
+                    <li><a href="{% url 'GroupList' %}">Permission Group</a></li> <!----Group is combination of different permissions--->
+                {% endif %}
+            </ul>
+        </li>
+       
      
     </ul>
 </nav>
