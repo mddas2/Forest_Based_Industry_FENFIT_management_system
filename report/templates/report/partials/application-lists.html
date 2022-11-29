@@ -20,6 +20,7 @@
                             <div class="ms-auto">
                                 <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
                             </div>
+                            <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" onclick="Create('{{  export_link_name  }}')"><i class="bi bi-cloud-arrow-up"></i> Export</button>
                         </div>
                     </div>
              
@@ -29,19 +30,20 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Full Name</th>                                
-                                <th>नागरिकता पर्तिलिपि</th>
-                                <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
-                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>
-                                <th>बैंक भौचर</th> 
-                                <th>भुक्तानी स्थिति</th> 
                                 <th>जिल्ला</th>                                                   
+                                <th>State</th>                                                   
+                                <th>DSC</th>
+                                <th>बिल नम्बर</th>                                                
+                                <th>Company Name</th>
+                                <th>User Email</th>      
+                                <th>User Number</th>
                                 <th>विवरण हेर्नुहोस्</th>
+                                {% comment %} <th>बैंक भौचर</th> 
+                                <th>भुक्तानी स्थिति</th> 
                                 <!-- <th>दर्ता गरिएको मिति</th>
                                 <th>स्थिति</th> -->
-                                <th>बिल नम्बर</th>                                                
-                                <th>बुझिलिएको रकम</th>                               
-                                <th style="display:none">email</th>                            
+                                <th>बुझिलिएको रकम</th>                                
+                                <th style="display:none">email</th>             {% endcomment %}               
                             </tr>
                         </thead>
                         {% if all_data %}
@@ -51,8 +53,15 @@
                                     <tr>
                                         <td>{{i.id}}</td>
                                         <td>{{i.get_user_application_detail.owner_full_name}}</td>
+                                        <td>{{i.user.district_name}}</td>
+                                        <td>{{i.user.state_name}}</td>
+                                        <td>{{i.dsc}}</td>
+                                        <td> {{i.bill_number}} </td>                                        
+                                        <td>{{i.user.company_name}}</td>
+                                        <td>{{i.user.email}}</td>
+                                        <td>{{i.user.phone}}</td>
                                          
-                                        <td class="zoom-gallery">
+                                        {% comment %} <td class="zoom-gallery">
                                             {% if i.get_user_application_detail.certificate_citizenship %} 
                                             <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                             {% else %}
@@ -81,19 +90,16 @@
                                             {% else %}
                                                 NotFound
                                             {% endif %}
-                                        </td>  <!-- this is quantity-->                                       
-                                        <td>{{i.get_user_application_detail.voucher_number}}</td>                                        
+                                        </td>  <!-- this is quantity-->                                        {% endcomment %}
+                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
+                                        {% comment %} <td>{{i.get_user_application_detail.voucher_number}}</td>                                        
                                         <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
                                         <td>{{i.user.district_name}}</td>
-                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
                                         <!-- <td><span class="label label-info">{{i.get_date}}</span></td>
                                         <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td> -->
                                        
-                                        <td>             
-                                            {{i.bill_number}}                             
-                                        </td>                                        
                                         <td style="display:none">{{i.phone}}</td>  
-                                        <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                        <td style="display:none">{{i.get_shipping_address.email}}</td> {% endcomment %}
                                                                                            
                                     </tr>
                                     {% comment %} <script>
