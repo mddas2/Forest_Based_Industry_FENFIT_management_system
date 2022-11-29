@@ -261,7 +261,7 @@
                                 <div class="card">
                                     <div class="row">
                                         <div class="col-md-6" id="div_print_application">
-                                            <button onClick="printdiv('div_print_application');">print</button>
+                                            <button class="print-hide" onClick="printdiv('div_print_application');">print</button>
                                             <div class="nibedan-form" >
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
@@ -324,7 +324,7 @@
                                         </div>
                                            <!---certificate-->                                        
                                         <div class="col-md-6" id="div_print_certificate">
-                                            <button onClick="printdiv('div_print_certificate');">print</button>
+                                            <button class="print-hide" onClick="printdiv('div_print_certificate');">print</button>
                                             <div class="nibedan-form">
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
@@ -628,68 +628,83 @@
                             function printdiv(printpage) {
                                 var headstr = "<html><head><title></title></head><body>";
                                 var footstr = "</body>";
-                                var css = "<style>.nibedan-form{padding: 0px 30px;max-width: 100%;\
+                                var css = "<style>\
+                                          .card-title{\
+                                            font-size: 16px;\
                                         }\
-                                        .nibedan-form p{\
+                                        .nibedan-form {\
+                                            padding: 50px 20px;\
+                                            max-width: 600px;\
+                                            border: 1px solid #d9d6d6;\
+                                        }\
+                                        .nibedan-form p {\
                                             font-size: 14px;\
                                             line-height: 24px;\
                                             font-weight: 400;\
                                             color: #000;\
                                             text-align: justify;\
-                                        }.nibedan-form .form-logo{\
+                                        }\
+                                        .nibedan-form .form-logo {\
                                             text-align: center;\
                                         }\
-                                        .nibedan-form .form-logo img{\
+                                        .nibedan-form .form-logo img {\
                                             max-width: 500px;\
                                             width: 100%;\
                                             margin-bottom: 20px;\
                                         }\
-                                        h2.main-title{\
-                                            font-size: 18px;\
-                                            line-height: 22px;\
-                                            font-weight: bold;\
-                                            text-align: center;\
-                                        }\
-                                        .nibedan-form-top{\
+                                        h5.main-title{\
+                                                       font-size: 14px;\
+                                                        line-height: 22px;\
+                                                        font-weight: bold;\
+                                                        text-align: center;\
+                                                    }\
+                                        .nibedan-form-top {\
                                             position: relative;\
                                             display: block;\
                                             width: 100%;\
                                             padding: 50px 0;\
-                                        }                .form-top-left{\
+                                        }\
+                                        .nibedan-form-top1 {\
+                                            position: relative;\
+                                            display: block;\
+                                            width: 100%;\
+                                            padding: 10px 0;\
+                                        }\
+                                        .form-top-left {\
                                             float: left;\
                                         }\
-                                        .form-top-right{\
+                                        .form-top-right {\
                                             float: right;\
                                         }\
-                                        .nibedan-form-body{\
+                                        .nibedan-form-body {\
                                             position: relative;\
                                             display: block;\
                                             margin-top: 50px;\
                                         }\
-                                        .nibedan-form-body h2{\
+                                        .nibedan-form-body h2 {\
                                             font-size: 16px;\
                                             line-height: 22px;\
                                             font-weight: bold;\
                                             text-align: center;\
                                         }\
-                                        .nibedan-form-body h5{\
+                                        .nibedan-form-body h5 {\
                                             font-size: 16px;\
                                             line-height: 22px;\
                                             font-weight: bold;\
                                             text-decoration: underline;\
                                         }\
-                                        .nibedan-form-body ul li{\
+                                        .nibedan-form-body ul li {\
                                             font-size: 14px;\
                                             line-height: 24px;\
                                             font-weight: 400;\
                                             color: #000;\
                                             text-align: justify;\
                                         }\
-                                        .nibedan-form-footer .user-info{\
+                                        .nibedan-form-footer .user-info {\
                                             text-align: left;\
                                             padding-right: 20px;\
                                         }\
-                                        .nibedan-form-footer .user-info label{\
+                                        .nibedan-form-footer .user-info label {\
                                             font-size: 14px;\
                                             line-height: 24px;\
                                             font-weight: 400;\
@@ -697,18 +712,21 @@
                                             display: block;\
                                             margin-bottom: 10px;\
                                         }\
-                                        .nibedan-form-footer .user-info label img{\
+                                        .nibedan-form-footer .user-info label img {\
                                             max-width: 150px;\
                                         }\
-                                        .nibedan-form-footer .user-info label .user-info-data{\
+                                        .nibedan-form-footer .user-info label .user-info-data {\
                                             max-width: 150px;\
                                             min-width: 150px;\
                                             overflow: hidden;\
                                         }\
-                                        .nibedan-form-footer .user-address{\
+                                        .nibedan-form-footer .user-address {\
                                             margin-top: 20px;\
                                         }\
-                                        .nibedan-form-footer .user-address label{\
+                                        .print-hide{\
+                                            display: None;\
+                                        }\
+                                        .nibedan-form-footer .user-address label {\
                                             font-size: 14px;\
                                             line-height: 24px;\
                                             font-weight: 400;\
@@ -717,34 +735,22 @@
                                             margin-bottom: 10px;\
                                             width: 49%;\
                                         }\
-                                        .img-data-area img{\
-                                            max-width: 300px;\
-                                            min-width: 300px;\
-                                            max-height: 300px;\
-                                            object-fit: fill;\
-                                            border: 1px solid #dbdbdb;\
-                                            padding: 5px;\
-                                            object-fit: contain;\
-                                        }\
                                         @media (max-width:767px) {\
                                             .nibedan-form-footer .user-info,\
-                                            .nibedan-form-footer .user-address{\
+                                            .nibedan-form-footer .user-address {\
                                                 padding-right: 0;\
-                                                text-align: left;\
+                                                text-align: center;\
                                             }\
-                                            .nibedan-form-footer .user-address label{\
+                                            .nibedan-form-footer .user-address label {\
                                                 width: 100%;\
-                                            }\
-                                            .img-data-area img{\
-                                                max-width: 100%;\
-                                                min-width: auto;\
-                                                max-height: initial;\
                                             }\
                                         }\
                                     </style>"
                                 var newstr = document.all.item(printpage).innerHTML;
+                                var documentm = document.getElementById("documents").innerHTML;
+                                console.log(document)
                                 var oldstr = document.body.innerHTML;
-                                document.body.innerHTML = headstr + css + newstr + footstr;
+                                document.body.innerHTML = headstr + css + newstr + documentm + footstr;
                                 window.print();
                                 document.body.innerHTML = oldstr;
                                 return false;
