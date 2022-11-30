@@ -361,7 +361,8 @@ def UserApplicationFormStore(request):
             'user_id' : request.user.id,
             'business_price_category' : price_category['code_name'],
             'is_reniew' : is_reniew,
-            'payment_rupees' : payment_rupees
+            'payment_rupees' : payment_rupees,
+            'physical_year' : request.POST['physical_year']
         }
 
         if request.POST['voucher_number'] != None:

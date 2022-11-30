@@ -90,7 +90,7 @@ class UserApplicationDetail(models.Model):
     approved_name = models.CharField(max_length=205,null=True)
     approved_email = models.CharField(max_length=205,null=True)
     approved_signature = models.ImageField(upload_to='user/documents', null=True)
-    approved_company_name =models.CharField(max_length=205,null=True)
+    approved_company_name = models.CharField(max_length=205,null=True)
 
     certificate_citizenship = models.ImageField(upload_to='user/documents', null=True) #नागरिकता पर्तिलिपि
     certificate_company_registration = models.ImageField(upload_to='user/documents', null=True) #कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि
@@ -108,6 +108,7 @@ class UserApplicationDetail(models.Model):
     industry_certificate = models.ImageField(upload_to='user/documents', null=True) #उद्योग प्रमाणपत्र को प्रतिलिपि
     
     application_certificate =  models.FileField(upload_to='user/documents', null=True)
+    physical_year = models.CharField(max_length=205,null=True)
     
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)

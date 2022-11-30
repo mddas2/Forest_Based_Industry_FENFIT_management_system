@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUser(AbstractUser):
+    sex = models.CharField(max_length=255 , null=True) #male and female
+    
     phone = models.CharField(max_length=255 , null=True)
     permanent_address = models.CharField(max_length=255 , null=True)
     email = models.EmailField(max_length=255, unique=True)

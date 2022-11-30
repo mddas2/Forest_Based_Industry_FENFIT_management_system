@@ -4,10 +4,20 @@
     {% include 'admin/authentication/partials/register.html' %}
 {% endblock %}
 
-{% block optionaljs %}
+
+{% block optionalcss %}
 {% load staticfiles %}
+    <link href="{% static '/assets/node_modules/icheck/skins/all.css' %}" rel="stylesheet">
+    <link href="{% static '/assets/dist/css/pages/form-icheck.css' %}" rel="stylesheet">
+{% endblock %}
+{% block optionaljs %}
+
+{% load staticfiles %}
+        <script src="/static/assets/node_modules/dropify/dist/js/dropify.min.js"></script>
+        <script src="{% static '/assets/node_modules/icheck/icheck.min.js' %}"></script>
+        <script src="{% static '/assets/node_modules/icheck/icheck.init.js' %}"></script>
         <!-- jQuery file upload -->
-        <script src="{% static '/assets/node_modules/dropify/dist/js/dropify.min.js' %}"></script>
+       
         <script>
         $(document).ready(function() {
             // Basic
