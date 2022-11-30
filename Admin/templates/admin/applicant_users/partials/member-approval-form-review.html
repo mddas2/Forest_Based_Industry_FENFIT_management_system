@@ -63,6 +63,9 @@
                         <div class="form-logo">
                             <img src="/static/assets/images/logo-2.png">
                         </div>
+                        <div class="fanfet-info">
+                            <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
+                        </div>
                         {% if id_data.union_type == 'private' %}
                             <h5 style="font-weight: 600;"><center>{{id_data.approved_company_name}}</center></h5>
                             <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
@@ -189,6 +192,9 @@
                     <div class="nibedan-form">
                         <div class="form-logo">
                             <img src="/static/assets/images/logo-2.png">
+                        </div>
+                        <div class="fanfet-info">
+                            <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
                         </div>
                         <h2 class="main-title">{% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता फारम {% else %} सदस्यता आवेदन फारम {% endif %}</h2>
                         <div class="nibedan-form-top">
@@ -359,9 +365,22 @@
                 .nibedan-form .form-logo img {
                     max-width: 500px;
                     width: 100%;
-                    margin-bottom: 20px;
                 }
-
+                .fanfet-info{
+                            text-align: center;
+                        } 
+                        .fanfet-info ul{
+                            padding: 0;
+                            list-style: none;
+                        }
+                        .fanfet-info ul li{
+                            font-size: 12px;
+                            display: inline-block;
+                            color: #000;
+                        }
+                        .fanfet-info ul li a{
+                            color: #000;
+                        }
                 h2.main-title {
                     font-size: 18px;
                     line-height: 22px;
@@ -501,8 +520,22 @@
                 .nibedan-form .form-logo img{\
                     max-width: 500px;\
                     width: 100%;\
-                    margin-bottom: 20px;\
                 }\
+                .fanfet-info{\
+                            text-align: center;\
+                        } \
+                        .fanfet-info ul{\
+                            padding: 0;\
+                            list-style: none;\
+                        }\
+                        .fanfet-info ul li{\
+                            font-size: 12px;\
+                            display: inline-block;\
+                            color: #000;\
+                        }\
+                        .fanfet-info ul li a{\
+                            color: #000;\
+                        }\
                 h2.main-title{\
                     font-size: 18px;\
                     line-height: 22px;\
