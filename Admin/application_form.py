@@ -492,6 +492,18 @@ def PaymentGet(request):#all application
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_central_role)
+def TypeApplicationId(request):#all application
+    # return HttpResponse(request.POST.items())
+    obj = ApplicationForm.objects.get(id=request.POST['form_id'])
+    try:
+        obj.type_application_id = request.POST['type_application_id']
+        obj.save()
+    except:
+        pass
+    return redirect("/")
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_central_role)
 def CertificateUpload(request):#all application
     # return HttpResponse(request.POST.items()    
         try:

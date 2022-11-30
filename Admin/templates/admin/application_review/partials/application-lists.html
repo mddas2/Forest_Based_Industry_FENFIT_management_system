@@ -30,9 +30,9 @@
                                 <th>Id</th>
                                 <th>Full Name</th>
                                 {% if request.user.groups.first.name != 'accountant' %}  
-                                    <th>नागरिकता पर्तिलिपि</th>
+                                    <!-- <th>नागरिकता पर्तिलिपि</th> -->
                                     <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                    <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
+                                    <!-- <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>       -->
                                     <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>
                                 {% endif %}
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
@@ -51,6 +51,9 @@
                                 {% elif request.user.role == request.user.CENTRAL %}
                                     <th>बुझिलिएको रकम</th>  
                                 {% endif %}
+                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
+                                    <th>सिफारिस ID</th>   
+                                {% endif %}
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' and i.get_user_application_detail.application_certificate %}
                                  <th>upload certificate</th>  
                                 {% endif %}
@@ -66,13 +69,13 @@
                                         <td>{{i.id}}</td>
                                         <td>{{i.get_user_application_detail.owner_full_name}}</td>
                                         {% if request.user.groups.first.name != 'accountant' %}  
-                                            <td class="zoom-gallery">
+                                            <!-- <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.certificate_citizenship %} 
                                                 <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                                 {% else %}
                                                     NotFound
                                                 {% endif %}
-                                            </td>
+                                            </td> -->
                                             <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.certificate_company_registration %}  
                                                 <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
@@ -81,13 +84,13 @@
                                                     NotFound
                                                 {% endif %}
                                             </td>
-                                            <td class="zoom-gallery">    
+                                            <!-- <td class="zoom-gallery">    
                                                 {% if i.get_user_application_detail.provisional_account_number %}        
                                                 <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                                 {% else %}
                                                     NotFound
                                                 {% endif %}
-                                            </td>   
+                                            </td>    -->
 
                                             <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.tax_paid_certificate %}       
@@ -143,6 +146,26 @@
                                         {% endif %}
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name != 'accountant' %}
                                             <td>{{i.payment_get}}</td>
+                                        {% endif %}
+                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
+                                                
+                                             <td>             
+                                                <form class="form-horizontal form-material" id="type_application_id" action="{% url 'TypeApplicationId' %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
+                                                    <div class="form-group ">
+                                                        <div class="row">
+                                                        <div class="col-md-4">
+                                                            <input id="type_application_id" class="form-control" type="text" required="" value="{{i.type_application_id}}" placeholder="सिफारिस ID" name="type_application_id"> 
+                                                        </div>
+                                                        <div class="col-md-8 ">
+                                                            <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>                                         
+                                                </form>                                    
+                                            </td>
+                                            
                                         {% endif %}
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  and i.get_user_application_detail.application_certificate == '' %}
                                             <td>
