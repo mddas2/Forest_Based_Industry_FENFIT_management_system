@@ -1,6 +1,6 @@
 <!-- Info box Content applicant user personal information-->
 <!-- ============================================================== -->
-
+{% load staticfiles %}
 
 <div class="row">
     <!-- Column -->
@@ -32,9 +32,13 @@
                             </div>
 
       <div class="qrScanner">
-        <img style="height: 200px; max-width: 400px;" src="https://media.istockphoto.com/id/518484289/photo/close-up-of-qr-code-example.jpg?s=1024x1024&w=is&k=20&c=G7_H2Q7-rM-r97FYGDUJxBQZ_ynRN4OuvXUBujb3i_o="/>    
+        <img src="{% static '/assets/qr-new.jpg' %}">    
      </div>                
-                    
+    <style>
+        .qrScanner img{
+            max-width: 400px;
+        }
+    </style>                
     </div>
        <div class="form-actions m-t-40">
            <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i
