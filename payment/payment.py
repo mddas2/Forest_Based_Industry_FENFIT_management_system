@@ -42,7 +42,7 @@ def BusinessPriceCategory(request,ammount = None):
         if ammount:
             pass
         else:
-            ammount=9999999999999999
+            ammount=0
     try:
         ajax = request.GET['ajax']
     except:

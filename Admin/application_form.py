@@ -533,7 +533,7 @@ def AccountantPayment(request):#all application
 
                 application_detail =  ApplicationForm.objects.get(id=pk).get_user_application_detail
                 # return HttpResponse(application_detail.applicationform.all().first().id)
-                if dsc == 'central_accountant' and request.user.get_dsc_Role()=='central_accountant':
+                if dsc == 'central_accountant' or dsc == 'central_admin' and request.user.get_dsc_Role()=='central_accountant':
                     payment_data = {
                         'is_renew' : application_detail.is_reniew,
                         'business_price_category' : application_detail.business_price_category,
@@ -570,7 +570,7 @@ def AccountantPayment(request):#all application
             elif payment=='0':
                 should_insert = 0
                 dsc = ApplicationForm.objects.get(id=pk).dsc
-                if dsc == 'central_accountant' and request.user.get_dsc_Role()=='central_accountant':
+                if dsc == 'central_accountant' or dsc == 'central_admin' and request.user.get_dsc_Role()=='central_accountant':
                         application_form = ApplicationForm.objects.filter(id=pk).first()
                         application_form.is_payment = 0
                         application_form.save()
