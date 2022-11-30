@@ -51,7 +51,8 @@
                                 {% elif request.user.role == request.user.CENTRAL %}
                                     <th>बुझिलिएको रकम</th>  
                                 {% endif %}
-                                {% if request.user.role == request.user.CENTRAL %}
+                        
+                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' and i.get_user_application_detail.application_certificate %}
                                      <th>upload certificate</th>  
                                 {% endif %}
                                 <th>Action</th>
@@ -144,9 +145,9 @@
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name != 'accountant' %}
                                             <td>{{i.payment_get}}</td>
                                         {% endif %}
-                                        {% if request.user.role == request.user.CENTRAL %}
+                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  and i.get_user_application_detail.application_certificate == '' %}
                                             <td>
-                                                <form class="form-horizontal form-material" id="certificate_upload" action="{% url 'CertificateUpload' %}" method="POST">
+                                                <form class="form-horizontal form-material" id="certificate_upload" action="{% url 'CertificateUpload' %}" method="POST" enctype="multipart/form-data">
                                                     {% csrf_token %}
                                                     <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
                                                     <div class="form-group ">
@@ -203,30 +204,32 @@
                                                             </a>
                                                             </li>
                                                             {% else %}
-                                                                <li>
-                                                                    <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                                        {%if i.approved_pending_cancelled == "p" %} 
-                                                                    <i class="bi bi-check-lg"></i> 
-                                                                    {% else %} &nbsp; &nbsp;
-                                                                        {% endif %}
-                                                                    Pending
+                                                                {% if i.get_user_application_detail.application_certificate %}
+                                                                    <li>
+                                                                        <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
+                                                                            {%if i.approved_pending_cancelled == "p" %} 
+                                                                        <i class="bi bi-check-lg"></i> 
+                                                                        {% else %} &nbsp; &nbsp;
+                                                                            {% endif %}
+                                                                        Pending
+                                                                        </a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
+                                                                        {%if i.approved_pending_cancelled == "a" %} 
+                                                                        <i class="bi bi-check-lg"></i> 
+                                                                        {% else %} &nbsp; &nbsp;
+                                                                            {% endif %}
+                                                                        Approved
+                                                                    </a></li>
+                                                                    <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
+                                                                        {%if i.approved_pending_cancelled == "c" %} 
+                                                                        <i class="bi bi-check-lg"></i> 
+                                                                        {% else %} &nbsp; &nbsp;
+                                                                            {% endif %}
+                                                                        Cancelled
                                                                     </a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
-                                                                    {%if i.approved_pending_cancelled == "a" %} 
-                                                                    <i class="bi bi-check-lg"></i> 
-                                                                    {% else %} &nbsp; &nbsp;
-                                                                        {% endif %}
-                                                                    Approved
-                                                                </a></li>
-                                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
-                                                                    {%if i.approved_pending_cancelled == "c" %} 
-                                                                    <i class="bi bi-check-lg"></i> 
-                                                                    {% else %} &nbsp; &nbsp;
-                                                                        {% endif %}
-                                                                    Cancelled
-                                                                </a>
-                                                                </li>
+                                                                    </li>
+                                                                {% endif %}
                                                             {% endif %}
                                                         </ul>
                                                 </div>

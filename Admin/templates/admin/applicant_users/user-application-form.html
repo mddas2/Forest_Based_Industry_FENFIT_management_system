@@ -60,6 +60,7 @@
     $(document).ready(function () {      
         // catch the form's submit event
         $('#amount_to_select').keyup(function () {
+           
             // create an AJAX call
             num = $("#amount_to_select").val()
             $.ajax({
@@ -67,12 +68,16 @@
                 url: "{% url 'BusinessPriceCategory' %}",
                 // on success
                 success: function (response) {
+                    console.log(response)
+                    
                     if (response.price_category) {
                         if($('#renew_check').is(":checked")){
                             $("#businessrice").text(response.price_category.renewal_fee)
+                            $("#business_priccategory_be_category").val(response.price_category.name_1)
                         }
                         else{
                             $("#businessrice").text(response.price_category.start_recommendation_fee)
+                            $("#category_b").val(response.price_category.name_1)
                         }
                     }
                     else{

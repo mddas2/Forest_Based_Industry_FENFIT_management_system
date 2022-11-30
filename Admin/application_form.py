@@ -494,14 +494,16 @@ def PaymentGet(request):#all application
 @customized_user_passes_test(is_central_role)
 def CertificateUpload(request):#all application
     # return HttpResponse(request.POST.items()    
-    try:
-        obj = ApplicationForm.objects.get(id=request.POST['form_id'])
-        obj.get_user_application_detail.application_certificate = request.FILES['certificate']
-        obj.save()
-    except:
-        messages.error("certificate can't be upload")
-        pass
-    return redirect("/")
+        try:
+            formobj = ApplicationForm.objects.get(id=request.POST['form_id'])
+            application_obj = formobj.get_user_application_detail
+            application_obj.application_certificate = request.FILES['application_certificate']
+            application_obj.save()
+            messages.info(request,"certificate upload successfully")
+        except:    
+            messages.error(request,"certificate can't be upload")
+            pass
+        return redirect("/")
 
 
 @login_required(login_url=settings.LOGIN_URL)
