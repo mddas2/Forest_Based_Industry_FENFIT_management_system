@@ -9,8 +9,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = '__all__'
 
+class UserApplicationDetail(serializers.ModelSerializer):
+    class Meta:
+        model = UserApplicationDetail
+        fields = '__all__'
+
 class ApplicationFormSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer(read_only=True)
+    get_user_application_detail = UserApplicationDetail(read_only=True)
     class Meta:
         model = ApplicationForm
         fields = '__all__'
