@@ -21,6 +21,8 @@ from wsgiref.util import FileWrapper
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_group
 from django.shortcuts import redirect
 
+from rest_framework.renderers import JSONRenderer
+
 
 def ApplicationFormReport(request):
      formsobj = ApplicationForm.objects.all()
@@ -37,39 +39,18 @@ def MembershipReport(request):
 class ExportProduct(LoginRequiredMixin,APIView):
 
     def get(self,request):
-     product_objs = ApplicationForm.objects.all()
-     # product_objs =  ApplicationForm.objects.select_related('user').all().first().user.email
-     # product_objs = ApplicationForm.objects.all().user
-     # return HttpResponse(product_objs)
-     serializer = ApplicationSerializer(product_objs, many=True)
-
-     # product_objs2 = UserApplicationDetail.objects.all()
-     # serializer2 = UserApplicationSerializer(product_objs2, many=True)
-
-     # # serializer = serializer1+serializer2
+          product_objs = ApplicationForm.objects.all()
      
-     df = pd.DataFrame(serializer.data)
 
-     # df = pd.(serializer.data)
-     # return HttpResponse(df)
-     #    tempname=uuid.uuid4()
+          serializer = ApplicationFormSerializer(product_objs, many=True)
+          return HttpResponse(JSONRenderer().render(serializer.data))
 
-     tempname="detail"
-     df.to_excel(f"report/static/excel/{tempname}.xlsx")
-     file_path = os.path.join(settings.STATIC_URL, 'excel/'+str(tempname)+'.xlsx')
-     return redirect(file_path)
-
-
-        # inquiry_form = Products.objects.all()
-        # data_list = []
-        # for i in inquiry_form:
-        #     data = i.__dict__
-        #     data_list.append(data)
-        # df = pd.DataFrame(df)
-          
-     #    total_data = df.iloc[:,]
-     #    df.to_excel(f"details.xlsx")
-     #    response = HttpResponse(content_type='xlsx')
-     #    response['Content-Disposition'] = 'attachment; filename=details.xlsx'
-     #    return response
+          serializer = ApplicationFormSerializer(product_objs, many=True)
+          return JsonResponse(serializer)
+          return HttpResponse(serializer)     
+          df = pd.DataFrame(serializer.data)
+          tempname="detail"
+          df.to_excel(f"report/static/excel/{tempname}.xlsx")
+          file_path = os.path.join(settings.STATIC_URL, 'excel/'+str(tempname)+'.xlsx')
+          return redirect(file_path)
        
