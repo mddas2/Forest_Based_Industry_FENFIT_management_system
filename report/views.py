@@ -37,10 +37,10 @@ def MembershipReport(request):
 class ExportProduct(LoginRequiredMixin,APIView):
 
     def get(self,request):
-     # product_objs = ApplicationForm.objects.filter(user__id=request.user).order_by('-updated_at')
-     product_objs =  ApplicationForm.objects.select_related('user').all().first().user.email
+     product_objs = ApplicationForm.objects.all()
+     # product_objs =  ApplicationForm.objects.select_related('user').all().first().user.email
      # product_objs = ApplicationForm.objects.all().user
-     return HttpResponse(product_objs)
+     # return HttpResponse(product_objs)
      serializer = ApplicationSerializer(product_objs, many=True)
 
      # product_objs2 = UserApplicationDetail.objects.all()
