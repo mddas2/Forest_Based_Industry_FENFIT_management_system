@@ -25,16 +25,7 @@ from . import html_to_pdf
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application
-    #for download return pdf 
-    # form = ApplicationForm.objects.get(id=12)
-    # pdf = html_to_pdf.report(request,form)
-    # response = HttpResponse(content_type="application/pdf")
-    # # d = datetime.today().strftime('%Y-%m-%d')
-    # response['Content Disposition'] = f'inline; filenane="s.pdf"'
-    # response.write(pdf)   
-    # return response
-        
+def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application        
     slug1 = "सदस्य अनुमोदित फारम"
 
     district_name = request.user.district_name
@@ -661,15 +652,14 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
                         email_message = 'बधाई तपाईंको फारम फेन्फिटद्वारा सफलतापूर्वक स्वीकृत गरिएको छ.\n '
-                        pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
                         try:   
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                             if application_form.get_user_application_detail.application_certificate:
-                                pdffile = application_form.get_user_application_detail.application_certificate.url
-                                pdf = pdffile.getvalue()
-                                bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdf,to_email)
+                                pdffile = application_form.get_user_application_detail.application_certificate
+                                bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdffile,to_email)
                                 messages.success(request,"Email with pdf sent successfuly!!!")
                             else:
+                                pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
                                 bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)                                
                                 messages.success(request,"Email sent successfuly!!!")
                         except:                       
@@ -701,15 +691,14 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
-
-    try:
-        if pdf:
-            response = HttpResponse(content_type='application/pdf') #for download
-            response['Content-Disposition'] = 'attachment; filename=certificate.pdf' #for download
-            response.write(pdf)
-            return response
-    except:
-        pass
+    # try:
+    #     if pdf:
+    #         response = HttpResponse(content_type='application/pdf') #for download
+    #         response['Content-Disposition'] = 'attachment; filename=certificate.pdf' #for download
+    #         response.write(pdf)
+    #         return response
+    # except:
+    #     pass
 
     return render(request,'admin/application_review/application-lists.html',data)
 

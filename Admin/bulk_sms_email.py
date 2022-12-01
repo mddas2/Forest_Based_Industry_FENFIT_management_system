@@ -16,7 +16,8 @@ def SendMailAttachment(subject,message,email_from,pdf,recipient_list):
     
 def SendMailAttachment_Pdf(subject,message,email_from,pdf,recipient_list):
     mail = EmailMessage(subject, message, email_from, recipient_list)
-    mail.attach('recomendation-certificate.pdf' ,pdf, 'application/pdf')
+    mail.attach("document.pdf", pdf.read())
+    # mail.attach('recomendation-certificate.pdf' ,pdf, 'application/pdf')
     mail.send()     
     # return pdf   
 
