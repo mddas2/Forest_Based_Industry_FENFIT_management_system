@@ -21,16 +21,26 @@ from rest_framework.renderers import JSONRenderer
 
 
 def ApplicationFormReport(request):
+     report_type = 'application'
      formsobj = ApplicationForm.objects.all()
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
         'export_link_name' : reverse("ExportProduct"),
+        'report_type':report_type
     }
      return render(request,'report/application-lists.html',data)
 
 def MembershipReport(request):
-     member = CustomUser.objects.all()
+     report_type = 'membership'
+     formsobj = ApplicationForm.objects.all()
+     # return HttpResponse(formsobj.first().dsc)
+     data={
+        'all_data' : formsobj,
+        'export_link_name' : reverse("ExportProduct"),
+        'report_type':report_type
+    }
+     return render(request,'report/application-lists.html',data)
 
 class ExportProduct(LoginRequiredMixin,APIView):
 

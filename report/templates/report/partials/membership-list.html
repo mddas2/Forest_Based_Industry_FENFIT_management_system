@@ -1,5 +1,5 @@
 {% load staticfiles %}
-    {% load mathfilters %}   
+
 <style>
     .dropdown-toggle::after {
         display: none;
@@ -11,123 +11,105 @@
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"> {{slug1}} </h5>
+            <div class="card-body">            
+                    <div class="right-page-header">
+                        <div class="d-flex">
+                            <div class="align-self-center">
+                                <h4 class="card-title m-t-10">{{slug1}} </h4>
+                            </div>
+                            <div class="ms-auto">
+                                <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
+                            </div>
+                            <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" onclick="Create('{{  export_link_name  }}')"><i class="bi bi-cloud-arrow-up"></i> Export</button>
+                        </div>
+                    </div>
+             
                 <div class="table-responsive" style="overflow-x: scroll;">
                     <table class="table product-overview">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Full Name</th>
-                                <th>नागरिकता पर्तिलिपि</th>
-                                <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
-                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>  
-                                {% if request.user.groups.first.name == 'accountant' %}   
-                                    <th>Bank Voucher</th> 
-                                {% endif %}
-                                <th>भुक्तानी स्थिति</th> 
+                                <th>Full Name</th>                                
                                 <th>जिल्ला</th>                                                   
+                                <th>State</th>                                                   
+                                <th>DSC</th>
+                                <th>बिल नम्बर</th>                                                
+                                <th>Company Name</th>
+                                <th>User Email</th>      
+                                <th>User Number</th>
                                 <th>विवरण हेर्नुहोस्</th>
-                                <th>दर्ता गरिएको मिति</th>
-                                <th>स्थिति</th>   
-                                <th style="display:none">email</th>                            
+                                {% comment %} <th>बैंक भौचर</th> 
+                                <th>भुक्तानी स्थिति</th> 
+                                <!-- <th>दर्ता गरिएको मिति</th>
+                                <th>स्थिति</th> -->
+                                <th>बुझिलिएको रकम</th>                                
+                                <th style="display:none">email</th>             {% endcomment %}               
                             </tr>
                         </thead>
                         {% if all_data %}
                         <tbody id="tableSearch">
-                            {% for i in all_data %}   
-                                                              
-                            <tr>                
-                                <td>{{i.id}}</td>
-                                {% with i=i.approved_form %}
-                                <td>{{i.get_user_application_detail.owner_full_name}}</td>
-                                <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.certificate_citizenship %} 
-                                    <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                    {% else %}
-                                        NotFound
-                                    {% endif %}
-                                </td>
-                                <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.certificate_company_registration %}  
-                                    <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
-                                    <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
-                                    {% else %}
-                                        NotFound
-                                    {% endif %}
-                                </td>
-                                <td class="zoom-gallery">    
-                                    {% if i.get_user_application_detail.provisional_account_number %}        
-                                    <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                    {% else %}
-                                        NotFound
-                                    {% endif %}
-                                </td>   
-                           
-                                <td class="zoom-gallery">
-                                    {% if i.get_user_application_detail.tax_paid_certificate %}       
-                                    <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                    {% else %}
-                                        NotFound
-                                    {% endif %}
-                                </td>  <!-- this is quantity-->      
-                                {% if request.user.groups.first.name == 'accountant' %}                           
-                                    <td>{{i.get_user_application_detail.voucher_number}}</td>
-                                {% endif %}
-                                <td><span class="label label-success">{% if i.get_user_application_detail.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
-                                <td>{{i.user.district_name}}</td>
-                                {% endwith %}
-                                <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
-                                {% with i=i.approved_form %}
-                                 <td><span class="label label-info">{{i.get_date}}</span></td>
-                                 <td><span class="label label-success">Approved</span></td>
-                                 {% if action%}
-                                 <td>
-                                   <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                           <i class="bi bi-three-dots-vertical" style="color: red;"></i>
-                                        </a>
+                            {% for i in all_data %}          
+                                            
+                                    <tr>
+                                        <td>{{i.id}}</td>
+                                        <td>{{i.get_user_application_detail.owner_full_name}}</td>
+                                        <td>{{i.user.district_name}}</td>
+                                        <td>{{i.user.state_name}}</td>
+                                        <td>{{i.dsc}}</td>
+                                        <td> {{i.bill_number}} </td>                                        
+                                        <td>{{i.user.company_name}}</td>
+                                        <td>{{i.user.email}}</td>
+                                        <td>{{i.user.phone}}</td>
+                                         
+                                        {% comment %} <td class="zoom-gallery">
+                                            {% if i.get_user_application_detail.certificate_citizenship %} 
+                                            <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                            {% else %}
+                                                NotFound
+                                            {% endif %}
+                                        </td>
+                                        <td class="zoom-gallery">
+                                            {% if i.get_user_application_detail.certificate_company_registration %}  
+                                            <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                            <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                            {% else %}
+                                                NotFound
+                                            {% endif %}
+                                        </td>
+                                        <td class="zoom-gallery">    
+                                            {% if i.get_user_application_detail.provisional_account_number %}        
+                                            <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                            {% else %}
+                                                NotFound
+                                            {% endif %}
+                                        </td>   
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                    {%if i.approved_pending_cancelled == "p" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                Pending
-                                                </a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="a"  %}">
-                                                {%if i.approved_pending_cancelled == "a" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                Approved
-                                            </a></li>
-                                            <li><a class="dropdown-item" href="{% url "Order" pk=i.id approved_pending_cancelled="c"  %}">
-                                                {%if i.approved_pending_cancelled == "c" %} 
-                                                <i class="bi bi-check-lg"></i> 
-                                                {% else %} &nbsp; &nbsp;
-                                                    {% endif %}
-                                                 Cancelled
-                                            </a></li>
-                                        </ul>
-                                        </div>
-                                 </td>
-                                 <td style="display:none">{{i.phone}}</td>  
-                                 <td style="display:none">{{i.get_shipping_address.email}}</td>
-                                 {% endif %}                                                          
-                            </tr>
-                            {% endwith %}
-                            {% comment %} <script>
-                                    $(document).ready(function($){
-                                        $(".clickable-row{{forloop.counter}}").click(function() {
-                                            window.location = $(this).data("href");
-                                        });
-                                    });
-                            </script> {% endcomment %}
+                                        <td class="zoom-gallery">
+                                            {% if i.get_user_application_detail.tax_paid_certificate %}       
+                                            <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                            {% else %}
+                                                NotFound
+                                            {% endif %}
+                                        </td>  <!-- this is quantity-->                                        {% endcomment %}
+                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
+                                        {% comment %} <td>{{i.get_user_application_detail.voucher_number}}</td>                                        
+                                        <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
+                                        <td>{{i.user.district_name}}</td>
+                                        <!-- <td><span class="label label-info">{{i.get_date}}</span></td>
+                                        <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td> -->
+                                       
+                                        <td style="display:none">{{i.phone}}</td>  
+                                        <td style="display:none">{{i.get_shipping_address.email}}</td> {% endcomment %}
+                                                                                           
+                                    </tr>
+                                    {% comment %} <script>
+                                            $(document).ready(function($){
+                                                $(".clickable-row{{forloop.counter}}").click(function() {
+                                                    window.location = $(this).data("href");
+                                                });
+                                            });
+                                    </script> {% endcomment %}
+                                
                     
                             {% endfor %}
                         </tbody>
@@ -161,8 +143,9 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="nibedan-form">
+                                        <div class="col-md-6" id="div_print_application">
+                                            <button onClick="printdiv('div_print_application');">print</button>
+                                            <div class="nibedan-form" >
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
                                                 </div>
@@ -222,9 +205,56 @@
                                         
                                             </div>
                                         </div>
-                                        <!--/span-->
-                                        <div class="col-md-6">
-                                            <div class="row">
+                                           <!---certificate-->                                        
+                                        <div class="col-md-6" id="div_print_certificate">
+                                            <button onClick="printdiv('div_print_certificate');">print</button>
+                                            <div class="nibedan-form">
+                                                <div class="form-logo">
+                                                    <img src="/static/assets/images/logo-2.png">
+                                                </div>
+                                                <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
+                                                <div class="nibedan-form-top">
+                                                    <div class="form-top-left">
+                                                        <p>{{form_data.id}} सिफारिश पत्र नम्बर : <br>
+                                                            </p>
+                                                    </div>
+                                            
+                                                    <div class="form-top-right">
+                                                        <span class="date">मिति ः <u>{{id_data.created_at|get_NepaliDate}}</u></span>
+                                                    </div>
+                                                </div>
+                                                <div class="nibedan-form-top1">
+                                                    <div class="form-top-left">
+                                                        <p>श्री डिभिजन वन कार्यालय,<br>
+                                                            {{request.user.district_name|get_districtName}} जिल्ला  </p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="nibedan-form-body">
+                                                    <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
+                                                    <p>सञ्चालक । प्रोप्राइटर श्री {{request.user.first_name}} स:मिल / भेनियर तथा प्लाईउड / {{request.user.company_name}} ले उद्योग दर्ता 
+                                                        प्रमाणपत्र साथ उद्योग सुचिकृत गर्नका लागि सिफारिस माग गरि {% if request.user.union_type == 'district' %} {{request.user.district_name|get_districtName}} जिल्ला संघ {% else %} {{approved_admin.company_name}} {% endif %} वस्तुगत संघ 
+                                                        माफर्त यस कार्यालयमा निवेदन दिनुभएकोमा उद्योग दर्ता प्रमाणपत्रकोआधार र {% if request.user.union_type == 'district' %} {{approved_admin.state_name|get_StateName}} प्रदेश महासंघ {% else %} {{approved_admin.company_name}} {% endif %}
+                                                        वस्तुगत संघको सिफारिशका आधारमा मा वन नियमावली, २०७९ को नियम १३१ को उपनियम (२) बमोजिम 
+                                                        सञ्चालक । प्रोप्राइटर श्री {{request.user.first_name}} को {{request.user.company_name}} {{id_data.applicationform.all.first.get_user_application_detail.business_name|get_NepaliBusinessName}} उद्योगलाई सुचिकृत गर्नका लागि यो सिफारिसपत्र प्रदान गरिएकोले वन उद्यम सुचीकृत 
+                                                        गरिदिनु हुन अनुरोध छ ।</h5>
+                                                </div>
+                                                <div class="nibedan-form-footer">
+                                                    <div class="user-info">
+                                                        <label style="font-weight: bold;">पद कार्यकारी निर्देशक</label>
+                                                        <label>नाम: <span class="user-info-data">{{approved_admin.first_name}}</span></label>
+                                                        {% load staticfiles %}
+                                                        <label>दस्तखत : <span class="user-info-data"><img
+                                                                    src="{% if approved_admin.signature %} {{approved_admin.signature.url}} {% endif %}"}></span></label>
+                                                    </div>
+                                                </div>
+                        
+                                            </div>
+                                        </div>                                           
+                                           <hr>
+                                            <!------certificate------>                                    
+                                        <div class="col-md-6" id="div_print_document">
+                                            <div class="row" id="documents">
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
@@ -481,8 +511,7 @@
                             function printdiv(printpage) {
                                 var headstr = "<html><head><title></title></head><body>";
                                 var footstr = "</body>";
-                                var css = "<style>.nibedan-form{padding: 50px 20px;max-width: 600px;\
-                                            border: 1px solid #d9d6d6;\
+                                var css = "<style>.nibedan-form{padding: 0px 30px;max-width: 100%;\
                                         }\
                                         .nibedan-form p{\
                                             font-size: 14px;\
@@ -584,7 +613,7 @@
                                             .nibedan-form-footer .user-info,\
                                             .nibedan-form-footer .user-address{\
                                                 padding-right: 0;\
-                                                text-align: center;\
+                                                text-align: left;\
                                             }\
                                             .nibedan-form-footer .user-address label{\
                                                 width: 100%;\
