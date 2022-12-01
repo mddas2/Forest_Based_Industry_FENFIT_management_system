@@ -619,6 +619,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
             try:
                 dsc = ApplicationForm.objects.get(id=pk).dsc
                 approved = 0
+                is_admin_approved = 0
                 if dsc == 'district' and request.user.get_dsc_Role()=='district':
                     referred_to_dsc = 'state'
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_district_approved_by = request.user.id)
@@ -635,6 +636,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     referred_to_dsc = 'central_ceo'  #after central accountant forward second application goes to central of admin
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
+                    is_admin_approved = 1
                 elif dsc == 'central_ceo' and request.user.get_dsc_Role()=='central_ceo':
                     referred_to_dsc = 'approved' #approved
                     ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
@@ -644,15 +646,17 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     #there is no any upper level
                 if should_insert==1:
                     whoses_form = ApplicationForm.objects.get(id=pk).user_id
-                    if approved == 1:
-                        messages.success(request,'form approved successfully!!!')
-                        UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
+                    application_form =  ApplicationForm.objects.get(id=pk)        
+                    if is_admin_approved:                       
                         to_number = CustomUser.objects.get(id=whoses_form).phone
                         user_sms = CustomUser.objects.get(id=whoses_form)
                         form_sms = ApplicationForm.objects.get(id=pk)
-                        sms = "Congratulation Your Form is approved successfully by FENFIT \n name"+ str(user_sms.first_name)+"\n application id: " + str(form_sms.id)
+                        sms = "Congratulation Form is approved successfully by FENFIT \n name"+ str(user_sms.first_name)+"\n application id: " + str(form_sms.id)
                         # bulk_sms_email.SendSms(to_number, sms)
-
+                        messages.success(request,"Messages sent")
+                    if approved == 1:
+                        messages.success(request,'form approved successfully!!!')
+                        UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
                         to_email = [CustomUser.objects.get(id=whoses_form).email]
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
@@ -660,16 +664,24 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
                         try:   
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
-                            bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)
+                            if application_form.get_user_application_detail.application_certificate:
+                                pdffile = application_form.get_user_application_detail.application_certificate.url
+                                pdf = pdffile.getvalue()
+                                bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdf,to_email)
+                                messages.success(request,"Email with pdf sent successfuly!!!")
+                            else:
+                                bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)                                
+                                messages.success(request,"Email sent successfuly!!!")
                         except:                       
                             messages.info(request,'Email send fail.')
-                    # return HttpResponse(whose_form)
+                        
                     application_form_approved_detail_data = {
                         'approved_form_id' : pk,
                         'approved_by_id' : request.user.id,
                         'whose_form' : whoses_form
                         }
                     ApplicationFormApprovedDetail.objects.create(**application_form_approved_detail_data)
+                    messages.success(request,"Form Forwarded successfully")
                 else:
                     messages.error(request,'can not approved form')
             except:

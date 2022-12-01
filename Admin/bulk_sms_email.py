@@ -10,11 +10,15 @@ def SendMail(subject,message,email_from,recipient_list):
 
 def SendMailAttachment(subject,message,email_from,pdf,recipient_list):
     mail = EmailMessage(subject, message, email_from, recipient_list)
-    mail.attach('recomendation-certificate.pdf' ,pdf, 'application/pdfd')
-    
+    mail.attach('recomendation-certificate.pdf' ,pdf, 'application/pdf')
     mail.send()     
     # return pdf   
-
+    
+def SendMailAttachment_Pdf(subject,message,email_from,pdf,recipient_list):
+    mail = EmailMessage(subject, message, email_from, recipient_list)
+    mail.attach('recomendation-certificate.pdf' ,pdf, 'application/pdf')
+    mail.send()     
+    # return pdf   
 
 def SendSms(to,text):
     r = requests.get("http://api.sparrowsms.com/v2/sms/",
