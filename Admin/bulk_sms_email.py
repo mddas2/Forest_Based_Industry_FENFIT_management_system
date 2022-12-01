@@ -41,7 +41,6 @@ def SendSmsRadiant(to,message):
     to = ','.join(to_number)
     token = 'dMs5g3thfBgpJPX61693HR4hAualD1wSpya4'
     sender =  'fenfit'
-    message = 'this is testing message !!! '
 
     r = requests.get("http://sms.radiantnepal.com/api/v3/sms?", # this api from radiant nepal
                 params={'token' : token,
