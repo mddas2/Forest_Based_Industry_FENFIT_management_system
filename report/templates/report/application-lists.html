@@ -1,7 +1,7 @@
 {% extends "layouts/master.html" %}
 {% block contents %}
 {% include "partials/page-title.html" %}
-    {% if report_Type == 'application' %}
+    {% if report_type == 'application' %}
         {%  include "report/partials/application-lists.html" %}
     {% else %}
         {%  include "report/partials/membership-list.html" %}
