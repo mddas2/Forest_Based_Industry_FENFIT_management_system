@@ -21,7 +21,7 @@ def SendMailAttachment_Pdf(subject,message,email_from,pdf,recipient_list):
     mail.send()     
     # return pdf   
 
-def SendSms(to,text):
+def SendSmsSparrow(to,text):
     r = requests.get("http://api.sparrowsms.com/v2/sms/",
                   params={'token' : 'v2_DQnxdpRc7NFevlo9VDvm68MNTUj.DDJT',
                   'from'  : 'Demo',
@@ -31,3 +31,16 @@ def SendSms(to,text):
     response = r.text
     response_json = r.json()
     return response_json
+
+def SendSmsRadiant(to,message):
+    token = 'dMs5g3thfBgpJPX61693HR4hAualD1wSpya4'
+    sender =  'fenfit'
+    to = '9808059156,9812520778'
+    message = 'this is testing message !!! '
+
+    r = requests.get("http://sms.radiantnepal.com/api/v3/sms?", # this api from radiant nepal
+                params={'token' : token,
+                    'sender'  : sender,
+                    'to'    : to,
+                    'message'  : message,
+            })
