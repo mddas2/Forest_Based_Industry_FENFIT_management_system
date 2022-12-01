@@ -651,7 +651,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         to_email = [CustomUser.objects.get(id=whoses_form).email]
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
-                        email_message = 'बधाई तपाईंको फारम फेन्फिटद्वारा सफलतापूर्वक स्वीकृत गरिएको छ.\n '
+                        email_message = 'वन उद्यम सुचीकृतका लागि नेपाल वन पैदावार उद्योग ब्यबसायि महासंघ बाट सिफारिस गरिएको पत्र यसै साथ संलग्न राखि पठाईएको ब्यहोरा अनुरोध छ ।.\n '
                         try:   
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                             if application_form.get_user_application_detail.application_certificate:

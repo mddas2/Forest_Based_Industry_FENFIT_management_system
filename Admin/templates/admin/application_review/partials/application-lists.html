@@ -55,7 +55,7 @@
                                     <th>सिफारिस ID</th>   
                                 {% endif %}
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' and i.get_user_application_detail.application_certificate %}
-                                 <th>upload certificate</th>  
+                                    <th>upload certificate</th>  
                                 {% endif %}
                                 <th>Action</th>
                                 <th style="display:none">email</th>                            
@@ -63,8 +63,7 @@
                         </thead>
                         {% if all_data %}
                         <tbody id="tableSearch">
-                            {% for i in all_data %}          
-                                            
+                            {% for i in all_data %}             
                                     <tr>
                                         <td>{{i.id}}</td>
                                         <td>{{i.get_user_application_detail.owner_full_name}}</td>
@@ -385,7 +384,7 @@
                                             </div>
                                         </div>
                                            <!---certificate-->               
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' %}                         
+                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
                                             <div class="col-md-6" id="div_print_certificate">
                                                 <button class="print-hide" onClick="printdiv('div_print_certificate');">print</button>
                                                 <div class="nibedan-form">
@@ -400,7 +399,7 @@
                                                         </div>
                                                 
                                                         <div class="form-top-right">
-                                                            <span class="date">मिति ः <u>{{id_data.created_at|get_NepaliDate}}</u></span>
+                                                            <span class="date">मिति ः <u>{{id_data.payment.all.last.updated_at|get_NepaliDate}}</u></span>
                                                         </div>
                                                     </div>
                                                     <div class="nibedan-form-top1">
