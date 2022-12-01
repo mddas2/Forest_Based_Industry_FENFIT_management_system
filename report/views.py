@@ -22,7 +22,7 @@ from rest_framework.renderers import JSONRenderer
 
 def ApplicationFormReport(request):
      report_type = 'application'
-     formsobj = ApplicationForm.objects.all()
+     formsobj = ApplicationForm.objects.filter(dsc__isnull=False)
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
@@ -33,7 +33,7 @@ def ApplicationFormReport(request):
 
 def MembershipReport(request):
      report_type = 'membership'
-     formsobj = ApplicationForm.objects.all()
+     formsobj = ApplicationForm.objects.filter(user__is_applyForVerified__contains=1)
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
