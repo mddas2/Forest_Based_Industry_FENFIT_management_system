@@ -21,11 +21,12 @@ from django.db.models import Q
 from django.template.loader import get_template 
 #import render_to_pdf from util.py 
 from . import html_to_pdf 
-
+from Admin.get_contact_list import getExactEmailList
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application        
+def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application      
+     
     slug1 = "सदस्य अनुमोदित फारम"
 
     district_name = request.user.district_name
@@ -638,17 +639,23 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                 if should_insert==1:
                     whoses_form = ApplicationForm.objects.get(id=pk).user_id
                     application_form =  ApplicationForm.objects.get(id=pk)        
-                    if is_admin_approved:                       
-                        to_number = CustomUser.objects.get(id=whoses_form).phone
+                    if is_admin_approved:                   
+
+                        to_number = CustomUser.objects.get(id=whoses_form).phone                        
                         user_sms = CustomUser.objects.get(id=whoses_form)
                         form_sms = ApplicationForm.objects.get(id=pk)
                         sms = "Congratulation Form is approved successfully by FENFIT \n name"+ str(user_sms.first_name)+"\n application id: " + str(form_sms.id)
-                        # bulk_sms_email.SendSms(to_number, sms)
+                        bulk_sms_email.SendSmsRadiant(to_number, sms)
+                        # bulk_sms_email.SendSmsSparrow(to_number, sms)
                         messages.success(request,"Messages sent")
                     if approved == 1:
                         messages.success(request,'form approved successfully!!!')
                         UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
-                        to_email = [CustomUser.objects.get(id=whoses_form).email]
+                       
+                        emaillist = getExactEmailList(request,application_form)    
+                        emaillist.append(CustomUser.objects.get(id=whoses_form).email)
+                        to_email = emaillist
+
                         from_email = settings.EMAIL_HOST_PASSWORD
                         subject = "FenFit"
                         email_message = 'वन उद्यम सुचीकृतका लागि नेपाल वन पैदावार उद्योग ब्यबसायि महासंघ बाट सिफारिस गरिएको पत्र यसै साथ संलग्न राखि पठाईएको ब्यहोरा अनुरोध छ ।.\n '
