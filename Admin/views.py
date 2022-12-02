@@ -77,8 +77,10 @@ def index(request, pk=None, pdc=None):
             return redirect('MemberAprovalForm')
         elif request.user.is_verified == True and request.user.applicationform.all().first().dsc == None:
             return redirect('MemberAprovalFormReview')
-        elif request.user.is_verified == True and request.user.applicationform.all().first().dsc != None:
+        elif request.user.is_verified == True and request.user.applicationform.all().first().dsc != None and request.user.applicationform.all().first().dsc != 'approved':
             return redirect('UserApplicationFormCreate')
+        elif  request.user.is_verified == True and request.user.applicationform.all().first().dsc == 'approved':
+            return redirect('UserApplicationReview')
         else:
             return redirect('MemberAprovalFormReview')
     elif request.user.isAdmin() == True:

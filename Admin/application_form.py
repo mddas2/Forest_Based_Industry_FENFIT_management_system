@@ -645,7 +645,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         user_sms = CustomUser.objects.get(id=whoses_form)
                         form_sms = ApplicationForm.objects.get(id=pk)
                         sms = "Congratulation Form is approved successfully by FENFIT \n name:"+ str(user_sms.first_name)+"\n application id: " + str(form_sms.id)
-                        bulk_sms_email.SendSmsRadiant(to_number, sms)
+                        # bulk_sms_email.SendSmsRadiant(to_number, sms)
                         # bulk_sms_email.SendSmsSparrow(to_number, sms)
                         messages.success(request,"Messages sent")
                     if approved == 1:
@@ -663,7 +663,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                             if application_form.get_user_application_detail.application_certificate:
                                 pdffile = application_form.get_user_application_detail.application_certificate
-                                bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdffile,to_email)
+                                # bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdffile,to_email)
                                 messages.success(request,"Email with pdf sent successfuly!!!")
                             else:
                                 pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 

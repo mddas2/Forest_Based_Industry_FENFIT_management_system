@@ -207,91 +207,88 @@
                                             </div>
                                             </div>
                                             <!--/span-->
-                                            <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">नागरिकता पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">नागरिकता पर्तिलिपि<span class="required">*</span></h4>
+                                                            <input name="certificate_citizenship" type="file" id="certificate_citizenship" class="dropify"/>
+                                                        </div>
                                                     </div>
+                                                    {% if id_data.certificate_citizenship %}
+                                                        <script>
+                                                            $("#certificate_citizenship").attr("data-default-file", "{{id_data.certificate_citizenship.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if id_data.certificate_citizenship %}
-                                                    <script>
-                                                        $("#certificate_citizenship").attr("data-default-file", "{{id_data.certificate_citizenship.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि<span class="required">*</span>​</h4>
-                                                        <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि<span class="required">*</span>​</h4>
+                                                            <input name="certificate_company_registration" type="file" id="certificate_company_registration" class="dropify" />
+                                                        </div>
                                                     </div>
+                                                    {% if id_data.certificate_company_registration %}
+                                                        <script>
+                                                            $("#certificate_company_registration").attr("data-default-file", "{{id_data.certificate_company_registration.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if id_data.certificate_company_registration %}
-                                                    <script>
-                                                        $("#certificate_company_registration").attr("data-default-file", "{{id_data.certificate_company_registration.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि<span class="required">*</span></h4>
+                                                            <input name="provisional_account_number" type="file" id="provisional_account_number" class="dropify" />
+                                                        </div>
                                                     </div>
+                                                    {% if id_data.provisional_account_number %}
+                                                        <script>
+                                                            $("#provisional_account_number").attr("data-default-file", "{{id_data.provisional_account_number.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if id_data.provisional_account_number %}
-                                                    <script>
-                                                        $("#provisional_account_number").attr("data-default-file", "{{id_data.provisional_account_number.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">बैंक डिपोजिट भौचर <!----लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि---><span class="required">*</span></h4>
-                                                        <input name="bank_voucher" type="file" id="bank_voucher" class="dropify" />
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">बैंक डिपोजिट भौचर <!----लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि---><span class="required">*</span></h4>
+                                                            <input name="bank_voucher" type="file" id="bank_voucher" class="dropify" />
+                                                        </div>
                                                     </div>
+                                                    {% if id_data.bank_voucher %}
+                                                        <script>
+                                                            $("#bank_voucher").attr("data-default-file", "{{id_data.bank_voucher.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if id_data.bank_voucher %}
-                                                    <script>
-                                                        $("#bank_voucher").attr("data-default-file", "{{id_data.bank_voucher.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि<span class="required">*</span></h4>
-                                                        <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि<span class="required">*</span></h4>
+                                                            <input name="tax_paid_certificate" type="file" id="tax_paid_certificate" class="dropify" />
+                                                        </div>
                                                     </div>
+                                                    {% if id_data.tax_paid_certificate %}
+                                                        <script>
+                                                            $("#tax_paid_certificate").attr("data-default-file", "{{id_data.tax_paid_certificate.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if id_data.tax_paid_certificate %}
-                                                    <script>
-                                                        $("#tax_paid_certificate").attr("data-default-file", "{{id_data.tax_paid_certificate.url}}");
-                                                    </script>
-                                                {% endif %}
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">उद्योग प्रमाणपत्र<span class="required">*</span></h4>
-                                                        <input name="industry_certificate" type="file" id="industry_certificate" class="dropify" />
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र<span class="required">*</span></h4>
+                                                            <input name="industry_certificate" type="file" id="industry_certificate" class="dropify" />
+                                                        </div>
                                                     </div>
+                                                    {% if id_data.industry_certificate %}
+                                                        <script>
+                                                            $("#industry_certificate").attr("data-default-file", "{{id_data.industry_certificate.url}}");
+                                                        </script>
+                                                    {% endif %}
                                                 </div>
-                                                {% if id_data.industry_certificate %}
-                                                    <script>
-                                                        $("#industry_certificate").attr("data-default-file", "{{id_data.industry_certificate.url}}");
-                                                    </script>
-                                                {% endif %}
                                             </div>
-                                            </div>
-                                            </div>
+                                        </div>
 
                                             <hr> 
                                         </div>

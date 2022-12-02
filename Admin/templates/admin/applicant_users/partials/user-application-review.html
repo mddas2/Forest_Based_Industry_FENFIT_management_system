@@ -293,9 +293,9 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
-                                    {% if form_data.auditing %}
-                                    <img src="{{form_data.auditing.url}}" class="img-responsive">
+                                    <h4 class="card-title">बैंक डिपोजिट भौचर</h4>
+                                    {% if form_data.bank_voucher %}
+                                        <img src="{{form_data.bank_voucher.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
@@ -306,6 +306,16 @@
                                     <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
                                     {% if form_data.tax_paid_certificate %}
                                     <img src="{{form_data.tax_paid_certificate.url}}" class="img-responsive">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">उद्योग प्रमाणपत्र</h4>
+                                    {% if form_data.tax_paid_certificate %}
+                                        <img src="{{form_data.industry_certificate.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
