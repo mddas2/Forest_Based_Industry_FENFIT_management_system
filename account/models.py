@@ -116,7 +116,6 @@ class CustomUser(AbstractUser):
                 permission_name = str(self.groups.all().first())
             except:
                 permission_name = 'none'
-
             if permission_name == 'ceo':
                 return 'central_ceo'
             elif permission_name == 'admin':

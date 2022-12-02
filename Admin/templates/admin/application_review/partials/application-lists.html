@@ -322,7 +322,7 @@
                                 <div class="card">
                                     <div class="row">
                                         <div class="col-md-6" id="div_print_application">
-                                            <button class="print-hide" onClick="printdiv('div_print_application');">print</button>
+                                            <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_application');">print</button>
                                             <div class="nibedan-form" >
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
@@ -386,7 +386,7 @@
                                            <!---certificate-->               
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
                                             <div class="col-md-6" id="div_print_certificate">
-                                                <button class="print-hide" onClick="printdiv('div_print_certificate');">print</button>
+                                                <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate');">print</button>
                                                 <div class="nibedan-form">
                                                     <div class="form-logo">
                                                         <img src="/static/assets/images/logo-2.png">
@@ -429,6 +429,7 @@
                                                     </div>
                             
                                                 </div>
+                                                <div class="page-break"></div>
                                             </div>                                           
                                         {% endif %}
                                             <!------certificate------>                                    
@@ -439,10 +440,11 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.certificate_citizenship %}
-                                                            <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive">
+                                                            <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
+                                                    <div class="page-break"></div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="card">
@@ -450,10 +452,11 @@
                                                             <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
                                                             {% if id_data.get_user_application_detail.certificate_company_registration %}
                                                             <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
-                                                                class="img-responsive">
+                                                                class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
+                                                    <div class="page-break"></div>
                                                 </div>
                         
                                                 <div class="col-md-6">
@@ -461,10 +464,11 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.provisional_account_number %}
-                                                            <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive">
+                                                            <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
+                                                    <div class="page-break"></div>
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -472,35 +476,36 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.tax_paid_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive">
+                                                            <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
+                                                    <div class="page-break"></div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive">
+                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
+                                                    <div class="page-break"></div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">उद्योग प्रमाणपत्र को प्रतिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.industry_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.industry_certificate.url}}" class="img-responsive">
+                                                            <img src="{{id_data.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
+                                                    <div class="page-break"></div>
                                                 </div>
                                             </div>
                                         </div>
-                        
-                                        <hr>
                                     </div>
                                    
                         
@@ -625,7 +630,18 @@
                                             margin-bottom: 10px;
                                             width: 49%;
                                         }
-                        
+                                        .print-hide {
+                                            color: #fff !important;
+                                            opacity: 1;
+                                            background: #10a50e;
+                                            width: auto;
+                                            height: auto;
+                                            padding: 4px 20px;
+                                            margin-bottom: 10px;
+                                            /* border: 1px solid #747474; */
+                                            border-radius: 0;
+                                            font-weight: 600;
+                                        }
                                         @media (max-width:767px) {
                         
                                             .nibedan-form-footer .user-info,
@@ -696,8 +712,8 @@
                                         }\
                                         .nibedan-form {\
                                             padding: 50px 20px;\
-                                            max-width: 600px;\
-                                            border: 1px solid #d9d6d6;\
+                                            max-width: 100%;\
+                                            border: 0;\
                                         }\
                                         .nibedan-form p {\
                                             font-size: 14px;\
@@ -797,6 +813,13 @@
                                             margin-bottom: 10px;\
                                             width: 49%;\
                                         }\
+                                        .page-break{\
+                                            clear: both;\
+                                            page-break-after: always;\
+                                        }\
+                                        .img-fit{\
+                                            max-height: 90vh;\
+                                        }\
                                         @media (max-width:767px) {\
                                             .nibedan-form-footer .user-info,\
                                             .nibedan-form-footer .user-address {\
@@ -810,7 +833,6 @@
                                     </style>"
                                 var newstr = document.all.item(printpage).innerHTML;
                                 var documentm = document.getElementById("documents").innerHTML;
-                                console.log(document)
                                 var oldstr = document.body.innerHTML;
                                 document.body.innerHTML = headstr + css + newstr + documentm + footstr;
                                 window.print();
