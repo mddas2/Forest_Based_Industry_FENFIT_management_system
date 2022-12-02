@@ -70,7 +70,7 @@
                                         {% if request.user.groups.first.name != 'accountant' %}  
                                             <!-- <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.certificate_citizenship %} 
-                                                <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                                <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive img-fit"" alt="img" /> </a>
                                                 {% else %}
                                                     NotFound
                                                 {% endif %}
@@ -93,7 +93,7 @@
 
                                             <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.tax_paid_certificate %}       
-                                                <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                                <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive img-fit"" alt="img" /> </a>
                                                 {% else %}
                                                     NotFound
                                                 {% endif %}
@@ -327,6 +327,9 @@
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
                                                 </div>
+                                                <div class="fanfet-info">
+                                                    <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
+                                                </div>
                                                 <h5 class="main-title">बिषय : वन उद्यम सुचिकरण सिफारिश गरि दिने सम्वन्धमा</h5>
                                                 <div class="nibedan-form-top">
                                                     <div class="form-top-left">
@@ -364,14 +367,14 @@
                                                 </div>
                                                 <div class="nibedan-form-footer">
                                                     <div class="user-info">
-                                                        
-                                                        <label style="font-weight: bold;">आवेदक</label>
+                                                       
+                                                        <label style="font-weight: bold; width: 100%;">आवेदक</label>
+                                                        {% load staticfiles %}
+                                                        <label style="width: 100%;">दस्तखत : <span class="user-info-data"><img src="{% if id_data.user.signature %}{{id_data.user.signature.url}} {% endif %}"></span></label>
                                                         <label>उद्यमीको नाम : <span class="user-info-data">{{id_data.user.first_name}}</span></label>
                                                         <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">{{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}}</span></label>
                                                         <label>सम्र्पक नं : <span class="user-info-data">{{id_data.user.phone}}</span></label>
                                                         <label>इमेल : <span class="user-info-data">{{id_data.user.email}}</span></label>
-                                                        {% load staticfiles %}
-                                                        <label>दस्तखत : <span class="user-info-data"><img src="{% if id_data.user.signature %}{{id_data.user.signature.url}} {% endif %}"></span></label>
                                                     </div>
                                                     <div class="user-address">
                                                         <label>ठेगाना :जिल्ला <u>{{id_data.user.district_name|get_districtName}}</u></label>
@@ -379,9 +382,9 @@
                                                         <label>वडा नं.<u>{{id_data.get_user_application_detail.ward_number}}</u></label>
                                                         <label>टोल <u>{{id_data.get_user_application_detail.tole}}</u></label>
                                                     </div>
-                                                </div>
-                                        
+                                                </div>                                        
                                             </div>
+                                            <div class="page-break"></div>
                                         </div>
                                            <!---certificate-->               
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
@@ -390,6 +393,9 @@
                                                 <div class="nibedan-form">
                                                     <div class="form-logo">
                                                         <img src="/static/assets/images/logo-2.png">
+                                                    </div>
+                                                    <div class="fanfet-info">
+                                                        <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
                                                     </div>
                                                     <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
                                                     <div class="nibedan-form-top">
@@ -452,7 +458,7 @@
                                                             <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
                                                             {% if id_data.get_user_application_detail.certificate_company_registration %}
                                                             <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
-                                                                class="img-responsive img-fit">
+                                                                class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -464,7 +470,7 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.provisional_account_number %}
-                                                            <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit">
+                                                            <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -476,7 +482,7 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.tax_paid_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit">
+                                                            <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -487,7 +493,7 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit">
+                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -498,7 +504,7 @@
                                                         <div class="card-body">
                                                             <h4 class="card-title">उद्योग प्रमाणपत्र को प्रतिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.industry_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit">
+                                                            <img src="{{id_data.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -510,7 +516,7 @@
                                    
                         
                                     <style>
-                                          .card-title{
+                                        .card-title{
                                             font-size: 16px;
                                         }
                                         .nibedan-form {
@@ -529,20 +535,32 @@
                         
                                         .nibedan-form .form-logo {
                                             text-align: center;
-                                        }
-                        
+                                        }                        
                                         .nibedan-form .form-logo img {
                                             max-width: 500px;
                                             width: 100%;
-                                            margin-bottom: 20px;
                                         }
-                        
-                                        h5.main-title{
-                                                       font-size: 14px;
-                                                        line-height: 22px;
-                                                        font-weight: bold;
-                                                        text-align: center;
-                                                    }
+                                        .fanfet-info{
+                                                text-align: center;
+                                            } 
+                                            .fanfet-info ul{
+                                                padding: 0;
+                                                list-style: none;
+                                            }
+                                            .fanfet-info ul li{
+                                                font-size: 12px;
+                                                display: inline-block;
+                                                color: #000;
+                                            }
+                                            .fanfet-info ul li a{
+                                                color: #000;
+                                           }
+                                            h5.main-title{
+                                                font-size: 14px;
+                                                line-height: 22px;
+                                                font-weight: bold;
+                                                text-align: center;
+                                            }
                         
                                         .nibedan-form-top {
                                             position: relative;
@@ -728,14 +746,28 @@
                                         .nibedan-form .form-logo img {\
                                             max-width: 500px;\
                                             width: 100%;\
-                                            margin-bottom: 20px;\
                                         }\
+                                        .fanfet-info{\
+                                                text-align: center;\
+                                            } \
+                                            .fanfet-info ul{\
+                                                padding: 0;\
+                                                list-style: none;\
+                                            }\
+                                            .fanfet-info ul li{\
+                                                font-size: 12px;\
+                                                display: inline-block;\
+                                                color: #000;\
+                                            }\
+                                            .fanfet-info ul li a{\
+                                                color: #000;\
+                                           }\
                                         h5.main-title{\
-                                                       font-size: 14px;\
-                                                        line-height: 22px;\
-                                                        font-weight: bold;\
-                                                        text-align: center;\
-                                                    }\
+                                                font-size: 14px;\
+                                                line-height: 22px;\
+                                                font-weight: bold;\
+                                                text-align: center;\
+                                            }\
                                         .nibedan-form-top {\
                                             position: relative;\
                                             display: block;\
@@ -787,8 +819,9 @@
                                             line-height: 24px;\
                                             font-weight: 400;\
                                             color: #000;\
-                                            display: block;\
+                                            display: inline-block;\
                                             margin-bottom: 10px;\
+                                            width: 49%;\
                                         }\
                                         .nibedan-form-footer .user-info label img {\
                                             max-width: 150px;\
@@ -797,9 +830,6 @@
                                             max-width: 150px;\
                                             min-width: 150px;\
                                             overflow: hidden;\
-                                        }\
-                                        .nibedan-form-footer .user-address {\
-                                            margin-top: 20px;\
                                         }\
                                         .print-hide{\
                                             display: None;\
@@ -819,16 +849,6 @@
                                         }\
                                         .img-fit{\
                                             max-height: 90vh;\
-                                        }\
-                                        @media (max-width:767px) {\
-                                            .nibedan-form-footer .user-info,\
-                                            .nibedan-form-footer .user-address {\
-                                                padding-right: 0;\
-                                                text-align: center;\
-                                            }\
-                                            .nibedan-form-footer .user-address label {\
-                                                width: 100%;\
-                                            }\
                                         }\
                                     </style>"
                                 var newstr = document.all.item(printpage).innerHTML;
