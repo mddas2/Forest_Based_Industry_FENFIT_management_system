@@ -165,16 +165,15 @@
                                                     </div>
                                                     {% if id_data.user.union_type == 'private' %}
                                                         <h5 style="font-weight: 600;"><center>{{id_data.user.approved_company_name}}</center></h5>
-                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.user.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
                                                     {% else %}
                                                         <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
-                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.user.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
                                                     {% endif %}
                                                     <div class="nibedan-form-top">
                                                         
                                                         <div class="form-top-left">
-                                                            <p><u>{{id_data.user.id}}</u>
-                                                                अद्यावद्यिक नम्बर</p>
+                                                            <p>अद्यावद्यिक नम्बर: {{id_data.user.id}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="nibedan-form-top">
@@ -224,11 +223,11 @@
                                                     <div class="nibedan-form-footer">
                                                         <div class="user-info">
                                                             <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                                            <label>नाम :<span class="user-info-data">{{request.user.approved_name}}</span></label>
+                                                            <label>नाम :<span class="user-info-data">{{id_data.user.approved_email|GetMemberFormApproved:'first_name'}}</span></label>
                                                             {% load staticfiles %}
                                                             <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                                             {% load staticfiles %}
-                                                            <label>दस्तखत : <span class="user-info-data"><img  src="{% if request.user.approved_signature %} {{request.user.approved_signature.url}} {% endif %}"></span></label>
+                                                            <label>दस्तखत : <span class="user-info-data"><img  src="{% if id_data.user.approved_signature %} {{id_data.user.approved_signature.url}} {% endif %}"></span></label>
                                                         </div>
                                                     </div>
                             

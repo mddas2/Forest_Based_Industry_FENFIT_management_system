@@ -13,6 +13,12 @@ def get_item(dictionary, key):
 
 @register.filter
 def GetMemberFormApproved(email,attribute):
+    if attribute == 'district_name':
+        obj = CustomUser.objects.get(email = email).district_name
+        return Districts.objects.get(name=obj).alt_name 
+    elif attribute == 'first_name':
+        obj = CustomUser.objects.get(email = email).first_name
+    return obj
     try:
        if attribute == 'district_name':
             obj = CustomUser.objects.get(email = email).district_name
