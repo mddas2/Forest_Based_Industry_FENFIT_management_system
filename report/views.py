@@ -21,24 +21,28 @@ from rest_framework.renderers import JSONRenderer
 
 
 def ApplicationFormReport(request):
+     slug = "सुचिकरण सिफारिश Report"
      report_type = 'application'
      formsobj = ApplicationForm.objects.filter(dsc__isnull=False)
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
         'export_link_name' : reverse("ExportProduct"),
-        'report_type':report_type
+        'report_type':report_type,
+        'slug1' : slug
     }
      return render(request,'report/application-lists.html',data)
 
 def MembershipReport(request):
+     slug = "सदस्यता Report"
      report_type = 'membership'
      formsobj = ApplicationForm.objects.filter(user__is_applyForVerified__contains=1)
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
         'export_link_name' : reverse("ExportProduct"),
-        'report_type':report_type
+        'report_type':report_type,
+        'slug1' : slug
     }
      return render(request,'report/application-lists.html',data)
 

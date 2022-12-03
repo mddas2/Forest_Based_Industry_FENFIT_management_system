@@ -12,16 +12,17 @@
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-body">            
-                    <div class="right-page-header">
-                        <div class="d-flex">
-                            <div class="align-self-center">
-                                <h4 class="card-title m-t-10">{{slug1}} </h4>
-                            </div>
-                            <div class="ms-auto">
-                                <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
-                            </div>
+                <div class="right-page-header">
+                    <div class="d-flex">
+                        <div class="align-self-center">
+                            <h4 class="card-title m-t-10">{{slug1}} </h4>
                         </div>
+                        <div class="ms-auto">
+                            <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
+                        </div>
+                        <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" onclick="Create('{{  export_link_name  }}')"><i class="bi bi-cloud-arrow-up"></i> Export</button>
                     </div>
+                </div>
              
                 <div class="table-responsive" style="overflow-x: scroll;">
                     <table class="table product-overview">
