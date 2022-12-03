@@ -26,12 +26,7 @@ from Admin.get_contact_list import getExactEmailList
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application  
-    subject = "hii"
-    message = "lol"
-    from_email = settings.EMAIL_HOST_USER
-    bulk_sms_email.SendMail(subject,message,from_email,['manojdas.py@gmail.com'])
     slug1 = "सदस्य अनुमोदित फारम"
-
     district_name = request.user.district_name
     state_name = request.user.state_name
 
@@ -659,14 +654,15 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         emaillist.append(CustomUser.objects.get(id=whoses_form).email)
                         to_email = emaillist
 
-                        from_email = settings.EMAIL_HOST_PASSWORD
+                        # from_email = settings.EMAIL_HOST_PASSWORD #this is for gmail
+                        from_email = settings.EMAIL_HOST_USER #this is for fenfit email
                         subject = "FenFit"
                         email_message = 'वन उद्यम सुचीकृतका लागि नेपाल वन पैदावार उद्योग ब्यबसायि महासंघ बाट सिफारिस गरिएको पत्र यसै साथ संलग्न राखि पठाईएको ब्यहोरा अनुरोध छ ।.\n '
                         try:   
                             # bulk_sms_email.SendMail(subject,email_message,from_email,to_email)
                             if application_form.get_user_application_detail.application_certificate:
                                 pdffile = application_form.get_user_application_detail.application_certificate
-                                # bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdffile,to_email)
+                                bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdffile,to_email)
                                 messages.success(request,"Email with pdf sent successfuly!!!")
                             else:
                                 pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
