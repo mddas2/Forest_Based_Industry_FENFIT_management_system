@@ -171,9 +171,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = "mddasgudiya@gmail.com"#sender's email-id
+# EMAIL_HOST_PASSWORD = 'bvgpkvyhqzjrrlkv'#password associated with above email-id
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'mail.fenfitnepal.com'
+EMAIL_USE_TLS = False
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "mddasgudiya@gmail.com"#sender's email-id
-EMAIL_HOST_PASSWORD = 'bvgpkvyhqzjrrlkv'#password associated with above email-id
+EMAIL_HOST_USER = "fenfit@fenfitnepal.com"#sender's email-id
+EMAIL_HOST_PASSWORD = 'fenfit@md'#password associated with above email-id

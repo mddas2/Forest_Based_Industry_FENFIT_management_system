@@ -25,8 +25,11 @@ from Admin.get_contact_list import getExactEmailList
 
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
-def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application      
-     
+def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all application  
+    subject = "hii"
+    message = "lol"
+    from_email = settings.EMAIL_HOST_USER
+    bulk_sms_email.SendMail(subject,message,from_email,['manojdas.py@gmail.com'])
     slug1 = "सदस्य अनुमोदित फारम"
 
     district_name = request.user.district_name
