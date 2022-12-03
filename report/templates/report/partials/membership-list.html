@@ -28,37 +28,17 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Full Name</th>
-                                {% if request.user.groups.first.name != 'accountant' %}  
-                                    <!-- <th>नागरिकता पर्तिलिपि</th> -->
-                                    <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                    <!-- <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>       -->
-                                    <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>
-                                {% endif %}
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
-                                    <th>बैंक भौचर</th> 
-                                {% endif %}
-                                <th>भुक्तानी स्थिति</th> 
-                                <!-- <th>जिल्ला</th>                                                    -->
-                                <th>विवरण हेर्नुहोस्</th>
-                                <!-- <th>दर्ता गरिएको मिति</th>
-                                <th>स्थिति</th> -->
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
-                                    <th>बिल नम्बर</th>   
-                                {% endif %}
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
-                                    <th>बुझिलिएको रकम</th> 
-                                {% elif request.user.role == request.user.CENTRAL %}
-                                    <th>बुझिलिएको रकम</th>  
-                                {% endif %}
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
-                                    <th>सिफारिस ID</th>   
-                                {% endif %}
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' and i.get_user_application_detail.application_certificate %}
-                                    <th>upload certificate</th>  
-                                {% endif %}
-                                <th>Action</th>
-                                <th style="display:none">email</th>                            
+                                <th>verified</th>
+                                <th>Full Name</th>   
+                                <th>gender</th>
+                                <th>जिल्ला</th>   
+                                <th>state</th>  
+                                <th>mobile number</th> 
+                                <th>email</th> 
+                               
+                                <!-- <th>स्थिति</th> -->
+                                <th>दर्ता गरिएको मिति</th>
+                                <th>विवरण हेर्नुहोस्</th>                                                            
                             </tr>
                         </thead>
                         {% if all_data %}
@@ -66,228 +46,18 @@
                             {% for i in all_data %}             
                                     <tr>
                                         <td>{{i.id}}</td>
-                                        <td>{{i.get_user_application_detail.owner_full_name}}</td>
-                                        {% if request.user.groups.first.name != 'accountant' %}  
-                                            <!-- <td class="zoom-gallery">
-                                                {% if i.get_user_application_detail.certificate_citizenship %} 
-                                                <a href="{{i.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive img-fit"" alt="img" /> </a>
-                                                {% else %}
-                                                    NotFound
-                                                {% endif %}
-                                            </td> -->
-                                            <td class="zoom-gallery">
-                                                {% if i.get_user_application_detail.certificate_company_registration %}  
-                                                <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
-                                                <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
-                                                {% else %}
-                                                    NotFound
-                                                {% endif %}
-                                            </td>
-                                            <!-- <td class="zoom-gallery">    
-                                                {% if i.get_user_application_detail.provisional_account_number %}        
-                                                <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                                {% else %}
-                                                    NotFound
-                                                {% endif %}
-                                            </td>    -->
-
-                                            <td class="zoom-gallery">
-                                                {% if i.get_user_application_detail.tax_paid_certificate %}       
-                                                <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive img-fit"" alt="img" /> </a>
-                                                {% else %}
-                                                    NotFound
-                                                {% endif %}
-                                            </td>  <!-- this is quantity-->
-                                        {% endif %}
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
-                                            <td>{{i.get_user_application_detail.voucher_number}}</td>
-                                        {% endif %}
-                                        <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
-                                        <!-- <td>{{i.user.district_name}}</td> -->
-                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
-                                        <!-- <td><span class="label label-info">{{i.get_date}}</span></td>
-                                        <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td> -->
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
-                                        <td>             
-                                            <form class="form-horizontal form-material" id="bill_form" action="{% url 'BillAdd' %}" method="POST">
-                                                {% csrf_token %}
-                                                <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
-                                                <div class="form-group ">
-                                                    <div class="row">
-                                                    <div class="col-md-8">
-                                                        <input id="bill_number" class="form-control" type="text" required="" value="{{i.bill_number}}" placeholder="बिल नम्बर" name="bill_number"> 
-                                                    </div>
-                                                    <div class="col-md-4 ">
-                                                        <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
-                                                    </div>
-                                                </div>
-                                                </div> 
-                                    
-                                            </form>                                    
-                                        </td>
-                                        <td>             
-                                            <form class="form-horizontal form-material" id="paymentget" action="{% url 'PaymentGet' %}" method="POST">
-                                                {% csrf_token %}
-                                                <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
-                                                <div class="form-group ">
-                                                    <div class="row">
-                                                    <div class="col-md-8">
-                                                        <input id="payment_get" class="form-control" type="text" required="" value="{{i.payment_get}}" placeholder="बुझिलिएको रकम" name="payment_get"> 
-                                                    </div>
-                                                    <div class="col-md-4 ">
-                                                        <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
-                                                    </div>
-                                                </div>
-                                                </div> 
-                                    
-                                            </form>                                    
-                                        </td>
-                                        {% endif %}
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name != 'accountant' %}
-                                            <td>{{i.payment_get}}</td>
-                                        {% endif %}
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
-                                                
-                                             <td>             
-                                                <form class="form-horizontal form-material" id="type_application_id" action="{% url 'TypeApplicationId' %}" method="POST">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
-                                                    <div class="form-group ">
-                                                        <div class="row">
-                                                        <div class="col-md-4">
-                                                            <input id="type_application_id" class="form-control" type="text" required="" value="{{i.type_application_id}}" placeholder="सिफारिस ID" name="type_application_id"> 
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
-                                                        </div>
-                                                    </div>
-                                                    </div>                                         
-                                                </form>                                    
-                                            </td>
-                                            
-                                        {% endif %}
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  and i.get_user_application_detail.application_certificate == '' %}
-                                            <td>
-                                                <form class="form-horizontal form-material" id="certificate_upload" action="{% url 'CertificateUpload' %}" method="POST" enctype="multipart/form-data">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
-                                                    <div class="form-group ">
-                                                        <div class="row">
-                                                        <div class="col-md-4" style="width: 80%;">
-                                                            <input id="certificate" class="form-control" type="file" required="" value="{{i.certificate}}" name="application_certificate"> 
-                                                        </div>
-                                                        <div class="col-md-8 ">
-                                                            <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
-                                                        </div>
-                                                    </div>
-                                                    </div> 
-                                                </form>   
-                                                <style>
-                                                    .dropify-wrapper {
-                                                        height:48px;  
-                                                    }
-                                                </style>
-                                            </td>
-                                        {% endif %}
-                                        {% if action%}
-                                       
-                                            <td>
-                                                <div class="dropdown">
-                                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-three-dots-vertical" style="color: red;"></i>
-                                                        </a>
-                                                        <!-- and i.is_payment == 0 or request.user.role == request.user.DISTRICT or request.user.role == request.user.STATE -->
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            
-                                                            {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
-                                                                {% if i.bill_number != '' and i.payment_get != '' %}
-                                                                    <li>
-                                                                        <form id = "payment_yes" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
-                                                                            <input type="hidden" name="pk" value="{{i.id}}"> 
-                                                                            <input type="hidden" name="payment" value="1"> 
-                                                                            <a class="dropdown-item" onclick="document.forms['payment_yes'].submit();" href="#">
-                                                                        </form>
-                                                                        {%if i.is_payment == True %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Payment
-                                                                    </a></li>
-                                                                    <li>
-                                                                        <form id = "payment_no" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
-                                                                            <input type="hidden" name="pk" value="{{i.id}}"> 
-                                                                            <input type="hidden" name="payment" value="0"> 
-                                                                            <a class="dropdown-item" onclick="document.forms['payment_no'].submit();" href="#">
-                                                                        </form>
-                                                                        {%if i.is_payment == False %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Non paid
-                                                                    </a>
-                                                                    </li>
-                                                                {% endif %}
-                                                            {% else %}
-                                                                 {% if  request.user.role == request.user.CENTRAL and i.get_user_application_detail.application_certificate and i.is_payment == True %}
-                                                                    <li>
-                                                                        <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                                            {%if i.approved_pending_cancelled == "p" %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Pending
-                                                                        </a>
-                                                                    </li>
-                                                                    <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
-                                                                        {%if i.approved_pending_cancelled == "a" %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Approved
-                                                                    </a></li>
-                                                                    <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
-                                                                        {%if i.approved_pending_cancelled == "c" %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Cancelled
-                                                                    </a>
-                                                                    </li>
-                                                                 {% elif request.user.role != request.user.CENTRAL %}
-                                                                 <li>
-                                                                    <a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="p"  %}"> 
-                                                                        {%if i.approved_pending_cancelled == "p" %} 
-                                                                    <i class="bi bi-check-lg"></i> 
-                                                                    {% else %} &nbsp; &nbsp;
-                                                                        {% endif %}
-                                                                    Pending
-                                                                    </a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="a"  %}">
-                                                                    {%if i.approved_pending_cancelled == "a" %} 
-                                                                    <i class="bi bi-check-lg"></i> 
-                                                                    {% else %} &nbsp; &nbsp;
-                                                                        {% endif %}
-                                                                    Approved
-                                                                </a></li>
-                                                                <li><a class="dropdown-item" href="{% url "AllApplication" pk=i.id approved_pending_cancelled="c"  %}">
-                                                                    {%if i.approved_pending_cancelled == "c" %} 
-                                                                    <i class="bi bi-check-lg"></i> 
-                                                                    {% else %} &nbsp; &nbsp;
-                                                                        {% endif %}
-                                                                    Cancelled
-                                                                </a>
-                                                                </li>
-                                                                 {% endif %}
-                                                            {% endif %}
-                                                        </ul>
-                                                </div>
-                                            </td>
+                                        <td>{{i.user.is_verified}}</td>
+                                        <td>{{i.get_user_application_detail.owner_full_name}}</td>   
+                                        <td>{{i.user.sex}}</td>     
+                                        <td>{{i.user.district_name}}</td>
+                                        <td>{{i.user.state_name}}</td> 
+                                        <td>{{i.user.phone}}</td>  
+                                        <td>{{i.user.email}}</td>   
+                                        <!-- <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>                                       -->
+                                        <td><span class="label label-info">{{i.user.created_at}}</span></td>                                      
+                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>             
                                         
-                                        
-                                        <td style="display:none">{{i.phone}}</td>  
-                                        <td style="display:none">{{i.get_shipping_address.email}}</td>
-                                        {% endif %}                                                          
+                                         
                                     </tr>                            
                     
                             {% endfor %}
