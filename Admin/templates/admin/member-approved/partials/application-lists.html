@@ -315,16 +315,15 @@
                                                     </div>
                                                     {% if id_data.union_type == 'private' %}
                                                         <h5 style="font-weight: 600;"><center>{{id_data.approved_company_name}}</center></h5>
-                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
                                                     {% else %}
                                                         <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
-                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
                                                     {% endif %}
                                                     <div class="nibedan-form-top">
                                                         
                                                         <div class="form-top-left">
-                                                            <p><u>{{id_data.user.id}}</u>
-                                                                अद्यावद्यिक नम्बर</p>
+                                                            <p>अद्यावद्यिक नम्बर : {{id_data.id}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="nibedan-form-top">
@@ -335,9 +334,9 @@
                                                                     {% if id_data.apply_role_type == request.user.PRIVATE %}
                                                                         {{id_data.company_name}} वस्तुगत संघ
                                                                     {% elif id_data.apply_role_type == request.user.STATE %}
-                                                                        {{id_data.state_name|get_StateName}} महासंघ
+                                                                        {{id_data.state_name|get_StateName}}
                                                                     {% elif id_data.apply_role_type == request.user.DISTRICT %}
-                                                                         {{id_data.district_name|get_districtName}} संघ
+                                                                         {{id_data.district_name|get_districtName}}
                                                                     {% endif %}
                                                                  </p>
                                                             </div> 
@@ -374,7 +373,7 @@
                                                     <div class="nibedan-form-footer">
                                                         <div class="user-info">
                                                             <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                                            <label>नाम :<span class="user-info-data">{{id_data.approved_name}}</span></label>
+                                                            <label>नाम :<span class="user-info-data">{{id_data.approved_email|GetMemberFormApproved:'district_name'}}</span></label>
                                                             {% load staticfiles %}
                                                             <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                                             {% load staticfiles %}
@@ -393,8 +392,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.certificate_citizenship %}
-                                                            <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -404,8 +403,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
-                                                            {% if id_data.get_user_application_detail.certificate_company_registration %}
-                                                            <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"
                                                                 class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
@@ -417,8 +416,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.provisional_account_number %}
-                                                            <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.provisional_account_number %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -429,8 +428,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.tax_paid_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -440,8 +439,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.bank_voucher %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -451,8 +450,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">उद्योग प्रमाणपत्र को प्रतिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.industry_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>

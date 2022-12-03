@@ -1,6 +1,7 @@
 from django.template.defaulttags import register
 from nepallocation.models import *
 from Admin.models import BusinessType,RecomendationPriceCategory
+from account.models import CustomUser
 
 @register.filter
 def get_item(dictionary, key):
@@ -10,6 +11,17 @@ def get_item(dictionary, key):
     except:
         return "None. please select first सिफारिस शुल्क category"
 
+@register.filter
+def GetMemberFormApproved(email,attribute):
+    try:
+       if attribute == 'district_name':
+            obj = CustomUser.objects.get(email = email).district_name
+            return Districts.objects.get(name=obj).alt_name 
+       elif attribute == 'first_name':
+            obj = CustomUser.objects.get(email = email).first_name
+       return obj
+    except:
+        return "None"
 
 @register.filter
 def get_StateName(name):

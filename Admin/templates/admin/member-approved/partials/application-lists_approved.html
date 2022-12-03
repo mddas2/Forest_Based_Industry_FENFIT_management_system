@@ -44,7 +44,92 @@
                         </thead>
                         {% if all_data %}
                         <tbody id="tableSearch">
-                            {% for i in all_data %}                               
+                            {% for i in all_data %}
+                              {% if request.user.role == request.user.PRIVATE and i.union_name == request.user.email%} 
+                                      <!----this is for private sangha-->            
+                                <tr>
+                                    <td>{{i.id}}</td>
+                                    <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                        <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>
+                                    <td class="zoom-gallery">    
+                                        {% if  i.applicationform.all.first.get_user_application_detail.provisional_account_number %}        
+                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>   
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.auditing %}    
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.auditing.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td> 
+                                    <td class="zoom-gallery">
+                                        {% if  i.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}       
+                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>  <!-- this is quantity-->
+                                    <td>{{i.district_name}}</td>
+                                    <td>{{i.dsc}}</td>
+                                    
+                                    <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
+                                    <td><span class="label label-info">{{i.updated_at}}</span></td>
+                                    <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                    {% if action%}
+                                    <td>
+                                    <div class="dropdown">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical" style="color: red;"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item"  href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='p'  %}"> 
+                                                    {%if i.is_verified == False %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Pending
+                                                </a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
+                                                        {%if i.is_verified == True %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Approved
+                                                    </a>
+                                                </li>
+                                
+                                                <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
+                                                    Cancelled
+                                                </a></li>
+                                                
+                                            </ul>
+                                            </div>
+                                    </td>
+                                    <td style="display:none">{{i.phone}}</td>  
+                                    <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                    {% endif %}                                                          
+                                </tr>
+            
+                            {% else %}
                             <tr>
                                 <td>{{i.id}}</td>
                                 <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
@@ -87,13 +172,13 @@
                                 <td>{{i.dsc}}</td>
                                 <td>{{i.district_name}}</td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
-                                 <td><span class="label label-info">{{i.updated_at}}</span></td>
-                                 <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>
-                                 {% if action%}
-                                 <td>
-                                   <div class="dropdown">
+                                <td><span class="label label-info">{{i.updated_at}}</span></td>
+                                <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                {% if action%}
+                                <td>
+                                <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                           <i class="bi bi-three-dots-vertical" style="color: red;"></i>
+                                        <i class="bi bi-three-dots-vertical" style="color: red;"></i>
                                         </a>
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -102,7 +187,7 @@
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                 Pending
+                                                Pending
                                             </a></li>
                                             <li>
                                                 <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
@@ -110,29 +195,22 @@
                                                 <i class="bi bi-check-lg"></i> 
                                                 {% else %} &nbsp; &nbsp;
                                                     {% endif %}
-                                                 Approved
+                                                Approved
                                                 </a>
                                             </li>
                             
                                             <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
-                                                 Cancelled
+                                                Cancelled
                                             </a></li>
                                             
                                         </ul>
-                                    </div>
-                                 </td>
-                                 <td style="display:none">{{i.phone}}</td>  
-                                 <td style="display:none">{{i.get_shipping_address.email}}</td>
-                                 {% endif %}                                                          
+                                        </div>
+                                </td>
+                                <td style="display:none">{{i.phone}}</td>  
+                                <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                {% endif %}                                                          
                             </tr>
-                            {% comment %} <script>
-                                    $(document).ready(function($){
-                                        $(".clickable-row{{forloop.counter}}").click(function() {
-                                            window.location = $(this).data("href");
-                                        });
-                                    });
-                            </script> {% endcomment %}
-                    
+                            {% endif%}
                             {% endfor %}
                         </tbody>
                         {% endif %}
@@ -144,6 +222,7 @@
 </div>
 
 <!-----modal-->
+
 <div class="card">
     <div class="card-body">      
         <!-- sample modal content -->
@@ -172,19 +251,19 @@
                                                     <div class="fanfet-info">
                                                         <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
                                                     </div>
-                                                    <h5 class="main-title">{% if id_data.user.member_admin == 'admin' %} संस्थागत आबध्दता फारम {% else %} सदस्यता आवेदन फारम {% endif %}</h5>
+                                                    <h5 class="main-title">{% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता फारम {% else %} सदस्यता आवेदन फारम {% endif %}</h5>
                                                     <div class="nibedan-form-top">
                                                         <div class="form-top-left">
                                                             <p>श्रीमान अध्यक्षज्यू<br>
                                                                 नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
-                                                            <label><u>जिल्ला {{id_data.user.district_name|get_districtName}}</u></label>
+                                                            <label><u>जिल्ला {{id_data.district_name|get_districtName}}</u></label>
                                                         </div>
                                                         <div class="form-top-right">
-                                                            <span class="date">मिति : <u>{{id_data.user.created_at|get_NepaliDate}}</u></span>
+                                                            <span class="date">मिति : <u>{{id_data.created_at|get_NepaliDate}}</u></span>
                                                         </div>
                                                     </div>
                                                     <div class="nibedan-form-body">
-                                                        <h2>बिषय ः {% if id_data.user.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
+                                                        <h2>बिषय ः {% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
                                                         <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
                                                             जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
                                                             प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र
@@ -203,20 +282,20 @@
                                                     <div class="nibedan-form-footer">
                                                         <div class="user-info">
                                                             <label style="font-weight: bold;">आवेदक</label>
-                                                            <label>उद्यमीको नाम : <span class="user-info-data">{{id_data.user.first_name}}</span></label>
+                                                            <label>उद्यमीको नाम : <span class="user-info-data">{{id_data.first_name}}</span></label>
                                                             <label>उद्योग वा व्यवसायको नाम : <span
                                                                     class="user-info-data">{{business_name}}</span></label>
-                                                            <label>सम्र्पक नं : <span class="user-info-data">{{id_data.user.phone}}</span></label>
-                                                            <label>इमेल : <span class="user-info-data">{{id_data.user.email}}</span></label>
+                                                            <label>सम्र्पक नं : <span class="user-info-data">{{id_data.phone}}</span></label>
+                                                            <label>इमेल : <span class="user-info-data">{{id_data.email}}</span></label>
                                                             {% load staticfiles %}
                                                             <label>दस्तखत : <span class="user-info-data">
-                                                                {% if id_data.user.signature %} <img src="{{ id_data.user.signature.url }}"> {% endif %} </span></label>
+                                                                {% if id_data.user.signature %} <img src="{{ id_data.signature.url }}"> {% endif %} </span></label>
                                                         </div>
                                                         <div class="user-address">
-                                                            <label>ठेगाना : जिल्ला <u>{{id_data.user.district_name|get_districtName}}</u></label>
+                                                            <label>ठेगाना : जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
                                                             <label>न.पा.÷गा.पा <u>{{id_data.get_user_application_detail.municipality|get_MuncipalityName}}</u></label>
-                                                            <label>वडा नं.<u>{{id_data.get_user_application_detail.ward_number}}</u></label>
-                                                            <label>टोल <u>{{id_data.get_user_application_detail.tole}}</u></label>
+                                                            <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
+                                                            <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
                                                         </div>
                                                     </div>
                             
@@ -224,7 +303,7 @@
                                             <div class="page-break"></div>
                                         </div>
                                            <!---certificate-->               
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
+                                        {% if request.user.role == request.user.CENTRAL and id_data.is_verified == True %}                         
                                             <div class="col-md-6" id="div_print_certificate">
                                                 <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate');">print</button>
                                                 <div class="nibedan-form">
@@ -234,18 +313,17 @@
                                                     <div class="fanfet-info">
                                                         <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
                                                     </div>
-                                                    {% if id_data.user.union_type == 'private' %}
-                                                        <h5 style="font-weight: 600;"><center>{{id_data.user.approved_company_name}}</center></h5>
-                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                    {% if id_data.union_type == 'private' %}
+                                                        <h5 style="font-weight: 600;"><center>{{id_data.approved_company_name}}</center></h5>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
                                                     {% else %}
                                                         <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
-                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{approved_admin.district_name|get_districtName}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
                                                     {% endif %}
                                                     <div class="nibedan-form-top">
                                                         
                                                         <div class="form-top-left">
-                                                            <p><u>{{id_data.user.id}}</u>
-                                                                अद्यावद्यिक नम्बर</p>
+                                                            <p>अद्यावद्यिक नम्बर : {{id_data.id}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="nibedan-form-top">
@@ -256,9 +334,9 @@
                                                                     {% if id_data.apply_role_type == request.user.PRIVATE %}
                                                                         {{id_data.company_name}} वस्तुगत संघ
                                                                     {% elif id_data.apply_role_type == request.user.STATE %}
-                                                                        {{id_data.state_name|get_StateName}} महासंघ
+                                                                        {{id_data.state_name|get_StateName}}
                                                                     {% elif id_data.apply_role_type == request.user.DISTRICT %}
-                                                                         {{id_data.district_name|get_districtName}} संघ
+                                                                         {{id_data.district_name|get_districtName}}
                                                                     {% endif %}
                                                                  </p>
                                                             </div> 
@@ -295,11 +373,11 @@
                                                     <div class="nibedan-form-footer">
                                                         <div class="user-info">
                                                             <label style="font-weight: bold;">पद अध्यक्ष</label>
-                                                            <label>नाम :<span class="user-info-data">{{request.user.approved_name}}</span></label>
+                                                            <label>नाम :<span class="user-info-data">{{id_data.approved_email|GetMemberFormApproved:'district_name'}}</span></label>
                                                             {% load staticfiles %}
                                                             <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
                                                             {% load staticfiles %}
-                                                            <label>दस्तखत : <span class="user-info-data"><img  src="{% if request.user.approved_signature %} {{request.user.approved_signature.url}} {% endif %}"></span></label>
+                                                            <label>दस्तखत : <span class="user-info-data"><img  src="{% if id_data.approved_signature %} {{id_data.approved_signature.url}} {% endif %}"></span></label>
                                                         </div>
                                                     </div>
                             
@@ -314,8 +392,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.certificate_citizenship %}
-                                                            <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -325,8 +403,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
-                                                            {% if id_data.get_user_application_detail.certificate_company_registration %}
-                                                            <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}"
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"
                                                                 class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
@@ -338,8 +416,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.provisional_account_number %}
-                                                            <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.provisional_account_number %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -350,8 +428,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.tax_paid_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -361,8 +439,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.bank_voucher %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -372,8 +450,8 @@
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h4 class="card-title">उद्योग प्रमाणपत्र को प्रतिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.industry_certificate %}
-                                                            <img src="{{id_data.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>
