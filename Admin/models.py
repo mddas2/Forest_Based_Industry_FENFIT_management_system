@@ -105,8 +105,9 @@ class UserApplicationDetail(models.Model):
     self_declaration_not_on_the_black_list = models.ImageField(upload_to='user/documents', null=True) #कालो सुचीमा नपरेको स्वघोषणा
     bank_voucher = models.ImageField(upload_to='user/documents', null=True) #bank भौचर को प्रतिलिपि
 
-    industry_certificate = models.ImageField(upload_to='user/documents', null=True) #उद्योग प्रमाणपत्र को प्रतिलिपि
-    
+    industry_certificate_front_side = models.ImageField(upload_to='user/documents', null=True) #उद्योग प्रमाणपत्र अगाडि पटी को प्रतिलिपि
+    industry_certificate_back_side = models.ImageField(upload_to='user/documents', null=True) #उद्योग प्रमाणपत्र पछाडी पटी
+
     application_certificate =  models.FileField(upload_to='user/documents', null=True)
     physical_year = models.CharField(max_length=205,null=True)
     

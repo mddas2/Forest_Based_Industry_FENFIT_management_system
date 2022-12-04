@@ -193,8 +193,16 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">बैंक डिपोजिट भौचर</h4>
-                                    {% if form_data.industry_certificate %}
-                                    <img src="{{form_data.industry_certificate.url}}" class="img-responsive">
+                                    {% if form_data.industry_certificate_front_side %}
+                                    <img src="{{form_data.industry_certificate_front_side.url}}" class="img-responsive">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">बैंक डिपोजिट भौचर</h4>
+                                    {% if form_data.industry_certificate_back_side %}
+                                    <img src="{{form_data.industry_certificate_back_side.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>

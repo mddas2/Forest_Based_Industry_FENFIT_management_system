@@ -449,9 +449,20 @@
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h4 class="card-title">उद्योग प्रमाणपत्र को प्रतिलिपि</h4>
-                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate %}
-                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate.url}}" class="img-responsive img-fit" img-fit">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate_front_side %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate_back_side %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate_back_side.url}}" class="img-responsive img-fit" img-fit">
                                                             {% endif %}
                                                         </div>
                                                     </div>

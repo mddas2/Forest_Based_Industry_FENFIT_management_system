@@ -277,13 +277,26 @@
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h4 class="card-title">उद्योग प्रमाणपत्र<span class="required">*</span></h4>
-                                                            <input name="industry_certificate" type="file" id="industry_certificate" class="dropify" />
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी<span class="required">*</span></h4>
+                                                            <input name="industry_certificate_front_side" type="file" id="industry_certificate_front_side" class="dropify" />
                                                         </div>
                                                     </div>
-                                                    {% if id_data.industry_certificate %}
+                                                    {% if id_data.industry_certificate_front_side %}
                                                         <script>
-                                                            $("#industry_certificate").attr("data-default-file", "{{id_data.industry_certificate.url}}");
+                                                            $("#industry_certificate_front_side").attr("data-default-file", "{{id_data.industry_certificate_front_side.url}}");
+                                                        </script>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी<span class="required">*</span></h4>
+                                                            <input name="industry_certificate_back_side" type="file" id="industry_certificate_back_side" class="dropify" />
+                                                        </div>
+                                                    </div>
+                                                    {% if id_data.industry_certificate_back_side %}
+                                                        <script>
+                                                            $("#industry_certificate_back_side").attr("data-default-file", "{{id_data.industry_certificate.url}}");
                                                         </script>
                                                     {% endif %}
                                                 </div>
