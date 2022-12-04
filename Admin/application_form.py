@@ -317,7 +317,7 @@ def UserApplicationFormStore(request):
         # return HttpResponse(response)
         try:
             if request.POST['is_renew']=='on':
-                is_reniew = 1
+                is_reniew = 0 #is_reniew = 1 renew block
                 try:
                     transaction_amount = int(request.POST['transaction_amount'])
                 except:
@@ -327,7 +327,7 @@ def UserApplicationFormStore(request):
                 # return HttpResponse(response)
                 price_category = response['price_category']
                 # return HttpResponse(price_category)
-                price = price_category['renewal_fee']
+                price = price_category['start_recommendation_fee'] #price_category['renewal_fee'] renew block
                 try:
                     payment_rupees = int(price)
                 except:
