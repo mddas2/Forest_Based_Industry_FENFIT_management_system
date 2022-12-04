@@ -229,13 +229,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="nibedan-form-body">
-                                                        <h2>बिषय ः {% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
+                                                        <h2>बिषय : {% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
                                                         <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
                                                             जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
                                                             प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र
                                                             तपसिल
                                                             बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
-                                                        <h5>संलग्न कागजातहरु ः–</h5>
+                                                        <h5>संलग्न कागजातहरु :-</h5>
                                                         <ul>
                                                             <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
                                                             <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
@@ -255,7 +255,7 @@
                                                             <label>इमेल : <span class="user-info-data">{{id_data.email}}</span></label>
                                                             {% load staticfiles %}
                                                             <label>दस्तखत : <span class="user-info-data">
-                                                                {% if id_data.user.signature %} <img src="{{ id_data.signature.url }}"> {% endif %} </span></label>
+                                                                {% if id_data.user.signature %} <img src="{{ id_data.user.signature.url }}"> {% endif %} </span></label>
                                                         </div>
                                                         <div class="user-address">
                                                             <label>ठेगाना : जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
@@ -401,39 +401,9 @@
                                                     </div>
                                                     <div class="page-break"></div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
-                                                            {% if id_data.applicationform.all.first.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
-                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate_front_side %}
-                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit" img-fit">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
-                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate_back_side %}
-                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate_back_side.url}}" class="img-responsive img-fit" img-fit">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
+                                                
+                                               
+                                               
                                             </div>
                                         </div>
                                     </div>
