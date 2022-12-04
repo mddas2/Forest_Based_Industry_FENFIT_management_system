@@ -37,7 +37,7 @@ def SendSmsSparrow(to,text):
     return response_json
 
 def SendSmsRadiant(to,message):
-    to_number.append(to)
+    # to_number.append(to)
     to = ','.join(to_number)
     token = 'dMs5g3thfBgpJPX61693HR4hAualD1wSpya4'
     sender =  'fenfit'
