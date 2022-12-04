@@ -59,7 +59,7 @@ class ExportProduct(LoginRequiredMixin,APIView):
           # return HttpResponse(JSONRenderer().render(serializer.data))
           df = pd.DataFrame(serializer.data)
           tempname="detail"
-          df.to_excel(f"report/static/excel/{tempname}.xlsx")
-          file_path = os.path.join(settings.STATIC_URL, 'excel/'+str(tempname)+'.xlsx')
+          df.to_excel(f"media/excel/{tempname}.xlsx")
+          file_path = os.path.join(settings.MEDIA_URL, 'excel/'+str(tempname)+'.xlsx')
           return redirect(file_path)
        
