@@ -21,6 +21,8 @@ from rest_framework.renderers import JSONRenderer
 
 
 def ApplicationFormReport(request):
+     approved_admin =  CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo').first()
+
      slug = "सुचिकरण सिफारिश Report"
      report_type = 'application'
      formsobj = ApplicationForm.objects.filter(dsc__isnull=False)
@@ -29,7 +31,8 @@ def ApplicationFormReport(request):
         'all_data' : formsobj,
         'export_link_name' : reverse("ExportProduct"),
         'report_type':report_type,
-        'slug1' : slug
+        'slug1' : slug,
+        'approved_admin' : approved_admin
     }
      return render(request,'report/application-lists.html',data)
 

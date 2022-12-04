@@ -192,7 +192,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">बैंक डिपोजिट भौचर</h4>
+                                    <h4 class="card-title">उद्योग प्रमाणपत्र</h4>
                                     {% if form_data.industry_certificate_front_side %}
                                     <img src="{{form_data.industry_certificate_front_side.url}}" class="img-responsive">
                                     {% endif %}
@@ -200,7 +200,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">बैंक डिपोजिट भौचर</h4>
+                                    <h4 class="card-title">उद्योग प्रमाणपत्र</h4>
                                     {% if form_data.industry_certificate_back_side %}
                                     <img src="{{form_data.industry_certificate_back_side.url}}" class="img-responsive">
                                     {% endif %}
@@ -265,6 +265,16 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
+                                    <h4 class="card-title">फोटो</h4>
+                                    {% if form_data.user.image %}
+                                        <img src="{{form_data.user.image.url}}" class="img-responsive">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
                                     <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                     {% if form_data.certificate_citizenship %}
                                         <img src="{{form_data.certificate_citizenship.url}}" class="img-responsive">
@@ -317,9 +327,19 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">उद्योग प्रमाणपत्र</h4>
-                                    {% if form_data.tax_paid_certificate %}
-                                        <img src="{{form_data.industry_certificate.url}}" class="img-responsive">
+                                    <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
+                                    {% if form_data.industry_certificate_front_side %}
+                                        <img src="{{form_data.industry_certificate_front_side.url}}" class="img-responsive">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
+                                    {% if form_data.industry_certificate_back_side %}
+                                        <img src="{{form_data.industry_certificate_back_side.url}}" class="img-responsive">
                                     {% endif %}
                                 </div>
                             </div>
@@ -519,11 +539,11 @@
                 .fanfet-info ul li a{\
                     color: #000;\
                 }\
-                h2.main-title{\
-                    font-size: 18px;\
-                    line-height: 22px;\
-                    font-weight: bold;\
-                    text-align: center;\
+                h5.main-title{\
+                            font-size: 14px;\
+                            line-height: 22px;\
+                            font-weight: bold;\
+                            text-align: center;\
                 }\
                 .nibedan-form-top{\
                     position: relative;\

@@ -218,6 +218,17 @@
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
+                                                            <h4 class="card-title">फोटो</h4>
+                                                            {% if id_data.user.image %}
+                                                                <img src="{{id_data.user.image.url}}" class="img-responsive img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
                                                             <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                                             {% if id_data.get_user_application_detail.certificate_citizenship %}
                                                             <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">

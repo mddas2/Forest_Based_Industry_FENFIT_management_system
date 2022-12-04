@@ -414,6 +414,7 @@ def UserApplicationFormStore(request):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_USER_role)
 def UserApplicationReview(request,id=None):
+    approved_admin =  CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo').first()
     create_link_name = reverse("UserPersonalInformationCreate")
     if id==None:
         slug1 = "सिफारिस फारम पुनरावलोकन स्थिति" 
@@ -430,7 +431,16 @@ def UserApplicationReview(request,id=None):
         form_data = None
         business_name =None
     
-    data = {'business_name':business_name,'id_data':id_data,'slug1':slug1,'create':False,'create_link_name':create_link_name,'action':action,'form_data':form_data}
+    data = {
+        'business_name':business_name,
+        'id_data':id_data,
+        'slug1':slug1,
+        'create':False,
+        'create_link_name':create_link_name,
+        'action':action,
+        'form_data':form_data,
+        'approved_admin' : approved_admin,
+    }
     return render(request, "admin/applicant_users/user-application-review.html",data)
     # except:
     #     form_data = None
