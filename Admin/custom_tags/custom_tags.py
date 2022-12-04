@@ -46,11 +46,6 @@ def get_MuncipalityName(name):
 
 @register.filter
 def get_NepaliDate(date):
-    import datetime
-    import nepali_datetime
-    dt = datetime.date(date.year,date.month,date.day)
-    nepali_date = nepali_datetime.date.from_datetime_date(dt)
-    return nepali_date
     try:
         import datetime
         import nepali_datetime
