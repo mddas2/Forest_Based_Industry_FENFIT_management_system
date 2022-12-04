@@ -29,16 +29,17 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Full Name</th>
-                                <th>नागरिकता पर्तिलिपि</th>
+                                <!-- <th>नागरिकता पर्तिलिपि</th>
                                 <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
                                 <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
                                 <th>लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</th>
-                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>   
-                                <th>द्वारा स्थानान्तरण</th> 
+                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>    -->
+                               
                                 <th>जिल्ला</th>                                                   
-                                <th>विवरण हेर्नुहोस्</th>
+                                
                                 <th>दर्ता गरिएको मिति</th>
                                 <th>स्थिति</th>   
+                                <th>विवरण हेर्नुहोस्</th>
                                 <th style="display:none">email</th>                            
                             </tr>
                         </thead>
@@ -50,48 +51,14 @@
                                 <tr>
                                     <td>{{i.id}}</td>
                                     <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
-                                    <td class="zoom-gallery">
-                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
-                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                        {% else %}
-                                            NotFound
-                                        {% endif %}
-                                    </td>
-                                    <td class="zoom-gallery">
-                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
-                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
-                                        <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
-                                        {% else %}
-                                            NotFound
-                                        {% endif %}
-                                    </td>
-                                    <td class="zoom-gallery">    
-                                        {% if  i.applicationform.all.first.get_user_application_detail.provisional_account_number %}        
-                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                        {% else %}
-                                            NotFound
-                                        {% endif %}
-                                    </td>   
-                                    <td class="zoom-gallery">
-                                        {% if i.applicationform.all.first.get_user_application_detail.auditing %}    
-                                        <a href="{{i.applicationform.all.first.get_user_application_detail.auditing.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                        {% else %}
-                                            NotFound
-                                        {% endif %}
-                                    </td> 
-                                    <td class="zoom-gallery">
-                                        {% if  i.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}       
-                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
-                                        {% else %}
-                                            NotFound
-                                        {% endif %}
-                                    </td>  <!-- this is quantity-->
+
                                     <td>{{i.district_name}}</td>
-                                    <td>{{i.dsc}}</td>
+                                   
                                     
-                                    <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
+                                    
                                     <td><span class="label label-info">{{i.updated_at}}</span></td>
                                     <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                    <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                     {% if action%}
                                     <td>
                                     <div class="dropdown">
@@ -133,7 +100,7 @@
                             <tr>
                                 <td>{{i.id}}</td>
                                 <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
-                                <td class="zoom-gallery">
+                                <!-- <td class="zoom-gallery">
                                     {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
                                     <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
@@ -143,7 +110,7 @@
                                 <td class="zoom-gallery">
                                     {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
                                     <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
-                                    <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                  
                                     {% else %}
                                         NotFound
                                     {% endif %}
@@ -168,12 +135,11 @@
                                     {% else %}
                                         NotFound
                                     {% endif %}
-                                </td>  <!-- this is quantity-->
-                                <td>{{i.dsc}}</td>
+                                </td>  -->
                                 <td>{{i.district_name}}</td>
-                                <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                 <td><span class="label label-info">{{i.updated_at}}</span></td>
                                 <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
                                 {% if action%}
                                 <td>
                                 <div class="dropdown">

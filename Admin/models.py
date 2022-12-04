@@ -269,3 +269,9 @@ class RecomendationPriceCategory(models.Model):
         'greater_than_3_crode':{'code_name':'greater_than_3_crode','name_1':'रु ३ करोड माथि','start_recommendation_fee':'50000','renewal_fee':'25000'},
         'old_unregistered_non_payment':{'code_name':'old_unregistered_non_payment','name_1':'कारोबार रकम नख’ल्ने तथा महासंघमा दर्ता नभएका प’राना उद्योगका हकमा','start_recommendation_fee':'50000','renewal_fee':'50000'},
     }
+    recommendation_fee = {
+        'less_than_2_crode':{'code_name':'less_than_2_crode','name_1':'२ करोड भन्दा कम','start_recommendation_fee':'10000','renewal_fee':'5000'},
+        'greater_than_2_crode':{'code_name':'greater_than_2_crode','name_1':'रु २ करोड भन्दा माथि','start_recommendation_fee':'20000','renewal_fee':'10000'},
+        'old_unregistered_non_payment':{'code_name':'old_unregistered_non_payment','name_1':'कारोबार रकम नख’ल्ने तथा महासंघमा दर्ता नभएका प’राना उद्योगका हकमा','start_recommendation_fee':'20000','renewal_fee':'50000'},
+        # 'non_decide_payment':{'code_name':'old_unregistered_non_payment','name_1':'कारोबार रकम नख’ल्ने तथा महासंघमा दर्ता नभएका प’राना उद्योगका हकमा','start_recommendation_fee':'20000','renewal_fee':'50000'},
+    }
