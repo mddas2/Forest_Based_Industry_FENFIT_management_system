@@ -12,20 +12,14 @@ def get_item(dictionary, key):
         return "None. please select first सिफारिस शुल्क category"
 
 @register.filter
-def GetMemberFormApproved(email,attribute):
-    if attribute == 'district_name':
-        obj = CustomUser.objects.get(email = email).district_name
-        return Districts.objects.get(name=obj).alt_name 
-    elif attribute == 'first_name':
-        obj = CustomUser.objects.get(email = email).first_name
-    return obj
+def GetMemberFormApproved(email,attribute): 
     try:
-       if attribute == 'district_name':
+        if attribute == 'district_name':
             obj = CustomUser.objects.get(email = email).district_name
             return Districts.objects.get(name=obj).alt_name 
-       elif attribute == 'first_name':
+        elif attribute == 'first_name':
             obj = CustomUser.objects.get(email = email).first_name
-       return obj
+        return obj
     except:
         return "None"
 
@@ -43,7 +37,6 @@ def get_districtName(name):
     except:
         return name  
 
-
 @register.filter
 def get_MuncipalityName(name):
     try:
@@ -53,6 +46,11 @@ def get_MuncipalityName(name):
 
 @register.filter
 def get_NepaliDate(date):
+    import datetime
+    import nepali_datetime
+    dt = datetime.date(date.year,date.month,date.day)
+    nepali_date = nepali_datetime.date.from_datetime_date(dt)
+    return nepali_date
     try:
         import datetime
         import nepali_datetime
