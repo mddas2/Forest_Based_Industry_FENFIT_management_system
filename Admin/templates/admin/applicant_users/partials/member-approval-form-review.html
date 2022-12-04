@@ -212,6 +212,16 @@
                             <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
+                                        <h4 class="card-title">फोटो</h4>
+                                        {% if form_data.user.image %}
+                                        <img src="{{form_data.user.image.url}}" class="img-responsive">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
                                         <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
                                         {% if form_data.certificate_company_registration %}
                                         <img src="{{form_data.certificate_company_registration.url}}"
@@ -237,6 +247,16 @@
                                         <h4 class="card-title">लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</h4>
                                         {% if form_data.auditing %}
                                         <img src="{{form_data.auditing.url}}" class="img-responsive">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                        {% if form_data.tax_paid_certificate %}
+                                        <img src="{{form_data.tax_paid_certificate.url}}" class="img-responsive">
                                         {% endif %}
                                     </div>
                                 </div>
