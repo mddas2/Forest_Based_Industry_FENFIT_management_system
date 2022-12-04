@@ -36,7 +36,8 @@
                                     <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>
                                 {% endif %}
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
-                                    <th>बैंक भौचर</th> 
+                                    <th>तिर्नु पर्ने रकम</th>
+                                    <!-- <th>बैंक भौचर</th>  -->
                                 {% endif %}
                                 <th>भुक्तानी स्थिति</th> 
                                 <!-- <th>जिल्ला</th>                                                    -->
@@ -100,7 +101,8 @@
                                             </td>  <!-- this is quantity-->
                                         {% endif %}
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
-                                            <td>{{i.get_user_application_detail.voucher_number}}</td>
+                                            <td><span class="label label-info">Rs. {{i.get_user_application_detail.payment_rupees}}</span></td>
+                                            <!-- <td>{{i.get_user_application_detail.voucher_number}}</td> -->
                                         {% endif %}
                                         <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
                                         <!-- <td>{{i.user.district_name}}</td> -->
@@ -512,6 +514,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                    
                         
