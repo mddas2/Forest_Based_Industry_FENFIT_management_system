@@ -36,6 +36,7 @@ def EsewaPayment(request):
 def BusinessPriceCategory(request,ammount = None): 
     recommendation_fee = RecomendationPriceCategory.recommendation_fee
 
+
     try:
         ammount = int(request.GET['ammount'])
     except:
@@ -52,24 +53,14 @@ def BusinessPriceCategory(request,ammount = None):
             'price_category' : recommendation_fee['old_unregistered_non_payment']
         }
         
-    elif ammount < 2500000:
+    elif ammount < 20000000:
         response = {
-            'price_category' : recommendation_fee['less_than_25_lakh']
+            'price_category' : recommendation_fee['less_than_2_crode']
         }
        
-    elif ammount >= 2500000 and ammount < 10000000:
+    elif ammount >= 20000000:
         response = {
-            'price_category' : recommendation_fee['greater_than_25_lakh_and_less_than_1_crode']
-        }
-        
-    elif ammount >= 10000000 and ammount < 30000000:
-        response = {
-            'price_category' : recommendation_fee['greater_than_1_crode_and_less_than_3_crode']
-        }
-
-    elif ammount >= 30000000:
-        response = {
-            'price_category' : recommendation_fee['greater_than_3_crode']
+            'price_category' : recommendation_fee['greater_than_2_crode']
         }
     else:
         response = {
@@ -80,4 +71,32 @@ def BusinessPriceCategory(request,ammount = None):
         return JsonResponse(response)        
     else:
         return json.dumps(response)
+    # elif ammount < 2500000:
+    #     response = {
+    #         'price_category' : recommendation_fee['less_than_25_lakh']
+    #     }
+       
+    # elif ammount >= 2500000 and ammount < 10000000:
+    #     response = {
+    #         'price_category' : recommendation_fee['greater_than_25_lakh_and_less_than_1_crode']
+    #     }
+        
+    # elif ammount >= 10000000 and ammount < 30000000:
+    #     response = {
+    #         'price_category' : recommendation_fee['greater_than_1_crode_and_less_than_3_crode']
+    #     }
+
+    # elif ammount >= 30000000:
+    #     response = {
+    #         'price_category' : recommendation_fee['greater_than_3_crode']
+    #     }
+    # else:
+    #     response = {
+    #         'price_category' : recommendation_fee['old_unregistered_non_payment']
+    #     }
+    # import json
+    # if ajax == '1':
+    #     return JsonResponse(response)        
+    # else:
+    #     return json.dumps(response)
     
