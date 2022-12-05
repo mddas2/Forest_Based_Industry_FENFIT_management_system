@@ -58,6 +58,7 @@ def index(request, pk=None, pdc=None):
     total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
     total_member = CustomUser.objects.all().count()
     data_1={
+        'a' : 12,
         'total_pending_application_form' : total_pending_application_form,
         'total_approved_form' : total_approved_form,
         'total_rejected_application_form' : total_rejected_application_form,

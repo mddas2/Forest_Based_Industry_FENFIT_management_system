@@ -62,14 +62,14 @@ $(function () {
    
         data: [{
             label: "REJECTED",
-            value: '9',
+            value: total_rejected_application_form,
 
         }, {
             label: "PENDING",
-            value: '9',
+            value: total_pending_application_form,
         }, {
             label: "APPROVED",
-            value: '9'
+            value: total_approved_form
         }],
         resize: true,
         colors:['#fb9678', '#01c0c8', '#4F5467']
