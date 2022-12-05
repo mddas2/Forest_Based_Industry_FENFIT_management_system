@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <a href="{% url 'Pending' %}">
-                    <h4 class="card-title">अस्वीकृत आवेदन फारम</h4>
+                    <h4 class="card-title">{{slug1}} द्वारा बाँकी अस्वीकृत आवेदन फारम</h4>
                     <div class="text-end"> <span class="text-muted">Total Pending Application</span>
                         <h1 class="font-light"><sup><i class="ti-arrow-up text-success"></i></sup>{{total_pending_application_form}}</h1>
                     </div>
@@ -24,8 +24,8 @@
         <div class="card">
             <div class="card-body">
                 <a href="{% url 'ApprovedApplication' %}">
-                    <h4 class="card-title">स्वीकृत आवेदन फारम</h4>
-                    <div class="text-end"> <span class="text-muted">Today Approved Application</span>
+                    <h4 class="card-title">{{slug1}} द्वारा स्वीकृत आवेदन फारम</h4>
+                    <div class="text-end"> <span class="text-muted">total Approved Application</span>
                         <h1 class="font-light"><sup><i class="ti-arrow-up text-primary"></i></sup>{{total_approved_form}}</h1>
                     </div>
                     <span class="text-primary">30%</span>
@@ -42,7 +42,7 @@
         <div class="card">
             <div class="card-body">
                 <a href="{% url 'CanelledApplication' %}">
-                    <h4 class="card-title">अस्वीकृत आवेदन फारम</h4>
+                    <h4 class="card-title">{{slug1}} द्वारा अस्वीकृत आवेदन फारम</h4>
                     <div class="text-end"> <span class="text-muted">Total Rejected Aapplication</span>
                         <h1 class="font-light"><sup><i class="ti-arrow-down text-info"></i></sup>{{total_rejected_application_form}}</h1>
                     </div>
@@ -113,15 +113,15 @@
                         <ul class="list-inline m-t-30 text-center mb-1 d-flex">
                             <li class="list-inline-item p-r-20">
                                 <h5 class="text-muted"><i class="fa fa-circle" style="color: #fb9678;"></i>Total Reject</h5>
-                                <h4 class="m-b-0">989</h4>
+                                <h4 class="m-b-0">{{total_rejected_application_form}}</h4>
                             </li>
                             <li class="list-inline-item p-r-20">
                                 <h5 class="text-muted"><i class="fa fa-circle" style="color: #01c0c8;"></i>Total Pending</h5>
-                                <h4 class="m-b-0">233</h4>
+                                <h4 class="m-b-0">{{total_approved_form}}</h4>
                             </li>
                             <li class="list-inline-item">
                                 <h5 class="text-muted"> <i class="fa fa-circle" style="color: #4F5467;"></i>Total Approved</h5>
-                                <h4 class="m-b-0">21</h4>
+                                <h4 class="m-b-0">{{total_member}}</h4>
                             </li>
                         </ul>
                     </div>

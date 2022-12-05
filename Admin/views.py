@@ -56,7 +56,7 @@ def index(request, pk=None, pdc=None):
     total_pending_application_form = ApplicationForm.objects.filter(dsc=dsc_role).count()
     total_approved_form = request.user.total_application_form_approved.all().count()
     total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
-    total_member = 1
+    total_member = CustomUser.objects.all().count()
     data_1={
         'total_pending_application_form' : total_pending_application_form,
         'total_approved_form' : total_approved_form,

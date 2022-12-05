@@ -57,19 +57,19 @@ $(function () {
     });
 
  // Morris donut chart
-        
     Morris.Donut({
         element: 'morris-donut-chart',
+   
         data: [{
             label: "REJECTED",
-            value: 8500,
+            value: '9',
 
         }, {
             label: "PENDING",
-            value: 3630,
+            value: '9',
         }, {
             label: "APPROVED",
-            value: 4870
+            value: '9'
         }],
         resize: true,
         colors:['#fb9678', '#01c0c8', '#4F5467']
