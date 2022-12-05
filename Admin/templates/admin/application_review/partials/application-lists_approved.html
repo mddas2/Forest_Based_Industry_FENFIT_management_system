@@ -21,7 +21,7 @@
                                 <th>Full Name</th>
                                 <th>नागरिकता पर्तिलिपि</th>
                                 <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
-                                <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
+                                <!-- <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>       -->
                                 <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>  
                                 {% if request.user.groups.first.name == 'accountant' %}   
                                     <th>Bank Voucher</th> 
@@ -57,13 +57,13 @@
                                         NotFound
                                     {% endif %}
                                 </td>
-                                <td class="zoom-gallery">    
+                                <!-- <td class="zoom-gallery">    
                                     {% if i.get_user_application_detail.provisional_account_number %}        
                                     <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
                                     {% else %}
                                         NotFound
                                     {% endif %}
-                                </td>   
+                                </td>    -->
                            
                                 <td class="zoom-gallery">
                                     {% if i.get_user_application_detail.tax_paid_certificate %}       
@@ -75,7 +75,7 @@
                                 {% if request.user.groups.first.name == 'accountant' %}                           
                                     <td>{{i.get_user_application_detail.voucher_number}}</td>
                                 {% endif %}
-                                <td><span class="label label-success">{% if i.get_user_application_detail.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
+                                <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
                                 <td>{{i.user.district_name}}</td>
                                 {% endwith %}
                                 <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
