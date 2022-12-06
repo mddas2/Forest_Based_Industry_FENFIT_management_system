@@ -323,8 +323,8 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="row">
-                                        <div class="col-md-6" id="div_print_application">
-                                            <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_application');">print</button>
+                                        <div class="col-md-6" id="div_print_application{{id_data.id}}">
+                                            <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_application{{id_data.id}}');">print</button>
                                             <div class="nibedan-form" >
                                                 <div class="form-logo">
                                                     <img src="/static/assets/images/logo-2.png">
@@ -390,8 +390,8 @@
                                         </div>
                                            <!---certificate-->               
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
-                                            <div class="col-md-6" id="div_print_certificate">
-                                                <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate');">print</button>
+                                            <div class="col-md-6" id="div_print_certificate{{id_data.id}}">
+                                                <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate{{id_data.id}}');">print</button>
                                                 <div class="nibedan-form">
                                                     <div class="form-logo">
                                                         <img src="/static/assets/images/logo-2.png">
@@ -435,7 +435,7 @@
                                                 </div>
                                                 <div class="page-break"></div>
 
-                                                <div class="card">
+                                                <div class="card other_informtion">
                                                     <div class="card-body">
                                                         <!-- <h4 class="card-title">Column Toggle Table</h4> -->
                                                         <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
@@ -469,7 +469,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
+                                                <div class="card other_informtion">
                                                     <div class="card-body">
                                                         <!-- <h4 class="card-title">Column Toggle Table</h4> -->
                                                         <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
@@ -502,7 +502,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
+                                                <div class="card other_informtion">
                                                     <div class="card-body">
                                                         <!-- <h4 class="card-title">Column Toggle Table</h4> -->
                                                         <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
@@ -534,7 +534,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
+                                                <div class="card other_informtion">
                                                     <div class="card-body">
                                                         <!-- <h4 class="card-title">Column Toggle Table</h4> -->
                                                         <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
@@ -990,6 +990,9 @@
                                             display: None;\
                                         }\
                                         #bank_voucher{\
+                                            display:None;\
+                                        }\
+                                        .other_informtion{\
                                             display:None;\
                                         }\
                                         .nibedan-form-footer .user-address label {\
