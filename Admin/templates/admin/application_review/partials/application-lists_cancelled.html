@@ -36,12 +36,9 @@
                                 <th>mobile number</th> 
                                 <th>email</th> 
                                 <th>भुक्तानी स्थिति</th>                                 
-                                <th>बैंक भौचर</th>                                                                                
-                                <th>बिल नम्बर</th>
-                                <th>बुझिलिएको रकम</th>
                                 <!-- <th>स्थिति</th> -->
                                 <th>दर्ता गरिएको मिति</th>
-                                <th>dsc</th>
+                                
                                 <th>विवरण हेर्नुहोस्</th>                                                            
                             </tr>
                         </thead>
@@ -57,12 +54,10 @@
                                         <td>{{i.approved_form.user.phone}}</td>  
                                         <td>{{i.approved_form.user.email}}</td>   
                                         <td><span class="label label-success">{% if i.approved_form.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>                            
-                                        <td>{{i.approved_form.get_user_application_detail.voucher_number}}</td>                                      
-                                        <td>{{i.approved_form.bill_number}}</td>
-                                        <td>{{i.approved_form.payment_get}}</td>
+                                       
                                         <!-- <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>                                       -->
                                         <td><span class="label label-info">{{i.approved_form.get_date}}</span></td>    
-                                        <td>{{i.approved_form.dsc}}</td>                                  
+                                                                      
                                         <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>                             
                                         
                                          
@@ -273,17 +268,19 @@
                                                     </div>
                                                     <div class="page-break"></div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
-                                                            {% if id_data.approved_form.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.approved_form.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
-                                                            {% endif %}
+                                                {% if request.user.role == request.user.CENTRAL %}
+                                                    <div class="col-md-6">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
+                                                                {% if id_data.approved_form.get_user_application_detail.bank_voucher %}
+                                                                <img src="{{id_data.approved_form.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
+                                                                {% endif %}
+                                                            </div>
                                                         </div>
+                                                        <div class="page-break"></div>
                                                     </div>
-                                                    <div class="page-break"></div>
-                                                </div>
+                                                {% endif %}
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">
