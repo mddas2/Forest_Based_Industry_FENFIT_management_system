@@ -201,10 +201,10 @@
                                                     <div class="nibedan-form-footer">
                                                         <div class="user-info">
                                                             <label style="font-weight: bold;">पद कार्यकारी निर्देशक</label>
-                                                            <label>नाम: <span class="user-info-data">{{approved_admin.first_name}}</span></label>
+                                                            <label>नाम: <span class="user-info-data">{{id_data.payment.all.first.ceo_approved_name}}</span></label>
                                                             {% load staticfiles %}
                                                             <label>दस्तखत : <span class="user-info-data"><img
-                                                                        src="{% if approved_admin.signature %} {{approved_admin.signature.url}} {% endif %}"}></span></label>
+                                                                        src="{% if id_data.payment.all.first.ceo_approved_signature %} {{id_data.payment.all.first.ceo_approved_signature.url}} {% endif %}"}></span></label>
                                                         </div>
                                                     </div>
                             
