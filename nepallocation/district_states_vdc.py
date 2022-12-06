@@ -37,7 +37,6 @@ def GetMember(request):
      }
      return JsonResponse(response)
  
- 
      
 
 def GetStates(request):
