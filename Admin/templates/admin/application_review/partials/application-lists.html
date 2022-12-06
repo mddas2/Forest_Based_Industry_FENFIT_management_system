@@ -486,17 +486,19 @@
                                                     </div>
                                                     <div class="page-break"></div>
                                                 </div>
-                                                <div class="col-md-6" id="bank_voucher">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.bank_voucher %}
-                                                            <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
-                                                            {% endif %}
+                                                {% if request.user.role == request.user.CENTRAL %}
+                                                    <div class="col-md-6" id="bank_voucher">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
+                                                                {% if id_data.get_user_application_detail.bank_voucher %}
+                                                                <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
+                                                                {% endif %}
+                                                            </div>
                                                         </div>
+                                                        <div class="page-break"></div>
                                                     </div>
-                                                    <div class="page-break"></div>
-                                                </div>
+                                                {% endif %}
                                                 <div class="col-md-6">
                                                     <div class="card">
                                                         <div class="card-body">

@@ -168,6 +168,10 @@ class UserApplicationPayment(models.Model):
     bill_number = models.CharField(max_length=205,null=True)
     payment_get = models.CharField(max_length=205,default='')
 
+    ceo_approved_name = models.CharField(max_length=205,null=True)
+    ceo_approved_email = models.CharField(max_length=205,null=True)
+    ceo_approved_signature = models.ImageField(upload_to='user/documents', null=True)
+
 
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
