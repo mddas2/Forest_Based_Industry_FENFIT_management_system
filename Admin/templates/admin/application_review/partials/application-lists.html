@@ -424,11 +424,11 @@
                                                     </div>
                                                     <div class="nibedan-form-footer">
                                                         <div class="user-info">
-                                                            <label style="font-weight: bold;">पद कार्यकारी निर्देशक</label>
-                                                            <label>नाम: <span class="user-info-data">{{id_data.payment.all.first.ceo_approved_name}}</span></label>
+                                                            <label style="font-weight: bold; width: 100%">पद कार्यकारी निर्देशक</label>
+                                                            <label style="width:100%">नाम: <span class="user-info-data">{{id_data.payment.all.first.ceo_approved_name}}</span></label>
                                                             {% load staticfiles %}
-                                                            <label>दस्तखत : <span class="user-info-data"><img
-                                                                        src="{% if id_data.payment.all.first.ceo_approved_signature %} {{id_data.payment.all.first.ceo_approved_signature.url}} {% endif %}"}></span></label>
+                                                            <label style="width:100%">दस्तखत : <span class="user-info-data"><img
+                                                                src="{% if id_data.payment.all.first.ceo_approved_signature %} {{id_data.payment.all.first.ceo_approved_signature.url}} {% endif %}"}></span></label>
                                                         </div>
                                                     </div>
                             
@@ -570,7 +570,7 @@
                                             h5.main-title{
                                                 font-size: 14px;
                                                 line-height: 22px;
-                                                font-weight: bold;
+                                                font-weight: 400;
                                                 text-align: center;
                                             }
                         
@@ -777,7 +777,7 @@
                                         h5.main-title{\
                                                 font-size: 14px;\
                                                 line-height: 22px;\
-                                                font-weight: bold;\
+                                                font-weight: 400;\
                                                 text-align: center;\
                                             }\
                                         .nibedan-form-top {\
