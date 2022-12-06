@@ -437,9 +437,9 @@
 
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">Column Toggle Table</h4>
-                                                        <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which
-                                                            columns they want to be visible.</h5>
+                                                        <!-- <h4 class="card-title">Column Toggle Table</h4> -->
+                                                        <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
+                                                            <!-- columns they want to be visible.</h5> -->
                                                         <div class="table-responsive">
                                                             <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
                                                                 data-tablesaw-mode="columntoggle">
@@ -447,26 +447,119 @@
                                                                     <!-- start row -->
                                                                     <tr>
                                                                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">
-                                                                            Movie Title</th>
+                                                                            उद्योग/कम्पनीको नाम</th>
                                                                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
-                                                                            data-tablesaw-priority="3" class="border">Rank</th>
-                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Year
+                                                                            data-tablesaw-priority="3" class="border">व्यवसाय को नाम</th>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">सिफारिस शुल्क र सो को वाडफाड
                                                                         </th>
+                                                        
+                                                                    </tr> <!-- end row -->
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- start row -->
+                                                                    <tr>
+                                                                        <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.owner_full_name}}</a></td>
+                                                                        <td>{{id_data.get_user_application_detail.business_name}}</td>
+                                                                        <td>{{id_data.get_user_application_detail.business_price_category}}</td>
+                                                                       
+                                                                    </tr> <!-- end row -->
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <!-- <h4 class="card-title">Column Toggle Table</h4> -->
+                                                        <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
+                                                            <!-- columns they want to be visible.</h5> -->
+                                                        <div class="table-responsive">
+                                                            <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
+                                                                data-tablesaw-mode="columntoggle">
+                                                                <thead>
+                                                                    <!-- start row -->
+                                                                    <tr>
                                                                         <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1" class="border">
-                                                                            <abbr title="Rotten Tomato Rating">Rating</abbr>
+                                                                            <abbr title="voucher number">बैंक भुगतान भौचर नम्बर</abbr>
                                                                         </th>
-                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">Gross
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">कम्पनीको अधिकृत पुजी
+                                                                        </th>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">कर रकम
+                                                                        </th>                                                                       
+                                                                    </tr> <!-- end row -->
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- start row -->
+                                                                    <tr>
+                                                                        <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.voucher_number}}</a></td>
+                                                                        <td>{{id_data.get_user_application_detail.authorized_capital_of_company}}</td>
+                                                                        <td>{{id_data.get_user_application_detail.tax_amount}}</td>
+                                                                    </tr> <!-- end row -->
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <!-- <h4 class="card-title">Column Toggle Table</h4> -->
+                                                        <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
+                                                            <!-- columns they want to be visible.</h5> -->
+                                                        <div class="table-responsive">
+                                                            <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
+                                                                data-tablesaw-mode="columntoggle">
+                                                                <thead>
+                                                                    <!-- start row -->
+                                                                    <tr>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">कामदार तथा कर्मचारि स.ख्या
+                                                                        </th>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">कम्पनीको चुक्ता पुजी
+                                                                        </th>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">प्रदेश
                                                                         </th>
                                                                     </tr> <!-- end row -->
                                                                 </thead>
                                                                 <tbody>
                                                                     <!-- start row -->
                                                                     <tr>
-                                                                        <td class="title"><a class="link" href="javascript:void(0)">Avatar</a></td>
-                                                                        <td>1</td>
-                                                                        <td>2009</td>
-                                                                        <td>83%</td>
-                                                                        <td>$2.7B</td>
+                                                                        <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.number_of_employees}}</a></td>
+                                                                        <td>{{id_data.get_user_application_detail.paid_up_capital_of_company}}</td>
+                                                                        <td>{{id_data.user.state_name}}</td>
+                                                                    </tr> <!-- end row -->
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <!-- <h4 class="card-title">Column Toggle Table</h4> -->
+                                                        <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
+                                                            <!-- columns they want to be visible.</h5> -->
+                                                        <div class="table-responsive">
+                                                            <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
+                                                                data-tablesaw-mode="columntoggle">
+                                                                <thead>
+                                                                    <!-- start row -->
+                                                                    <tr>
+                                                                
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">जिल्ला
+                                                                        </th>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">नगरपालिका/गाउँपालिका
+                                                                        </th>
+                                                                        <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">वडा नं.
+                                                                        </th>
+                                                                    </tr> <!-- end row -->
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- start row -->
+                                                                    <tr>
+                                                                        <td class="title"><a class="link" href="javascript:void(0)">{{id_data.user.state_name}}</a></td>
+                                                                        <td>{{id_data.user.district_name}}</td>
+                                                                        <td>{{id_data.get_user_application_detail.ward_number}}</td>
                                                                     </tr> <!-- end row -->
                                                                    
                                                                 </tbody>
@@ -568,10 +661,8 @@
                                                     <div class="page-break"></div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        
-                                    </div>
-                                   
+                                        </div>                                        
+                                    </div>                                   
                         
                                     <style>
                                         .mfp-wrap{
