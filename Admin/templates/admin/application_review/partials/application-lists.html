@@ -551,8 +551,8 @@
                                                                     <!-- start row -->
                                                                     <tr>
                                                                         <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.owner_full_name}}</a></td>
-                                                                        <td>{{id_data.get_user_application_detail.business_name}}</td>
-                                                                        <td>{{id_data.get_user_application_detail.business_price_category}}</td>
+                                                                        <td>{{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}}</td>
+                                                                        <td><span style="color: red; font-size: 15px; font-weight: 600;">(Rs.{{id_data.get_user_application_detail.payment_rupees}})</span>/{{id_data.get_user_application_detail.business_price_category|getPriceCategoryNepaliName}}</td>
                                                                        
                                                                     </tr> <!-- end row -->
                                                                    

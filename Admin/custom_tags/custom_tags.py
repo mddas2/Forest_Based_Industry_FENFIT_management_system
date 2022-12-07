@@ -72,4 +72,5 @@ def getPriceCategoryNepaliName(code_name):
     except:
         return code_name
 
+
     
