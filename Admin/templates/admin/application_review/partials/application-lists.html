@@ -54,8 +54,8 @@
                                 {% endif %}
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
                                     <th>सिफारिस ID</th>   
-                                {% endif %}
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' and i.get_user_application_detail.application_certificate %}
+                                {% endif %}                                
+                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  %}
                                     <th>upload certificate</th>  
                                 {% endif %}
                                 <th>Action</th>
@@ -176,7 +176,7 @@
                                                     <div class="form-group ">
                                                         <div class="row">
                                                         <div class="col-md-4" style="width: 80%;">
-                                                            <input id="certificate" class="form-control" type="file" required="" value="{{i.certificate}}" name="application_certificate"> 
+                                                            <input id="certificate" class="form-control" type="file" required=""  name="application_certificate"> 
                                                         </div>
                                                         <div class="col-md-8 ">
                                                             <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
@@ -190,6 +190,8 @@
                                                     }
                                                 </style>
                                             </td>
+                                        {% else %}
+                                            <td><a href="{{ i.get_user_application_detail.application_certificate.url }}" target="_blank">{{i.get_user_application_detail.application_certificate}}</a></td>
                                         {% endif %}
                                         {% if action%}
                                        
