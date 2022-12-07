@@ -101,7 +101,7 @@
                                                 <select id="business_price_category" class="form-control" name="business_price_category" data-placeholder="Choose a Category" tabindex="1" onchange="BusinessPrice(this);" required>
                                                     <option value='0' selected>व्यवसाय चयन गर्नुहोस्</option>
                                                     {% for business_price_category,value in recomendation_price_category.items%}
-                                                        <option value="{{business_price_category}}" data-price = "{{value|get_item:'renewal_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
+                                                        <option value="{{business_price_category}}" data-price = "{{value|get_item:'start_recommendation_fee'}}"  {% if id_data.business_price_category == business_price_category %} selected {% endif %}>{{value|get_item:'name_1'}}</option>
                                                     {% endfor %}
                                                </select>
                                             </div>
@@ -487,14 +487,9 @@
                     // Function to check Whether both passwords
                     // is same or not.
 
-                    $("#business_price_select_renew").change(function() {
-                    const $this = $(this); // Cache $(this)
-                    const price = $this.find(':selected').data('price'); // Get data value
-                    // const selectedVal = $this[0].value;
-                    $("#businessrice").text(price)
-                    });
 
-                    $("#business_price_select").change(function() {
+                    $("#business_price_category").change(function() {
+        
                     const $this = $(this); // Cache $(this)
                     const price = $this.find(':selected').data('price'); // Get data value
                     // const selectedVal = $this[0].value;

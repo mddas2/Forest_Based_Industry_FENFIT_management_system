@@ -315,41 +315,21 @@ def UserApplicationFormStore(request):
     if request.POST:
         # response = json.loads(response)
         # return HttpResponse(response)
-        try:
-            if request.POST['is_renew']=='on':
-                is_reniew = 0 #is_reniew = 1 renew block
-                try:
-                    transaction_amount = int(request.POST['transaction_amount'])
-                except:
-                    transaction_amount = 9999999999
-                response = BusinessPriceCategory(request,transaction_amount)
-                response = json.loads(response)
-                # return HttpResponse(response)
-                price_category = response['price_category']
-                # return HttpResponse(price_category)
-                price = price_category['start_recommendation_fee'] #price_category['renewal_fee'] renew block
-                try:
-                    payment_rupees = int(price)
-                except:
-                    payment_rupees = None
-        except:
+        if 'business_price_category' in request.POST:
+            price_category = request.POST['business_price_category']
             is_reniew = 0
             try:
-                transaction_amount = int(request.POST['transaction_amount'])
+                payment_rupees = int(RecomendationPriceCategory.recommendation_fee[price_category]['start_recommendation_fee'])
             except:
-                transaction_amount = 9999999999
-            response = BusinessPriceCategory(request,transaction_amount)
-            response = json.loads(response)
-            price_category = response['price_category']
-            price = price_category['start_recommendation_fee']
-            try:
-                payment_rupees = int(price)
-            except:
-                payment_rupees = None         
+                 messages.ERROR(request,'Please select सिफारिस शुल्क र सो को वाडफाड')
+                 return redirect('UserApplicationFormCreate')
+        else:
+            messages.ERROR(request,'Please select सिफारिस शुल्क र सो को वाडफाड')
+            return redirect('UserApplicationFormCreate')
 
         form_detail = {
             'user_id' : request.user.id,
-            'business_price_category' : price_category['code_name'],
+            'business_price_category' : price_category,
             'is_reniew' : is_reniew,
             'payment_rupees' : payment_rupees,
             'physical_year' : request.POST['physical_year']
