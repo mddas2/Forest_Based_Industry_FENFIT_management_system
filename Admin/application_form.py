@@ -382,6 +382,7 @@ def UserApplicationFormStore(request):
                 'dsc' : 'district',
             }
             form_data = {**dsc,**form_data}
+            messages.info(request, 'सिफारिस फारम Forwarded successfully !!!')
             #join dcs and form_data if user press send
         form,form_create = ApplicationForm.objects.update_or_create(user_id=request.user.id , defaults=form_data)
         # try:
