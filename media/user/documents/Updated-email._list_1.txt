@@ -1,0 +1,323 @@
+                                                            ------------state------------------------
+
+                                                            
+1. email: province1@fenfitnepal.com
+   pw: province1@123!
+
+2. email: madhesh@fenfitnepal.com                                                           
+   pw:madhesh@123!
+
+3. email:bagamati@fenfitnepal.com                                                            
+   pw:bagmati@123!
+
+4. email:gandaki@fenfitnepal.com                                                            
+   pw:gandaki@123!
+
+5. email:lumbini@fenfitnepal.com
+   pw:lumbini@123!
+
+6. email:karnali@fenfitnepal.com
+   pw:karnali@123!
+
+7. email:sudurpashchim@fenfitnepal.com
+   pw:sudurpashchim@123!
+------------------------------------
+8. email:ktmvalley@fenfitnepal.com
+   pw:ktmvalley@123!
+
+0. email: bastugat@fenfitnepal.com
+   pw: bastugat@123!  
+---------------------------------------------
+               
+----------------------------Central gmail-----------------------------
+
+1. email: account@fenfitnepal.com
+   pw: account@123!
+
+2. email: admin@fenfitnepal.com
+   pw: admin@123!
+
+3. email: central@fenfitnepal.com
+   pw: central@123!
+----------------------------------------------
+
+--------------------Districts of POV 1--------------------
+1. email: bhojpur@fenfitnepal.com
+   pw: bhojpur@123!
+
+2. email: dhankuta@fenfitnepal.com
+   pw: dhankuta@123!
+
+3. email: ilam@fenfitnepal.com
+   pw: ilam@123!
+
+4. email: jhapa@fenfitnepal.com
+   pw: jhapa@123!
+
+5. email: khotang@fenfitnepal.com
+   pw: khotang@123!
+
+6. email: morang@fenfitnepal.com
+   pw: morang@123!
+
+7. email: okhaldhunga@fenfitnepal.com
+   pw: okhaldhunga@123!
+
+8. email: panchthar@fenfitnepal.com
+   pw: panchthar@123!
+
+9. email: sankhuwasabha@fenfitnepal.com
+   pw: sankhuwasabha@123!
+
+10. email: solukhumbu@fenfitnepal.com
+    pw: solukhumbu@123!
+
+11. email: sunsari@fenfitnepal.com
+    pw: sunsari@123!
+
+12. taplejung@fenfitnepal.com
+    pw: Taplejung@123! or taplejung@123!
+
+13. email: terhathum@fenfitnepal.com
+    pw: terhathum@123!
+
+14. email: udayapur@fenfitnepal.com
+    pw: udayapur@123!
+
+
+-------------------Madhesh Pradesh--------------
+
+1. email: bara@fenfitnepal.com
+   pw: bara@123!
+
+2. email: dhanusa@fenfitnepal.com
+   pw: dhanusa@123!
+
+3. email: mahottari@fenfitnepal.com
+   pw: mahottari@123!
+
+4. email: parsa@fenfitnepal.com
+   pw: parsa@123!
+
+5. email: rautahat@fenfitnepal.com
+   pw: rautahat@123!
+
+6. email: saptari@fenfitnepal.com
+   pw: saptari@123!
+
+7. email: sarlahi@fenfitnepal.com
+   pw: sarlahi@123!
+
+8. email: siraha@fenfitnepal.com
+   pw: siraha@123!
+
+--------------Bagmati Pradesh--------------
+
+
+1. email: bhaktapur@fenfitnepal.com
+   pw: bhaktapur@123!
+
+2. email: chitwan@fenfitnepal.com
+   pw: chitwan@123!
+
+3. email: dhading@fenfitnepal.com
+   pw: dhading@123!
+
+4. email: dolakha@fenfitnepal.com
+   pw: dolakha@123!
+
+5. email: kathmandu@fenfitnepal.com
+   pw: kathmandu@123!
+
+6. email: kavrepalanchok@fenfitnepal.com
+   pw: kavrepalanchok@123!
+
+7. email: lalitpur@fenfitnepal.com
+   pw: lalitpur@123!
+
+8. email: makawanpur@fenfitnepal.com
+   pw: makawanpur@123!
+
+9. email: nuwakot@fenfitnepal.com
+   pw: nuwakot@123!
+
+10. email: ramechhap@fenfitnepal.com
+   pw: ramechhap@123!
+
+11. email: rasuwa@fenfitnepal.com
+   pw: rasuwa@123!
+
+12. email: sindhuli@fenfitnepal.com
+   pw: sindhuli@123!
+
+13. email: sindhupalchok@fenfitnepal.com
+   pw: sindhupalchok@123!
+
+----------------Gandaki Pradesh-------------------------
+
+
+1. email: baglung@fenfitnepal.com
+   pw: baglung@123!
+
+2. email: gorkha@fenfitnepal.com
+   pw: gorkha@123!
+
+3. email: kaski@fenfitnepal.com
+   pw: kaski@123!
+
+4. email: lamjung@fenfitnepal.com
+   pw: lamjung@123!
+
+5. email: manang@fenfitnepal.com
+   pw: manang@123!
+
+6. email: mustang@fenfitnepal.com
+   pw: mustang@123!
+
+7. email: myagdi@fenfitnepal.com
+   pw: myagdi@123!
+
+8. email: nawalpur@fenfitnepal.com
+   pw: nawalpur@123!
+
+9. email: parbat@fenfitnepal.com
+   pw: parbat@123!
+
+10. email: syangja@fenfitnepal.com
+   pw: syangja@123!
+
+11. email: tanahu@fenfitnepal.com
+   pw: tanahu@123!
+
+---------------------------Lumbani Pradesh---------------------
+
+
+1. email: arghakhanchi@fenfitnepal.com.com
+   pw: arghakhanchi@123!
+
+2. email: banke@fenfitnepal.com
+   pw: banke@123!
+
+3. email:bardiya@fenfitnepal.com
+   pw:bardiya@123!
+
+4. email: dang@fenfitnepal.com
+   pw: dang@123!
+
+5. email:gulmi@fenfitnepal.com
+   pw: gulmi@123!
+
+6. email:kapilvastu@fenfitnepal.com
+   pw: kapilvastu@123!
+
+7. email:parasi@fenfitnepal.com
+   pw: parasi@123!
+
+8. email:palpa@fenfitnepal.com
+   pw:palpa@123!
+
+9. email:pyuthan@fenfitnepal.com
+   pw: pyuthan@123!
+
+10. email:rolpa@fenfitnepal.com
+    pw: rolpa@123!
+
+11. email:rukum@fenfitnepal.com
+    pw:rukum@123!
+
+12. email: rupandehi@fenfitnepal.com
+    pw: rupandehi@123!
+
+
+-------------------------Karnali Pradesh-----------------------------
+
+
+1       email: dailekh@fenfitnepal.com 
+        pw: dailekh@123!
+
+2	email: dolpa@fenfitnepal.com 
+        pw: dolpa@123!
+
+3	email: humla@fenfitnepal.com
+        pw: humla@123!
+
+4	email: jajarkot@fenfitnepal.com
+        pw: jajarkot@123!
+
+5	email: jumla@fenfitnepal.com
+        pw: jumla@123!
+
+6	email: kalikot@fenfitnepal.com
+        pw: kalikot@123!
+
+7	email: mugu@fenfitnepal.com
+        pw: mugu@123!
+
+8	email: rukumpaschim@fenfitnepal.com
+        pw: rukumpaschim@123!
+
+9	email: salyan@fenfitnepal.com
+        pw: salyan@123!
+
+10	email: surkhet@fenfitnepal.com
+        pw: surkhet@123!
+
+
+
+---------------------Sudur Paschim Pradesh-------------------
+ 
+
+1 email: achham@fenfitnepal.com
+  pw: achham@123!
+
+2 email: baitadi@fenfitnepal.com 
+  pw: baitadi@123!
+
+3 email: bajhang@fenfitnepal.com 
+  pw: bajhang@123!
+
+4 email: bajura@fenfitnepal.com  
+  pw: bajura @123!
+
+5 email: dadeldhura@fenfitnepal.com 
+  pw: dadeldhura@123!
+
+6 email: darchula@fenfitnepal.com 
+  pw: darchula@123!
+
+7 email: doti@fenfitnepal.com
+  pw: doti@123!
+
+8 email: kailali@fenfitnepal.com 
+  pw: kailali@123!
+
+9 email: kanchanpur@fenfitnepal.com 
+  pw: kanchanpur@123!
+
+
+-----------------Ktm Valley-------------------
+
+1 email: valleykathmandu.com
+pw:  valleykathmandu@123!
+ 
+2 email: valleybhaktapur.com
+pw:  valleybhaktapur@123! 
+
+3 email: valleylalitpur.com
+pw:  valleybhaktapur@123! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

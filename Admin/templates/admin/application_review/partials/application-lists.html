@@ -435,7 +435,103 @@
                                                 </div>
                                                 <div class="page-break"></div>
 
-                                                <div class="card other_informtion">
+                                            </div>                                           
+                                        {% endif %}
+                                            <!------certificate------>                                    
+                                        <div class="col-md-6" id="div_print_document">
+                                            <div class="row zoom-gallery" id="documents">
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                                            {% if id_data.get_user_application_detail.certificate_citizenship %}
+                                                            <a href="{{id_data.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                            {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>                                                           
+                                                            {% if id_data.get_user_application_detail.certificate_company_registration %}
+                                                            <a href="{{id_data.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                        
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                                                            {% if id_data.get_user_application_detail.provisional_account_number %}
+                                                            <a href="{{id_data.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                            {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                                          
+                                                            {% if id_data.get_user_application_detail.tax_paid_certificate %}
+                                                            <a href="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                {% if request.user.role == request.user.CENTRAL %}
+                                                    <div class="col-md-6" id="bank_voucher">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
+                                                               
+                                                                {% if id_data.get_user_application_detail.bank_voucher %}
+                                                                <a href="{{id_data.get_user_application_detail.bank_voucher.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="page-break"></div>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
+                                                            
+                                                            {% if id_data.get_user_application_detail.industry_certificate_front_side %}
+                                                            <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
+                                                            
+
+                                                            {% if id_data.get_user_application_detail.industry_certificate_front_side %}
+                                                            <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="col-md-6" id="div_print_document">
+                                            <div class="card other_informtion">
                                                     <div class="card-body">
                                                         <!-- <h4 class="card-title">Column Toggle Table</h4> -->
                                                         <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
@@ -567,101 +663,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>                                           
-                                        {% endif %}
-                                            <!------certificate------>                                    
-                                        <div class="col-md-6" id="div_print_document">
-                                            <div class="row zoom-gallery" id="documents">
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.certificate_citizenship %}
-                                                            <a href="{{id_data.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                            {% endif %}
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>                                                           
-                                                            {% if id_data.get_user_application_detail.certificate_company_registration %}
-                                                            <a href="{{id_data.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                        
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                            {% if id_data.get_user_application_detail.provisional_account_number %}
-                                                            <a href="{{id_data.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                            {% endif %}
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
-                                                          
-                                                            {% if id_data.get_user_application_detail.tax_paid_certificate %}
-                                                            <a href="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                                                {% if request.user.role == request.user.CENTRAL %}
-                                                    <div class="col-md-6" id="bank_voucher">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
-                                                               
-                                                                {% if id_data.get_user_application_detail.bank_voucher %}
-                                                                <a href="{{id_data.get_user_application_detail.bank_voucher.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                                {% endif %}
-                                                            </div>
-                                                        </div>
-                                                        <div class="page-break"></div>
-                                                    </div>
-                                                {% endif %}
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
-                                                            
-                                                            {% if id_data.get_user_application_detail.industry_certificate_front_side %}
-                                                            <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
-                                                            
-
-                                                            {% if id_data.get_user_application_detail.industry_certificate_front_side %}
-                                                            <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="page-break"></div>
-                                                </div>
-                                            </div>
-                                        </div>                                        
+                                        </div>                                    
                                     </div>                                   
                         
                                     <style>
