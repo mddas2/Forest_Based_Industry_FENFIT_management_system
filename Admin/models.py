@@ -278,5 +278,8 @@ class RecomendationPriceCategory(models.Model):
         'less_than_2_crode':{'code_name':'less_than_2_crode','name_1':'२ करोड भन्दा कम','start_recommendation_fee':'10000','renewal_fee':'5000'},
         'greater_than_2_crode':{'code_name':'greater_than_2_crode','name_1':'रु २ करोड भन्दा माथि','start_recommendation_fee':'20000','renewal_fee':'10000'},
         'old_unregistered_non_payment':{'code_name':'old_unregistered_non_payment','name_1':'कारोबार रकम नख’ल्ने तथा महासंघमा दर्ता नभएका प’राना उद्योगका हकमा','start_recommendation_fee':'20000','renewal_fee':'50000'},
-        # 'non_decide_payment':{'code_name':'old_unregistered_non_payment','name_1':'कारोबार रकम नख’ल्ने तथा महासंघमा दर्ता नभएका प’राना उद्योगका हकमा','start_recommendation_fee':'20000','renewal_fee':'50000'},
+        'new_unregistered_non_payment':{'code_name':'new_unregistered_non_payment','name_1':'कारोबार रकम नख’ल्ने नयाँ उद्योगका हकमा','start_recommendation_fee':'10000','renewal_fee':'50000'},
+        'apply_from_private_organization':{'code_name':'new_unregistered_non_payment','name_1':'बस्तुगत संघा बाटा अवेदन गर्नेहरु','start_recommendation_fee':'10000','renewal_fee':'50000'},
+        'suppliers_and_furniture_industry':{'code_name':'suppliers_and_furniture_industry','name_1':'सप्लायर्स तथा फर्निचर उध्योग का हक्मा','start_recommendation_fee':'5000','renewal_fee':'50000'},
+
     }

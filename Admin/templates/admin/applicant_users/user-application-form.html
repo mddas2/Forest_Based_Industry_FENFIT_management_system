@@ -60,7 +60,6 @@
     $(document).ready(function () {      
         // catch the form's submit event
         $('#amount_to_select').keyup(function () {
-           
             // create an AJAX call
             num = $("#amount_to_select").val()
             $.ajax({
@@ -77,7 +76,8 @@
                         }
                         else{
                             $("#businessrice").text(response.price_category.start_recommendation_fee)
-                            $("#category_b").val(response.price_category.name_1)
+                            $("#business_price_category").val(response.price_category.code_name)
+
                         }
                     }
                     else{
