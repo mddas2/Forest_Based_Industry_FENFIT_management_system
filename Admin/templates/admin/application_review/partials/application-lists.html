@@ -31,9 +31,9 @@
                                 <th>Full Name</th>
                                 {% if request.user.groups.first.name != 'accountant' %}  
                                     <!-- <th>नागरिकता पर्तिलिपि</th> -->
-                                    <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
+                                    <!-- <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th> -->
                                     <!-- <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>       -->
-                                    <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>
+                                    <!-- <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th> -->
                                 {% endif %}
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
                                     <th>तिर्नु पर्ने रकम</th>
@@ -76,14 +76,14 @@
                                                     NotFound
                                                 {% endif %}
                                             </td> -->
-                                            <td class="zoom-gallery">
+                                            <!-- <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.certificate_company_registration %}  
                                                 <a href="{{i.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
-                                                <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                               
                                                 {% else %}
                                                     NotFound
                                                 {% endif %}
-                                            </td>
+                                            </td> -->
                                             <!-- <td class="zoom-gallery">    
                                                 {% if i.get_user_application_detail.provisional_account_number %}        
                                                 <a href="{{i.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
@@ -92,13 +92,13 @@
                                                 {% endif %}
                                             </td>    -->
 
-                                            <td class="zoom-gallery">
+                                            <!-- <td class="zoom-gallery">
                                                 {% if i.get_user_application_detail.tax_paid_certificate %}       
                                                 <a href="{{i.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{i.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive img-fit"" alt="img" /> </a>
                                                 {% else %}
                                                     NotFound
                                                 {% endif %}
-                                            </td>  <!-- this is quantity-->
+                                            </td>  -->
                                         {% endif %}
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name == 'accountant' %}
                                             <td><span class="label label-info">Rs. {{i.get_user_application_detail.payment_rupees}}</span></td>
