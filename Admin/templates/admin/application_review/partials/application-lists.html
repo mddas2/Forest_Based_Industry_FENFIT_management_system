@@ -191,7 +191,7 @@
                                                 </style>
                                             </td>
                                         {% else %}
-                                            <td><a href="{{ i.get_user_application_detail.application_certificate.url }}" target="_blank">{{i.get_user_application_detail.application_certificate}}</a></td>
+                                            <td><a href="{% if i.get_user_application_detail.application_certificate %}{{ i.get_user_application_detail.application_certificate.url }} {% else %} # {% endif %}" target="_blank">{{i.get_user_application_detail.application_certificate}}</a></td>
                                         {% endif %}
                                         {% if action%}
                                        
