@@ -35,13 +35,13 @@
                                 <th>state</th>  
                                 <th>mobile number</th> 
                                 <th>email</th> 
-                                <th>भुक्तानी स्थिति</th>                                 
+                                <th>भुक्तानी स्थिति</th>   
+                                <th>dsc</th>                              
                                 <th>बैंक भौचर</th>                                                                                
                                 <th>बिल नम्बर</th>
                                 <th>बुझिलिएको रकम</th>
                                 <!-- <th>स्थिति</th> -->
                                 <th>दर्ता गरिएको मिति</th>
-                                <th>dsc</th>
                                 <th>विवरण हेर्नुहोस्</th>                                                            
                             </tr>
                         </thead>
@@ -57,12 +57,13 @@
                                         <td>{{i.user.phone}}</td>  
                                         <td>{{i.user.email}}</td>   
                                         <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>                            
+                                        <td>{{i.dsc}}</td>
                                         <td>{{i.get_user_application_detail.voucher_number}}</td>                                      
                                         <td>{{i.bill_number}}</td>
                                         <td>{{i.payment_get}}</td>
                                         <!-- <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td>                                       -->
                                         <td><span class="label label-info">{{i.get_date}}</span></td>    
-                                        <td>{{i.dsc}}</td>                                  
+                                                                          
                                         <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>                             
                                         
                                          

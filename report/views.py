@@ -25,7 +25,7 @@ def ApplicationFormReport(request):
 
      slug = "सुचिकरण सिफारिश Report"
      report_type = 'application'
-     formsobj = ApplicationForm.objects.filter(dsc__isnull=False)
+     formsobj = ApplicationForm.objects.filter(dsc__isnull=False).order_by('id')
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
@@ -39,7 +39,7 @@ def ApplicationFormReport(request):
 def MembershipReport(request):
      slug = "सदस्यता Report"
      report_type = 'membership'
-     formsobj = ApplicationForm.objects.filter(user__is_applyForVerified__contains=1)
+     formsobj = ApplicationForm.objects.filter(user__is_applyForVerified__contains=1).order_by('id')
      # return HttpResponse(formsobj.first().dsc)
      data={
         'all_data' : formsobj,
