@@ -166,7 +166,7 @@
                                             <div class="page-break"></div>
                                         </div>
                                            <!---certificate-->               
-                                        {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
+                                        {% if request.user.role == request.user.CENTRAL and id_data.is_payment == True %}                         
                                             <div class="col-md-6" id="div_print_certificate{{id_data.id}}">
                                                 <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate{{id_data.id}}');">print</button>
                                                 <div class="nibedan-form">
