@@ -16,13 +16,14 @@ from django.contrib.auth.decorators import permission_required
 
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_group
 from django.shortcuts import redirect
-
+from Admin.decorators import customized_user_passes_test,is_admin_role,is_central_role
+from django.contrib.auth.decorators import login_required
 from rest_framework.renderers import JSONRenderer
 
-
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_central_role)
 def ApplicationFormReport(request):
      approved_admin =  CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo').first()
-
      slug = "सुचिकरण सिफारिश Report"
      report_type = 'application'
      formsobj = ApplicationForm.objects.filter(dsc__isnull=False).order_by('-id')
@@ -36,6 +37,8 @@ def ApplicationFormReport(request):
     }
      return render(request,'report/application-lists.html',data)
 
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_central_role)
 def MembershipReport(request):
      slug = "सदस्यता Report"
      report_type = 'membership'
@@ -50,16 +53,17 @@ def MembershipReport(request):
      return render(request,'report/application-lists.html',data)
 
 class ExportProduct(LoginRequiredMixin,APIView):
-
     def get(self,request):
-          product_objs = ApplicationForm.objects.all()
-     
+          if request.user.role == CustomUser.CENTRAL:
+               product_objs = ApplicationForm.objects.all()   
+               serializer = ApplicationFormSerializer(product_objs, many=True)
+               # return HttpResponse(JSONRenderer().render(serializer.data))
+               df = pd.DataFrame(serializer.data)
+               tempname="detail"
+               df.to_excel(f"media/excel/{tempname}.xlsx")
+               file_path = os.path.join(settings.MEDIA_URL, 'excel/'+str(tempname)+'.xlsx')
+               return redirect(file_path)
+          else:
+               return redirect(ApplicationFormReport)
 
-          serializer = ApplicationFormSerializer(product_objs, many=True)
-          # return HttpResponse(JSONRenderer().render(serializer.data))
-          df = pd.DataFrame(serializer.data)
-          tempname="detail"
-          df.to_excel(f"media/excel/{tempname}.xlsx")
-          file_path = os.path.join(settings.MEDIA_URL, 'excel/'+str(tempname)+'.xlsx')
-          return redirect(file_path)
        

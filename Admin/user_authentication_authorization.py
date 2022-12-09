@@ -310,9 +310,9 @@ def GroupStore(request,id=None):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_central_role)
 def GroupDelete(request,id):
-    groupobj = Group.objects.get(id=id)
-    groupobj.delete()
-    messages.success(request,'Group deleted Sucessful!!!')
+    # groupobj = Group.objects.get(id=id)
+    # groupobj.delete()
+    messages.info(request,'Group cant  delete it is protected!!!')
     return redirect(GroupList)
 
 @login_required(login_url=settings.LOGIN_URL)
