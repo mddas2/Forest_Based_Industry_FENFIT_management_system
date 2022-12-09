@@ -114,25 +114,33 @@
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-note"></i>
-                        {% if client_msg %}
-                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        {% if request|getTotamMember or request|getTotalApplication %}
+                            <div class="notify"> <span class="heartbit"></span> <span class="point">{{request|getTotalNotification}}</span> </div>                        
                         {% endif %}
                     </a>
+                    
                     <div class="dropdown-menu mailbox dropdown-menu-end animated bounceInDown" aria-labelledby="2">
                         <ul>
                             <li>
-                                <div class="drop-title">You have {{client_msg|length}} new messages</div>
+                                <div class="drop-title">You have {{request|getTotalNotification}} new notification</div>
                             </li>
                             <li>
                                 <div class="message-center">
                                     <!-- Message -->
-                                     {% for msg in client_msg %}
-                                        <a href="{% url 'ClientMessage' id=msg.id %}">
-                                            <div class="user-img"> <img src="https://www.linkpicture.com/q/LPic633347498aa731232683242.png" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                     {% for msg in request|getTotamMember %}
+                                        <a href="{% url 'AllMemberList' %}">
+                                            <div class="user-img"> <img src="{% if msg.user.image %} {{msg.user.image.url}} {% else %} {% static '/assets/images/users/user_logo.png' %} {% endif %}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                             <div class="mail-contnet">
-                                                <h5>{{msg.name}}</h5> <span class="mail-desc">{{msg.subject}}</span> <span class="time">{{msg.get_date}}</span> </div>
+                                                <h5>Please approved my membership</h5></div>
                                         </a>
-                                    {% endfor %}
+                                     {% endfor %}
+                                     {% for msg in request|getTotalApplication %}
+                                        <a href="{% url 'Pending' %}">
+                                            <div class="user-img"> <img src="{% if msg.user.image %} {{msg.user.image.url}} {% else %} {% static '/assets/images/users/user_logo.png' %} {% endif %}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                            <div class="mail-contnet">
+                                                <h5>Please forward my application</h5></div>
+                                        </a>
+                                     {% endfor %}
                                 </div>
                             </li>
                             <li>

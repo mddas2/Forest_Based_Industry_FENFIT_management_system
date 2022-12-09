@@ -1,7 +1,8 @@
 from django.template.defaulttags import register
 from nepallocation.models import *
-from Admin.models import BusinessType,RecomendationPriceCategory
+from Admin.models import BusinessType,RecomendationPriceCategory,ApplicationForm
 from account.models import CustomUser
+from django.db.models import Q
 
 @register.filter
 def get_item(dictionary, key):
@@ -72,5 +73,56 @@ def getPriceCategoryNepaliName(code_name):
     except:
         return code_name
 
+@register.filter
+def getTotamMember(request):
+    try:
+        district_name = request.user.district_name
+        state_name = request.user.state_name
+        if request.user.role==CustomUser.DISTRICT:
+            all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,district_name=district_name).order_by('-updated_at') 
+        if request.user.role==CustomUser.PRIVATE:
+            all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,union_name=request.user.email).order_by('-updated_at') 
+        elif request.user.role==CustomUser.STATE:
+            all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True,state_name=state_name).order_by('-updated_at')
+        elif request.user.role==CustomUser.CENTRAL:
+            all_data = CustomUser.objects.filter(is_verified=False,is_applyForVerified=True).order_by('-updated_at')
+        else:
+            all_data = None
+        return all_data
+    except:
+        all_data = None
+        return all_data
+
+@register.filter
+def getTotalApplication(request):
+    try:
+        if request.user.role == CustomUser.DISTRICT:
+            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-updated_at')  
+        elif request.user.role == CustomUser.STATE:
+            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-updated_at')  
+        elif request.user.role == CustomUser.PRIVATE:
+            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-updated_at') 
+        elif request.user.role == CustomUser.CENTRAL:
+            if request.user.get_dsc_Role() == 'central_accountant':
+                all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('-updated_at') #admin can view both data from accountant and self
+            else:
+                all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at') 
+        else:
+            all_data = None 
+        return all_data
+    except:
+        return None    
+
+@register.filter
+def getTotalNotification(request):
+    try:
+        app = getTotalApplication(request).count()
+        member = getTotamMember(request).count()
+        return app+member
+    except:
+        try:
+            return getTotamMember(request).count()
+        except:
+            return 0
 
     
