@@ -115,7 +115,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-note"></i>
                         {% if request|getTotamMember or request|getTotalApplication %}
-                            <div class="notify"> <span class="heartbit"></span> <span class="point">{{request|getTotalNotification}}</span> </div>                        
+                            <div class="notify"> <span class="heartbit"></span> <span class="point" style="color: red; font-weight: bold;">{{request|getTotalNotification}}</span> </div>                        
                         {% endif %}
                     </a>
                     
@@ -129,16 +129,16 @@
                                     <!-- Message -->
                                      {% for msg in request|getTotamMember %}
                                         <a href="{% url 'AllMemberList' %}">
-                                            <div class="user-img"> <img src="{% if msg.user.image %} {{msg.user.image.url}} {% else %} {% static '/assets/images/users/user_logo.png' %} {% endif %}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                            <div class="user-img"> <img src="{% if msg.image %} {{msg.image.url}} {% else %} {% static '/assets/images/users/user_logo.png' %} {% endif %}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                             <div class="mail-contnet">
-                                                <h5>Please approved my membership</h5></div>
+                                                <h5>{{msg.first_name}}</h5>Please approved my membership</div>
                                         </a>
                                      {% endfor %}
                                      {% for msg in request|getTotalApplication %}
                                         <a href="{% url 'Pending' %}">
                                             <div class="user-img"> <img src="{% if msg.user.image %} {{msg.user.image.url}} {% else %} {% static '/assets/images/users/user_logo.png' %} {% endif %}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                             <div class="mail-contnet">
-                                                <h5>Please forward my application</h5></div>
+                                                <h5>{{msg.user.first_name}}</h5><span>Please forward my application</span></div>
                                         </a>
                                      {% endfor %}
                                 </div>
