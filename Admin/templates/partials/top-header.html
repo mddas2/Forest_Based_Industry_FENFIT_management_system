@@ -115,7 +115,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-note"></i>
                         {% if request|getTotamMember or request|getTotalApplication %}
-                            <div class="notify"> <span class="heartbit"></span> <span class="point" style="color: red; font-weight: bold;">{{request|getTotalNotification}}</span> </div>                        
+                            <div class="notify"> <span class="heartbit"></span> <span class="point" style="color: red; font-weight: bold; width:9px">{{request|getTotalNotification}}</span> </div>                        
                         {% endif %}
                     </a>
                     
