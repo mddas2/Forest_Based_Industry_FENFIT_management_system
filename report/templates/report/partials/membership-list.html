@@ -134,7 +134,7 @@
                                                             <label style="font-weight: bold;">आवेदक</label>
                                                             <label>उद्यमीको नाम : <span class="user-info-data">{{id_data.user.first_name}}</span></label>
                                                             <label>उद्योग वा व्यवसायको नाम : <span
-                                                                    class="user-info-data">{{business_name}}</span></label>
+                                                                    class="user-info-data">{{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}}</span></label>
                                                             <label>सम्र्पक नं : <span class="user-info-data">{{id_data.user.phone}}</span></label>
                                                             <label>इमेल : <span class="user-info-data">{{id_data.user.email}}</span></label>
                                                             {% load staticfiles %}
