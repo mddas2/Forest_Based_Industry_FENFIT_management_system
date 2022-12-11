@@ -27,6 +27,7 @@ from django.contrib.auth.decorators import permission_required
 from wsgiref.util import FileWrapper
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_group,is_USER_role,is_all_role
 from django.shortcuts import redirect
+from django.db.models import Sum
 
 from django.db.models import Q
 
@@ -57,13 +58,17 @@ def index(request, pk=None, pdc=None):
     total_approved_form = request.user.total_application_form_approved.all().count()
     total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
     total_member = CustomUser.objects.all().count()
+    total_income = UserApplicationPayment.objects.filter(is_payment=True).aggregate(Sum('payment_rupees'))
+    # return HttpResponse(total_income['payment_rupees__sum'])
+    # total_income = 9808
     data_1={
         'a' : 12,
         'total_pending_application_form' : total_pending_application_form,
         'total_approved_form' : total_approved_form,
         'total_rejected_application_form' : total_rejected_application_form,
         'total_member' : total_member,
-        'approved_admin' : approved_admin
+        'approved_admin' : approved_admin,
+        'total_income' : total_income['payment_rupees__sum']
     }
 
     # return  HttpResp  onse(today_max)
