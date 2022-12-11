@@ -41,7 +41,7 @@
                                 {% endif %}
                                 <th>भुक्तानी स्थिति</th> 
                                 <!-- <th>जिल्ला</th>                                                    -->
-                                <th>विवरण हेर्नुहोस्</th>
+                               
                                 <!-- <th>दर्ता गरिएको मिति</th>
                                 <th>स्थिति</th> -->
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
@@ -58,8 +58,9 @@
                                 {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  %}
                                     <th>upload certificate</th>  
                                 {% endif %}
+                                <th>विवरण हेर्नुहोस्</th>
                                 <th>Action</th>
-                                <th style="display:none">email</th>                            
+                                                         
                             </tr>
                         </thead>
                         {% if all_data %}
@@ -106,7 +107,7 @@
                                         {% endif %}
                                         <td><span class="label label-success">{% if i.is_payment == True %} paid {% else %} Unpaid {% endif %}</span></td>
                                         <!-- <td>{{i.user.district_name}}</td> -->
-                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
+                                        
                                         <!-- <td><span class="label label-info">{{i.get_date}}</span></td>
                                         <td><span class="label label-success">{% if i.approved_pending_cancelled == 'p' %} Pending {% elif i.approved_pending_cancelled == 'a' %} Approved {% elif i.approved_pending_cancelled == 'c' %} Cancelled {% else %} Processing {% endif %}</span></td> -->
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
@@ -148,6 +149,7 @@
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name != 'accountant' %}
                                             <td>{{i.payment_get}}</td>
                                         {% endif %}
+                                       
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
                                                 
                                              <td>             
@@ -165,8 +167,7 @@
                                                     </div>
                                                     </div>                                         
                                                 </form>                                    
-                                            </td>
-                                            
+                                            </td>                                            
                                         {% endif %}
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  and i.get_user_application_detail.application_certificate == '' %}
                                             <td>
@@ -191,8 +192,11 @@
                                                 </style>
                                             </td>
                                         {% else %}
+                                          {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  %}
                                             <td><a href="{% if i.get_user_application_detail.application_certificate %}{{ i.get_user_application_detail.application_certificate.url }} {% else %} # {% endif %}" target="_blank">{{i.get_user_application_detail.application_certificate}}</a></td>
+                                           {% endif %} 
                                         {% endif %}
+                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
                                         {% if action%}
                                        
                                             <td>
