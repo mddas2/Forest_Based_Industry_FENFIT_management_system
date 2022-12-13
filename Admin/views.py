@@ -53,8 +53,10 @@ def index(request, pk=None, pdc=None):
     dsc_role = request.user.get_dsc_Role()
 
     approved_admin =  CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo').first()
-
-    total_pending_application_form = all_data.count()
+    try:
+        total_pending_application_form = all_data.count()
+    except:
+        total_pending_application_form = 0
     total_approved_form = request.user.total_application_form_approved.all().count()
     total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
     total_member = CustomUser.objects.all().count()
