@@ -719,6 +719,7 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
             all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at') 
     else:
         all_data = None 
+    
     dsc_role = request.user.get_dsc_Role()
 
     slug1 = "Pending Application"
