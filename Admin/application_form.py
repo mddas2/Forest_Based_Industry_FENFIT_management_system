@@ -722,7 +722,7 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
     dsc_role = request.user.get_dsc_Role()
 
     slug1 = "Pending Application"
-    all_data = ApplicationForm.objects.filter(dsc=dsc_role).order_by('-updated_at')   
+   
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
