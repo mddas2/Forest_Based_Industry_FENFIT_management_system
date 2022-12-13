@@ -678,16 +678,29 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
             except:
                 messages.error(request,'form not approved')
          elif approved_pending_cancelled=='c':
+            dsc = dsc_role = request.user.get_dsc_Role()
             referred_to_dsc = None #jumps to user(cancelled by all)
-            ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
-            whoses_form = ApplicationForm.objects.get(id=pk).user_id
-            application_form_cancelled_detail_data = {
-                    'cancelled_form_id' : pk,
-                    'cancelled_by_id' : request.user.id,
-                    'whose_form' : whoses_form
-                }
-            ApplicationFormCancelledDetail.objects.create(**application_form_cancelled_detail_data)           
-            messages.success(request,'form cancelled successfully!!!')
+            try:
+                app_dsc = ApplicationForm.objects.get(id=pk).dsc
+            except:
+                messages.error(request,"you can not cancelled form ")
+                return redirect('index')
+            if app_dsc == dsc:
+                update_obj = ApplicationForm.objects.filter(id=pk,dsc=dsc).update(dsc=referred_to_dsc,approved_pending_cancelled=None)
+            else:
+                update_obj = 0
+            if update_obj == 1:           
+                whoses_form = ApplicationForm.objects.get(id=pk).user_id
+                application_form_cancelled_detail_data = {
+                        'cancelled_form_id' : pk,
+                        'cancelled_by_id' : request.user.id,
+                        'whose_form' : whoses_form
+                    }
+                ApplicationFormCancelledDetail.objects.create(**application_form_cancelled_detail_data)           
+                messages.success(request,'form cancelled successfully!!!')
+            else:
+                messages.error(request,'you can not cancelled form')
+                return redirect('index')
 
     data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
