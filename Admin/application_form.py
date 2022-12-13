@@ -46,7 +46,7 @@ def AllMemberList(request, pk=None, approved_pending_cancelled=None):#all applic
            CustomUser.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name) 
            messages.success(request,'Member approved successfully!!!')       
          elif approved_pending_cancelled=='c':            
-            CustomUser.objects.filter(id=pk).update(is_varified=False,is_applyForVerified=False)          
+            CustomUser.objects.filter(id=pk).update(is_verified=False,is_applyForVerified=False)          
             messages.success(request,'Member cancelled successfully!!!')
          elif approved_pending_cancelled=='p':            
             CustomUser.objects.filter(id=pk).update(is_verified=False,is_applyForVerified=True)          
