@@ -1,7 +1,7 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/radijmdg/fenfitnepal/ #this is demo
-    # - export DEPLOYPATH=/home/fenfitnepal/fenfitnepal/ #this is original
+    # - export DEPLOYPATH=/home/radijmdg/fenfitnepal/ #this is demo
+    - export DEPLOYPATH=/home/fenfitnepal/fenfitnepal/ #this is original
     - /bin/cp -r nepallocation $DEPLOYPATH
     - /bin/cp -r report $DEPLOYPATH
     - /bin/cp -r payment $DEPLOYPATH
