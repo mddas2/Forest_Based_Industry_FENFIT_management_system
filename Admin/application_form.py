@@ -802,3 +802,18 @@ def DeleteTeam(request,id=None):
     except:
         pass
     return redirect('MemberAprovalForm')
+    
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def CertificatiRemoved(request , id=None):
+    if request.user.role != request.user.CENTRAL:
+        messages.info(request,"you are not allowed to delete file")
+        return redirect("/")
+    try:
+        obj = ApplicationForm.objects.get(id=id)
+        detail_obj = obj.get_user_application_detail.application_certificate.delete(save=True)
+        messages.success(request,"certificate is removed successfully !")
+        return redirect("/")
+    except:
+        messages.info(request,"can not remove certificate")
+        return redirect("/")

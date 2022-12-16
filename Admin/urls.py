@@ -97,6 +97,7 @@ urlpatterns = [
     path('all-application-accountant-payment-store', application_form.PaymentGet, name='PaymentGet'),
     path('all-application-accountant-application-certificate-store', application_form.CertificateUpload, name='CertificateUpload'),
     path('all-application-accountant-type-application-id-store', application_form.TypeApplicationId, name='TypeApplicationId'),
+    path('all-application-accountant-certificate-remove/<int:id>', application_form.CertificatiRemoved, name='CertificatiRemoved'),
     #**** Client messages*****#
     path('client-messages/<int:id>', views.ClientMessage, name='ClientMessage'),
 

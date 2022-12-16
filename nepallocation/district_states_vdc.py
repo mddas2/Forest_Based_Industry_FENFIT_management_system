@@ -127,6 +127,7 @@ def storeMunicipality(request,municipality,state_id,district_id):
      return id
 
 def InsertAll(request):
+     return HttpResponse("it is blocked , can not be insert")
      response = requests.get(
           "https://nepallocation.com.np/api/v1/province/list",
           headers={'Authorization': 'Bearer ' + token}

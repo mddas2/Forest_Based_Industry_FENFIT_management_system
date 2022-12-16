@@ -152,21 +152,25 @@
                                        
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin' %}
                                                 
-                                             <td>             
-                                                <form class="form-horizontal form-material" id="type_application_id" action="{% url 'TypeApplicationId' %}" method="POST">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
-                                                    <div class="form-group ">
-                                                        <div class="row">
-                                                        <div class="col-md-4">
-                                                            <input id="type_application_id" class="form-control" type="text" required="" value="{{i.type_application_id}}" placeholder="सिफारिस ID" name="type_application_id"> 
+                                             <td>     
+                                                {% if i.type_application_id == '' %}        
+                                                    <form class="form-horizontal form-material" id="type_application_id" action="{% url 'TypeApplicationId' %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" class="form-control"  value="{{i.id}}" name="form_id">                             
+                                                        <div class="form-group ">
+                                                            <div class="row">
+                                                            <div class="col-md-4">
+                                                                <input id="type_application_id" class="form-control" type="text" required="" value="{{i.type_application_id}}" placeholder="सिफारिस ID" name="type_application_id"> 
+                                                            </div>
+                                                                <div class="col-md-8 ">
+                                                                    <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
+                                                                </div>
                                                         </div>
-                                                        <div class="col-md-8 ">
-                                                            <button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">Save</button>
-                                                        </div>
-                                                    </div>
-                                                    </div>                                         
-                                                </form>                                    
+                                                        </div>                                         
+                                                    </form>  
+                                                {% else %}
+                                                     {{i.type_application_id}}
+                                                {% endif %}                               
                                             </td>                                            
                                         {% endif %}
                                         {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  and i.get_user_application_detail.application_certificate == '' %}
@@ -193,7 +197,16 @@
                                             </td>
                                         {% else %}
                                           {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'admin'  %}
-                                            <td><a href="{% if i.get_user_application_detail.application_certificate %}{{ i.get_user_application_detail.application_certificate.url }} {% else %} # {% endif %}" target="_blank">{{i.get_user_application_detail.application_certificate}}</a></td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <a href="{% if i.get_user_application_detail.application_certificate %}{{ i.get_user_application_detail.application_certificate.url }} {% else %} # {% endif %}" target="_blank"><button class="btn w-100 btn-sm btn-info btn-rounded text-white" type="submit">open</button></a>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a href="{% url 'CertificatiRemoved' id=i.id %}"><button class="btn w-100 btn-sm btn-danger btn-rounded text-white" type="submit">remove</button></a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                            {% endif %} 
                                         {% endif %}
                                         <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
