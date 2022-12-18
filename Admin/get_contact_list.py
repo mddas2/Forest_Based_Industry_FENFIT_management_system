@@ -15,6 +15,8 @@ def getExactEmailList(request,application_form_obj):
     ceo_obj = CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo')
     for user in ceo_obj:
         email_list.append(user)
+    email_list.append('info@dofsc.gov.np')
+    email_list.append('info@mofe.gov.np')
     return email_list
     # if union_type == 'district':
         
