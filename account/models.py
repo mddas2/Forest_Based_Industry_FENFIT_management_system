@@ -32,6 +32,9 @@ class CustomUser(AbstractUser):
 
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
+
+    division_forest_email = models.CharField(max_length=205,null=True) #डिभिजन वन कार्यालयहरुको इमेल
+
     USERNAME_FIELD = 'email'
 
     CENTRAL = 1

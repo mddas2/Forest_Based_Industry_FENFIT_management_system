@@ -96,6 +96,17 @@
                                                 <!--/span-->
                                         </div>
                                         <!--/row-->
+                                        {% if id_data.role == id_data.DISTRICT %}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"><font color="red">डिभिजन वन कार्यालयहरुको इमेल</font>
+                                                        </label>
+                                                        <input name="division_forest_email" type="text" value="{{id_data.division_forest_email}}" name="keyword" class="form-control">
+                                                    </div>
+                                                </div> 
+                                            </div>  
+                                        {% endif %}
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -109,7 +120,8 @@
                                                     <input name="password2" type="text" name="keyword" class="form-control"> </div>
                                             </div>
                                             <!--/span-->
-                                        
+                                                                                    
+                                            
                                             <div class="col-md-3">
                                                 <div class="card">
                                                     <div class="card-body">

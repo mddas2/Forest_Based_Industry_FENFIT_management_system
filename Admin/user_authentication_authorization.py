@@ -175,7 +175,13 @@ def UserStore(request,id=None):
                 messages.success(request, 'Group Permission is set to '+ group.name)
             else:
                 messages.INFO(request, 'Group not Seted!!!')
-
+        
+        if str(user.role) == str(CustomUser.DISTRICT) and 'division_forest_email' in request.POST:
+            division_forest_email = request.POST['division_forest_email']
+            user.division_forest_email = division_forest_email
+            user.save()
+        else:
+            return HttpResponse("else")
         request.session['user_id'] = user.id
         messages.info(request, 'User inserted Successfully !!!')
         return redirect(UserList)
