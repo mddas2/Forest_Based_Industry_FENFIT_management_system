@@ -12,11 +12,12 @@ def getExactEmailList(request,application_form_obj):
             pass
         else:
             email_list.append(usr.approved_by.email)
+            email_list.append(usr.approved_by.division_forest_email)
     ceo_obj = CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo')
     for user in ceo_obj:
         email_list.append(user)
-    # email_list.append('info@dofsc.gov.np')
-    # email_list.append('info@mofe.gov.np')
+    email_list.append('info@dofsc.gov.np')
+    email_list.append('info@mofe.gov.np')
     return email_list
     # if union_type == 'district':
         
