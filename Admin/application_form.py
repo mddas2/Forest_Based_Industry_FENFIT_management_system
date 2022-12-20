@@ -721,16 +721,16 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
 @customized_user_passes_test(is_admin_role)
 def Pending(request, pk=None, approved_pending_cancelled=None):
     if request.user.role == CustomUser.DISTRICT:
-        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-updated_at')  
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-created_at')  
     elif request.user.role == CustomUser.STATE:
-        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-updated_at')  
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-created_at')  
     elif request.user.role == CustomUser.PRIVATE:
-        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-updated_at') 
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-created_at') 
     elif request.user.role == CustomUser.CENTRAL:
         if request.user.get_dsc_Role() == 'central_accountant':
-            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('-updated_at') #admin can view both data from accountant and self
+            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('-created_at') #admin can view both data from accountant and self
         else:
-            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at') 
+            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-created_at') 
     else:
         all_data = None 
     
