@@ -638,7 +638,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         user_sms = CustomUser.objects.get(id=whoses_form)
                         form_sms = ApplicationForm.objects.get(id=pk)
                         sms = "FENFIT_ALERT!\n"+"District Name:"+ str(user_sms.district_name) + "\n Name:"+ str(user_sms.first_name)+"\n Id: " + str(form_sms.id)
-                        bulk_sms_email.SendSmsRadiant(to_number, sms)
+                        # bulk_sms_email.SendSmsRadiant(to_number, sms)
                         # bulk_sms_email.SendSmsSparrow(to_number, sms)
                         messages.success(request,"Messages sent")
                     if approved == 1:
@@ -648,6 +648,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         emaillist = getExactEmailList(request,application_form)    
                         emaillist.append(CustomUser.objects.get(id=whoses_form).email)
                         to_email = emaillist
+                        return HttpResponse(to_email)
 
                         # from_email = settings.EMAIL_HOST_PASSWORD #this is for gmail
                         from_email = settings.EMAIL_HOST_USER #this is for fenfit email
