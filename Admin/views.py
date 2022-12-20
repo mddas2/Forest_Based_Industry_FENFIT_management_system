@@ -65,13 +65,20 @@ def index(request, pk=None, pdc=None):
     # return HttpResponse(total_income['payment_rupees__sum'])
     # total_income = 9808
 
-    paginate_obj = Paginator(all_data, 2) #creating pagiting (only 5 data)
+    
     
     
     page_number = request.GET.get('page')
     page_type = request.GET.get('type')
+    range = request.GET.get('range')
     next = 2
     prev = 1
+
+    try:
+        paginate_obj = Paginator(all_data, int(range)) #creating pagiting (only 5 data)
+    except:
+        paginate_obj = Paginator(all_data, 2)
+
     try:
         page_number = int(page_number)
         if page_type == "next":
@@ -90,6 +97,7 @@ def index(request, pk=None, pdc=None):
         'a' : 12,
         'next' : next,
         'prev' : prev,
+        'range' : range,
         'total_pending_application_form' : total_pending_application_form,
         'total_approved_form' : total_approved_form,
         'total_rejected_application_form' : total_rejected_application_form,

@@ -15,6 +15,7 @@ from django.contrib.auth.hashers import make_password
 from payment.payment import BusinessPriceCategory
 from . import bulk_sms_email
 from . import nepal_location
+from django.core.paginator import Paginator
 from django.db.models import Q
 
 #importing get_template from loader
@@ -736,10 +737,35 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
     dsc_role = request.user.get_dsc_Role()
 
     slug1 = "Pending Application"
+
+   
+    page_number = request.GET.get('page')
+    page_type = request.GET.get('type')
+    page_type = request.GET.get('type')
+
+    next = 2
+    prev = 1
+    try:
+        paginate_obj = Paginator(all_data, int(range)) #creating pagiting (only 5 data)
+    except:
+        paginate_obj = Paginator(all_data, 2)
+    try:
+        page_number = int(page_number)
+        if page_type == "next":
+            next = page_number+1
+        elif page_number == 'prev':
+            prev = page_number-1
+    except:
+        page_number = 2
+    try:
+        all_data = paginate_obj.get_page(page_number)  # returns the desired page object
+    except:
+        # if page_number is not an integer then assign the first page
+        all_data = paginate_obj.page(1)
    
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  
-    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
+    data = {'range':range,'next':next,'prev':prev,'slug1':slug1,'create':False, 'all_data':all_data,'action':True}
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     return render(request,'admin/application_review/application-lists.html',data)
