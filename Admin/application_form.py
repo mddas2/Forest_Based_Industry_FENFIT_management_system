@@ -624,7 +624,7 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                     is_admin_approved = 1
                 elif dsc == 'central_ceo' and request.user.get_dsc_Role()=='central_ceo':
                     referred_to_dsc = 'approved' #approved
-                    ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
+                    # ApplicationForm.objects.filter(id=pk).update(dsc=referred_to_dsc,approved_pending_cancelled=None,in_central_approved_by=request.user.id)
                     should_insert = 1
                     approved = 1
 
@@ -642,13 +642,14 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                         # bulk_sms_email.SendSmsSparrow(to_number, sms)
                         messages.success(request,"Messages sent")
                     if approved == 1:
-                        messages.success(request,'form approved successfully!!!')
-                        UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
                        
                         emaillist = getExactEmailList(request,application_form)    
                         emaillist.append(CustomUser.objects.get(id=whoses_form).email)
                         to_email = emaillist
                         return HttpResponse(to_email)
+
+                        messages.success(request,'form approved successfully!!!')
+                        UserApplicationDetail.objects.filter(id=pk).update(approved_name=request.user.first_name,approved_email=request.user.email,approved_signature=request.user.signature,approved_company_name=request.user.company_name)
 
                         # from_email = settings.EMAIL_HOST_PASSWORD #this is for gmail
                         from_email = settings.EMAIL_HOST_USER #this is for fenfit email
