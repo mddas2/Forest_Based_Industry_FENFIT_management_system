@@ -180,8 +180,6 @@ def UserStore(request,id=None):
             division_forest_email = request.POST['division_forest_email']
             user.division_forest_email = division_forest_email
             user.save()
-        else:
-            return HttpResponse("else")
         request.session['user_id'] = user.id
         messages.info(request, 'User inserted Successfully !!!')
         return redirect(UserList)
