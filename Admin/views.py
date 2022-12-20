@@ -63,9 +63,7 @@ def index(request, pk=None, pdc=None):
     total_member = CustomUser.objects.all().count()
     total_income = UserApplicationPayment.objects.filter(is_payment=True).aggregate(Sum('payment_rupees'))
     # return HttpResponse(total_income['payment_rupees__sum'])
-    # total_income = 9808
-
-    
+    # total_income = 9808   
     
     
     page_number = request.GET.get('page')
@@ -277,5 +275,26 @@ def ClientMessage(request, id):
     return render(request, 'admin/clients_messages/client-msg-details.html',data)
     return HttpResponse('okay')
 
+def ajaxIndex(request):
+    if request.user.role == CustomUser.DISTRICT:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-created_at')  
+    elif request.user.role == CustomUser.STATE:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-created_at')  
+    elif request.user.role == CustomUser.PRIVATE:
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-created_at') 
+    elif request.user.role == CustomUser.CENTRAL:
+        if request.user.get_dsc_Role() == 'central_accountant':
+            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('payment') #admin can view both data from accountant and self
+        else:
+            all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-created_at') 
+    else:
+        all_data = None  
 
+    # return all_data
+    import json
+    from django.http import JsonResponse
+    from django.core import serializers
+    from rest_framework.renderers import JSONRenderer
+    serializer = ApplicationFormSerializer(all_data, many=True)
+    return HttpResponse(JSONRenderer().render(serializer.data))
        

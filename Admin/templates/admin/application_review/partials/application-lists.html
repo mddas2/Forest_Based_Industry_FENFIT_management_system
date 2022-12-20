@@ -1121,6 +1121,34 @@ $("#pagination").change(function(){
         })
     });
     
+    $(document).ready(function()  { //this is success call back	
+		var CSRF_TOKEN  = "{{ csrf_token }}";
+		var form_data = new FormData();
+		form_data.append("csrfmiddlewaretoken",CSRF_TOKEN);
+        url = '{% url "ajaxIndex" %}',
+        alert(url)
+        // $('#signeddoc').val(data);
+        // $('#docinfo').text('Signed Document attached!');
+		$.ajax({
+            url:url,
+            method: 'GET',
+			data : form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforSend: function () {
+               
+            },
+            success: function (data) {
+                alert(data)
+                alert("Data get success");
+				// location.reload();
+            },
+            error: function (error) {
+              alert("error")
+            }
+        })
+    })
 
 </script>
 {% endblock %}
