@@ -28,6 +28,7 @@ from wsgiref.util import FileWrapper
 from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_group,is_USER_role,is_all_role
 from django.shortcuts import redirect
 from django.db.models import Sum
+from django.core.paginator import Paginator
 
 from django.db.models import Q
 
@@ -63,6 +64,15 @@ def index(request, pk=None, pdc=None):
     total_income = UserApplicationPayment.objects.filter(is_payment=True).aggregate(Sum('payment_rupees'))
     # return HttpResponse(total_income['payment_rupees__sum'])
     # total_income = 9808
+
+    paginate_obj = Paginator(all_data, 5) #creating pagiting (only 5 data)
+    page_number = request.GET.get('page')
+    try:
+        all_data = paginate_obj.get_page(page_number)  # returns the desired page object
+    except:
+        # if page_number is not an integer then assign the first page
+        all_data = paginate_obj.page(1)
+    
     data_1={
         'a' : 12,
         'total_pending_application_form' : total_pending_application_form,
