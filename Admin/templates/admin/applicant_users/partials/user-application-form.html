@@ -445,7 +445,10 @@
                                     </style>
                                     <div class="form-actions m-t-40">
                                         <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i class="fa fa-check"></i> Save</button>
-                                        <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
+                                       
+                                        {% if id_data.applicationform.all.last.dsc == None %}
+                                            <button type="submit" class="btn btn-success text-white" value="1" name="submits"> <i class="fa fa-check"></i>Send</button>
+                                        {% endif %}
                                         <button type="button" class="btn btn-dark">Cancel</button>
                                     </div>
                                 </form>

@@ -5,7 +5,6 @@ from django.core.mail import EmailMessage
 from django.http import HttpResponse
 
 to_number = ['9851328888','9851342946','9851205419']
-# to_number = ['9808059156','9812520778']
 
 def SendMail(subject,message,email_from,recipient_list):
     send_mail( subject, message, email_from, recipient_list )

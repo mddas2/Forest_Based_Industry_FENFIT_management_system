@@ -659,10 +659,10 @@ def AllApplication(request, pk=None, approved_pending_cancelled=None):#all appli
                                 pdffile = application_form.get_user_application_detail.application_certificate
                                 bulk_sms_email.SendMailAttachment_Pdf(subject,email_message,from_email,pdffile,to_email)
                                 messages.success(request,"Email with pdf sent successfuly!!!")
-                            else:
-                                pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
-                                bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)                                
-                                messages.success(request,"Email sent successfuly!!!")
+                            # else:
+                            #     pdf = html_to_pdf.report(request,ApplicationForm.objects.get(id=pk)) 
+                            #     bulk_sms_email.SendMailAttachment(subject,email_message,from_email,pdf,to_email)                                
+                            #     messages.success(request,"Email sent successfuly!!!")
                         except:                       
                             messages.info(request,'Email send fail.')
                         
