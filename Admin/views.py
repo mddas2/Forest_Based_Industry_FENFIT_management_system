@@ -65,7 +65,7 @@ def index(request, pk=None, pdc=None):
     # return HttpResponse(total_income['payment_rupees__sum'])
     # total_income = 9808
 
-    paginate_obj = Paginator(all_data, 5) #creating pagiting (only 5 data)
+    paginate_obj = Paginator(all_data, 2) #creating pagiting (only 5 data)
     page_number = request.GET.get('page')
     try:
         all_data = paginate_obj.get_page(page_number)  # returns the desired page object
