@@ -343,7 +343,7 @@ $("#pagination").change(function(){
 <!-----modal-->
 
 <div class="card">
-    <div class="card-body">      
+    <div class="card-body" id="modal_ajax">      
         <!-- sample modal content -->
         <!----for loop-->
        {% for id_data in all_data %}  
@@ -763,321 +763,321 @@ $("#pagination").change(function(){
             </div>
             <!-- /.modal-dialog -->
         </div>
-        {% endfor %}
-        <style>
-            .mfp-wrap{
-                z-index: 99999;
-            }
-            .mfp-bg{
-                z-index: 9999;
-            }
-            .card-title{
-                font-size: 16px;
-            }
-            .nibedan-form {
-                padding: 50px 20px;
-                max-width: 600px;
-                border: 1px solid #d9d6d6;
-            }
-
-            .nibedan-form p {
-                font-size: 14px;
-                line-height: 24px;
-                font-weight: 400;
-                color: #000;
-                text-align: justify;
-            }
-
-            .nibedan-form .form-logo {
-                text-align: center;
-            }                        
-            .nibedan-form .form-logo img {
-                max-width: 500px;
-                width: 100%;
-            }
-            .fanfet-info{
-                    text-align: center;
-                } 
-                .fanfet-info ul{
-                    padding: 0;
-                    list-style: none;
-                }
-                .fanfet-info ul li{
-                    font-size: 12px;
-                    display: inline-block;
-                    color: #000;
-                }
-                .fanfet-info ul li a{
-                    color: #000;
-               }
-                h5.main-title{
-                    font-size: 14px;
-                    line-height: 22px;
-                    font-weight: 400;
-                    text-align: center;
-                }
-
-            .nibedan-form-top {
-                position: relative;
-                display: block;
-                width: 100%;
-                padding: 50px 0;
-            }
-            .nibedan-form-top1 {
-                position: relative;
-                display: block;
-                width: 100%;
-                padding: 10px 0;
-            }
-
-            .form-top-left {
-                float: left;
-            }
-
-            .form-top-right {
-                float: right;
-            }
-
-            .nibedan-form-body {
-                position: relative;
-                display: block;
-                margin-top: 50px;
-            }
-
-            .nibedan-form-body h2 {
-                font-size: 16px;
-                line-height: 22px;
-                font-weight: bold;
-                text-align: center;
-            }
-
-            .nibedan-form-body h5 {
-                font-size: 16px;
-                line-height: 22px;
-                font-weight: bold;
-                text-decoration: underline;
-            }
-
-            .nibedan-form-body ul li {
-                font-size: 14px;
-                line-height: 24px;
-                font-weight: 400;
-                color: #000;
-                text-align: justify;
-            }
-
-            .nibedan-form-footer .user-info {
-                text-align: left;
-                padding-right: 20px;
-            }
-
-            .nibedan-form-footer .user-info label {
-                font-size: 14px;
-                line-height: 24px;
-                font-weight: 400;
-                color: #000;
-                display: block;
-                margin-bottom: 10px;
-            }
-
-            .nibedan-form-footer .user-info label img {
-                max-width: 150px;
-            }
-
-            .nibedan-form-footer .user-info label .user-info-data {
-                max-width: 150px;
-                min-width: 150px;
-                overflow: hidden;
-            }
-
-            .nibedan-form-footer .user-address {
-                margin-top: 20px;
-            }
-
-            .nibedan-form-footer .user-address label {
-                font-size: 14px;
-                line-height: 24px;
-                font-weight: 400;
-                color: #000;
-                display: inline-block;
-                margin-bottom: 10px;
-                width: 49%;
-            }
-            .print-hide {
-                color: #fff !important;
-                opacity: 1;
-                background: #10a50e;
-                width: auto;
-                height: auto;
-                padding: 4px 20px;
-                margin-bottom: 10px;
-                /* border: 1px solid #747474; */
-                border-radius: 0;
-                font-weight: 600;
-            }
-            @media (max-width:767px) {
-
-                .nibedan-form-footer .user-info,
-                .nibedan-form-footer .user-address {
-                    padding-right: 0;
-                    text-align: center;
-                }
-
-                .nibedan-form-footer .user-address label {
-                    width: 100%;
-                }
-            }
-        </style>
-        <script>
-            function printdiv(printpage) {
-                var headstr = "<html><head><title></title></head><body>";
-                var footstr = "</body>";
-                var css = "<style>\
-                          .card-title{\
-                            font-size: 16px;\
-                        }\
-                        .nibedan-form {\
-                            padding: 50px 20px;\
-                            max-width: 100%;\
-                            border: 0;\
-                        }\
-                        .nibedan-form p {\
-                            font-size: 14px;\
-                            line-height: 24px;\
-                            font-weight: 400;\
-                            color: #000;\
-                            text-align: justify;\
-                        }\
-                        .nibedan-form .form-logo {\
-                            text-align: center;\
-                        }\
-                        .nibedan-form .form-logo img {\
-                            max-width: 500px;\
-                            width: 100%;\
-                        }\
-                        .fanfet-info{\
-                                text-align: center;\
-                            } \
-                            .fanfet-info ul{\
-                                padding: 0;\
-                                list-style: none;\
-                            }\
-                            .fanfet-info ul li{\
-                                font-size: 12px;\
-                                display: inline-block;\
-                                color: #000;\
-                            }\
-                            .fanfet-info ul li a{\
-                                color: #000;\
-                           }\
-                        h5.main-title{\
-                                font-size: 14px;\
-                                line-height: 22px;\
-                                font-weight: 400;\
-                                text-align: center;\
-                            }\
-                        .nibedan-form-top {\
-                            position: relative;\
-                            display: block;\
-                            width: 100%;\
-                            padding: 50px 0;\
-                        }\
-                        .nibedan-form-top1 {\
-                            position: relative;\
-                            display: block;\
-                            width: 100%;\
-                            padding: 10px 0;\
-                        }\
-                        .form-top-left {\
-                            float: left;\
-                        }\
-                        .form-top-right {\
-                            float: right;\
-                        }\
-                        .nibedan-form-body {\
-                            position: relative;\
-                            display: block;\
-                            margin-top: 50px;\
-                        }\
-                        .nibedan-form-body h2 {\
-                            font-size: 16px;\
-                            line-height: 22px;\
-                            font-weight: bold;\
-                            text-align: center;\
-                        }\
-                        .nibedan-form-body h5 {\
-                            font-size: 16px;\
-                            line-height: 22px;\
-                            font-weight: bold;\
-                            text-decoration: underline;\
-                        }\
-                        .nibedan-form-body ul li {\
-                            font-size: 14px;\
-                            line-height: 24px;\
-                            font-weight: 400;\
-                            color: #000;\
-                            text-align: justify;\
-                        }\
-                        .nibedan-form-footer .user-info {\
-                            text-align: left;\
-                            padding-right: 20px;\
-                        }\
-                        .nibedan-form-footer .user-info label {\
-                            font-size: 14px;\
-                            line-height: 24px;\
-                            font-weight: 400;\
-                            color: #000;\
-                            display: inline-block;\
-                            margin-bottom: 10px;\
-                            width: 49%;\
-                        }\
-                        .nibedan-form-footer .user-info label img {\
-                            max-width: 150px;\
-                        }\
-                        .nibedan-form-footer .user-info label .user-info-data {\
-                            max-width: 150px;\
-                            min-width: 150px;\
-                            overflow: hidden;\
-                        }\
-                        .print-hide{\
-                            display: None;\
-                        }\
-                        #bank_voucher{\
-                            display:None;\
-                        }\
-                        .other_informtion{\
-                            display:None;\
-                        }\
-                        .nibedan-form-footer .user-address label {\
-                            font-size: 14px;\
-                            line-height: 24px;\
-                            font-weight: 400;\
-                            color: #000;\
-                            display: inline-block;\
-                            margin-bottom: 10px;\
-                            width: 49%;\
-                        }\
-                        .page-break{\
-                            clear: both;\
-                            page-break-after: always;\
-                        }\
-                        .img-fit{\
-                            max-height: 90vh;\
-                        }\
-                    </style>"
-                var newstr = document.all.item(printpage).innerHTML;
-                var documentm = document.getElementById("documents").innerHTML;
-                var oldstr = document.body.innerHTML;
-                document.body.innerHTML = headstr + css + newstr + documentm + footstr;
-                window.print();
-                document.body.innerHTML = oldstr;
-                return false;
-            }
-        </script>
+        {% endfor %}        
         <!----end for loop  -->
     </div>
 </div>
+<style>
+    .mfp-wrap{
+        z-index: 99999;
+    }
+    .mfp-bg{
+        z-index: 9999;
+    }
+    .card-title{
+        font-size: 16px;
+    }
+    .nibedan-form {
+        padding: 50px 20px;
+        max-width: 600px;
+        border: 1px solid #d9d6d6;
+    }
+
+    .nibedan-form p {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+        text-align: justify;
+    }
+
+    .nibedan-form .form-logo {
+        text-align: center;
+    }                        
+    .nibedan-form .form-logo img {
+        max-width: 500px;
+        width: 100%;
+    }
+    .fanfet-info{
+            text-align: center;
+        } 
+        .fanfet-info ul{
+            padding: 0;
+            list-style: none;
+        }
+        .fanfet-info ul li{
+            font-size: 12px;
+            display: inline-block;
+            color: #000;
+        }
+        .fanfet-info ul li a{
+            color: #000;
+       }
+        h5.main-title{
+            font-size: 14px;
+            line-height: 22px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+    .nibedan-form-top {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 50px 0;
+    }
+    .nibedan-form-top1 {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .form-top-left {
+        float: left;
+    }
+
+    .form-top-right {
+        float: right;
+    }
+
+    .nibedan-form-body {
+        position: relative;
+        display: block;
+        margin-top: 50px;
+    }
+
+    .nibedan-form-body h2 {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .nibedan-form-body h5 {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .nibedan-form-body ul li {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+        text-align: justify;
+    }
+
+    .nibedan-form-footer .user-info {
+        text-align: left;
+        padding-right: 20px;
+    }
+
+    .nibedan-form-footer .user-info label {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .nibedan-form-footer .user-info label img {
+        max-width: 150px;
+    }
+
+    .nibedan-form-footer .user-info label .user-info-data {
+        max-width: 150px;
+        min-width: 150px;
+        overflow: hidden;
+    }
+
+    .nibedan-form-footer .user-address {
+        margin-top: 20px;
+    }
+
+    .nibedan-form-footer .user-address label {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+        display: inline-block;
+        margin-bottom: 10px;
+        width: 49%;
+    }
+    .print-hide {
+        color: #fff !important;
+        opacity: 1;
+        background: #10a50e;
+        width: auto;
+        height: auto;
+        padding: 4px 20px;
+        margin-bottom: 10px;
+        /* border: 1px solid #747474; */
+        border-radius: 0;
+        font-weight: 600;
+    }
+    @media (max-width:767px) {
+
+        .nibedan-form-footer .user-info,
+        .nibedan-form-footer .user-address {
+            padding-right: 0;
+            text-align: center;
+        }
+
+        .nibedan-form-footer .user-address label {
+            width: 100%;
+        }
+    }
+</style>
 {% block optionaljs %}
+<script>
+    function printdiv(printpage) {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var css = "<style>\
+                  .card-title{\
+                    font-size: 16px;\
+                }\
+                .nibedan-form {\
+                    padding: 50px 20px;\
+                    max-width: 100%;\
+                    border: 0;\
+                }\
+                .nibedan-form p {\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    text-align: justify;\
+                }\
+                .nibedan-form .form-logo {\
+                    text-align: center;\
+                }\
+                .nibedan-form .form-logo img {\
+                    max-width: 500px;\
+                    width: 100%;\
+                }\
+                .fanfet-info{\
+                        text-align: center;\
+                    } \
+                    .fanfet-info ul{\
+                        padding: 0;\
+                        list-style: none;\
+                    }\
+                    .fanfet-info ul li{\
+                        font-size: 12px;\
+                        display: inline-block;\
+                        color: #000;\
+                    }\
+                    .fanfet-info ul li a{\
+                        color: #000;\
+                   }\
+                h5.main-title{\
+                        font-size: 14px;\
+                        line-height: 22px;\
+                        font-weight: 400;\
+                        text-align: center;\
+                    }\
+                .nibedan-form-top {\
+                    position: relative;\
+                    display: block;\
+                    width: 100%;\
+                    padding: 50px 0;\
+                }\
+                .nibedan-form-top1 {\
+                    position: relative;\
+                    display: block;\
+                    width: 100%;\
+                    padding: 10px 0;\
+                }\
+                .form-top-left {\
+                    float: left;\
+                }\
+                .form-top-right {\
+                    float: right;\
+                }\
+                .nibedan-form-body {\
+                    position: relative;\
+                    display: block;\
+                    margin-top: 50px;\
+                }\
+                .nibedan-form-body h2 {\
+                    font-size: 16px;\
+                    line-height: 22px;\
+                    font-weight: bold;\
+                    text-align: center;\
+                }\
+                .nibedan-form-body h5 {\
+                    font-size: 16px;\
+                    line-height: 22px;\
+                    font-weight: bold;\
+                    text-decoration: underline;\
+                }\
+                .nibedan-form-body ul li {\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    text-align: justify;\
+                }\
+                .nibedan-form-footer .user-info {\
+                    text-align: left;\
+                    padding-right: 20px;\
+                }\
+                .nibedan-form-footer .user-info label {\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    display: inline-block;\
+                    margin-bottom: 10px;\
+                    width: 49%;\
+                }\
+                .nibedan-form-footer .user-info label img {\
+                    max-width: 150px;\
+                }\
+                .nibedan-form-footer .user-info label .user-info-data {\
+                    max-width: 150px;\
+                    min-width: 150px;\
+                    overflow: hidden;\
+                }\
+                .print-hide{\
+                    display: None;\
+                }\
+                #bank_voucher{\
+                    display:None;\
+                }\
+                .other_informtion{\
+                    display:None;\
+                }\
+                .nibedan-form-footer .user-address label {\
+                    font-size: 14px;\
+                    line-height: 24px;\
+                    font-weight: 400;\
+                    color: #000;\
+                    display: inline-block;\
+                    margin-bottom: 10px;\
+                    width: 49%;\
+                }\
+                .page-break{\
+                    clear: both;\
+                    page-break-after: always;\
+                }\
+                .img-fit{\
+                    max-height: 90vh;\
+                }\
+            </style>"
+        var newstr = document.all.item(printpage).innerHTML;
+        var documentm = document.getElementById("documents").innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + css + newstr + documentm + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+</script>
 <script src="{% static '/assets/node_modules/dropify/dist/js/dropify.min.js' %}"></script>
 <script>
     $(document).ready(function() {
