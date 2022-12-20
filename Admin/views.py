@@ -45,7 +45,7 @@ def index(request, pk=None, pdc=None):
         all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-created_at') 
     elif request.user.role == CustomUser.CENTRAL:
         if request.user.get_dsc_Role() == 'central_accountant':
-            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('-created_at') #admin can view both data from accountant and self
+            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,).order_by('payment') #admin can view both data from accountant and self
         else:
             all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-created_at') 
     else:
