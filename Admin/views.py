@@ -294,7 +294,8 @@ def ajaxIndex(request):
     import json
     from django.http import JsonResponse
     from django.core import serializers
-    from rest_framework.renderers import JSONRenderer
+    # from rest_framework.renderers import JSONRenderer
     serializer = ApplicationFormSerializer(all_data, many=True)
-    return HttpResponse(JSONRenderer().render(serializer.data))
+    return HttpResponse(serializer.data)
+    # return HttpResponse(JSONRenderer().render(serializer.data))
        
