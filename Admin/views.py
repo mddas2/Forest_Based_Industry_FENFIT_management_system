@@ -66,7 +66,20 @@ def index(request, pk=None, pdc=None):
     # total_income = 9808
 
     paginate_obj = Paginator(all_data, 2) #creating pagiting (only 5 data)
+    
+    
     page_number = request.GET.get('page')
+    page_type = request.GET.get('type')
+    next = 2
+    prev = 1
+    try:
+        page_number = int(page_number)
+        if page_type == "next":
+            next = page_number+1
+        elif page_number == 'prev':
+            prev = page_number-1
+    except:
+        page_number = 2
     try:
         all_data = paginate_obj.get_page(page_number)  # returns the desired page object
     except:
@@ -75,6 +88,8 @@ def index(request, pk=None, pdc=None):
     
     data_1={
         'a' : 12,
+        'next' : next,
+        'prev' : prev,
         'total_pending_application_form' : total_pending_application_form,
         'total_approved_form' : total_approved_form,
         'total_rejected_application_form' : total_rejected_application_form,
