@@ -721,11 +721,9 @@ $("#pagination").change(function(){
                
             },
             success: function (data) {
-                Object.entries(data).forEach((entry) => {
-                    const [key, value] = entry;
-                    // alert(value)
-                });
-                var string_data = ` <div id="order_detail`+id_data.id+` class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+                Object.entries(data.data).forEach((entry) => {
+                    const [key, id_data] = entry;
+                    var string_data = ` <div id="order_detail`+id_data.id+`" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -739,8 +737,8 @@ $("#pagination").change(function(){
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="row">
-                                <div class="col-md-6" id="div_print_application{{id_data.id}}">
-                                    <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_application{{id_data.id}}');">print</button>
+                                <div class="col-md-6" id="div_print_application`+id_data.id+`">
+                                    <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_application`+id_data.id+`');">print</button>
                                     <div class="nibedan-form" >
                                         <div class="form-logo">
                                             <img src="/static/assets/images/logo-2.png">
@@ -1141,9 +1139,9 @@ $("#pagination").change(function(){
     </div>
     <!-- /.modal-dialog -->
 </div>`;
-
-                console.log(data)
-                $('#ajax_modal').prepend(string_data);
+                    
+                    $('#ajax_modal').prepend(string_data);
+                });
             },
             error: function (error) {
               alert("error");
