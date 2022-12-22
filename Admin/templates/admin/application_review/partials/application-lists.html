@@ -723,6 +723,8 @@ $("#pagination").change(function(){
             success: function (data) {
                 Object.entries(data.data).forEach((entry) => {
                     const [key, id_data] = entry;
+                    // alert(id_data.payment.id);
+                    // console.log(id_data.payment.id);
                     var string_data = ` <div id="order_detail`+id_data.id+`" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -748,21 +750,22 @@ $("#pagination").change(function(){
                                         </div>
                                         <h5 class="main-title">बिषय : वन उद्यम सुचिकरण सिफारिश गरि दिने सम्वन्धमा</h5>
                                         <div class="nibedan-form-top">
-                                            <div class="form-top-left">
-                                                {% if id_data.user.union_type == 'district' %}<p>श्रीमान अध्यक्षज्यू<br>
-                                                    नेपाल वन पैदावार उद्योग व्यवसायी संघ<br>जिल्ला {{id_data.user.district_name|get_districtName}} </p>
-                                                {% else %}
-                                                <p>श्रीमान अध्यक्षज्यू<br>
-                                                    {{approved_admin.company_name}}<br>वस्तुगत संघ</p>
-                                                {% endif %}
-                                               
-                                            </div>
+                                            <div class="form-top-left">`
+                                                //id_data.user.district_name|get_districtName
+                                                //id_data.user.created_at|get_NepaliDate
+                if (id_data.user.union_type == 'district'){                    
+                    var string_data1 =`<p>श्रीमान अध्यक्षज्यू<br> नेपाल वन पैदावार उद्योग व्यवसायी संघ<br>जिल्ला`+id_data.user.district_name + `</p>`
+                }
+                else {
+                var string_data1 =  ` <p>श्रीमान अध्यक्षज्यू<br> ` + id_data.user.approved_company_name + ` <br>वस्तुगत संघ</p>`
+                }              
+                var string_data2 =   ` </div>
                                             <div class="form-top-right">
-                                                <span class="date">मिति: <u>{{id_data.user.created_at|get_NepaliDate}}</u></span>
+                                                <span class="date">मिति: <u> `+id_data.user.created_at+`</u></span>
                                             </div>
                                         </div>
                                         <div class="nibedan-form-body">
-                                            <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
+                                            <!-- <h2>बिषय : सदस्यता सम्बन्धमा ।</h2> -->
                                             <p>वन ऐन २०७६ को प्रस्तावनामा उल्ल्ेखित वन श्रोतलाई सदुपयोग गरि राष्ट्रिय संमृद्धिमा योगदान पुरयाउने 
                                                 ब्यवस्थालाई कार्यान्वयन गर्न गराउन वन नियमावलि २०७९को नियम १२८र नियम १२८को उप नियममा.२मा 
                                                 नेपाल वन पैदावार उद्योग ब्यवसायी महासंघको सिफारिसमा डिभिजन वन कार्यालयमा वन उद्यमीहरु सुचीकृत 
@@ -786,26 +789,28 @@ $("#pagination").change(function(){
                                                
                                                 <label style="font-weight: bold; width: 100%;">आवेदक</label>
                                                 {% load staticfiles %}
-                                                <label style="width: 100%;">दस्तखत : <span class="user-info-data"><img src="{% if id_data.user.signature %}{{id_data.user.signature.url}} {% endif %}"></span></label>
-                                                <label>उद्यमीको नाम : <span class="user-info-data">{{id_data.user.first_name}}</span></label>
-                                                <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">{{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}}</span></label>
-                                                <label>सम्र्पक नं : <span class="user-info-data">{{id_data.user.phone}}</span></label>
-                                                <label>इमेल : <span class="user-info-data">{{id_data.user.email}}</span></label>
+                                                <label style="width: 100%;">दस्तखत : <span class="user-info-data"><img src="/media/`+id_data.user.signature+`"></span></label>
+                                                <label>उद्यमीको नाम : <span class="user-info-data">`+id_data.user.first_name+`</span></label>
+                                                <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">`+id_data.get_user_application_detail.business_name+`|get_NepaliBusinessName}}</span></label>
+                                                <label>सम्र्पक नं : <span class="user-info-data">`+id_data.user.phone+`</span></label>
+                                                <label>इमेल : <span class="user-info-data">`+id_data.user.email+`</span></label>
                                             </div>
                                             <div class="user-address">
-                                                <label>ठेगाना :जिल्ला <u>{{id_data.user.district_name|get_districtName}}</u></label>
-                                                <label>न.पा.÷गा.पा <u>{{id_data.get_user_application_detail.municipality|get_MuncipalityName}}</u></label>
-                                                <label>वडा नं.<u>{{id_data.get_user_application_detail.ward_number}}</u></label>
-                                                <label>टोल <u>{{id_data.get_user_application_detail.tole}}</u></label>
+                                                <label>ठेगाना :जिल्ला <u>`+id_data.user.district_name+`|get_districtName}}</u></label>
+                                                <label>न.पा.÷गा.पा <u>`+id_data.get_user_application_detail.municipality+`|get_MuncipalityName}}</u></label>
+                                                <label>वडा नं.<u>`+id_data.get_user_application_detail.ward_number+`</u></label>
+                                                <label>टोल <u>`+id_data.get_user_application_detail.tole+`</u></label>
                                             </div>
                                         </div>                                        
                                     </div>
                                     <div class="page-break"></div>
                                 </div>
                                    <!---certificate-->               
-                                {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' and id_data.is_payment == True %}                         
-                                    <div class="col-md-6" id="div_print_certificate{{id_data.id}}">
-                                        <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate{{id_data.id}}');">print</button>
+            {% if request.user.role == request.user.CENTRAL and request.user.groups.all.first.name != 'accountant' %}`
+            var string_data3 = '';
+                if(id_data.is_payment == true){                                                         
+                 var string_data3 = `<div class="col-md-6" id="div_print_certificate`+id_data.id+`">
+                                        <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate`+id_data.id+`');">print</button>
                                         <div class="nibedan-form">
                                             <div class="form-logo">
                                                 <img src="/static/assets/images/logo-2.png">
@@ -816,25 +821,25 @@ $("#pagination").change(function(){
                                             <h5 class="main-title">(वन नियमावलि २०७९ नियम १२८ को उपनियम (२) सँग सम्बन्धित)</h5>                                                    
                                             <div class="nibedan-form-top">
                                                 <div class="form-top-left">
-                                                    <p>सिफारिश पत्र नम्बर : {{id_data.id}}<br>
+                                                    <p>सिफारिश पत्र नम्बर : `+id_data.id+`<br>
                                                         </p>
                                                 </div>
                                         
                                                 <div class="form-top-right">
-                                                    <span class="date">मिति : {{id_data.payment.all.last.updated_at|get_NepaliDate}}</span>
+                                                    <span class="date">मिति : `+id_data.payment.updated_at+`</span>
                                                 </div>
                                             </div>
                                             <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
                                             <div class="nibedan-form-top1">
                                                 <div class="form-top-left">
                                                     <p>श्री डिभिजन वन कार्यालय,<br>
-                                                        {{id_data.user.district_name|get_districtName}} </p>
+                                                        `+id_data.user.district_name+`</p>
                                                 </div>
                                             </div>
                                             
                                             <div class="nibedan-form-body">
-                                                <!-- <h2>बिषय ः सदस्यता सम्बन्धमा ।</h2> -->
-                                                <p>उपरोक्त सम्वन्धमा {{id_data.user.company_name}} उद्योगका सञ्चालक । प्रोप्राइटर  {{id_data.user.first_name}}   ले  आवश्यक कागजात साथ  वन नियमावली २०७९ बमोजिम डिभिजन वन कार्यालयमा  उद्योग सुचिकृतका लागि  सिफारिस माग गरेकोले  उक्त उद्योग सुचिकृत गरिदिनु हुन  सिफारिस गरिएको ब्यहोरा अनुरोध  छ </p>
+                                                <!-- <h2>बिषय : सदस्यता सम्बन्धमा ।</h2> -->
+                                                <p>उपरोक्त सम्वन्धमा `+id_data.user.company_name+ `उद्योगका सञ्चालक । प्रोप्राइटर  `+id_data.user.first_name+`   ले  आवश्यक कागजात साथ  वन नियमावली २०७९ बमोजिम डिभिजन वन कार्यालयमा  उद्योग सुचिकृतका लागि  सिफारिस माग गरेकोले  उक्त उद्योग सुचिकृत गरिदिनु हुन  सिफारिस गरिएको ब्यहोरा अनुरोध  छ </p>
                                             </div>
                                             <div class="nibedan-form-footer">
                                                 <div class="user-info">
@@ -842,26 +847,25 @@ $("#pagination").change(function(){
                                                     <label style="width:100%">नाम: <span class="user-info-data">{{id_data.payment.all.first.ceo_approved_name}}</span></label>
                                                     {% load staticfiles %}
                                                     <label style="width:100%">दस्तखत : <span class="user-info-data"><img
-                                                        src="{% if id_data.payment.all.first.ceo_approved_signature %} {{id_data.payment.all.first.ceo_approved_signature.url}} {% endif %}"}></span></label>
+                                                        src="+id_data.payment.all.first.ceo_approved_signature.url+"></span></label>
                                                 </div>
                                             </div>
                     
                                         </div>
                                         <div class="page-break"></div>
-
-                                    </div>                                           
-                                {% endif %}
-                                    <!------certificate------>                                    
-                                <div class="col-md-6" id="div_print_document">
+                                    </div>{% endif %}`}
+                                                           
+                                
+                                    // <!------certificate------>                                    
+            var certificate =  `<div class="col-md-6" id="div_print_document">
                                     <div class="row zoom-gallery" id="documents">
                                         <div class="col-md-6">
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
-                                                    {% if id_data.get_user_application_detail.certificate_citizenship %}
-                                                    <a href="{{id_data.get_user_application_detail.certificate_citizenship.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                    {% endif %}
                                                     
+                                                    <a href="/media/`+id_data.get_user_application_detail.certificate_citizenship+`" title="zoom image"> <img src="/media/`+id_data.get_user_application_detail.certificate_citizenship+`" class="img-responsive img-fit"" alt="img" /> </a>
+                                                                                                        
                                                 </div>
                                             </div>
                                             <div class="page-break"></div>
@@ -932,8 +936,7 @@ $("#pagination").change(function(){
                                         <div class="col-md-6">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
-                                                    
+                                                    <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>                                                   
 
                                                     {% if id_data.get_user_application_detail.industry_certificate_front_side %}
                                                     <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
@@ -1140,7 +1143,7 @@ $("#pagination").change(function(){
     <!-- /.modal-dialog -->
 </div>`;
                     
-                    $('#ajax_modal').prepend(string_data);
+                    $('#ajax_modal').prepend(string_data+string_data1+string_data2+string_data3+certificate);
                 });
             },
             error: function (error) {
