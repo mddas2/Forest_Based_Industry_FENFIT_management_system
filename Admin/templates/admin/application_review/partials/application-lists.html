@@ -706,7 +706,7 @@ $("#pagination").change(function(){
 		var CSRF_TOKEN  = "{{ csrf_token }}";
 		var form_data = new FormData();
 		form_data.append("csrfmiddlewaretoken",CSRF_TOKEN);
-        url = '{% url "ajaxIndex" %}',
+        url = '{% url "ajaxIndex" %}';
        
         // $('#signeddoc').val(data);
         // $('#docinfo').text('Signed Document attached!');
@@ -723,7 +723,27 @@ $("#pagination").change(function(){
             success: function (data) {
                 Object.entries(data.data).forEach((entry) => {
                     const [key, id_data] = entry;
-                    
+                        var get_nepali_data = '{% url "ajaxGetNepaliData" %}';
+                        var form_data_1 = new FormData();
+                        form_data.append("csrfmiddlewaretoken",CSRF_TOKEN);
+                        form_data.append("application_id",id_data.user.id);
+                        $.ajax({
+                                url:get_nepali_data,
+                                method: 'GET',
+                                data : form_data,
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                beforSend: function () {
+                                
+                                },
+                                success: function (nepali_response) {
+                                    Object.entries(data.data).forEach((entry) => {
+                                        const [key1, id_data1] = entry;
+                                    })
+                                }
+
+                            })
                     //console.log(id_data.payment[Object.keys(id_data.payment).length-1]) get last element of json payment dictionary
                     
                     var string_data = ` <div id="order_detail`+id_data.id+`" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
@@ -790,17 +810,17 @@ $("#pagination").change(function(){
                                                
                                                 <label style="font-weight: bold; width: 100%;">आवेदक</label>
                                                 {% load staticfiles %}
-                                                <label style="width: 100%;">दस्तखत : <span class="user-info-data"><img src="/media/`+id_data.user.signature+`"></span></label>
+                                                <label style="width: 100%;">दस्तखत : <span class="user-info-data"><img src="`+id_data.user.signature+`"></span></label>
                                                 <label>उद्यमीको नाम : <span class="user-info-data">`+id_data.user.first_name+`</span></label>
-                                                <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">`+id_data.get_user_application_detail.business_name+`|get_NepaliBusinessName}}</span></label>
+                                                <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">`+id_data.get_user_application_detail.business_name+`</span></label>
                                                 <label>सम्र्पक नं : <span class="user-info-data">`+id_data.user.phone+`</span></label>
                                                 <label>इमेल : <span class="user-info-data">`+id_data.user.email+`</span></label>
                                             </div>
                                             <div class="user-address">
-                                                <label>ठेगाना :जिल्ला <u>`+id_data.user.district_name+`</u></label>
-                                                <label>न.पा.÷गा.पा <u>`+id_data.get_user_application_detail.municipality+`|get_MuncipalityName}}</u></label>
-                                                <label>वडा नं.<u>`+id_data.get_user_application_detail.ward_number+`</u></label>
-                                                <label>टोल <u>`+id_data.get_user_application_detail.tole+`</u></label>
+                                                <label>ठेगाना :जिल्ला :<u>`+id_data.user.district_name+`</u></label>
+                                                <label>न.पा.÷गा.पा :<u>`+id_data.get_user_application_detail.municipality+`</u></label>
+                                                <label>वडा नं."<u>`+id_data.get_user_application_detail.ward_number+`</u></label>
+                                                <label>टोल :<u>`+id_data.get_user_application_detail.tole+`</u></label>
                                             </div>
                                         </div>                                        
                                     </div>
@@ -840,15 +860,15 @@ $("#pagination").change(function(){
                                             
                                             <div class="nibedan-form-body">
                                                 <!-- <h2>बिषय : सदस्यता सम्बन्धमा ।</h2> -->
-                                                <p>उपरोक्त सम्वन्धमा `+id_data.user.company_name+ `उद्योगका सञ्चालक । प्रोप्राइटर  `+id_data.user.first_name+`   ले  आवश्यक कागजात साथ  वन नियमावली २०७९ बमोजिम डिभिजन वन कार्यालयमा  उद्योग सुचिकृतका लागि  सिफारिस माग गरेकोले  उक्त उद्योग सुचिकृत गरिदिनु हुन  सिफारिस गरिएको ब्यहोरा अनुरोध  छ </p>
+                                                <p>उपरोक्त सम्वन्धमा `+id_data.user.company_name+ ` उद्योगका सञ्चालक । प्रोप्राइटर  `+id_data.user.first_name+`   ले  आवश्यक कागजात साथ  वन नियमावली २०७९ बमोजिम डिभिजन वन कार्यालयमा  उद्योग सुचिकृतका लागि  सिफारिस माग गरेकोले  उक्त उद्योग सुचिकृत गरिदिनु हुन  सिफारिस गरिएको ब्यहोरा अनुरोध  छ </p>
                                             </div>
                                             <div class="nibedan-form-footer">
                                                 <div class="user-info">
                                                     <label style="font-weight: bold; width: 100%">पद कार्यकारी निर्देशक</label>
-                                                    <label style="width:100%">नाम: <span class="user-info-data">{{id_data.payment.all.first.ceo_approved_name}}</span></label>
+                                                    <label style="width:100%">नाम: <span class="user-info-data">`+id_data.payment[Object.keys(id_data.payment).length-1].ceo_approved_name+`</span></label>
                                                     {% load staticfiles %}
                                                     <label style="width:100%">दस्तखत : <span class="user-info-data"><img
-                                                        src="+id_data.payment.all.first.ceo_approved_signature.url+"></span></label>
+                                                        src="`+id_data.payment[Object.keys(id_data.payment).length-1].ceo_approved_signature+`"></span></label>
                                                 </div>
                                             </div>
                     

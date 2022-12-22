@@ -30,6 +30,8 @@ from django.shortcuts import redirect
 from django.db.models import Sum
 from django.core.paginator import Paginator
 
+from .custom_tags.custom_tags import *
+
 from django.db.models import Q
 
 
@@ -278,7 +280,7 @@ def ClientMessage(request, id):
     return render(request, 'admin/clients_messages/client-msg-details.html',data)
     return HttpResponse('okay')
 
-def ajaxIndex(request):
+def ajaxApplicationFormIndex(request):
     if request.user.role == CustomUser.DISTRICT:
         all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-created_at')  
     elif request.user.role == CustomUser.STATE:
@@ -305,5 +307,20 @@ def ajaxIndex(request):
      }
     print(type(JsonResponse(response)))
     return JsonResponse(response)
-    
+
+def ajaxGetNepaliData(request):
+    if request.GET:
+        import json
+        from django.http import JsonResponse   
+        
+        application_id = request.GET['application_id']
+        application_obj = ApplicationForm.objects.get(id=application_id)
+
+        district_name =  application_obj.user.district_name
+        return HttpResponse(get_districtName(district_name))
+        response = {
+            'data' : p
+        }
+        print(type(JsonResponse(response)))
+        return JsonResponse(response)
        

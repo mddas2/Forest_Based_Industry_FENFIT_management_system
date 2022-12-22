@@ -145,5 +145,7 @@ urlpatterns = [
    path('pdf-report', html_to_pdf.report, name='getPdf'),
    
    #****************************ajax Index**********
-   path('ajax-get-index-data', views.ajaxIndex, name='ajaxIndex'),
+   path('ajax-get-index-data', views.ajaxApplicationFormIndex, name='ajaxIndex'),
+   path('ajax-get-nepali-data', views.ajaxGetNepaliData, name='ajaxGetNepaliData'),
+   
 ]   
