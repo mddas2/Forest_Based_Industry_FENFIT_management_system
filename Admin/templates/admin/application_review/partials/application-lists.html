@@ -864,7 +864,7 @@ $("#pagination").change(function(){
                                                 <div class="card-body">
                                                     <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
                                                     
-                                                    <a href="/media/`+id_data.get_user_application_detail.certificate_citizenship+`" title="zoom image"> <img src="/media/`+id_data.get_user_application_detail.certificate_citizenship+`" class="img-responsive img-fit"" alt="img" /> </a>
+                                                    <a href="`+id_data.get_user_application_detail.certificate_citizenship+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.certificate_citizenship+`" class="img-responsive img-fit"" alt="img" /> </a>
                                                                                                         
                                                 </div>
                                             </div>
@@ -874,9 +874,7 @@ $("#pagination").change(function(){
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>                                                           
-                                                    {% if id_data.get_user_application_detail.certificate_company_registration %}
-                                                    <a href="{{id_data.get_user_application_detail.certificate_company_registration.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.certificate_company_registration.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                    {% endif %}
+                                                    <a href="`+id_data.get_user_application_detail.certificate_company_registration+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.certificate_company_registration+`" class="img-responsive img-fit"" alt="img" /> </a>                                                    
                                                 </div>
                                             </div>
                                             <div class="page-break"></div>
@@ -886,9 +884,8 @@ $("#pagination").change(function(){
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
-                                                    {% if id_data.get_user_application_detail.provisional_account_number %}
-                                                    <a href="{{id_data.get_user_application_detail.provisional_account_number.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                    {% endif %}
+                                                    <a href="`+id_data.get_user_application_detail.provisional_account_number+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.provisional_account_number+`" class="img-responsive img-fit"" alt="img" /> </a>
+                                                                           
                                                     
                                                 </div>
                                             </div>
@@ -900,9 +897,9 @@ $("#pagination").change(function(){
                                                 <div class="card-body">
                                                     <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
                                                   
-                                                    {% if id_data.get_user_application_detail.tax_paid_certificate %}
-                                                    <a href="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                    {% endif %}
+                                                    <a href="`+id_data.get_user_application_detail.tax_paid_certificate+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.tax_paid_certificate+`" class="img-responsive img-fit"" alt="img" /> </a>
+
+                                                   
                                                 </div>
                                             </div>
                                             <div class="page-break"></div>
@@ -913,9 +910,9 @@ $("#pagination").change(function(){
                                                     <div class="card-body">
                                                         <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
                                                        
-                                                        {% if id_data.get_user_application_detail.bank_voucher %}
-                                                        <a href="{{id_data.get_user_application_detail.bank_voucher.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                        {% endif %}
+                                                        <a href="`+id_data.get_user_application_detail.bank_voucher+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.bank_voucher+`" class="img-responsive img-fit"" alt="img" /> </a>
+
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="page-break"></div>
@@ -926,9 +923,8 @@ $("#pagination").change(function(){
                                                 <div class="card-body">
                                                     <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
                                                     
-                                                    {% if id_data.get_user_application_detail.industry_certificate_front_side %}
-                                                    <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                    {% endif %}
+                                                    <a href="`+id_data.get_user_application_detail.industry_certificate_front_side+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.industry_certificate_front_side+`" class="img-responsive img-fit"" alt="img" /> </a>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="page-break"></div>
@@ -938,9 +934,8 @@ $("#pagination").change(function(){
                                                 <div class="card-body">
                                                     <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>                                                   
 
-                                                    {% if id_data.get_user_application_detail.industry_certificate_front_side %}
-                                                    <a href="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" title="zoom image"> <img src="{{id_data.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit"" alt="img" /> </a>
-                                                    {% endif %}
+                                                    <a href="`+id_data.get_user_application_detail.industry_certificate_front_side+`" title="zoom image"> <img src="`+id_data.get_user_application_detail.industry_certificate_front_side+`" class="img-responsive img-fit"" alt="img" /> </a>
+                                                   
                                                 </div>
                                             </div>
                                             <div class="page-break"></div>
@@ -950,33 +945,27 @@ $("#pagination").change(function(){
                                 <div class="col-md-6">
                                     <div class="card other_informtion">
                                             <div class="card-body">
-                                                <!-- <h4 class="card-title">Column Toggle Table</h4> -->
-                                                <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
-                                                    <!-- columns they want to be visible.</h5> -->
                                                 <div class="table-responsive">
                                                     <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
                                                         data-tablesaw-mode="columntoggle">
-                                                        <thead>
-                                                            <!-- start row -->
+                                                        <thead>                                                            
                                                             <tr>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">
                                                                     उद्योग/कम्पनीको नाम</th>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
                                                                     data-tablesaw-priority="3" class="border">व्यवसाय को नाम</th>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">सिफारिस शुल्क र सो को वाडफाड
-                                                                </th>
-                                                
-                                                            </tr> <!-- end row -->
+                                                                </th>                                                
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <!-- start row -->
-                                                            <tr>
-                                                                <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.owner_full_name}}</a></td>
-                                                                <td>{{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}}</td>
-                                                                <td><span style="color: red; font-size: 15px; font-weight: 600;">(Rs.{{id_data.get_user_application_detail.payment_rupees}})</span>/{{id_data.get_user_application_detail.business_price_category|getPriceCategoryNepaliName}}</td>
-                                                               
-                                                            </tr> <!-- end row -->
                                                            
+                                                            <tr>
+                                                                <td class="title"><a class="link" href="javascript:void(0)">`+id_data.get_user_application_detail.owner_full_name+`</a></td>
+                                                                <td>`+id_data.get_user_application_detail.business_name+`</td>
+                                                                <td><span style="color: red; font-size: 15px; font-weight: 600;">(Rs.`+id_data.get_user_application_detail.payment_rupees+`)</span>/`+id_data.get_user_application_detail.business_price_category+`</td>
+                                                               
+                                                            </tr>                                                           
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1005,11 +994,10 @@ $("#pagination").change(function(){
                                                         <tbody>
                                                             <!-- start row -->
                                                             <tr>
-                                                                <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.voucher_number}}</a></td>
-                                                                <td>{{id_data.get_user_application_detail.authorized_capital_of_company}}</td>
-                                                                <td>{{id_data.get_user_application_detail.tax_amount}}</td>
-                                                            </tr> <!-- end row -->
-                                                           
+                                                                <td class="title"><a class="link" href="javascript:void(0)">`+id_data.get_user_application_detail.voucher_number+`</a></td>
+                                                                <td>`+id_data.get_user_application_detail.authorized_capital_of_company+`</td>
+                                                                <td>`+id_data.get_user_application_detail.tax_amount+`</td>
+                                                            </tr>                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1024,7 +1012,6 @@ $("#pagination").change(function(){
                                                     <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
                                                         data-tablesaw-mode="columntoggle">
                                                         <thead>
-                                                            <!-- start row -->
                                                             <tr>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">कामदार तथा कर्मचारि स.ख्या
                                                                 </th>
@@ -1032,15 +1019,14 @@ $("#pagination").change(function(){
                                                                 </th>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">प्रदेश
                                                                 </th>
-                                                            </tr> <!-- end row -->
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <!-- start row -->
                                                             <tr>
-                                                                <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.number_of_employees}}</a></td>
-                                                                <td>{{id_data.get_user_application_detail.paid_up_capital_of_company}}</td>
-                                                                <td>{{id_data.user.state_name}}</td>
-                                                            </tr> <!-- end row -->
+                                                                <td class="title"><a class="link" href="javascript:void(0)">`+id_data.get_user_application_detail.number_of_employees+`</a></td>
+                                                                <td>`+id_data.get_user_application_detail.paid_up_capital_of_company+`</td>
+                                                                <td>`+id_data.user.state_name+`</td>
+                                                            </tr>
                                                            
                                                         </tbody>
                                                     </table>
@@ -1049,31 +1035,26 @@ $("#pagination").change(function(){
                                         </div>
                                         <div class="card other_informtion">
                                             <div class="card-body">
-                                                <!-- <h4 class="card-title">Column Toggle Table</h4> -->
-                                                <!-- <h5 class="card-subtitle mb-3">The Column Toggle Table allows the user to select which -->
-                                                    <!-- columns they want to be visible.</h5> -->
                                                 <div class="table-responsive">
                                                     <table class="tablesaw table-striped table-hover table-bordered table no-wrap"
                                                         data-tablesaw-mode="columntoggle">
                                                         <thead>
-                                                            <!-- start row -->
-                                                            <tr>
-                                                        
+                                                            <tr>                                                        
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">जिल्ला
                                                                 </th>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">नगरपालिका/गाउँपालिका
                                                                 </th>
                                                                 <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4" class="border">वडा नं.
                                                                 </th>
-                                                            </tr> <!-- end row -->
+                                                            </tr> 
                                                         </thead>
                                                         <tbody>
-                                                            <!-- start row -->
+                                                            
                                                             <tr>
-                                                                <td class="title"><a class="link" href="javascript:void(0)">{{id_data.user.state_name}}</a></td>
-                                                                <td>{{id_data.user.district_name}}</td>
-                                                                <td>{{id_data.get_user_application_detail.ward_number}}</td>
-                                                            </tr> <!-- end row -->
+                                                                <td class="title"><a class="link" href="javascript:void(0)">`+id_data.user.state_name+`</a></td>
+                                                                <td>`+id_data.user.district_name+`</td>
+                                                                <td>`+id_data.get_user_application_detail.ward_number+`</td>
+                                                            </tr> 
                                                            
                                                         </tbody>
                                                     </table>
