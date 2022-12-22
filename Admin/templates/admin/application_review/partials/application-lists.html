@@ -723,30 +723,17 @@ $("#pagination").change(function(){
             success: function (data) {
                 Object.entries(data.data).forEach((entry) => {
                     const [key, id_data] = entry;
-                        var get_nepali_data = '{% url "ajaxGetNepaliData" %}';
-                        var form_data_1 = new FormData();
-                        form_data.append("csrfmiddlewaretoken",CSRF_TOKEN);
-                        form_data.append("application_id",id_data.user.id);
+                        var get_nepali_data = '{% url "ajaxGetNepaliData" %}';                     
+                       
                         $.ajax({
                                 url:get_nepali_data,
-                                method: 'GET',
-                                data : form_data,
-                                contentType: false,
-                                cache: false,
-                                processData: false,
+                                data:{'application_id':id_data.id},                        
                                 beforSend: function () {
                                 
                                 },
                                 success: function (nepali_response) {
-                                    Object.entries(data.data).forEach((entry) => {
-                                        const [key1, id_data1] = entry;
-                                    })
-                                }
-
-                            })
-                    //console.log(id_data.payment[Object.keys(id_data.payment).length-1]) get last element of json payment dictionary
-                    
-                    var string_data = ` <div id="order_detail`+id_data.id+`" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+                                    var nepali_data = nepali_response.data 
+                                    var string_data = ` <div id="order_detail`+id_data.id+`" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -775,14 +762,14 @@ $("#pagination").change(function(){
                                                 //id_data.user.district_name|get_districtName
                                                 //id_data.user.created_at|get_NepaliDate
                 if (id_data.user.union_type == 'district'){                    
-                    var string_data1 =`<p>श्रीमान अध्यक्षज्यू<br> नेपाल वन पैदावार उद्योग व्यवसायी संघ<br>जिल्ला`+id_data.user.district_name + `</p>`
+                    var string_data1 =`<p>श्रीमान अध्यक्षज्यू<br> नेपाल वन पैदावार उद्योग व्यवसायी संघ<br>जिल्ला`+nepali_data.district_name + `</p>`
                 }
                 else {
                 var string_data1 =  ` <p>श्रीमान अध्यक्षज्यू<br> ` + id_data.user.approved_company_name + ` <br>वस्तुगत संघ</p>`
                 }              
                 var string_data2 =   ` </div>
                                             <div class="form-top-right">
-                                                <span class="date">मिति: <u> `+id_data.user.created_at+`</u></span>
+                                                <span class="date">मिति: <u> `+nepali_data.payment_created_at+`</u></span>
                                             </div>
                                         </div>
                                         <div class="nibedan-form-body">
@@ -812,12 +799,12 @@ $("#pagination").change(function(){
                                                 {% load staticfiles %}
                                                 <label style="width: 100%;">दस्तखत : <span class="user-info-data"><img src="`+id_data.user.signature+`"></span></label>
                                                 <label>उद्यमीको नाम : <span class="user-info-data">`+id_data.user.first_name+`</span></label>
-                                                <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">`+id_data.get_user_application_detail.business_name+`</span></label>
+                                                <label>उद्योग वा व्यवसायको नाम : <span class="user-info-data">`+nepali_data.business_name+`</span></label>
                                                 <label>सम्र्पक नं : <span class="user-info-data">`+id_data.user.phone+`</span></label>
                                                 <label>इमेल : <span class="user-info-data">`+id_data.user.email+`</span></label>
                                             </div>
                                             <div class="user-address">
-                                                <label>ठेगाना :जिल्ला :<u>`+id_data.user.district_name+`</u></label>
+                                                <label>ठेगाना :जिल्ला :<u>`+nepali_data.district_name+`</u></label>
                                                 <label>न.पा.÷गा.पा :<u>`+id_data.get_user_application_detail.municipality+`</u></label>
                                                 <label>वडा नं."<u>`+id_data.get_user_application_detail.ward_number+`</u></label>
                                                 <label>टोल :<u>`+id_data.get_user_application_detail.tole+`</u></label>
@@ -847,14 +834,14 @@ $("#pagination").change(function(){
                                                 </div>
                                         
                                                 <div class="form-top-right">
-                                                    <span class="date">मिति : `+id_data.payment[Object.keys(id_data.payment).length-1].created_at+`</span>
+                                                    <span class="date">मिति : `+nepali_data.payment_created_at+`</span>
                                                 </div>
                                             </div>
                                             <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
                                             <div class="nibedan-form-top1">
                                                 <div class="form-top-left">
                                                     <p>श्री डिभिजन वन कार्यालय,<br>
-                                                        `+id_data.user.district_name+`</p>
+                                                        `+nepali_data.district_name+`</p>
                                                 </div>
                                             </div>
                                             
@@ -1145,7 +1132,10 @@ $("#pagination").change(function(){
     <!-- /.modal-dialog -->
 </div>`;
                     
-                    $('#ajax_modal').prepend(string_data+string_data1+string_data2+string_data3+certificate);
+                    $('#ajax_modal').prepend(string_data+string_data1+string_data2+string_data3+certificate); 
+                                }
+
+                            })
                 });
             },
             error: function (error) {

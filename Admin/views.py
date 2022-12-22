@@ -310,17 +310,28 @@ def ajaxApplicationFormIndex(request):
 
 def ajaxGetNepaliData(request):
     if request.GET:
-        import json
-        from django.http import JsonResponse   
-        
+        import json       
+        from django.http import JsonResponse
+
         application_id = request.GET['application_id']
         application_obj = ApplicationForm.objects.get(id=application_id)
 
+
         district_name =  application_obj.user.district_name
-        return HttpResponse(get_districtName(district_name))
+        payment_created_at = application_obj.payment.all().last().created_at
+        business_name = application_obj.get_user_application_detail.business_name
+        business_price_category = application_obj.get_user_application_detail.business_price_category
+        # return HttpResponse(payment_created_at)
+        nepali_data = {
+            'district_name' : get_districtName(district_name),
+            'payment_created_at' : str(get_NepaliDate(payment_created_at)),
+            'business_name' : get_NepaliBusinessName(business_name),
+            'business_price_category' : getPriceCategoryNepaliName(business_price_category),
+        }   
+        response = json.loads(json.dumps(nepali_data))
         response = {
-            'data' : p
+          'data' : response
         }
-        print(type(JsonResponse(response)))
         return JsonResponse(response)
+        
        
