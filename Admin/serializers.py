@@ -21,7 +21,7 @@ class UserApplicationDetail(serializers.ModelSerializer):
 class ApplicationFormSerializer(serializers.ModelSerializer):
     user = CustomUserSerializer(read_only=True)
     get_user_application_detail = UserApplicationDetail(read_only=True)
-    payment = UserApplicationPaymentSerializer(read_only=True)
+    payment = UserApplicationPaymentSerializer(many=True)
     class Meta:
         model = ApplicationForm
         fields = '__all__'

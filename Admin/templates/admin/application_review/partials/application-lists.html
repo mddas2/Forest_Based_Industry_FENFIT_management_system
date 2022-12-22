@@ -723,8 +723,9 @@ $("#pagination").change(function(){
             success: function (data) {
                 Object.entries(data.data).forEach((entry) => {
                     const [key, id_data] = entry;
-                    // alert(id_data.payment.id);
-                    // console.log(id_data.payment.id);
+                    
+                    //console.log(id_data.payment[Object.keys(id_data.payment).length-1]) get last element of json payment dictionary
+                    
                     var string_data = ` <div id="order_detail`+id_data.id+`" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -796,7 +797,7 @@ $("#pagination").change(function(){
                                                 <label>इमेल : <span class="user-info-data">`+id_data.user.email+`</span></label>
                                             </div>
                                             <div class="user-address">
-                                                <label>ठेगाना :जिल्ला <u>`+id_data.user.district_name+`|get_districtName}}</u></label>
+                                                <label>ठेगाना :जिल्ला <u>`+id_data.user.district_name+`</u></label>
                                                 <label>न.पा.÷गा.पा <u>`+id_data.get_user_application_detail.municipality+`|get_MuncipalityName}}</u></label>
                                                 <label>वडा नं.<u>`+id_data.get_user_application_detail.ward_number+`</u></label>
                                                 <label>टोल <u>`+id_data.get_user_application_detail.tole+`</u></label>
@@ -826,7 +827,7 @@ $("#pagination").change(function(){
                                                 </div>
                                         
                                                 <div class="form-top-right">
-                                                    <span class="date">मिति : `+id_data.payment.updated_at+`</span>
+                                                    <span class="date">मिति : `+id_data.payment[Object.keys(id_data.payment).length-1].created_at+`</span>
                                                 </div>
                                             </div>
                                             <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
