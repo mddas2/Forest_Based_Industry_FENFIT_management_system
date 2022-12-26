@@ -144,8 +144,4 @@ urlpatterns = [
    path('application-result', application_form.UserApplicationResult, name='UserApplicationResult'),
    path('pdf-report', html_to_pdf.report, name='getPdf'),
    
-   #****************************ajax Index**********
-   path('ajax-get-index-data', views.ajaxApplicationFormIndex, name='ajaxIndex'),
-   path('ajax-get-nepali-data', views.ajaxGetNepaliData, name='ajaxGetNepaliData'),
-   
 ]   

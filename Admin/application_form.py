@@ -741,7 +741,9 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
    
     page_number = request.GET.get('page')
     page_type = request.GET.get('type')
+    page_type = request.GET.get('type')
     range = request.GET.get('range')
+
     next = 2
     prev = 1
     try:
@@ -749,7 +751,6 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
             paginate_obj = Paginator(all_data, int(range)) #creating pagiting (only 5 data)
         except:
             paginate_obj = Paginator(all_data, 2)
-
         try:
             page_number = int(page_number)
             if page_type == "next":
@@ -764,7 +765,8 @@ def Pending(request, pk=None, approved_pending_cancelled=None):
             # if page_number is not an integer then assign the first page
             all_data = paginate_obj.page(1)
     except:
-        all_data = None 
+        range = 2
+        all_data = None
    
     if pk and approved_pending_cancelled:
          ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=approved_pending_cancelled)  

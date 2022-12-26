@@ -30,8 +30,6 @@ from django.shortcuts import redirect
 from django.db.models import Sum
 from django.core.paginator import Paginator
 
-from .custom_tags.custom_tags import *
-
 from django.db.models import Q
 
 
@@ -65,20 +63,23 @@ def index(request, pk=None, pdc=None):
     total_member = CustomUser.objects.all().count()
     total_income = UserApplicationPayment.objects.filter(is_payment=True).aggregate(Sum('payment_rupees'))
     # return HttpResponse(total_income['payment_rupees__sum'])
-    # total_income = 9808   
-    
+    # total_income = 9808
 
+    
+    
+    
     page_number = request.GET.get('page')
     page_type = request.GET.get('type')
     range = request.GET.get('range')
     next = 2
     prev = 1
+    
     try:
         try:
             paginate_obj = Paginator(all_data, int(range)) #creating pagiting (only 5 data)
         except:
             paginate_obj = Paginator(all_data, 2)
-
+    
         try:
             page_number = int(page_number)
             if page_type == "next":
@@ -93,8 +94,8 @@ def index(request, pk=None, pdc=None):
             # if page_number is not an integer then assign the first page
             all_data = paginate_obj.page(1)
     except:
-        all_data = None 
-        
+        range = 2
+        all_data = None
     
     data_1={
         'a' : 12,
@@ -280,58 +281,5 @@ def ClientMessage(request, id):
     return render(request, 'admin/clients_messages/client-msg-details.html',data)
     return HttpResponse('okay')
 
-def ajaxApplicationFormIndex(request):
-    if request.user.role == CustomUser.DISTRICT:
-        all_data = ApplicationForm.objects.filter(id=request.GET['application_id'],dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__district_name__contains=request.user.district_name).order_by('-created_at')  
-    elif request.user.role == CustomUser.STATE:
-        all_data = ApplicationForm.objects.filter(id=request.GET['application_id'],dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__state_name__contains=request.user.state_name).order_by('-created_at')  
-    elif request.user.role == CustomUser.PRIVATE:
-        all_data = ApplicationForm.objects.filter(id=request.GET['application_id'],dsc__isnull=False,dsc=request.user.get_dsc_Role(),user__union_name__contains=request.user.email).order_by('-created_at') 
-    elif request.user.role == CustomUser.CENTRAL:
-        if request.user.get_dsc_Role() == 'central_accountant':
-            all_data = ApplicationForm.objects.filter(Q(dsc=request.user.get_dsc_Role()) | Q(dsc='central_admin'),dsc__isnull=False,id=request.GET['application_id'],).order_by('payment') #admin can view both data from accountant and self
-        else:
-            all_data = ApplicationForm.objects.filter(id=request.GET['application_id'],dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-created_at') 
-    else:
-        all_data = None  
 
-    # return all_data
-    import json
-    from django.http import JsonResponse   
-    
-    serializer = ApplicationFormSerializer(all_data, many=True)
-    p= json.loads(json.dumps(serializer.data))
-
-    response = {
-          'data' : p
-     }
-    print(type(JsonResponse(response)))
-    return JsonResponse(response)
-
-def ajaxGetNepaliData(request):
-    if request.GET:
-        import json       
-        from django.http import JsonResponse
-
-        application_id = request.GET['application_id']
-        application_obj = ApplicationForm.objects.get(id=application_id)
-
-
-        district_name =  application_obj.user.district_name
-        payment_created_at = application_obj.payment.all().last().created_at
-        business_name = application_obj.get_user_application_detail.business_name
-        business_price_category = application_obj.get_user_application_detail.business_price_category
-        # return HttpResponse(payment_created_at)
-        nepali_data = {
-            'district_name' : get_districtName(district_name),
-            'payment_created_at' : str(get_NepaliDate(payment_created_at)),
-            'business_name' : get_NepaliBusinessName(business_name),
-            'business_price_category' : getPriceCategoryNepaliName(business_price_category),
-        }   
-        response = json.loads(json.dumps(nepali_data))
-        response = {
-          'data' : response
-        }
-        return JsonResponse(response)
-        
        
