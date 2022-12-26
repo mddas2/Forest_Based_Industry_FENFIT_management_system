@@ -1,0 +1,117 @@
+{% extends "admin/authentication/layouts/master.html" %}
+
+{% block form %}
+    {% include 'admin/authentication/partials/login.html' %}
+{% endblock %}
+
+{% block optionalcss %}
+    <style>
+        #state_sh{
+            display: none;
+        }
+        #district_sh{
+            display: none;
+        }
+        #private_sh{
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block optionaljs %}
+<script>
+    $( "#users_value" ).change(function() {
+        var users = $(this).val()
+        if(users == 'central'){
+            $("#private_sh").hide()
+            $("#state_sh").hide()
+            $("#district_sh").hide()
+        }
+        else if(users == 'state'){
+            $("#state_sh").show()
+            $("#private_sh").hide()
+            $("#district_sh").hide()
+        }
+        else if(users == 'district'){
+            $("#district_sh").show()
+            $("#state_sh").hide()
+            $("#private_sh").hide()
+        }
+        else if(users == 'private'){
+            $("#private_sh").show()
+            $("#state_sh").hide()
+            $("#district_sh").hide()
+        }
+        else if(users == 'client'){
+            $("#private_sh").hide()
+            $("#state_sh").hide()
+            $("#district_sh").hide()
+        }
+    });
+
+
+ $(document).ready(function () {      
+        // catch the form's submit event
+        $( "#users_value" ).change(function() {
+            // create an AJAX call
+            var state_district = $(this).val()
+            if(state_district == 'state'){
+                id = "#state_value"
+                url = "{% url 'GetStates' %}"
+            }
+            else if(state_district == 'district'){
+                id = "#district_value"
+                url = "{% url 'GetDistricts' %}"
+            }
+            else if(state_district == 'private'){
+                id = "#district_value"
+                url = "{% url 'GetMember' %}"
+            }
+            $.ajax({
+                 // get the form data
+                url: url,
+                // on success
+                success: function (response) {
+                    if (response) {
+                        
+                        if(state_district == 'district'){
+                            $('#district_value').empty();
+                                $.each(response.data, function( index, value ) {
+                                    $("#district_value").append($('<option>', {value:value.name, text:value.alt_name}));
+                                });   
+                            }
+                        else if(state_district == 'state'){
+                            $('#state_value').empty();
+                                $.each(response.data, function( index, value ) {
+                                    $("#state_value").append($('<option>', {value:value.name, text:value.alt_name}));
+                                }); 
+                                $("#state_value").append($('<option>', {value:'kathmandu valley', text:'काठमाडौं उपत्यका'}));
+                                    
+                        }
+                        else if(state_district == 'private'){
+                            $('#private_value').empty();
+                                $.each(response.data, function( index, value ) {
+                                    $("#private_value").append($('<option>', {value:value['fields']['email'], text:value['fields']['company_name']}));
+                                }); 
+                        }
+                       
+                                          
+                    }
+                    else{
+                        alert("please contact to Admin")
+                    }
+                },
+                // on error
+                error: function (response) {
+                    // alert the error if any error occured
+                    console.log(response.responseJSON.errors)
+                }
+            });
+
+            return false;
+        });
+    })
+
+
+</script>
+{% endblock %}

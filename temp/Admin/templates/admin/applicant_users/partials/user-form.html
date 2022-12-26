@@ -1,0 +1,138 @@
+     <!-- Info box Content applicant user personal information-->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
+                                {% csrf_token %}
+                                    <div class="form-body">
+                                        <h5 class="card-title">Profile Setting</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">First Name</label>
+                                                    <input type="text" id="first" name="first_name" class="form-control" value="{{ id_data.first_name }}" placeholder="Albert" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" name="email" value="{{id_data.email}}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                        <!--/row-->
+                                        
+                                        <div class="row">
+                                            <div class="col-md-3 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Mobile Number</label>
+                                                    <input type="number" name="phone" value="{{id_data.phone}}" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">District</label>
+                                                    <input type="text" name="district" value="{{id_data.district_name}}"  class="form-control" disabled>
+                                                </div>
+                                             </div>
+                                             <div class="col-md-3 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">State</label>
+                                                    <input type="text" name="state" value="{{id_data.state_name}}"  class="form-control" disabled>
+                                                </div>
+                                             </div>
+                                                <!--/span-->
+                                        </div>
+                                        <!--/row-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">password</label>
+                                                    <input name="password1" type="text" name="meta_title" class="form-control"> </div>
+                                            </div>
+                                            <!--/span--> 
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">confirm password</label>
+                                                    <input name="password2" type="text" name="keyword" class="form-control"> </div>
+                                            </div>
+                                            <!--/span-->
+                                        
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Profile Image</h4>
+                                                        <input name="profile_image" type="file" id="profile_image" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.image %}
+                                                    <script>
+                                                        $("#profile_image").attr("data-default-file", "{{id_data.image.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Signature Image</h4>
+                                                        <input name="signature" type="file" id="signature" class="dropify" />
+                                                    </div>
+                                                </div>
+                                                {% if id_data.signature %}
+                                                    <script>
+                                                        $("#signature").attr("data-default-file", "{{id_data.signature.url}}");
+                                                    </script>
+                                                {% endif %}
+                                            </div>
+                                        <hr> </div>
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <div class="form-actions m-t-40">
+                                        <button type="submit" class="btn btn-success text-white"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="button" class="btn btn-dark">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <script>
+          
+                    // Function to check Whether both passwords
+                    // is same or not.
+                    function checkPassword(form) {
+                        password1 = form.password1.value;
+                        password2 = form.password2.value;
+          
+                        // If password not entered
+                        if (password1 == ''){
+                            return true
+                            // alert ("password remain same");
+                        }
+                        // If confirm password not entered
+                        else if (password2 == ''){
+                            return true
+                            // alert ("password remain same");
+                        }
+                        // If Not same return False.    
+                        else if (password1 != password2) {
+                            alert ("\nPassword did not match: Please try again...")
+                            return false;
+                        }
+          
+                        // If same return True.
+                        else{
+                            return true;
+                        }
+                    }
+                </script>
+ 
+                
+                

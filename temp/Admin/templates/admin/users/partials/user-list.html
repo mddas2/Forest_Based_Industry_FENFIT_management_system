@@ -1,0 +1,107 @@
+{% load staticfiles %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="right-page-header">
+                    <div class="d-flex">
+                        <div class="align-self-center">
+                            <h4 class="card-title m-t-10">Users List </h4>
+                        </div>
+                        <div class="ms-auto">
+                            <input type="text" id="search_users" placeholder="search users" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive m-t-30" style="overflow: scroll;">
+                    <table class="table product-overview">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>District Name</th>
+                                <th>Photo</th>
+                                <th>Email</th>
+                                <th>Mobile Number</th>
+                                <th>Active</th>
+                                <th>Roles</th>
+                                <th>Group Permission</th>
+                                <!-- <th>Activity</th> -->
+                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name != 'accountant' %}
+                                    <th>Actions</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody id="table">
+                            {% for user in users %}
+                            <style>
+                                .sucessful-update{
+                                    background-color: #00c55899 !important;
+                                }
+                            </style>
+                            <tr {% if request.session.user_id == user.id %} class="sucessful-update" {% endif %}>
+                               <td>{{user.id}}</td>
+                               <td>{{user.first_name}}</td>
+                               <td>{{user.district_name}}</td>
+                               <td>    
+                                    {% if user.image %}                                               
+                                        <img src="{{user.image.url}}" class="" alt="{{user.image}}" width="80" height="50">
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>   
+                               <td>{{user.email}}</td>
+                               <td>{{user.phone}}</td>
+                               <td><span class="label label-{% if user.is_active%}success{% else %}primary{% endif %}">{{user.is_active}}</span></td>
+                               <td><span class="label label-{% if user.role == 1 %}success{% else %}primary{% endif %}">{{user.getRoleName}}</span></td>
+                               <td><span class="label label-{% if user.groups.first ==  None %}primary{% else %}success{% endif %}">{{user.groups.all.first}}</span></td>
+                                {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name != 'accountant' %}
+                                    <td>
+                                        <a href="{% url 'UserCreate' id=user.id %}" class="text-inverse p-r-10" data-bs-toggle="tooltip" title="" data-original-title="Edit">
+                                            <i class="ti-marker-alt"></i>
+                                        </a> 
+                                        <a onclick="Delete('{% url 'UserDelete' id=user.id %}')" class="text-inverse" title="" data-bs-toggle="tooltip" data-original-title="Delete">
+                                            <i class="ti-trash"></i>
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function Delete(url){
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.href = url;
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          
+        }
+      })
+    }
+    $(document).ready(function(){
+            $("#search_users").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#table tr").filter(function() {                
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+            });
+        });
+</script>

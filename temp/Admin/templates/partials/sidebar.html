@@ -1,0 +1,97 @@
+<nav class="sidebar-nav">
+    <ul id="sidebarnav">
+        <!-- <li>
+            <div class="hide-menu text-center">
+                <div id="eco-spark"></div>
+                <small>TOTAL EARNINGS - JUNE 2020</small>
+                <h4>$2,478.00</h4>
+            </div>
+        </li> -->
+        <!-- <li class="nav-small-cap">----PRODUCTS AND CATEGORY</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">GENERAL <span class="badge rounded-pill bg-cyan ms-auto">6</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="{% url 'NavigationList' %}">Main Navigation</a></li>
+                <li><a href="{% url 'HomeNavigationList' %}">Home Navigation</a></li>
+                <li><a href="{% url 'GlobalCreate' %}">Global Settings</a></li>
+                <li><a href="{% url 'Blogs' %}">Blogs</a></li>
+               
+            </ul>
+        </li> -->
+        {% if request.user.role == request.user.USER %}
+        <li class="nav-small-cap">----USER INFORMATION</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">सिफारिश फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
+                <!-- <li><a href="{% url 'UserPersonalInformationCreate' %}">प्रोफाइल सेटिङ</a></li> -->
+                {% if request.user.is_verified == False %}
+                    <li><a href="{% url 'MemberAprovalForm' %}">सदस्य सिफारिश फारम</a></li> <!---member approval form-->
+                {% endif %}
+
+                {% if request.user.applicationform.all.first.user_id ==  request.user.id%}
+                    <li><a href="{% url 'MemberAprovalFormReview' %}"> सदस्य आवेदन पुनरावलोकन l</a></li> <!---member approval form review--->
+                {% endif %}
+                {% if request.user.is_verified == True  %}
+                        {% if request.user.applicationform.all.first.dsc != 'approved' and  request.user.applicationform.all.first.dsc != 'c' %}                        
+                            <li><a href="{% url 'UserApplicationFormCreate' %}">सिफारिस फारम</a></li> <!-----APPLICATION Form-->
+                        {% endif %}                        
+                    <li><a href="{% url 'UserApplicationReview' %}">सिफारिस आवेदन पुनरावलोकन</a></li> <!----application review---->
+                    <!-- <li><a href="{% url 'UserApplicationResult' %}">PRINT RESULT</a></li> -->
+                {% endif %}
+            </ul>
+        </li>
+       {% elif request.user.role == request.user.CENTRAL or request.user.role == request.user.STATE or request.user.role == request.user.PRIVATE or request.user.role == request.user.DISTRICT%}
+        <li class="nav-small-cap">----CLIENT ACTIVITIES</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">प्रयोगकर्ताको सदस्यता फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
+                <li><a href="{% url 'AllMemberList' %}">अस्वीकृत प्रयोगकर्ता(pending)</a></li>
+                <li><a href="{% url 'ApprovedMember' %}">स्वीकृत प्रयोगकर्ता</a></li>
+            </ul>
+        </li>
+
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">सिफारिस आवेदन फारम<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <!-- <li><a href="{% url 'CustomerOrder' %}">CUSTOMER ORDERS</a></li> -->
+                <li><a href="{% url 'AllApplication' %}">सबै आवेदन फारम</a></li>
+                <li><a href="{% url 'Pending' %}">अस्वीकृत आवेदन फारम(pending)</a></li>
+                <li><a href="{% url 'ApprovedApplication' %}">स्वीकृत आवेदन फारम</a></li>
+                <li><a href="{% url 'CanelledApplication' %}">अस्वीकार आवेदन फारम</a></li>
+            </ul>
+        </li>
+        
+        
+        <li class="nav-small-cap">----USERS</li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">प्रयोगकर्ता(USERS)<span class="badge rounded-pill bg-cyan ms-auto">4</span></span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="{% url 'UserList' %}">प्रयोगकर्ता(USERS)</a></li>
+                {% if request.user.role == request.user.CENTRAL %}
+                    <li><a href="{% url 'AdvanceUserList' role_id=0 %}">प्रयोगकर्ता वर्गीकरण</a></li>
+                    <li><a href="{% url 'RoleList' %}">भूमिका(Role)</a></li>
+                    <li><a href="{% url 'GroupList' %}">Permission Group</a></li> <!----Group is combination of different permissions--->
+                    <!-- <li><a href="{% url 'PermissionList' %}">जिल्ला संघ(Permission)</a></li>  -->
+                    <!-- <li><a href="{% url 'UserLogs' %}">LOGS</a></li> -->
+                {% endif %}
+            </ul>
+        </li>
+        <!-- <li> <a href="{% url 'ChatApp' %}" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">CHAT-APP<span class="badge rounded-pill bg-cyan ms-auto"></span></span></a>
+        </li>
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-email"></i><span class="hide-menu">Email</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="{% url 'MailApp' %}">Mailbox</a></li>
+                <li><a href="{% url 'MailDetail' %}">Mailbox Detail</a></li>
+                <li><a href="{% url 'MailCompose' %}">Compose Mail</a></li>
+            </ul>
+        </li> -->
+        {% endif %}       
+    
+        {% if request.user.role == request.user.CENTRAL %}
+        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-layers"></i><span class="hide-menu">रिपोर्ट<span class="badge rounded-pill bg-cyan ms-auto">2</span></span></a>
+            <ul aria-expanded="false" class="collapse">                
+                    <li><a href="{% url 'ApplicationFormReport' %}">सिफारिस रिपोर्ट</a></li>
+                    <li><a href="{% url 'MembershipReport' %}">प्रयोगकर्ताको सदस्यता रिपोर्ट</a></li>
+            </ul>
+        </li>
+        {% endif %}       
+     
+    </ul>
+</nav>

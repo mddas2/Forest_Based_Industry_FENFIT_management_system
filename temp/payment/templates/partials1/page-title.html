@@ -1,0 +1,95 @@
+<div class="row page-titles" style="margin-top:10px;">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">{{ slug1 }}</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-end">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb justify-content-end">
+                <li class="breadcrumb-item"><a href="/">dashboard</a></li>
+                <li class="breadcrumb-item active">{{ slug1 }}</li>
+            </ol>
+            {% if create == True %}
+                <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" onclick="Create('{{  create_link_name  }}')"><i class="fa fa-plus-circle"></i> Create New</button>
+            {% endif %}
+            {% if import == True %}
+                <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm" class="model_img img-responsive"><i class="bi bi-cloud-arrow-down"></i> Import</button>
+            {% endif %}
+             {% if export == True %}
+                <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" onclick="Create('{{  export_link_name  }}')"><i class="bi bi-cloud-arrow-up"></i> Export</button>
+            {% endif %}
+            {% if permission_create == True %}
+                <button type="button" class="btn btn-info d-lg-block m-l-15 text-white" data-bs-toggle="modal" data-bs-target="#add-contact"><i class="fa fa-plus-circle"></i>Create</button>
+                <div id="add-contact" class="modal fade in" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Add New Permission</h4>
+                                <button type="button" class="btn-close me-1 p-0" data-bs-dismiss="modal" aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body">
+                                {%if id_data%}
+                                <form class="form-horizontal form-material" action="{% url action edit_id=id_data.id %}" method="post" enctype="multipart/form-data" onsubmit="submitForm();" name="navform">
+                                {%else%}
+                                <form class="form-horizontal form-material" action="{% url action %}" method="post" enctype="multipart/form-data" onsubmit="submitForm();" name="navform">
+                                {%endif%}
+                                {% csrf_token %}
+                                    <div class="form-group">
+                                        <div class="col-md-12 m-b-20">
+                                            <label class="form-label" style="float: left;">Permission Discription (as district)</label>
+                                            <input id="name" name="name" type="text" class="form-control" placeholder="Can approved all application of Kathmandu " required><!----all application goes to admin have permission Kathmandu--->
+                                        </div>
+                                        <div class="col-md-12 m-b-20">
+                                            <label class="form-label" style="float: left;">Permission Code (as district)</label>
+                                            <input id="codename" name="codename" type="text" class="form-control" placeholder="kathmandu" required>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input id="permission_id" type="hidden" name="id">
+                                        <button type="submit" class="btn btn-info waves-effect" data-bs-dismiss="modal">Save</button>
+                                        <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </from>
+                            </div>
+                            
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+            {% endif %}
+            <!--below is permission modal-->
+          
+            <script>
+                function Create(link){
+                      location.href = link
+                    }                
+            </script>
+            {% comment %}  {% if create == True %}
+            <a href="
+            {% if parameter %}
+                {% url  create_link_name  id=parameter %}
+            {% else %}
+                {% url  create_link_name  %}
+            {% endif %}
+            ">
+                <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"
+                 onclick="Create('')"><i class="fa fa-plus-circle"></i> Create New</button>
+            </a>
+            {% endif %} {% endcomment %}
+        </div>
+    </div>
+</div>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% else %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}

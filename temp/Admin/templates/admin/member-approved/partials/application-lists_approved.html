@@ -1,0 +1,834 @@
+{% load staticfiles %}
+    {% load mathfilters %}   
+<style>
+    .dropdown-toggle::after {
+        display: none;
+    }
+    .modal-dialog {
+        max-width: 100% !important;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-body">            
+                    <div class="right-page-header">
+                        <div class="d-flex">
+                            <div class="align-self-center">
+                                <h4 class="card-title m-t-10">{{slug1}} </h4>
+                            </div>
+                            <div class="ms-auto">
+                                <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
+                            </div>
+                        </div>
+                    </div>
+             
+                <div class="table-responsive" style="overflow-x: scroll;">
+                    <table class="table product-overview">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Full Name</th>
+                                <th>नागरिकता पर्तिलिपि</th>
+                                <th>कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि</th>
+                                <th>स्थायी लेखा नम्बरको पर्तिलिपि</th>      
+                                <th>लेखा परिक्षण पर्तिवेदन्को पर्तिलिपि</th>
+                                <th>कर चुक्ता प्रमाण पत्रको पर्तिलिपि</th>   
+                                <th>द्वारा स्थानान्तरण</th> 
+                                <th>जिल्ला</th>                                                   
+                                <th>विवरण हेर्नुहोस्</th>
+                                <th>दर्ता गरिएको मिति</th>
+                                <th>स्थिति</th>   
+                                <th style="display:none">email</th>                            
+                            </tr>
+                        </thead>
+                        {% if all_data %}
+                        <tbody id="tableSearch">
+                            {% for i in all_data %}
+                              {% if request.user.role == request.user.PRIVATE and i.union_name == request.user.email%} 
+                                      <!----this is for private sangha-->            
+                                <tr>
+                                    <td>{{i.id}}</td>
+                                    <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                        <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>
+                                    <td class="zoom-gallery">    
+                                        {% if  i.applicationform.all.first.get_user_application_detail.provisional_account_number %}        
+                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>   
+                                    <td class="zoom-gallery">
+                                        {% if i.applicationform.all.first.get_user_application_detail.auditing %}    
+                                        <a href="{{i.applicationform.all.first.get_user_application_detail.auditing.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td> 
+                                    <td class="zoom-gallery">
+                                        {% if  i.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}       
+                                        <a href="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                        {% else %}
+                                            NotFound
+                                        {% endif %}
+                                    </td>  <!-- this is quantity-->
+                                    <td>{{i.district_name}}</td>
+                                    <td>{{i.dsc}}</td>
+                                    
+                                    <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
+                                    <td><span class="label label-info">{{i.updated_at}}</span></td>
+                                    <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                    {% if action%}
+                                    <td>
+                                    <div class="dropdown">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical" style="color: red;"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item"  href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='p'  %}"> 
+                                                    {%if i.is_verified == False %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Pending
+                                                </a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
+                                                        {%if i.is_verified == True %} 
+                                                    <i class="bi bi-check-lg"></i> 
+                                                    {% else %} &nbsp; &nbsp;
+                                                        {% endif %}
+                                                    Approved
+                                                    </a>
+                                                </li>
+                                
+                                                <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
+                                                    Cancelled
+                                                </a></li>
+                                                
+                                            </ul>
+                                            </div>
+                                    </td>
+                                    <td style="display:none">{{i.phone}}</td>  
+                                    <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                    {% endif %}                                                          
+                                </tr>
+            
+                            {% else %}
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.applicationform.all.first.get_user_application_detail.owner_full_name}}</td>
+                                <td class="zoom-gallery">
+                                    {% if i.applicationform.all.first.get_user_application_detail.certificate_citizenship %} 
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>
+                                <td class="zoom-gallery">
+                                    {% if i.applicationform.all.first.get_user_application_detail.certificate_company_registration %}  
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>                                             
+                                    <!-- <img src="{{i.get_user_application_detail.certificate_company_registration.url}}" class="" alt="{{i.product.image1}}" width="80" height="50"> -->
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>
+                                <td class="zoom-gallery">    
+                                    {% if  i.applicationform.all.first.get_user_application_detail.provisional_account_number %}        
+                                    <a href="{{ i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" title=""> <img src="{{i.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}"  style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>   
+                                <td class="zoom-gallery">
+                                    {% if i.applicationform.all.first.get_user_application_detail.auditing %}    
+                                    <a href="{{i.applicationform.all.first.get_user_application_detail.auditing.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.auditing.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td> 
+                                <td class="zoom-gallery">
+                                    {% if  i.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}       
+                                    <a href="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" title=""> <img src="{{ i.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}"   style='width:80px; height:50px;' class="img-responsive" alt="img" /> </a>
+                                    {% else %}
+                                        NotFound
+                                    {% endif %}
+                                </td>  <!-- this is quantity-->
+                                <td>{{i.dsc}}</td>
+                                <td>{{i.district_name}}</td>
+                                <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn waves-effect waves-light btn-secondary model_img img-responsive">view</button></td>
+                                <td><span class="label label-info">{{i.updated_at}}</span></td>
+                                <td><span class="label label-success">{% if i.is_verified == True %} Approved {% elif i.is_verified == False %} Processing {% endif %}</span></td>
+                                {% if action%}
+                                <td>
+                                <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical" style="color: red;"></i>
+                                        </a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item"  href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='p'  %}"> 
+                                                {%if i.is_verified == False %} 
+                                                <i class="bi bi-check-lg"></i> 
+                                                {% else %} &nbsp; &nbsp;
+                                                    {% endif %}
+                                                Pending
+                                            </a></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='a'  %}"> 
+                                                    {%if i.is_verified == True %} 
+                                                <i class="bi bi-check-lg"></i> 
+                                                {% else %} &nbsp; &nbsp;
+                                                    {% endif %}
+                                                Approved
+                                                </a>
+                                            </li>
+                            
+                                            <li><a class="dropdown-item" href="{% url "AllMemberList" pk=i.id approved_pending_cancelled='c'  %}">
+                                                Cancelled
+                                            </a></li>
+                                            
+                                        </ul>
+                                        </div>
+                                </td>
+                                <td style="display:none">{{i.phone}}</td>  
+                                <td style="display:none">{{i.get_shipping_address.email}}</td>
+                                {% endif %}                                                          
+                            </tr>
+                            {% endif%}
+                            {% endfor %}
+                        </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----modal-->
+
+<div class="card">
+    <div class="card-body">      
+        <!-- sample modal content -->
+        <!----for loop-->
+       {% for id_data in all_data %}  
+        <div id="order_detail{{id_data.id}}" class="modal" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="vcenter">Form review</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-----order detail-->                        
+                        <div class="row">
+                            <!-- Column -->
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-md-6" id="div_print_application">
+                                            <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_application');">print</button>
+                                                <div class="nibedan-form">
+                                                    <div class="form-logo">
+                                                        <img src="/static/assets/images/logo-2.png">
+                                                    </div>
+                                                    <div class="fanfet-info">
+                                                        <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
+                                                    </div>
+                                                    <h5 class="main-title">{% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता फारम {% else %} सदस्यता आवेदन फारम {% endif %}</h5>
+                                                    <div class="nibedan-form-top">
+                                                        <div class="form-top-left">
+                                                            <p>श्रीमान अध्यक्षज्यू<br>
+                                                                नेपाल वन पैदावार उद्योग व्यवसायी संघ</p>
+                                                            <label><u>जिल्ला {{id_data.district_name|get_districtName}}</u></label>
+                                                        </div>
+                                                        <div class="form-top-right">
+                                                            <span class="date">मिति : <u>{{id_data.created_at|get_NepaliDate}}</u></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nibedan-form-body">
+                                                        <h2>बिषय ः {% if id_data.member_admin == 'admin' %} संस्थागत आबध्दता उपलब्धता गराइदिने सम्वन्धमा {% else %} सदस्यता सम्बन्धमा {% endif %}।</h2>
+                                                        <p>वन पैदावारमा आधारित सम्पुर्ण उद्योग व्यवसायीहरुको हकहित संरक्षण र पैरवी गर्ने त्यस
+                                                            जिल्ला संघको विधानको अधिनमा रहि नीति, कार्यक्रम तथा निर्णयहरुको पूर्णरुपमा पालना गर्ने
+                                                            प्रतिबद्धता जाहेर गर्दै जिल्ला संघको सदस्यता लिई आवद्ध हुन चाहेकोले आवस्यक दस्तुर र
+                                                            तपसिल
+                                                            बमोजिमका कागजात यसैआवेदन आवेदन साथ पेश गर्दछु।</p>
+                                                        <h5>संलग्न कागजातहरु :-</h5>
+                                                        <ul>
+                                                            <li>नागरिकताको प्रमाणित प्रतिलिपि १ थान ।</li>
+                                                            <li>उद्योग वा कम्पनी दर्ता प्रमाण पत्रको प्रतिलिपि ।</li>
+                                                            <li>स्थायी लेखा नम्बरको प्रतिलिपि ।</li>
+                                                            <li>लेखा परिक्षण प्रतिवेदनको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
+                                                            <li>कर चुक्ता प्रमाण पत्रको प्रतिलिपि (नयाँ दर्ताको लागि आवस्यक नपर्ने) ।</li>
+                            
+                                                        </ul>
+                                                    </div>
+                                                    <div class="nibedan-form-footer">
+                                                        <div class="user-info">
+                                                            <label style="font-weight: bold;">आवेदक</label>
+                                                            <label>उद्यमीको नाम : <span class="user-info-data">{{id_data.first_name}}</span></label>
+                                                            <label>उद्योग वा व्यवसायको नाम : <span
+                                                                    class="user-info-data">{{business_name}}</span></label>
+                                                            <label>सम्र्पक नं : <span class="user-info-data">{{id_data.phone}}</span></label>
+                                                            <label>इमेल : <span class="user-info-data">{{id_data.email}}</span></label>
+                                                            {% load staticfiles %}
+                                                            <label>दस्तखत : <span class="user-info-data">
+                                                                {% if id_data.user.signature %} <img src="{{ id_data.signature.url }}"> {% endif %} </span></label>
+                                                        </div>
+                                                        <div class="user-address">
+                                                            <label>ठेगाना : जिल्ला <u>{{id_data.district_name|get_districtName}}</u></label>
+                                                            <label>न.पा.÷गा.पा <u>{{id_data.get_user_application_detail.municipality|get_MuncipalityName}}</u></label>
+                                                            <label>वडा नं.<u>{{id_data.applicationform.all.first.get_user_application_detail.ward_number}}</u></label>
+                                                            <label>टोल <u>{{id_data.applicationform.all.first.get_user_application_detail.tole}}</u></label>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                            <div class="page-break"></div>
+                                        </div>
+                                           <!---certificate-->               
+                                        {% if request.user.role == request.user.CENTRAL and id_data.is_verified == True %}                         
+                                            <div class="col-md-6" id="div_print_certificate">
+                                                <button data-bs-dismiss="modal" aria-hidden="true" class="print-hide btn-close" onClick="printdiv('div_print_certificate');">print</button>
+                                                <div class="nibedan-form">
+                                                    <div class="form-logo">
+                                                        <img src="/static/assets/images/logo-2.png">
+                                                    </div>
+                                                    <div class="fanfet-info">
+                                                        <ul><li><a href="mailto:fenfitnepal@gmail.com">fenfitnepal@gmail.com</a></li>, <li><a href="tel:015147074">+977 01-5147074</a>, <a href="tel:015147152">5147152</a></li></ul>
+                                                    </div>
+                                                    {% if id_data.union_type == 'private' %}
+                                                        <h5 style="font-weight: 600;"><center>{{id_data.approved_company_name}}</center></h5>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                    {% else %}
+                                                        <h5 style="font-weight: 600;"><center>नेपाल वन पैदावार उद्योग व्यवसायी संघ</center></h5>
+                                                        <h6 style="text-align: center; font-weight: 600;">जिल्ला {{id_data.approved_email|GetMemberFormApproved:'district_name'}}<br> {% if id_data.member_admin == 'admin' %} संस्थागत अद्यावद्यिक प्रमाण पत्र {% else %} सदस्यता अद्यावद्यिक प्रमाण पत्र । {% endif %}</h6>
+                                                    {% endif %}
+                                                    <div class="nibedan-form-top">
+                                                        
+                                                        <div class="form-top-left">
+                                                            <p>अद्यावद्यिक नम्बर : {{id_data.id}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nibedan-form-top">
+                                                        {% if id_data.member_admin == 'admin' %}
+                                                            
+                                                            <div class="form-top-left">
+                                                                <p>श्री. अध्यक्ष ज्यू<br>
+                                                                    {% if id_data.apply_role_type == request.user.PRIVATE %}
+                                                                        {{id_data.company_name}} वस्तुगत संघ
+                                                                    {% elif id_data.apply_role_type == request.user.STATE %}
+                                                                        {{id_data.state_name|get_StateName}}
+                                                                    {% elif id_data.apply_role_type == request.user.DISTRICT %}
+                                                                         {{id_data.district_name|get_districtName}}
+                                                                    {% endif %}
+                                                                 </p>
+                                                            </div> 
+                                                        {% else %}
+                                                        <div class="form-top-left">
+                                                            <p>श्रीमान {{id_data.first_name}} ज्यू<br>
+                                                                {{id_data.company_name}} फर्म । कम्पनी </p>
+                                                        </div>
+                                                        {% endif %}
+                                                        <div class="form-top-right">
+                                                            <span class="date">मिति : <u>{{id_data.updated_at|get_NepaliDate}}</u></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nibedan-form-body">
+                             
+                                                            {% if id_data.member_admin == 'admin' %} 
+                                                            <p>तपाईले सस्थागत आवद्धताका लागि मिति {{id_data.updated_at|get_NepaliDate}} मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको विधान 
+                                                                अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बभु mाउनुपर्ने दस्तुर समेत बुझाई सक्नुभएकोलेनेपाल वन पैदावार
+                                                                उद्योग ब्यवसायि महासंघको विधान .बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सस्थागत आबद्धताको 
+                                                                अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । महासंघको उद्धेश्य परिपुर्तिमा विधान बमोजिम सदस्यहरको हित रक्षार्थ 
+                                                                क्रियाशील हुनुहुनेछ भन्नेविश्वास लिएकोछु। तपाईकोनेतृत्वकोकार्यकाल सफल र उत्कृष्ट रहोस भन्नेशुभकामना
+                                                                ब्यक्त गर्दछु ।  </p>
+                                                            {% else %}
+                                                            <p>तपाईले सदस्यता अद्यावद्यिकका लागि मिति {{id_data.updated_at|get_NepaliDate}} मा पेश गर्नु भएको आबेदन अनुसार त्यहाँ संस्थाको 
+                                                                विधान अनुरुप का कार्यहरु सम्पन्न गरि आबद्धताका लागि बुझाउनु पर्ने दस्तुर समेत बुझाई सक्नु भएकोले ं(जुन संघ 
+                                                                वा बस्तुगत संघ छनौट गरेर आवेदन गरेको हुन्छ त्यहि संघ वा वस्तुगत संघको नाम आउने वनाउनेसंघको विधान 
+                                                                बमोजिम मिति २०८०।००।०० सम्म बहाल रहने गरि सदस्यता अद्यावद्यिक प्रमाण पत्र प्रदान गरिएको छ । संघको 
+                                                                उद्धेश्य परिपुर्तिमा विधान बमोजिम सदस्यहरकोहित रक्षार्थ क्रियाशील हुनुहुनेछ भन्नेविश्वास लिएकोछु। तपाइर्क ो
+                                                                कार्यकाल सफल र उत्कृष्ट रहोस भन्ने शुभकामना ब्यक्त गर्दछु । </p>
+                                                            {% endif %}
+                                                        
+                            
+                                                    </div>
+                                                    <div class="nibedan-form-footer">
+                                                        <div class="user-info">
+                                                            <label style="font-weight: bold;">पद अध्यक्ष</label>
+                                                            <label>नाम :<span class="user-info-data">{{id_data.approved_email|GetMemberFormApproved:'district_name'}}</span></label>
+                                                            {% load staticfiles %}
+                                                            <label>पद अध्यक्ष्: <span class="user-info-data"> नेपाल वन पैदावार उद्योग व्यवसायी संघ</span></label>
+                                                            {% load staticfiles %}
+                                                            <label>दस्तखत : <span class="user-info-data"><img  src="{% if id_data.approved_signature %} {{id_data.approved_signature.url}} {% endif %}"></span></label>
+                                                        </div>
+                                                    </div>
+                            
+                                                </div>
+                                                <div class="page-break"></div>
+                                            </div>                                           
+                                        {% endif %}
+                                            <!------certificate------>                                    
+                                        <div class="col-md-6" id="div_print_document">
+                                            <div class="row" id="documents">
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">नागरिकता पर्तिलिपि</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_citizenship.url}}" class="img-responsive img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कम्पनी दर्ताको प्रमाण पत्र पर्तिलिपि​</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.certificate_company_registration.url}}"
+                                                                class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                        
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">स्थायी लेखा नम्बरको पर्तिलिपि</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.provisional_account_number %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.provisional_account_number.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">कर चुक्ता प्रमाण पत्रको पर्तिलिपि</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.tax_paid_certificate.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">बैंक भौचर को प्रतिलिपि</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.bank_voucher %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.bank_voucher.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र अगाडि पटी</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate_front_side %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate_front_side.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">उद्योग प्रमाणपत्र पछाडी पटी</h4>
+                                                            {% if id_data.applicationform.all.first.get_user_application_detail.industry_certificate_back_side %}
+                                                            <img src="{{id_data.applicationform.all.first.get_user_application_detail.industry_certificate_back_side.url}}" class="img-responsive img-fit" img-fit">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="page-break"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                        
+                                    <style>
+                                        .card-title{
+                                            font-size: 16px;
+                                        }
+                                        .nibedan-form {
+                                            padding: 50px 20px;
+                                            max-width: 600px;
+                                            border: 1px solid #d9d6d6;
+                                        }
+                        
+                                        .nibedan-form p {
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            text-align: justify;
+                                        }
+                        
+                                        .nibedan-form .form-logo {
+                                            text-align: center;
+                                        }                        
+                                        .nibedan-form .form-logo img {
+                                            max-width: 500px;
+                                            width: 100%;
+                                        }
+                                        .fanfet-info{
+                                                text-align: center;
+                                            } 
+                                            .fanfet-info ul{
+                                                padding: 0;
+                                                list-style: none;
+                                            }
+                                            .fanfet-info ul li{
+                                                font-size: 12px;
+                                                display: inline-block;
+                                                color: #000;
+                                            }
+                                            .fanfet-info ul li a{
+                                                color: #000;
+                                           }
+                                            h5.main-title{
+                                                font-size: 14px;
+                                                line-height: 22px;
+                                                font-weight: bold;
+                                                text-align: center;
+                                            }
+                        
+                                        .nibedan-form-top {
+                                            position: relative;
+                                            display: block;
+                                            width: 100%;
+                                            padding: 50px 0;
+                                        }
+                                        .nibedan-form-top1 {
+                                            position: relative;
+                                            display: block;
+                                            width: 100%;
+                                            padding: 10px 0;
+                                        }
+                        
+                                        .form-top-left {
+                                            float: left;
+                                        }
+                        
+                                        .form-top-right {
+                                            float: right;
+                                        }
+                        
+                                        .nibedan-form-body {
+                                            position: relative;
+                                            display: block;
+                                            margin-top: 50px;
+                                        }
+                        
+                                        .nibedan-form-body h2 {
+                                            font-size: 16px;
+                                            line-height: 22px;
+                                            font-weight: bold;
+                                            text-align: center;
+                                        }
+                        
+                                        .nibedan-form-body h5 {
+                                            font-size: 16px;
+                                            line-height: 22px;
+                                            font-weight: bold;
+                                            text-decoration: underline;
+                                        }
+                        
+                                        .nibedan-form-body ul li {
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            text-align: justify;
+                                        }
+                        
+                                        .nibedan-form-footer .user-info {
+                                            text-align: left;
+                                            padding-right: 20px;
+                                        }
+                        
+                                        .nibedan-form-footer .user-info label {
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            display: block;
+                                            margin-bottom: 10px;
+                                        }
+                        
+                                        .nibedan-form-footer .user-info label img {
+                                            max-width: 150px;
+                                        }
+                        
+                                        .nibedan-form-footer .user-info label .user-info-data {
+                                            max-width: 150px;
+                                            min-width: 150px;
+                                            overflow: hidden;
+                                        }
+                        
+                                        .nibedan-form-footer .user-address {
+                                            margin-top: 20px;
+                                        }
+                        
+                                        .nibedan-form-footer .user-address label {
+                                            font-size: 14px;
+                                            line-height: 24px;
+                                            font-weight: 400;
+                                            color: #000;
+                                            display: inline-block;
+                                            margin-bottom: 10px;
+                                            width: 49%;
+                                        }
+                                        .print-hide {
+                                            color: #fff !important;
+                                            opacity: 1;
+                                            background: #10a50e;
+                                            width: auto;
+                                            height: auto;
+                                            padding: 4px 20px;
+                                            margin-bottom: 10px;
+                                            /* border: 1px solid #747474; */
+                                            border-radius: 0;
+                                            font-weight: 600;
+                                        }
+                                        @media (max-width:767px) {
+                        
+                                            .nibedan-form-footer .user-info,
+                                            .nibedan-form-footer .user-address {
+                                                padding-right: 0;
+                                                text-align: center;
+                                            }
+                        
+                                            .nibedan-form-footer .user-address label {
+                                                width: 100%;
+                                            }
+                                        }
+                                    </style>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                        </div>
+                        <div class="row">
+
+                            <!-- column -->
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title card-title">सिफारिश अनुमोदन प्रगति पट्टी<a class="get-code" data-bs-toggle="collapse"
+                                                href="#pgr2" aria-expanded="true"></a></h4>
+                        
+                                        <div class="progress m-t-20">
+                                            <div class="progress-bar bg-success"
+                                                style="width: {% if id_data.dsc == 'district' %} 15% {% elif id_data.dsc == 'state' %} 30% {% elif id_data.dsc == 'central_accountant' %} 45% {% elif id_data.dsc == 'central_admin' %} 60% {% elif id_data.dsc == 'central_ceo' %} 75%  {% elif id_data.dsc == 'approved' %} 100%  {% else %} 15% {% endif %} ; height:15px;"
+                                                role="progressbar">{% if id_data.dsc == 'district' %} 15% {% elif id_data.dsc == 'state' %} 30% {% elif id_data.dsc == 'central_accountant' %} 45% {% elif id_data.dsc == 'central_admin' %} 60% {% elif id_data.dsc == 'central_ceo' %} 75%  {% elif id_data.dsc == 'approved' %} 100%  {% else %} 15% {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                                                                        
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <center>
+                                    <h3 class="card-title">FENFIT APPLICATION</h3>
+                                    <h6 class="card-subtitle text-info">{% if id_data.dsc == 'district' %} Pending on जिल्ला संघ {{id_data.get_user_application_detail.district}} {% elif id_data.dsc == 'state' %} Pending on प्रदेश संघ{{id_data.get_user_application_detail.state}} {% elif id_data.dsc == 'central_accountant' %} Pending on महासंघ लेखापाल {% elif id_data.dsc == 'central_admin' %} Pending on महासंघ व्यवस्थापक {% elif id_data.dsc == 'central_ceo' %} Pending on महासंघ मुख्य व्यवस्थापक {% else %} User Need to Forward for further Process {% endif %}</h6>
+                                    <!-- <h4 class="box-title m-t-40">Application description</h4>
+                                        <p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. but the majority have suffered alteration in some form, by injected humour</p> -->
+                                    <h2 class="m-t-4 card-title"><small class="text-success">{% if id_data.dsc == 'district' %} (15% COMPLETED) {% elif id_data.dsc == 'state' %} (35% COMPLETED) {% elif id_data.dsc == 'central_accountant' %} (45% COMPLETED) {% elif id_data.dsc == 'central_admin' %} (60% COMPLETED) {% elif id_data.dsc == 'central_ceo' %} (75% COMPLETED)  {% elif id_data.dsc == 'approved' %} (100% COMPLETED)  {% else %} (15% COMPLETED) {% endif %}</small></h2>
+                                    <button
+                                        class="btn btn-sm btn-{% if id_data.user.applicationform.all.first.dsc == 'approved' %}success btn-rounded{% else %}primary btn-rounded{% endif %}">{% if id_data.dsc == 'district' %} जिल्ला संघ {{request.user.district_name}} NOT APPROVED YET {% elif id_data.dsc == 'state' %} प्रदेश संघ {{id_data.get_user_application_detail.state}} NOT APPROVED YET {% elif id_data.dsc == 'central_accountant' %} महासंघ लेखापालले अझै स्वीकृत गेरेको छैन {% elif id_data.dsc == 'central_admin' %} प्रशासकले अझै स्वीकृत गेरेको छैन| {% elif id_data.dsc == 'central_ceo' %}मुख्य प्रशासकले अझै स्वीकृत गेरेको छैन|  {% elif id_data.dsc == 'approved' %} (100% COMPLETED)  {% else %} (15% COMPLETED) {% endif %}</button>
+                                </center>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <center>
+                                   <h3 class="box-title m-t-4">Comments Highlights</h3>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
+                                        <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
+                                        <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
+                                    </ul>
+                                </center>
+                            </div>
+                            
+                            <!-- column -->
+                        </div>
+                        <script>
+                            function printdiv(printpage) {
+                                var headstr = "<html><head><title></title></head><body>";
+                                var footstr = "</body>";
+                                var css = "<style>\
+                                          .card-title{\
+                                            font-size: 16px;\
+                                        }\
+                                        .nibedan-form {\
+                                            padding: 50px 20px;\
+                                            max-width: 100%;\
+                                            border: 0;\
+                                        }\
+                                        .nibedan-form p {\
+                                            font-size: 14px;\
+                                            line-height: 24px;\
+                                            font-weight: 400;\
+                                            color: #000;\
+                                            text-align: justify;\
+                                        }\
+                                        .nibedan-form .form-logo {\
+                                            text-align: center;\
+                                        }\
+                                        .nibedan-form .form-logo img {\
+                                            max-width: 500px;\
+                                            width: 100%;\
+                                        }\
+                                        .fanfet-info{\
+                                                text-align: center;\
+                                            } \
+                                            .fanfet-info ul{\
+                                                padding: 0;\
+                                                list-style: none;\
+                                            }\
+                                            .fanfet-info ul li{\
+                                                font-size: 12px;\
+                                                display: inline-block;\
+                                                color: #000;\
+                                            }\
+                                            .fanfet-info ul li a{\
+                                                color: #000;\
+                                           }\
+                                        h5.main-title{\
+                                                font-size: 14px;\
+                                                line-height: 22px;\
+                                                font-weight: bold;\
+                                                text-align: center;\
+                                            }\
+                                        .nibedan-form-top {\
+                                            position: relative;\
+                                            display: block;\
+                                            width: 100%;\
+                                            padding: 50px 0;\
+                                        }\
+                                        .nibedan-form-top1 {\
+                                            position: relative;\
+                                            display: block;\
+                                            width: 100%;\
+                                            padding: 10px 0;\
+                                        }\
+                                        .form-top-left {\
+                                            float: left;\
+                                        }\
+                                        .form-top-right {\
+                                            float: right;\
+                                        }\
+                                        .nibedan-form-body {\
+                                            position: relative;\
+                                            display: block;\
+                                            margin-top: 50px;\
+                                        }\
+                                        .nibedan-form-body h2 {\
+                                            font-size: 16px;\
+                                            line-height: 22px;\
+                                            font-weight: bold;\
+                                            text-align: center;\
+                                        }\
+                                        .nibedan-form-body h5 {\
+                                            font-size: 16px;\
+                                            line-height: 22px;\
+                                            font-weight: bold;\
+                                            text-decoration: underline;\
+                                        }\
+                                        .nibedan-form-body ul li {\
+                                            font-size: 14px;\
+                                            line-height: 24px;\
+                                            font-weight: 400;\
+                                            color: #000;\
+                                            text-align: justify;\
+                                        }\
+                                        .nibedan-form-footer .user-info {\
+                                            text-align: left;\
+                                            padding-right: 20px;\
+                                        }\
+                                        .nibedan-form-footer .user-info label {\
+                                            font-size: 14px;\
+                                            line-height: 24px;\
+                                            font-weight: 400;\
+                                            color: #000;\
+                                            display: inline-block;\
+                                            margin-bottom: 10px;\
+                                            width: 49%;\
+                                        }\
+                                        .nibedan-form-footer .user-info label img {\
+                                            max-width: 150px;\
+                                        }\
+                                        .nibedan-form-footer .user-info label .user-info-data {\
+                                            max-width: 150px;\
+                                            min-width: 150px;\
+                                            overflow: hidden;\
+                                        }\
+                                        .print-hide{\
+                                            display: None;\
+                                        }\
+                                        .nibedan-form-footer .user-address label {\
+                                            font-size: 14px;\
+                                            line-height: 24px;\
+                                            font-weight: 400;\
+                                            color: #000;\
+                                            display: inline-block;\
+                                            margin-bottom: 10px;\
+                                            width: 49%;\
+                                        }\
+                                        .page-break{\
+                                            clear: both;\
+                                            page-break-after: always;\
+                                        }\
+                                        .img-fit{\
+                                            max-height: 90vh;\
+                                        }\
+                                    </style>"
+                                var newstr = document.all.item(printpage).innerHTML;
+                                var documentm = document.getElementById("documents").innerHTML;
+                                var oldstr = document.body.innerHTML;
+                                document.body.innerHTML = headstr + css + newstr + documentm + footstr;
+                                window.print();
+                                document.body.innerHTML = oldstr;
+                                return false;
+                            }
+                        </script>
+                        <!-----close order detail-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info waves-effect text-white" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        {% endfor %}
+        <!----end for loop  -->
+    </div>
+</div>

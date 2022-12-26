@@ -1,0 +1,91 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Favicon icon -->
+        <style>
+            
+            .nibedan-form-body{
+                line-height: 40px;
+                font-size: 19px;
+                font-family:italic;
+            }
+            .title{
+                font-size: 18px;
+                text-align: center;
+            }
+            
+            .subject{
+                margin-left: 10px;
+            }
+            .left{
+               font-size: 18px;
+               font-weight: bold;
+               margin-left: 5px;
+            }
+            .subject{
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .lable{
+                font-size: 18px;
+            }
+            .nibedan-form-footer{
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+          
+        </style>    
+    </head>
+    <body>
+      
+        <div class="row">
+            <div class="col-md-6" id="div_print">
+                <div class="nibedan-form">
+                    <div class="form-logo">
+                        <img src='http://127.0.0.1:8000/static/assets/images/logo-2.png'>
+                    </div>
+                    <hr>
+                    <div class="title">
+                        <h1>हेल्लो कस्तो हुनुहुन्छ Related to Sub-rule (2) of Forest Rules 2079 Rule 128) Recommendation Letter for Listing Of Wood and Wood Based Industries  </h1>
+                   </div>
+                    <div class="serial_number_time">
+                            <span class="left">........ Recomendation Number : <br></span>                                 
+                            <span class="left" style="margin-top: 10px;">Date:<u>{{request.user.created_at}}</u></span>
+                     </div>                   
+                     <div class="subject">                  
+                            <p>Mr. <u> <font color='red'>{{name}}</font></u> <br>
+                                {{form_data.company_name|title}} Federation of Forest-based Industry and Trade, Nepal</p>
+                      </div>                    
+                   
+                    <div class="nibedan-form-body">
+                        <p>Saptary District Association asking for recommendation for listing the industry with industry registration certificate . 
+                            On the basis of the industry registration certificate and the State Federation of Madhesh Provinces for applying to this office through the Commodity Association .
+                            On the basis of the recommendation of the Objective Association, in accordance with Sub-rule (2) of Rule 131 of the Forest Rules,
+                             2079, you have to say ' This recommendation letter has been given to list the industry. It is requested to operate the industry subject to the Forest Act, 
+                             2076, Forest Rules, 2079 and other prevailing laws. </p>
+                    </div>
+                    <div class="nibedan-form-footer">
+                        <div class="user-info">
+                            <label style="font-weight: bold;">Post President</label>
+                            <label>president : Unknown Das <br><span class="user-info-data">{{form_data.district|title}}
+                                Federation of Forest-based Industry and Trade, Nepal (FenFIT-Nepal)</span></label>
+                            {% load staticfiles %}
+                            <label>Signature : <span class="user-info-data"><img
+                                        src="{% static '/assets/images/signature.jpeg' %}"></span></label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>      
+
+            <hr>
+        </div>
+    </body>
+</html>

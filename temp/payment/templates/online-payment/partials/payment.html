@@ -1,0 +1,126 @@
+<!-- Info box Content applicant user personal information-->
+<!-- ============================================================== -->
+{% load staticfiles %}
+
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-3">
+
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'PaymentWith' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-body">
+                        <hr>
+                        <h5 class="card-title">भुक्तानी विवरण</h5>                       
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label class="form-label">आवेदन दर्ता नम्बर<span class="required">*</span></label>
+                                    <input type="number" name="application_id" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label class="form-label">जीमेल आईडी<span
+                                            class="required">*</span></label>
+                                    <input type="email" name="email_id" class="form-control" required>
+                                </div>
+                            </div>
+
+      <div class="qrScanner">
+        <img src="{% static '/assets/qr-new.jpg' %}">    
+     </div>     
+     <p style="color: red">नेपाल बन पैदावार उद्योग ब्यवसायी महासंघ 
+        नेपाल क्रेडिट एण्ड कमर्श बैक लि  ,  थानकोट शाखा
+        काठमाण्डौ , खाता नं <h3><b>००५०००११९६३१c</b></h3>
+       <b>Nepal Credit and Commerce Bank Ltd</b></p>           
+    <style>
+        .qrScanner img{
+            max-width: 400px;
+        }
+    </style>                
+    </div>
+       <div class="form-actions m-t-40">
+           <button type="submit" class="btn btn-success text-white" value="0" name="submits"> <i
+                                    class="fa fa-check"></i>Pay with Esewa</button>
+                           
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+
+    </div>
+    <!-- Column -->
+</div>
+<!--==============================================================-->
+<!-- End PAge Content -->
+<script>
+
+    $("#renew_check").change(function () {
+        if (this.checked) {
+            $("#business_price_select_renew_sh").show()
+
+            const a = $("#business_price_select_renew");
+            const price = a.find(':selected').data('price');
+            $("#businessrice").text(price)
+
+            $("#business_price_select_sh").hide()
+
+        }
+        else {
+            $("#business_price_select_renew_sh").hide()
+
+            const a = $("#business_price_select");
+            const price = a.find(':selected').data('price');
+            $("#businessrice").text(price)
+
+            $("#business_price_select_sh").show()
+        }
+    });
+
+    // Function to check Whether both passwords
+    // is same or not.
+
+    $("#business_price_select_renew").change(function () {
+        const $this = $(this); // Cache $(this)
+        const price = $this.find(':selected').data('price'); // Get data value
+        // const selectedVal = $this[0].value;
+        $("#businessrice").text(price)
+    });
+
+    $("#business_price_select").change(function () {
+        const $this = $(this); // Cache $(this)
+        const price = $this.find(':selected').data('price'); // Get data value
+        // const selectedVal = $this[0].value;
+        $("#businessrice").text(price)
+    });
+
+  function create_post() {
+    console.log("create post is working!") // sanity check
+    $.ajax({
+        url : "create_post/", // the endpoint
+        type : "POST", // http method
+        data : { the_post : $('#post-text').val() }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            $('#post-text').val(''); // remove the value from the input
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+};
+</script>

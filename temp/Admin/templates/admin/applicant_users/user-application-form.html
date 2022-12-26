@@ -1,0 +1,104 @@
+{% extends "layouts/master.html" %}
+{% block contents %}
+    {% include "partials/page-title.html" %}
+    {% include 'admin/applicant_users/partials/user-application-form.html' %}
+{% endblock %}
+
+{% block optionalcss %}
+{% load staticfiles %}
+    <link href="{% static '/assets/node_modules/switchery/dist/switchery.min.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block optionaljs %}
+{% load staticfiles %}
+        <!-- jQuery file upload -->
+        <script src="{% static '/assets/node_modules/switchery/dist/switchery.min.js' %}"></script>
+        <script src="{% static '/assets/node_modules/dropify/dist/js/dropify.min.js' %}"></script>
+        <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
+    
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+    
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+    
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+    
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+    
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+    
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+        //Ajax for business price category
+
+    $(document).ready(function () {      
+        // catch the form's submit event
+        $('#amount_to_select').keyup(function () {
+            // create an AJAX call
+            num = $("#amount_to_select").val()
+            $.ajax({
+                data: {'ammount':num,'ajax':'1'}, // get the form data
+                url: "{% url 'BusinessPriceCategory' %}",
+                // on success
+                success: function (response) {
+                    console.log(response)
+                    
+                    if (response.price_category) {
+                        if($('#renew_check').is(":checked")){
+                            $("#businessrice").text(response.price_category.renewal_fee)
+                            $("#business_priccategory_be_category").val(response.price_category.name_1)
+                        }
+                        else{
+                            $("#businessrice").text(response.price_category.start_recommendation_fee)
+                            $("#business_price_category").val(response.price_category.code_name)
+
+                        }
+                    }
+                    else{
+                        
+                    }
+                },
+                // on error
+                error: function (response) {
+                    // alert the error if any error occured
+                    console.log(response.responseJSON.errors)
+                }
+            });
+
+            return false;
+        });
+    })
+
+
+
+
+        </script>
+{% endblock %}
+
+

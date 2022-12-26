@@ -1,0 +1,163 @@
+{% load staticfiles %}
+{% load mathfilters %}  
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'Pending' %}">
+                    <h4 class="card-title">{{slug1}} द्वारा बाँकी अस्वीकृत आवेदन फारम</h4>
+                    <div class="text-end"> <span class="text-muted">Total Pending Application</span>
+                        <h1 class="font-light"><sup><i class="ti-arrow-up text-success"></i></sup>{{total_pending_application_form}}</h1>
+                    </div>
+                    <!-- <span class="text-success">20%</span> -->
+                    <!-- <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 20%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'ApprovedApplication' %}">
+                    <h4 class="card-title">{{slug1}} द्वारा स्वीकृत आवेदन फारम</h4>
+                    <div class="text-end"> <span class="text-muted">total Approved Application</span>
+                        <h1 class="font-light"><sup><i class="ti-arrow-up text-primary"></i></sup>{{total_approved_form}}</h1>
+                    </div>
+                    <!-- <span class="text-primary">30%</span>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 30%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                {% if request.user.role == request.user.CENTRAL %}
+                 <!-- <a href="{% url 'CanelledApplication' %}"> -->
+                    <h4 class="card-title">कुल राजस्व </h4>
+                    <div class="text-end"> <span class="text-muted">Total revenue</span>
+                        <h1 class="font-light"><sup><i class="ti-arrow-up text-info"></i></sup>Rs.{{total_income}}</h1>
+                    </div>
+                <!-- </a> -->
+                {% else %}
+                    <a href="{% url 'CanelledApplication' %}">
+                        <h4 class="card-title">{{slug1}} द्वारा अस्वीकृत आवेदन फारम</h4>
+                        <div class="text-end"> <span class="text-muted">Total Rejected Aapplication</span>
+                            <h1 class="font-light"><sup><i class="ti-arrow-down text-info"></i></sup>{{total_rejected_application_form}}</h1>
+                        </div>
+                    </a>
+                {% endif %} 
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <a href="#">
+                    <h4 class="card-title">कुल सदस्य</h4>
+                    <div class="text-end"> <span class="text-muted">TOTAL MEMBERS</span><!---yearly income-->
+                        <h1 class="font-light"><sup><i class="ti-arrow-up text-inverse"></i></sup>{{total_member}}</h1>
+                    </div>
+                    <!-- <span class="text-inverse">80%</span>
+                    <div class="progress">
+                        <div class="progress-bar bg-inverse" role="progressbar" style="width: 80%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> -->
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+{% block optionalcss %}
+{% load staticfiles %}
+    <link href="{% static '/assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css' %}" rel="stylesheet">
+{% endblock %}
+{% if all_data %}
+    {%  include "admin/application_review/partials/application-lists.html" %}
+{% endif %}
+
+<!-- ============================================================== -->
+<!-- charts -->
+<!-- ============================================================== -->
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-8 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Monthly Report</h4>
+                            <div id="bar-chart" style="width:100%; height:400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="morris-area-chart2" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #morris-area-chart2{
+            display: none;
+        }
+    </style>
+    <!-- Column -->
+    <div class="col-lg-4 col-md-12">
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">APPLICATION STATUS</h5>
+                        <div id="morris-donut-chart" class="ecomm-donute"></div>
+                        <ul class="list-inline m-t-30 text-center mb-1 d-flex">
+                            <li class="list-inline-item p-r-20">
+                                <h5 class="text-muted"><i class="fa fa-circle" style="color: #fb9678;"></i>Total Reject</h5>
+                                <h4 class="m-b-0">{{total_rejected_application_form}}</h4>
+                            </li>
+                            <li class="list-inline-item p-r-20">
+                                <h5 class="text-muted"><i class="fa fa-circle" style="color: #01c0c8;"></i>Total Pending</h5>
+                                <h4 class="m-b-0">{{total_pending_application_form}}</h4>
+                            </li>
+                            <li class="list-inline-item">
+                                <h5 class="text-muted"> <i class="fa fa-circle" style="color: #4F5467;"></i>Total Approved</h5>
+                                <h4 class="m-b-0">{{total_approved_form}}</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- charts -->
+<!-- ============================================================== -->
+
+{% block optionaljs %}
+{% load staticfiles %}
+        <script>
+            var total_pending_application_form = '{{total_pending_application_form}}'
+            var total_approved_form = '{{total_approved_form}}'
+            var total_rejected_application_form = '{{total_rejected_application_form}}'
+            var total_member = '{{total_member}}'
+        </script>
+         <script src="{% static '/assets/node_modules/echarts/echarts-all.js' %}"></script>
+         <script src="{% static '/assets/node_modules/echarts/echarts-init.js' %}"></script>
+        <!-- jQuery file upload -->
+        <script src="{% static '/assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static '/assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup-init.js' %}"></script>
+{% endblock %}
