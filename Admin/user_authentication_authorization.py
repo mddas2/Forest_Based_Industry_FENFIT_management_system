@@ -189,8 +189,8 @@ def UserStore(request,id=None):
 @customized_user_passes_test(is_central_role)
 def UserDelete(request,id):
     try:
-        user = CustomUser.objects.get(id=id).delete()
-        messages.success(request, 'User deleted sucessfully!!!.')
+        # user = CustomUser.objects.get(id=id).delete()
+        messages.success(request, 'User can not deleted contact Admin !!!.')
         return redirect(UserList)
     except:
         messages.info(request,"foreign key constraint fails CONSTRAINT error")
