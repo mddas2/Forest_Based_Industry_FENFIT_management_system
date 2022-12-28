@@ -29,6 +29,7 @@ from Admin.decorators import customized_user_passes_test,is_admin_role,is_admin_
 from django.shortcuts import redirect
 from django.db.models import Sum
 from django.core.paginator import Paginator
+from axes.models import AccessAttempt
 
 from django.db.models import Q
 
@@ -62,6 +63,9 @@ def index(request, pk=None, pdc=None):
     total_rejected_application_form = request.user.total_application_form_cancelled.all().count()
     total_member = CustomUser.objects.all().count()
     total_income = UserApplicationPayment.objects.filter(is_payment=True).aggregate(Sum('payment_rupees'))
+
+    total_blocked = AccessAttempt.objects.filter(failures_since_start__gte = 4).count()
+
     # return HttpResponse(total_income['payment_rupees__sum'])
     # total_income = 9808
 
@@ -98,6 +102,7 @@ def index(request, pk=None, pdc=None):
         all_data = None
     
     data_1={
+        'total_blocked' : total_blocked,
         'a' : 12,
         'next' : next,
         'prev' : prev,
@@ -280,6 +285,8 @@ def ClientMessage(request, id):
     data = {'slug1':slug1,'create':False,'client_msg':client_msg,'client_details':client_details}
     return render(request, 'admin/clients_messages/client-msg-details.html',data)
     return HttpResponse('okay')
+
+
 
 
        

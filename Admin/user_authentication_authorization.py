@@ -412,8 +412,17 @@ def SignUp(request):
         'districts' : Districts.objects.all(),
     }
     return render(request , 'admin/authentication/register.html',data)
+
 def Logout(request):
     logout(request)
+    return redirect('index')
+
+@login_required(login_url=settings.LOGIN_URL)
+@customized_user_passes_test(is_admin_role)
+def UnblockAllUser(request):
+    from axes.models import AccessAttempt
+    AccessAttempt.objects.all().delete()
+    messages.success(request,"All the blocked members are successfully unblocked!!!")
     return redirect('index')
 
 
