@@ -110,7 +110,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Monthly Report</h4>
-                            <div id="bar-chart" style="width:100%; height:400px;"></div>
+                            <div id="bar-chart" style="width:100%; height:400px;"></div> 
                         </div>
                     </div>
                 </div>
@@ -154,12 +154,19 @@
         </div>
     </div>
 </div>
-<!-- ============================================================== -->
-<!-- charts -->
-<!-- ============================================================== -->
 
+<script>
 
-
+setTimeout(function() {    
+    function includeJS(filePath) {
+        var script = document.createElement('script');
+        script.src = filePath;
+        document.head.appendChild(script);
+    }
+    includeJS('{% static "/assets/node_modules/echarts/echarts-init.js" %}');
+   
+}, 1000);
+</script>
 
 {% block optionaljs %}
 {% load staticfiles %}
@@ -168,10 +175,11 @@
             var total_approved_form = '{{total_approved_form}}'
             var total_rejected_application_form = '{{total_rejected_application_form}}'
             var total_member = '{{total_member}}'
-            var monthly_report_data = [1.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+            // var monthly_report_data = [1.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+            
         </script>
          <script src="{% static '/assets/node_modules/echarts/echarts-all.js' %}"></script>
-         <script src="{% static '/assets/node_modules/echarts/echarts-init.js' %}"></script>
+         <!-- <script src="{% static '/assets/node_modules/echarts/echarts-init.js' %}"></script> -->
         <!-- jQuery file upload -->
         <script src="{% static '/assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup.min.js' %}"></script>
         <script src="{% static '/assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup-init.js' %}"></script>

@@ -146,5 +146,10 @@ urlpatterns = [
 
    #****************Application reviewed application i.e clients check application status**************************************
    path('unblock-all-users', user_authentication_authorization.UnblockAllUser, name='UnblockAllUser'),
+
+     #****************Application reviewed application i.e clients check application status**************************************
+   path('ajax-monthly-report-data', views.GetanalysisData, name='GetanalysisData'),
+
+
    
 ]   

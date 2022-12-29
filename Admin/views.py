@@ -68,16 +68,6 @@ def index(request, pk=None, pdc=None):
 
     # return HttpResponse(total_income['payment_rupees__sum'])
     # total_income = 9808
-
-    from django.db.models.functions import Cast
-    from django.db import models
-    monthly_data = UserApplicationPayment.objects.all()
-    month_wise_data = monthly_data.filter(created_at__range=["2021-01-01", "2023-01-01"]).annotate(month=Cast('created_at', models.DateField())).values('month').annotate(total_id=models.Count('id'))
-    # Sample.objects.filter(date__range=["2011-01-01", "2011-01-31"])
-    # Sample.objects.filter(date__year='2011', date__month='01')
-    # month_wise_sales = monthly_data.annotate(month=Cast('created_at', models.DateField())).values('month').annotate(total_id=models.Count('id'))
-    # print(month_wise_sales)
-    #return HttpResponse(month_wise_sales)
     
     page_number = request.GET.get('page')
     page_type = request.GET.get('type')
@@ -109,7 +99,6 @@ def index(request, pk=None, pdc=None):
         all_data = None
     
     data_1={
-        'month_wise_data' : month_wise_data,
         'total_blocked' : total_blocked,
         'a' : 12,
         'next' : next,
@@ -294,6 +283,32 @@ def ClientMessage(request, id):
     return render(request, 'admin/clients_messages/client-msg-details.html',data)
     return HttpResponse('okay')
 
+
+def GetanalysisData(request):
+    from django.http import JsonResponse
+    import json
+    from django.db.models.functions import Cast
+    from django.db import models
+    import datetime
+    monthly_data = UserApplicationPayment.objects.all()
+    month_wise_data = monthly_data.filter(created_at__range=["2022-12-01", "2023-01-01"]).annotate(month=Cast('created_at', models.DateField())).values('month').annotate(total_id=models.Count('id'))
+    # Sample.objects.filter(date__range=["2011-01-01", "2011-01-31"])
+    # Sample.objects.filter(date__year='2011', date__month='01')
+    # month_wise_sales = monthly_data.annotate(month=Cast('created_at', models.DateField())).values('month').annotate(total_id=models.Count('id'))
+    # print(type(month_wise_data))
+    # print(a)
+    data = list(month_wise_data)
+    output = {}
+    output_list = []
+    for i in range(32):
+        output_list.append(0)
+    for i in data:
+        # print(i['month'].strftime("%d"))
+        output[i['month'].strftime("%d")]=i['total_id']
+        output_list[int(i['month'].strftime("%d"))-1] = i['total_id']
+
+ 
+    return JsonResponse(output_list, safe=False) 
 
 
 
