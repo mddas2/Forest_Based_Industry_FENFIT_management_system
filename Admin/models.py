@@ -173,7 +173,8 @@ class UserApplicationPayment(models.Model):
     ceo_approved_signature = models.ImageField(upload_to='user/documents', null=True)
 
 
-    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    # created_at = models.DateTimeField(auto_now_add=True,null=True)
+    created_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
 class ApplicationFormApprovedDetail(models.Model):

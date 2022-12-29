@@ -531,6 +531,11 @@ def AccountantPayment(request):#all application
                 # return HttpResponse(application_detail.applicationform.all().first().id)
                 if dsc == 'central_accountant' or dsc == 'central_admin' and request.user.get_dsc_Role()=='central_accountant':
                     approved_ceo_obj = CustomUser.objects.filter(role = CustomUser.CENTRAL,groups__name__contains = 'ceo').first()
+                
+                    import datetime                   
+                    created_at = datetime.datetime(2022, 12, 29, 12, 0, 13, 204815)
+                    
+                    
                     payment_data = {
                         'is_renew' : application_detail.is_reniew,
                         'business_price_category' : application_detail.business_price_category,
@@ -551,6 +556,7 @@ def AccountantPayment(request):#all application
                         'ceo_approved_name' : approved_ceo_obj.first_name,
                         'ceo_approved_email' : approved_ceo_obj.email,
                         'ceo_approved_signature' : approved_ceo_obj.signature,
+                        'created_at' : created_at,  #remove this line after 15 days
                     }
                     UserApplicationPayment.objects.update_or_create(bill_number=bill_number,defaults=payment_data)
                     ApplicationForm.objects.filter(id=pk).update(is_payment=1,dsc="central_admin")
