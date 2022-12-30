@@ -516,6 +516,7 @@ def AccountantPayment(request):#all application
     all_data = ApplicationForm.objects.filter(dsc__isnull=False,dsc=request.user.get_dsc_Role()).order_by('-updated_at')
     if request.POST:
         pk = request.POST['pk']
+       
         payment = request.POST['payment']
         if pk and payment:
             ApplicationForm.objects.filter(id=pk).update(approved_pending_cancelled=payment)

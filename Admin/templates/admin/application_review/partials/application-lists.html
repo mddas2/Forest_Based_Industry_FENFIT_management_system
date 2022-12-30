@@ -218,7 +218,7 @@
                                             </td>
                                            {% endif %} 
                                         {% endif %}
-                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view</button></td>
+                                        <td><button data-bs-toggle="modal" data-bs-target="#order_detail{{i.id}}" class="btn w-100 btn-sm btn-info btn-rounded text-white">view {{i.id}}</button></td>
                                         {% if action%}
                                        
                                             <td>
@@ -232,28 +232,28 @@
                                                             {% if request.user.role == request.user.CENTRAL and request.user.groups.first.name == 'accountant' %}
                                                                 {% if i.bill_number != '' and i.payment_get != '' %}
                                                                     <li>
-                                                                        <form id = "payment_yes" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
+                                                                        <form action="{% url 'AccountantPayment' %}" method="POST">{% csrf_token %}
                                                                             <input type="hidden" name="pk" value="{{i.id}}"> 
-                                                                            <input type="hidden" name="payment" value="1"> 
-                                                                            <a class="dropdown-item" onclick="document.forms['payment_yes'].submit();" href="#">
-                                                                        </form>
-                                                                        {%if i.is_payment == True %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Payment
-                                                                    </a></li>
+                                                                            <input type="hidden" name="payment" value="1">                                                                          
+                                                                            
+                                                                            {%if i.is_payment == True %} 
+                                                                            <i class="bi bi-check-lg"></i> 
+                                                                            {% else %} &nbsp; &nbsp;
+                                                                                {% endif %}                                                                       
+                                                                            <button class = "btn w-50 btn-sm btn-success btn-rounded text-white" type="submit" style="margin: 1px;">Payent</button>
+                                                                      </form>
+                                                                    </li>
                                                                     <li>
-                                                                        <form id = "payment_no" action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
+                                                                        <form action="{% url 'AccountantPayment' %}" method="post">{% csrf_token %}
                                                                             <input type="hidden" name="pk" value="{{i.id}}"> 
-                                                                            <input type="hidden" name="payment" value="0"> 
-                                                                            <a class="dropdown-item" onclick="document.forms['payment_no'].submit();" href="#">
+                                                                            <input type="hidden" name="payment" value="0">                                                                          
+                                                                            
+                                                                            {%if i.is_payment == False %} 
+                                                                            <i class="bi bi-check-lg"></i> 
+                                                                            {% else %} &nbsp; &nbsp;
+                                                                                {% endif %}
+                                                                            <button class = "btn w-50 btn-sm btn-danger btn-rounded text-white" type="submit">Non paid</button>
                                                                         </form>
-                                                                        {%if i.is_payment == False %} 
-                                                                        <i class="bi bi-check-lg"></i> 
-                                                                        {% else %} &nbsp; &nbsp;
-                                                                            {% endif %}
-                                                                        Non paid
                                                                     </a>
                                                                     </li>
                                                                 {% endif %}
@@ -445,8 +445,8 @@ $("#pagination").change(function(){
                                                         </div>
                                                 
                                                         <div class="form-top-right">
-                                                            <!-- <span class="date"> मिति : {{id_data.payment.all.last.updated_at|get_NepaliDate}}</span> -->
-                                                            <span class="date"> मिति : 2079-09-14</span>
+                                                            <span class="date"> मिति : {{id_data.payment.all.last.created_at|get_NepaliDate}}</span>
+                                                            <!-- <span class="date"> मिति : 2079-09-14</span> -->
                                                         </div>
                                                     </div>
                                                     <h5 class="main-title">बिषय : काठ, दाउरामा आधारित उद्योग सुचिकृतका लागि सिफारिस पत्र </h5>
