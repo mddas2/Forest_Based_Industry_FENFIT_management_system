@@ -20,7 +20,13 @@
                        
                         <div class="ms-auto">
                             <form action="{% url 'ApplicationFormSearch' %}" method="get" >
-                                <input type="text" name="search" class="form-control" placeholder="Search & enters" id="orderSearch"> 
+                                <div class="search-input">
+                                    <input type="text" name="search" class="form-control" placeholder="Search & enters" id="orderSearch"> 
+                                    <div class="autocom-box">
+                                        <li>aapple</li>
+                                        <li>ball</li>
+                                    </div>
+                                </div>
                             </form>   
                         </div>
                         <select id="pagination"  style="margin-right: 10px; border-radius: 7px;padding: 3px 6px 3px 10px; height: 35px; border-color: rgb(216, 214, 214);">                            
