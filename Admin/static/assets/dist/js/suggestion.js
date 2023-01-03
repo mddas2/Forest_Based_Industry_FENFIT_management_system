@@ -35,6 +35,7 @@ let suggestions = [
 ];
 // if user press any key and release
 inputBox.onkeyup = (e)=>{
+    
     let userData = e.target.value; //user enetered data
     // alert(userData);
     let emptyArray = [];

@@ -40,6 +40,10 @@ body{
   pointer-events: none;
   max-height: 280px;
   overflow-y: auto;
+
+  position: absolute;
+  background: #f9ecec;
+  z-index: 1;
 }
 
 .search-input.active .autocom-box{
