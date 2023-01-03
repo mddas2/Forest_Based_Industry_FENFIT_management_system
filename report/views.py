@@ -62,8 +62,10 @@ def ApplicationFormReport(request):
          all_data = None
     
      # return HttpResponse(formsobj.first().dsc)
+     ajaxsearch = 'member'
      data={
         'all_data' : all_data,
+        'ajaxsearch' : ajaxsearch,
         'next' : next,
         'prev' : prev,
         'range' : range,
@@ -235,6 +237,21 @@ def MembershipSearch(request):
         return render(request,'report/application-lists.html',data)
      else:
         return HttpResponse("unknown request")
+
+def AjaxSearch(request):
+    from django.http import JsonResponse
+    if request.GET:
+        search = request.GET['search']
+        try:
+            id = int(search)
+        except:
+            id = 0
+        
+        all_data = CustomUser.objects.filter(Q(email__contains=search) | Q(id=id) | Q(first_name__contains=search) | Q(phone__contains=search) | Q(district_name__contains=search) | Q(state_name__contains=search) ).order_by('-id')
+        all_data = list(all_data.values('email','first_name'))
+        return JsonResponse(all_data,safe=False)
+    else:
+        return HttpResponse("not allowed here in ajax search")
 
 
 class ExportProduct(LoginRequiredMixin,APIView):

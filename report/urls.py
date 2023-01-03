@@ -9,6 +9,8 @@ urlpatterns = [
     path('membership', views.MembershipReport, name='MembershipReport'),
     path('membership-search', views.MembershipSearch, name='MembershipSearch'),
 
+    path('ajax-search', views.AjaxSearch, name='AjaxSearch'),
+
     path('export-excel',views.ExportProduct.as_view()  , name='ExportProduct' ),
 
 
