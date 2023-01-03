@@ -16,11 +16,12 @@
                     <div class="d-flex">
                         <div class="align-self-center">
                             <h4 class="card-title m-t-10">{{slug1}} </h4>
-                        </div>
-                        
+                        </div>                       
                        
                         <div class="ms-auto">
-                            <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
+                            <form action="{% url 'ApplicationFormSearch' %}" method="get" >
+                                <input type="text" name="search" class="form-control" placeholder="Search & enters" id="orderSearch"> 
+                            </form>   
                         </div>
                         <select id="pagination"  style="margin-right: 10px; border-radius: 7px;padding: 3px 6px 3px 10px; height: 35px; border-color: rgb(216, 214, 214);">                            
                             <option value="2" {% if range == '2' %} selected {% endif %}>2 if network slow</option>
