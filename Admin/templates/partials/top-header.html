@@ -134,13 +134,13 @@
                                                 <h5>{{msg.user.first_name}}</h5><span>Please forward my application</span></div>
                                         </a>
                                      {% endfor %}
-                                     {% for msg in request|getTotamMember %}
+                                     <!-- {% for msg in request|getTotamMember %}
                                         <a href="{% url 'AllMemberList' %}">
                                             <div class="user-img"> <img src="{% if msg.image %} {{msg.image.url}} {% else %} {% static '/assets/images/users/user_logo.png' %} {% endif %}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                             <div class="mail-contnet">
                                                 <h5>{{msg.first_name}}</h5>Please approved my membership</div>
                                         </a>
-                                     {% endfor %}                                     
+                                     {% endfor %}                                      -->
                                 </div>
                             </li>
                             <li>
