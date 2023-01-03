@@ -135,7 +135,7 @@ def ApplicationFormSearch(request):
         slug = "सुचिकरण सिफारिश रिपोर्ट"
         report_type = 'application'
 
-        all_data = ApplicationForm.objects.filter(dsc__isnull=False).filter(Q(user__email=search) | Q(id=id) | Q(user__first_name=search) | Q(user__phone__contains=search) | Q(user__district_name__contains=search) | Q(user__state_name__contains=search) | Q(dsc__contains=search) ).order_by('-id')
+        all_data = ApplicationForm.objects.filter(dsc__isnull=False).filter(Q(user__email__contains=search) | Q(id=id) | Q(user__first_name__contains=search) | Q(user__phone__contains=search) | Q(user__district_name__contains=search) | Q(user__state_name__contains=search) | Q(dsc__contains=search) ).order_by('-id')
 
         page_number = request.GET.get('page')
         page_type = request.GET.get('type')
@@ -192,7 +192,7 @@ def MembershipSearch(request):
             id = int(search)
         except:
                 id = 0
-        all_data = ApplicationForm.objects.filter(user__is_applyForVerified__contains=1).order_by('-id').filter(Q(user__email=search) | Q(id=id) | Q(user__first_name=search) | Q(user__phone__contains=search) | Q(user__district_name__contains=search) | Q(user__state_name__contains=search) | Q(dsc__contains=search) ).order_by('-id')
+        all_data = ApplicationForm.objects.filter(user__is_applyForVerified__contains=1).order_by('-id').filter(Q(user__email__contains=search) | Q(id=id) | Q(user__first_name__contains=search) | Q(user__phone__contains=search) | Q(user__district_name__contains=search) | Q(user__state_name__contains=search) | Q(dsc__contains=search) ).order_by('-id')
 
         page_number = request.GET.get('page')
         page_type = request.GET.get('type')
