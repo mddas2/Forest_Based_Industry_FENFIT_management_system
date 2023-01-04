@@ -26,7 +26,14 @@
                             <option value="5000" {% if range == '5000' %} selected {% endif %}>show all</option>
                         </select>
                         <div class="ms-auto">
-                            <input type="text" class="form-control" placeholder="Search & enters" id="orderSearch">    
+                            <form action="{% url 'ApplicationFormSearch' %}" method="get" >
+                                <div class="search-input">
+                                    <input type="text" name="search" class="form-control" placeholder="Search & enters" id="orderSearch"> 
+                                    <div id="autocom_box" class="autocom-box">
+                                       
+                                    </div>
+                                </div>
+                            </form>   
                         </div>
                     </div>
                     
@@ -338,9 +345,9 @@
                                                                 <tbody>
                                                                     <!-- start row -->
                                                                     <tr>
-                                                                        <td class="title"><a class="link" href="javascript:void(0)">{{id_data.get_user_application_detail.owner_full_name}}</a></td>
-                                                                        <td>{{id_data.get_user_application_detail.business_name|get_NepaliBusinessName}}</td>
-                                                                        <td><span style="color: red; font-size: 15px; font-weight: 600;">(Rs.{{id_data.get_user_application_detail.payment_rupees}})</span>/{{id_data.get_user_application_detail.business_price_category|getPriceCategoryNepaliName}}</td>
+                                                                        <td class="title"><a class="link" href="javascript:void(0)">{{id_data.approved_form.user.company_name}}</a></td>
+                                                                        <td>{{id_data.approved_form.get_user_application_detail.business_name|get_NepaliBusinessName}}</td>
+                                                                        <td><span style="color: red; font-size: 15px; font-weight: 600;">(Rs.{{id_data.approved_form.get_user_application_detail.payment_rupees}})</span>/{{id_data.approved_form.get_user_application_detail.business_price_category|getPriceCategoryNepaliName}}</td>
                                                                        
                                                                     </tr> <!-- end row -->
                                                                    

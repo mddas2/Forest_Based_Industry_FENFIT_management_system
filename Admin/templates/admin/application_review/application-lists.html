@@ -63,9 +63,11 @@
         });
         
 </script>
+<script src="{% static '/assets/dist/js/suggestion.js' %}"></script>    
 {% endblock %}
 
 {% block optionalcss %}
 {% load staticfiles %}
+    <link href="{% static '/assets/dist/css/autocomplete.css' %}" rel="stylesheet">
     <link href="{% static '/assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css' %}" rel="stylesheet">
 {% endblock %}
