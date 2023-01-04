@@ -127,7 +127,10 @@ def MembershipReport(request):
 @customized_user_passes_test(is_central_role)
 def ApplicationFormSearch(request):
     if request.GET:
-        search = request.GET['search']
+        try:
+            search = request.GET['search']
+        except:
+            return redirect('ApplicationFormReport')
         try:
             id = int(search)
         except:
@@ -246,7 +249,6 @@ def AjaxSearch(request):
             id = int(search)
         except:
             id = 0
-        
         all_data = CustomUser.objects.filter(Q(email__contains=search) | Q(id=id) | Q(first_name__contains=search) | Q(phone__contains=search) | Q(district_name__contains=search) | Q(state_name__contains=search) ).order_by('-id')
         all_data = list(all_data.values('email','first_name'))
         return JsonResponse(all_data,safe=False)

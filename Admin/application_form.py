@@ -818,8 +818,9 @@ def ApprovedApplication(request):
     except:
         range = 2
         all_data = None
-    
+    ajaxsearch = 'member'
     data = {
+        'ajaxsearch' : ajaxsearch,
         'slug1':slug1,
         'next' : next,
         'prev' : prev,
