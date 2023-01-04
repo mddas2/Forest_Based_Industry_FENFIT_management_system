@@ -788,9 +788,47 @@ def ApprovedApplication(request):
     dsc_role = request.user.get_dsc_Role()
     slug1 = "Approved Applicatiton"
 
-    all_data = request.user.total_application_form_approved.all()
+    all_data = request.user.total_application_form_approved.all().order_by('-id') 
+
+    page_number = request.GET.get('page')
+    page_type = request.GET.get('type')
+    range = request.GET.get('range')
+    next = 2
+    prev = 1
     
-    data = {'slug1':slug1,'create':False, 'all_data':all_data,'action':False,'is_approved':1}
+    try:
+        try:
+            paginate_obj = Paginator(all_data, int(range)) #creating pagiting (only 5 data)
+        except:
+            paginate_obj = Paginator(all_data, 2)
+    
+        try:
+            page_number = int(page_number)
+            if page_type == "next":
+                next = page_number+1
+            elif page_number == 'prev':
+                prev = page_number-1
+        except:
+            page_number = 2
+        try:
+            all_data = paginate_obj.get_page(page_number)  # returns the desired page object
+        except:
+            # if page_number is not an integer then assign the first page
+            all_data = paginate_obj.page(1)
+    except:
+        range = 2
+        all_data = None
+    
+    data = {
+        'slug1':slug1,
+        'next' : next,
+        'prev' : prev,
+        'range' : range,
+        'create':False, 
+        'all_data':all_data,
+        'action':False,
+        'is_approved':1
+        }
     client_msg = ContactUs.objects.filter(read_unread=True)
     data['client_msg']=client_msg
     return render(request,'admin/application_review/application-lists.html',data)
