@@ -75,7 +75,6 @@ def getPriceCategoryNepaliName(code_name):
 
 @register.filter
 def getTotamMember(request):
-    return None
     try:
         district_name = request.user.district_name
         state_name = request.user.state_name
